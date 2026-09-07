@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useQueryStates } from "nuqs";
 import { useEffect, useMemo, useRef } from "react";
+import { BrewScreen } from "@/components/brew/BrewScreen";
 import { Fallback } from "@/components/scene/Fallback";
 import { Button } from "@/components/ui/button";
 import { type ClientCatalog, derive } from "@/lib/derive";
@@ -12,6 +13,7 @@ import {
   canLeave,
   firstIncompleteStep,
   WIZARD_STEPS,
+  type WizardState,
   type WizardStep,
   wizardMachine,
 } from "@/lib/machine";
@@ -59,7 +61,9 @@ export function Wizard({
   const actor = useActorRef(wizardMachine, {
     input: { selection: initialSelection },
   });
-  const step = useSelector(actor, (s) => s.value as WizardStep);
+  const state = useSelector(actor, (s) => s.value as WizardState);
+  const brewing = state === "brewing" || state === "done";
+  const step: WizardStep = brewing ? "summary" : state;
   const selection = useSelector(actor, (s) => s.context);
   const derived = useMemo(
     () => derive(catalog, selection),
@@ -103,6 +107,18 @@ export function Wizard({
     dir.current = type === "NEXT" ? 1 : -1;
     actor.send({ type });
   };
+
+  if (brewing && derived.recipe && derived.schedule) {
+    return (
+      <BrewScreen
+        key={`${derived.recipe.id}-${derived.schedule.dose}`}
+        recipe={derived.recipe}
+        schedule={derived.schedule}
+        onExit={() => actor.send({ type: "EXIT" })}
+        onDone={() => actor.send({ type: "DONE" })}
+      />
+    );
+  }
 
   const body = (() => {
     switch (step) {

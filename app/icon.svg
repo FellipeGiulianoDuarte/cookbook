@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><title>Cookbook</title>
+  <rect width="64" height="64" rx="14" fill="#151210"/>
+  <path d="M14 16 L50 16 L36 46 L28 46 Z" fill="none" stroke="#e0b077" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M20 28 L44 28 L36 46 L28 46 Z" fill="#8a5a3a"/>
+  <rect x="26" y="46" width="12" height="4" rx="1.5" fill="#4a3d35"/>
+</svg>

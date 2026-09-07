@@ -16,6 +16,8 @@ export const WIZARD_STEPS = [
   "summary",
 ] as const;
 export type WizardStep = (typeof WIZARD_STEPS)[number];
+/** Every state the machine can be in: the seven wizard steps plus the brew itself. */
+export type WizardState = WizardStep | "brewing" | "done";
 
 export interface Selection {
   method?: Method;
@@ -48,7 +50,11 @@ export type WizardEvent =
   | { type: "SET_NUDGE"; nudge: boolean }
   | { type: "NEXT" }
   | { type: "BACK" }
-  | { type: "JUMP"; step: WizardStep };
+  | { type: "JUMP"; step: WizardStep }
+  | { type: "START" }
+  | { type: "DONE" }
+  | { type: "EXIT" }
+  | { type: "AGAIN" };
 
 /** Which steps are complete enough to move past. */
 export function canLeave(step: WizardStep, s: Selection): boolean {
@@ -184,6 +190,16 @@ export const wizardMachine = setup({
     },
     bean: { on: { NEXT: "options", BACK: "amount" } },
     options: { on: { NEXT: "summary", BACK: "bean" } },
-    summary: { on: { BACK: "options" } },
+    summary: {
+      on: {
+        BACK: "options",
+        START: {
+          guard: ({ context }) => firstIncompleteStep(context) === "summary",
+          target: "brewing",
+        },
+      },
+    },
+    brewing: { on: { DONE: "done", EXIT: "summary" } },
+    done: { on: { AGAIN: "summary", EXIT: "summary" } },
   },
 });

@@ -2,13 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { primeBrewAudio } from "@/components/brew/BrewScreen";
 import { Button } from "@/components/ui/button";
 import { Eyebrow, StepTitle } from "@/components/ui/choice";
 import { fillStepText, formatClock } from "@/lib/engine/schedule";
 import { useLocalized } from "@/lib/use-localized";
 import type { DerivedStepProps } from "./types";
 
-export function SummaryStep({ selection, derived }: DerivedStepProps) {
+export function SummaryStep({ selection, derived, send }: DerivedStepProps) {
   const t = useTranslations();
   const L = useLocalized();
   const [copied, setCopied] = useState(false);
@@ -111,7 +112,13 @@ export function SummaryStep({ selection, derived }: DerivedStepProps) {
         <Button variant="secondary" onClick={share}>
           {copied ? t("nav.copied") : t("nav.share")}
         </Button>
-        <Button className="flex-1" disabled title="Phase 3">
+        <Button
+          className="flex-1"
+          onClick={() => {
+            primeBrewAudio();
+            send({ type: "START" });
+          }}
+        >
           {t("nav.start")}
         </Button>
       </div>

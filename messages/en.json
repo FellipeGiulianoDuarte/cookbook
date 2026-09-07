@@ -129,7 +129,13 @@
     "done": "Done",
     "doneTitle": "Enjoy",
     "drainTime": "Drain time",
-    "log": "Log this brew"
+    "log": "Log this brew",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off",
+    "exit": "Back to the recipe",
+    "ready": "Get ready",
+    "startTimer": "Start the timer",
+    "prepHint": "Do these first. The clock starts when you tap the button."
   },
   "chart": {
     "title": "Brewing control chart",

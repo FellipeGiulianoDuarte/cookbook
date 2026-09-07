@@ -129,7 +129,13 @@
     "done": "Pronto",
     "doneTitle": "Aproveite",
     "drainTime": "Tempo de escoamento",
-    "log": "Registrar este preparo"
+    "log": "Registrar este preparo",
+    "soundOn": "Som ligado",
+    "soundOff": "Som desligado",
+    "exit": "Voltar à receita",
+    "ready": "Prepare tudo",
+    "startTimer": "Iniciar o cronômetro",
+    "prepHint": "Faça isto antes. O relógio começa quando você tocar no botão."
   },
   "chart": {
     "title": "Gráfico de controle de extração",
