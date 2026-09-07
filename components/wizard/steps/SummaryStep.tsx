@@ -126,6 +126,10 @@ export function SummaryStep({
           {r.source.title}
         </a>
         {r.source.notes ? ` · ${r.source.notes}` : ""}
+        {" · "}
+        <a className="underline underline-offset-2" href="/sources">
+          {t("app.sources")}
+        </a>
       </p>
 
       <div className="mt-6 flex gap-3">
