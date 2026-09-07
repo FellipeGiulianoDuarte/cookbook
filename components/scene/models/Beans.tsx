@@ -4,55 +4,71 @@ import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-/*
-  A small pile of coffee beans. Each bean is a flattened sphere with a dark crease.
-  Colour follows the roast level (0 light → 1 dark).
-*/
-const LIGHT = new THREE.Color("#b8834a");
-const DARK = new THREE.Color("#2b1a11");
-
+const LIGHT = new THREE.Color("#aa7142");
+const DARK = new THREE.Color("#3d2418");
 const BEANS = [
-  { p: [0, 0, 0], r: [0.2, 0.4, 0.1] },
-  { p: [0.55, 0.02, 0.15], r: [0.1, 1.9, 0.3] },
-  { p: [-0.5, 0.02, 0.25], r: [0.3, 0.8, -0.2] },
-  { p: [0.15, 0.03, -0.55], r: [0.4, 2.6, 0.1] },
-  { p: [-0.3, 0.04, -0.4], r: [0.1, 1.2, 0.35] },
-  { p: [0.45, 0.05, -0.35], r: [0.5, 0.2, -0.3] },
-  { p: [-0.1, 0.32, -0.1], r: [1.4, 0.6, 0.3] },
-  { p: [0.2, 0.33, 0.2], r: [1.2, 2.2, 0.4] },
-] as const;
+  { p: [-0.34, 0, 0.13], angle: 0.4, size: 1 },
+  { p: [0.29, 0, 0.21], angle: 1.8, size: 0.94 },
+  { p: [-0.27, 0, -0.4], angle: 2.6, size: 0.92 },
+  { p: [0.29, 0, -0.37], angle: 0.2, size: 1.04 },
+  { p: [-0.78, 0, -0.13], angle: 1.4, size: 0.78 },
+  { p: [0.79, 0, 0.02], angle: 2.3, size: 0.83 },
+];
+
+/** A recessed, curved seam in the surface itself, with deterministic roast variation. */
+export function beanGeometry() {
+  const geometry = new THREE.SphereGeometry(1, 64, 48);
+  const positions = geometry.attributes.position;
+  const colors: number[] = [];
+  for (let i = 0; i < positions.count; i++) {
+    const x = positions.getX(i),
+      y = positions.getY(i),
+      z = positions.getZ(i);
+    const seam = Math.exp(-(((x - 0.13 * Math.sin(z * 3)) / 0.12) ** 2));
+    const top = Math.max(0, y);
+    const noise = Math.sin(x * 71 + z * 39) * Math.sin(y * 57 - z * 63);
+    positions.setXYZ(
+      i,
+      x * 0.245 * (1 + z * 0.08),
+      y * 0.16 - seam * top * 0.083 + noise * 0.003,
+      z * 0.355,
+    );
+    const shade = 1 - seam * top * 0.63 + noise * 0.055;
+    colors.push(shade, shade, shade);
+  }
+  geometry.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+  geometry.computeVertexNormals();
+  return geometry;
+}
 
 export function Beans({ roast, spin }: { roast: number; spin: boolean }) {
   const group = useRef<THREE.Group>(null);
-  const color = useMemo(
-    () => LIGHT.clone().lerp(DARK, Math.min(1, Math.max(0, roast))),
-    [roast],
-  );
-  useFrame((_, dt) => {
-    if (group.current && spin) group.current.rotation.y += dt * 0.35;
+  const geometry = useMemo(beanGeometry, []);
+  const r = THREE.MathUtils.clamp(roast, 0, 1);
+  const color = useMemo(() => LIGHT.clone().lerp(DARK, r), [r]);
+  useFrame(({ clock }) => {
+    if (group.current && spin)
+      group.current.rotation.y = Math.sin(clock.elapsedTime * 0.2) * 0.1;
   });
   return (
-    <group ref={group} position={[0, -1.1, 0]}>
-      {BEANS.map((b) => (
-        <group
-          key={b.p.join(",")}
-          position={b.p as unknown as [number, number, number]}
-          rotation={b.r as unknown as [number, number, number]}
+    <group ref={group} position={[0, -1.3, 0]}>
+      {BEANS.map((bean) => (
+        <mesh
+          key={bean.p.join(",")}
+          geometry={geometry}
+          castShadow
+          position={[bean.p[0], 0.165 * bean.size, bean.p[2]]}
+          rotation={[0, bean.angle, 0]}
+          scale={bean.size}
         >
-          <mesh scale={[0.36, 0.22, 0.26]}>
-            <sphereGeometry args={[1, 32, 24]} />
-            <meshPhysicalMaterial
-              color={color}
-              roughness={0.55 - roast * 0.25}
-              clearcoat={roast * 0.6}
-              clearcoatRoughness={0.4}
-            />
-          </mesh>
-          <mesh position={[0, 0.2, 0]} scale={[0.02, 0.05, 0.2]}>
-            <boxGeometry />
-            <meshStandardMaterial color="#1b110b" roughness={1} />
-          </mesh>
-        </group>
+          <meshPhysicalMaterial
+            color={color}
+            vertexColors
+            roughness={0.78 - r * 0.26}
+            clearcoat={r * 0.24}
+            clearcoatRoughness={0.5}
+          />
+        </mesh>
       ))}
     </group>
   );

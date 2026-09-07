@@ -1,9 +1,9 @@
 "use client";
 
-import { useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import * as THREE from "three";
 import { COLORS } from "../materials";
+import { tube } from "./shapes";
 
 /*
   Hario V60 02 on the 600 ml range server, modelled after the real set.
@@ -17,11 +17,11 @@ import { COLORS } from "../materials";
 const SERVER_H = 1.0;
 const SERVER_PROFILE: [number, number][] = [
   [0, 0],
-  [0.62, 0],
-  [0.7, 0.05],
-  [0.72, 0.16],
-  [0.7, 0.4],
-  [0.62, 0.62],
+  [0.48, 0.015],
+  [0.56, 0.05],
+  [0.59, 0.16],
+  [0.57, 0.4],
+  [0.5, 0.62],
   [0.5, 0.78],
   [0.43, 0.86],
   [0.42, 0.93],
@@ -31,11 +31,11 @@ const NECK_R = 0.42;
 
 const PLATE_Y = SERVER_H + 0.02;
 const CONE_BOTTOM_Y = PLATE_Y + 0.05;
-const CONE_TOP_Y = CONE_BOTTOM_Y + 0.66;
-const HOLE_R = 0.24;
-const CONE_TOP_R = 0.74;
+const CONE_TOP_Y = CONE_BOTTOM_Y + 0.82;
+const HOLE_R = 0.095;
+const CONE_TOP_R = 0.57;
 const WALL = 0.045;
-const RIDGES = 12;
+const RIDGES = 24;
 
 function coneRadius(y: number) {
   const t = (y - CONE_BOTTOM_Y) / (CONE_TOP_Y - CONE_BOTTOM_Y);
@@ -59,15 +59,23 @@ function splineLathe(points: [number, number][], segments = 96) {
 export function V60({
   fill,
   coffee,
-  pouring,
-  quality: _quality,
+  pouring: _pouring,
 }: {
   fill: number;
   coffee: number;
   pouring: boolean;
-  quality: "high" | "low";
 }) {
-  const server = useMemo(() => splineLathe(SERVER_PROFILE), []);
+  const server = useMemo(
+    () =>
+      splineLathe([
+        ...SERVER_PROFILE,
+        ...SERVER_PROFILE.slice(1)
+          .reverse()
+          .map(([r, y]) => [r - 0.022, Math.max(0.035, y)] as [number, number]),
+        [0, 0.035],
+      ]),
+    [],
+  );
 
   const level = Math.round(Math.max(0, Math.min(1, fill)) * 40) / 40;
   const serverLiquid = useMemo(() => {
@@ -99,9 +107,9 @@ export function V60({
         [NECK_R - 0.03, PLATE_Y],
         [HOLE_R + WALL, PLATE_Y],
         [HOLE_R + WALL, PLATE_Y + 0.05],
-        [0.88, PLATE_Y + 0.05],
-        [0.9, PLATE_Y + 0.02],
-        [0.88, PLATE_Y - 0.02],
+        [0.66, PLATE_Y + 0.05],
+        [0.68, PLATE_Y + 0.02],
+        [0.66, PLATE_Y - 0.02],
         [NECK_R + 0.01, PLATE_Y - 0.02],
         [NECK_R + 0.01, PLATE_Y - 0.14],
       ]),
@@ -117,7 +125,7 @@ export function V60({
         const t = k / 10;
         const y =
           CONE_BOTTOM_Y + 0.05 + t * (CONE_TOP_Y - CONE_BOTTOM_Y - 0.12);
-        const r = coneRadius(y) - 0.02;
+        const r = coneRadius(y) + WALL - 0.002;
         const a = a0 + t * 0.9;
         pts.push(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r));
       }
@@ -126,7 +134,7 @@ export function V60({
         geo: new THREE.TubeGeometry(
           new THREE.CatmullRomCurve3(pts),
           24,
-          0.018,
+          0.012,
           8,
           false,
         ),
@@ -135,6 +143,14 @@ export function V60({
     return geos;
   }, []);
 
+  const paper = useMemo(
+    () =>
+      toLathe([
+        [HOLE_R - 0.015, CONE_BOTTOM_Y + 0.025],
+        [CONE_TOP_R - 0.012, CONE_TOP_Y - 0.015],
+      ]),
+    [],
+  );
   const bedH = coffee <= 0 ? 0.0001 : 0.1 + Math.min(1, coffee) * 0.24;
   const bed = useMemo(() => {
     const y0 = CONE_BOTTOM_Y + 0.01;
@@ -167,22 +183,39 @@ export function V60({
     );
   }, [level, bedH]);
 
-  const stream = useRef<THREE.Mesh>(null);
-  useFrame(({ clock }) => {
-    if (!stream.current) return;
-    const s = stream.current.scale;
-    s.x = THREE.MathUtils.lerp(s.x, pouring ? 1 : 0, 0.15);
-    s.z = s.x;
-    stream.current.position.x = pouring
-      ? 0.12 + Math.sin(clock.elapsedTime * 9) * 0.01
-      : 0.12;
-  });
-
+  const serverHandle = useMemo(
+    () =>
+      tube(
+        [
+          [0.43, 0.9, 0],
+          [0.74, 0.88, 0],
+          [0.83, 0.63, 0],
+          [0.73, 0.38, 0],
+          [0.57, 0.35, 0],
+        ],
+        0.045,
+      ),
+    [],
+  );
+  const dripperHandle = useMemo(
+    () =>
+      tube(
+        [
+          [0.51, CONE_TOP_Y - 0.08, 0],
+          [0.79, CONE_TOP_Y - 0.08, 0],
+          [0.83, CONE_TOP_Y - 0.29, 0],
+          [0.62, CONE_TOP_Y - 0.47, 0],
+          [0.37, CONE_TOP_Y - 0.43, 0],
+        ],
+        0.043,
+      ),
+    [],
+  );
   const glass = (
     <meshPhysicalMaterial
       color="#ffffff"
       transparent
-      opacity={0.32}
+      opacity={0.22}
       roughness={0.04}
       metalness={0}
       clearcoat={1}
@@ -215,8 +248,9 @@ export function V60({
           side={THREE.DoubleSide}
         />
       </mesh>
-      <mesh position={[0.72, 0.52, 0]} rotation={[0, 0, -Math.PI / 2 - 0.3]}>
-        <torusGeometry args={[0.3, 0.04, 12, 40, Math.PI]} />
+      <mesh geometry={serverHandle}>{glass}</mesh>
+      <mesh position={[0, SERVER_H, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[NECK_R, 0.018, 12, 96]} />
         {glass}
       </mesh>
       {serverLiquid ? (
@@ -234,20 +268,29 @@ export function V60({
       {ridges.map(({ id, geo }) => (
         <mesh key={id} geometry={geo}>
           <meshPhysicalMaterial
-            color="#e8e1d6"
+            color="#f4efe7"
             roughness={0.35}
             clearcoat={0.5}
           />
         </mesh>
       ))}
-      <mesh
-        position={[coneRadius(CONE_TOP_Y - 0.26) + 0.03, CONE_TOP_Y - 0.26, 0]}
-        rotation={[0, 0, -Math.PI / 2 + 0.25]}
-      >
-        <torusGeometry args={[0.2, 0.045, 12, 40, Math.PI]} />
+      <mesh geometry={dripperHandle} castShadow>
         {ceramic}
       </mesh>
-
+      <mesh
+        position={[0, CONE_TOP_Y - 0.007, 0]}
+        rotation={[Math.PI / 2, 0, 0]}
+      >
+        <torusGeometry args={[CONE_TOP_R + WALL / 2, WALL / 2, 12, 96]} />
+        {ceramic}
+      </mesh>
+      <mesh geometry={paper}>
+        <meshStandardMaterial
+          color={COLORS.paper}
+          roughness={0.95}
+          side={THREE.DoubleSide}
+        />
+      </mesh>
       <mesh geometry={bed} visible={coffee > 0}>
         <meshStandardMaterial color={COLORS.coffee} roughness={0.95} />
       </mesh>
@@ -260,22 +303,6 @@ export function V60({
           />
         </mesh>
       ) : null}
-
-      <mesh
-        ref={stream}
-        position={[0.12, CONE_TOP_Y + 0.5, 0]}
-        scale={[0, 1, 0]}
-      >
-        <cylinderGeometry args={[0.018, 0.026, 1.0, 12]} />
-        <meshPhysicalMaterial
-          color="#d8ecff"
-          transparent
-          opacity={0.75}
-          roughness={0}
-          transmission={0.6}
-          thickness={0.2}
-        />
-      </mesh>
     </group>
   );
 }

@@ -3,12 +3,10 @@
 import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
-import { COLORS } from "../materials";
+import { lathe, tube } from "./shapes";
 
-/*
-  Hand grinder: body, hopper, crank, and a dial ring with `ticks` marks per rotation.
-  The ring turns to `value` ticks from zero; the crank idles slowly.
-*/
+const FLUTES = Array.from({ length: 64 }, (_, i) => (i / 64) * Math.PI * 2);
+
 export function Grinder({
   ticks,
   value,
@@ -18,112 +16,146 @@ export function Grinder({
   value: number;
   spin: boolean;
 }) {
-  const shownTicks = Math.min(60, Math.max(6, Math.round(ticks)));
   const ring = useRef<THREE.Group>(null);
   const crank = useRef<THREE.Group>(null);
-  const marks = useRef<THREE.InstancedMesh>(null);
-  const cur = useRef(0);
-
-  const markGeo = useMemo(() => new THREE.BoxGeometry(0.012, 0.05, 0.05), []);
-
+  const cur = useRef(value);
+  const count = Math.min(60, Math.max(6, Math.round(ticks)));
+  const marks = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        angle: (i / count) * Math.PI * 2,
+        major: i % 5 === 0,
+      })),
+    [count],
+  );
+  const body = useMemo(
+    () =>
+      lathe([
+        [0, 0],
+        [0.285, 0],
+        [0.315, 0.025],
+        [0.32, 0.12],
+        [0.32, 1.6],
+        [0.31, 1.65],
+        [0.285, 1.67],
+        [0, 1.67],
+      ]),
+    [],
+  );
+  const arm = useMemo(
+    () =>
+      tube(
+        [
+          [0, 0.045, 0],
+          [0.17, 0.05, 0],
+          [0.34, 0.13, 0],
+          [0.64, 0.14, 0],
+        ],
+        0.025,
+      ),
+    [],
+  );
   useFrame((_, dt) => {
-    if (marks.current && !marks.current.userData.placed) {
-      const d = new THREE.Object3D();
-      for (let i = 0; i < shownTicks; i++) {
-        const a = (i / shownTicks) * Math.PI * 2;
-        d.position.set(Math.cos(a) * 0.47, 0, Math.sin(a) * 0.47);
-        d.rotation.set(0, -a, 0);
-        d.updateMatrix();
-        marks.current.setMatrixAt(i, d.matrix);
-      }
-      marks.current.instanceMatrix.needsUpdate = true;
-      marks.current.userData.placed = true;
-    }
-    // ring turns to the target value; one full turn per `ticks`
-    cur.current = THREE.MathUtils.lerp(cur.current, value, 0.08);
+    cur.current = THREE.MathUtils.damp(cur.current, value, 8, dt);
     if (ring.current)
-      ring.current.rotation.y = -(cur.current / ticks) * Math.PI * 2;
-    if (crank.current && spin) crank.current.rotation.y += dt * 1.2;
+      ring.current.rotation.y =
+        (-cur.current / Math.max(1, ticks)) * Math.PI * 2;
+    if (crank.current && spin) crank.current.rotation.y += dt * 0.35;
   });
-
   return (
-    <group position={[0, -0.9, 0]}>
-      {/* catch cup */}
-      <mesh position={[0, 0.35, 0]}>
-        <cylinderGeometry args={[0.44, 0.44, 0.7, 48]} />
+    <group position={[0, -1.3, 0]} rotation={[0, -0.45, 0]}>
+      <mesh geometry={body} castShadow>
         <meshStandardMaterial
-          color={COLORS.plasticGrey}
-          roughness={0.3}
-          metalness={0.7}
+          color="#6c7778"
+          metalness={0.8}
+          roughness={0.33}
         />
       </mesh>
-      {/* dial ring at the base of the burr, with marks */}
-      <group ref={ring} position={[0, 0.74, 0]}>
-        <mesh>
-          <cylinderGeometry args={[0.46, 0.46, 0.1, 48]} />
-          <meshStandardMaterial
-            color={COLORS.plasticDark}
-            roughness={0.5}
-            metalness={0.4}
-          />
-        </mesh>
-        <instancedMesh
-          ref={marks}
-          args={[markGeo, undefined, shownTicks]}
-          position={[0, 0.02, 0]}
+      <mesh position={[0, 0.39, 0]}>
+        <cylinderGeometry args={[0.323, 0.323, 0.016, 96]} />
+        <meshStandardMaterial color="#1f292b" roughness={0.65} />
+      </mesh>
+      <mesh position={[0, 1.08, 0]}>
+        <cylinderGeometry args={[0.324, 0.324, 0.84, 96]} />
+        <meshStandardMaterial
+          color="#344043"
+          metalness={0.6}
+          roughness={0.42}
+        />
+      </mesh>
+      {FLUTES.map((angle) => (
+        <mesh
+          key={angle}
+          position={[Math.sin(angle) * 0.325, 1.08, Math.cos(angle) * 0.325]}
+          rotation={[0, angle, 0]}
         >
-          <meshStandardMaterial color={COLORS.crema} roughness={0.4} />
-        </instancedMesh>
+          <boxGeometry args={[0.008, 0.79, 0.006]} />
+          <meshStandardMaterial
+            color="#829091"
+            metalness={0.75}
+            roughness={0.4}
+          />
+        </mesh>
+      ))}
+      <group ref={ring} position={[0, 0.55, 0]}>
+        <mesh>
+          <cylinderGeometry args={[0.329, 0.329, 0.16, 96]} />
+          <meshStandardMaterial
+            color="#283235"
+            metalness={0.5}
+            roughness={0.4}
+          />
+        </mesh>
+        {marks.map(({ angle, major }) => (
+          <mesh
+            key={angle}
+            position={[Math.sin(angle) * 0.331, 0.02, Math.cos(angle) * 0.331]}
+            rotation={[0, angle, 0]}
+          >
+            <boxGeometry args={[0.007, major ? 0.065 : 0.03, 0.005]} />
+            <meshStandardMaterial color="#e6dac4" roughness={0.6} />
+          </mesh>
+        ))}
       </group>
-      {/* fixed pointer */}
-      <mesh position={[0.5, 0.74, 0]}>
-        <boxGeometry args={[0.06, 0.02, 0.02]} />
-        <meshStandardMaterial
-          color={COLORS.copper}
-          emissive={COLORS.copper}
-          emissiveIntensity={0.4}
-        />
+      <mesh position={[0, 0.68, 0.33]} rotation={[0, 0, Math.PI]}>
+        <coneGeometry args={[0.016, 0.036, 3]} />
+        <meshStandardMaterial color="#d6a467" metalness={0.3} roughness={0.3} />
       </mesh>
-      {/* body */}
-      <mesh position={[0, 1.4, 0]}>
-        <cylinderGeometry args={[0.45, 0.46, 1.2, 48]} />
-        <meshStandardMaterial
-          color={COLORS.plasticGrey}
-          roughness={0.3}
-          metalness={0.7}
-        />
+      <mesh position={[0, 1.675, 0]} castShadow>
+        <cylinderGeometry args={[0.318, 0.32, 0.045, 96]} />
+        <meshStandardMaterial color="#222d30" metalness={0.5} roughness={0.3} />
       </mesh>
-      {/* knurl band */}
-      <mesh position={[0, 1.65, 0]}>
-        <cylinderGeometry args={[0.462, 0.462, 0.28, 64]} />
-        <meshStandardMaterial color={COLORS.plasticDark} roughness={0.8} />
-      </mesh>
-      {/* lid */}
-      <mesh position={[0, 2.03, 0]}>
-        <cylinderGeometry args={[0.46, 0.45, 0.06, 48]} />
-        <meshStandardMaterial color={COLORS.plasticDark} roughness={0.5} />
-      </mesh>
-      {/* crank */}
-      <group ref={crank} position={[0, 2.08, 0]}>
-        <mesh position={[0, 0.03, 0]}>
-          <cylinderGeometry args={[0.06, 0.06, 0.06, 24]} />
+      <group ref={crank} position={[0, 1.73, 0]}>
+        <mesh>
+          <cylinderGeometry args={[0.062, 0.065, 0.09, 32]} />
           <meshStandardMaterial
-            color={COLORS.steel}
-            metalness={0.9}
-            roughness={0.3}
+            color="#bac2c1"
+            metalness={0.95}
+            roughness={0.22}
           />
         </mesh>
-        <mesh position={[0.3, 0.07, 0]}>
-          <boxGeometry args={[0.62, 0.03, 0.08]} />
+        <mesh geometry={arm} castShadow>
           <meshStandardMaterial
-            color={COLORS.steel}
-            metalness={0.9}
-            roughness={0.3}
+            color="#c2c9c8"
+            metalness={0.95}
+            roughness={0.2}
           />
         </mesh>
-        <mesh position={[0.6, 0.2, 0]}>
-          <cylinderGeometry args={[0.05, 0.06, 0.26, 24]} />
-          <meshStandardMaterial color={COLORS.plasticDark} roughness={0.5} />
+        <mesh position={[0.64, 0.23, 0]}>
+          <cylinderGeometry args={[0.03, 0.03, 0.2, 24]} />
+          <meshStandardMaterial
+            color="#adb5b5"
+            metalness={0.95}
+            roughness={0.2}
+          />
+        </mesh>
+        <mesh position={[0.64, 0.33, 0]} scale={[0.14, 0.16, 0.13]} castShadow>
+          <sphereGeometry args={[1, 40, 24]} />
+          <meshPhysicalMaterial
+            color="#745039"
+            roughness={0.5}
+            clearcoat={0.3}
+          />
         </mesh>
       </group>
     </group>

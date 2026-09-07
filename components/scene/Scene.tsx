@@ -3,7 +3,6 @@
 import {
   ContactShadows,
   Environment,
-  Float,
   Lightformer,
   PerformanceMonitor,
 } from "@react-three/drei";
@@ -20,20 +19,19 @@ import type { SceneState } from "./types";
 /*
   One canvas for the whole app. Objects sit at fixed spots; the camera rig moves between
   them. A procedural environment (light formers) gives the glass something to reflect
-  without downloading an HDR. PerformanceMonitor drops pixel ratio and glass quality
+  without downloading an HDR. PerformanceMonitor drops pixel ratio
   on weak devices.
 */
 
 const SPOTS = {
-  v60: new THREE.Vector3(-1.6, -1.3, 0),
-  aeropress: new THREE.Vector3(1.75, -1.06, 0),
+  v60: new THREE.Vector3(-1.15, -1.3, 0),
+  aeropress: new THREE.Vector3(1.15, -1.3, 0),
   grinder: new THREE.Vector3(0, 0, -6),
   beans: new THREE.Vector3(6, 0, -6),
 } as const;
 
 export default function Scene({ state }: { state: SceneState }) {
   const [dpr, setDpr] = useState(2);
-  const [quality, setQuality] = useState<"high" | "low">("high");
 
   return (
     <Canvas
@@ -45,10 +43,7 @@ export default function Scene({ state }: { state: SceneState }) {
     >
       <Suspense fallback={null}>
         <PerformanceMonitor
-          onDecline={() => {
-            setDpr(1);
-            setQuality("low");
-          }}
+          onDecline={() => setDpr(1)}
           onIncline={() => setDpr(2)}
           flipflops={2}
         />
@@ -56,14 +51,14 @@ export default function Scene({ state }: { state: SceneState }) {
         <hemisphereLight args={["#fff7ec", "#c9b8a2", 0.9]} />
         <directionalLight
           position={[4, 6, 3]}
-          intensity={2.0}
+          intensity={1.5}
           color="#fff1dc"
           castShadow={false}
         />
         <directionalLight
           position={[-3, 2, 4]}
-          intensity={0.9}
-          color="#ffe8cf"
+          intensity={0.6}
+          color="#ffffff"
         />
         <directionalLight
           position={[-5, 3, -2]}
@@ -116,39 +111,26 @@ export default function Scene({ state }: { state: SceneState }) {
           on={state.idle && state.focus === "brewers"}
           visible={state.focus === "brewers" || state.method !== "aeropress"}
         >
-          <Float
-            floatIntensity={state.idle && state.focus === "brewers" ? 0.25 : 0}
-            rotationIntensity={0}
-            speed={1.2}
-          >
-            <V60
-              fill={state.method === "v60" ? state.fill : 0}
-              coffee={state.coffee}
-              pouring={state.pouring && state.method === "v60"}
-              quality={quality}
-            />
-          </Float>
+          <V60
+            fill={state.method === "v60" ? state.fill : 0}
+            coffee={state.coffee}
+            pouring={state.pouring && state.method === "v60"}
+          />
         </Turntable>
         <Turntable
           position={SPOTS.aeropress}
           on={state.idle && state.focus === "brewers"}
-          scale={0.95}
-          phase={1.7}
+          scale={1}
+          phase={0.25}
           visible={state.focus === "brewers" || state.method === "aeropress"}
         >
-          <Float
-            floatIntensity={state.idle && state.focus === "brewers" ? 0.25 : 0}
-            rotationIntensity={0}
-            speed={1.4}
-          >
-            <AeroPress
-              fill={state.method === "aeropress" ? state.fill : 0}
-              coffee={state.coffee}
-              plunger={state.method === "aeropress" ? state.plunger : 0}
-              inverted={state.inverted}
-              quality={quality}
-            />
-          </Float>
+          <AeroPress
+            fill={state.method === "aeropress" ? state.fill : 0}
+            coffee={state.coffee}
+            plunger={state.method === "aeropress" ? state.plunger : 0}
+            inverted={state.inverted}
+            pouring={state.pouring && state.method === "aeropress"}
+          />
         </Turntable>
         <group
           position={SPOTS.beans.toArray()}
@@ -171,11 +153,17 @@ export default function Scene({ state }: { state: SceneState }) {
           <Kettle
             pouring={state.pouring}
             target={state.method === "aeropress" ? SPOTS.aeropress : SPOTS.v60}
-            spoutHeight={state.method === "aeropress" ? 1.45 : 1.15}
+            spoutHeight={
+              state.method === "aeropress"
+                ? state.inverted
+                  ? 1.96
+                  : 1.85
+                : 1.89
+            }
           />
         </group>
 
-        {/* floor: a dark disc under everything, lit by two pools */}
+        {/* A shared surface and live contact shadows keep every object grounded. */}
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.32, 0]}>
           <circleGeometry args={[14, 64]} />
           <meshStandardMaterial
@@ -188,7 +176,7 @@ export default function Scene({ state }: { state: SceneState }) {
           position={[SPOTS.v60.x, 5, 1.5]}
           angle={0.5}
           penumbra={1}
-          intensity={30}
+          intensity={8}
           color="#ffe6c8"
           distance={12}
           target-position={SPOTS.v60.toArray()}
@@ -197,7 +185,7 @@ export default function Scene({ state }: { state: SceneState }) {
           position={[SPOTS.aeropress.x, 5, 1.5]}
           angle={0.5}
           penumbra={1}
-          intensity={30}
+          intensity={8}
           color="#ffe6c8"
           distance={12}
         />
@@ -209,14 +197,15 @@ export default function Scene({ state }: { state: SceneState }) {
           blur={2.4}
           far={3}
           color="#000000"
-          frames={1}
+          frames={Infinity}
+          resolution={256}
         />
       </Suspense>
     </Canvas>
   );
 }
 
-/** Slow turntable for the hero view; still when off. */
+/** A small idle turn keeps the handles and markings facing the viewer. */
 function Turntable({
   children,
   position,
@@ -235,8 +224,11 @@ function Turntable({
   const ref = useRef<THREE.Group>(null);
   useFrame((_, dt) => {
     if (!ref.current) return;
-    if (on) ref.current.rotation.y += dt * 0.25;
-    else
+    if (on) {
+      ref.current.userData.time = (ref.current.userData.time ?? 0) + dt * 0.35;
+      ref.current.rotation.y =
+        0.25 + Math.sin(ref.current.userData.time) * 0.12;
+    } else
       ref.current.rotation.y = THREE.MathUtils.lerp(
         ref.current.rotation.y,
         0.35,
@@ -266,17 +258,17 @@ const VIEWS: Record<
 > = {
   brewers: {
     center: new THREE.Vector3(0.05, -0.35, 0),
-    radius: 2.3,
+    radius: 1.95,
     dir: new THREE.Vector3(0.12, 0.2, 1).normalize(),
   },
   brewersV60: {
-    center: new THREE.Vector3(-0.7, -0.35, 0),
-    radius: 2.2,
+    center: new THREE.Vector3(0, -0.25, 0),
+    radius: 1.95,
     dir: new THREE.Vector3(0.05, 0.2, 1).normalize(),
   },
   brewersAeropress: {
-    center: new THREE.Vector3(0.8, -0.35, 0),
-    radius: 2.2,
+    center: new THREE.Vector3(0, -0.25, 0),
+    radius: 1.95,
     dir: new THREE.Vector3(0.2, 0.2, 1).normalize(),
   },
   v60: {
@@ -285,8 +277,8 @@ const VIEWS: Record<
     dir: new THREE.Vector3(0.35, 0.28, 1).normalize(),
   },
   aeropress: {
-    center: new THREE.Vector3(SPOTS.aeropress.x, -0.2, 0),
-    radius: 1.35,
+    center: new THREE.Vector3(SPOTS.aeropress.x, -0.15, 0),
+    radius: 1.45,
     dir: new THREE.Vector3(0.35, 0.22, 1).normalize(),
   },
   grinder: {
@@ -308,13 +300,13 @@ const VIEWS: Record<
     dir: new THREE.Vector3(0.2, 0.75, 1).normalize(),
   },
   v60Brewing: {
-    center: new THREE.Vector3(SPOTS.v60.x + 0.15, 0.0, 0),
+    center: new THREE.Vector3(SPOTS.v60.x - 0.25, 0.0, 0),
     radius: 1.75,
     dir: new THREE.Vector3(0.3, 0.2, 1).normalize(),
   },
   aeropressBrewing: {
-    center: new THREE.Vector3(SPOTS.aeropress.x + 0.1, 0.2, 0),
-    radius: 1.65,
+    center: new THREE.Vector3(SPOTS.aeropress.x - 0.25, 0.1, 0),
+    radius: 1.75,
     dir: new THREE.Vector3(0.3, 0.2, 1).normalize(),
   },
 };

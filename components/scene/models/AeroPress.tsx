@@ -1,37 +1,54 @@
 "use client";
 
 import { useFrame } from "@react-three/fiber";
-import { useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { COLORS } from "../materials";
+import { Cup } from "./Cup";
+import { lathe, pressPose } from "./shapes";
 
-/*
-  Procedural AeroPress: chamber (glass), plunger with rubber seal, filter cap, and the
-  liquid column. `plunger` 0..1 moves the plunger down; the liquid shrinks with it.
-  Upright: cap at the bottom, on a cup. Inverted: plunger at the bottom, cap on top.
-*/
+const R = 0.315;
+const HEIGHT = 1.13;
+const SHAFT = 0.82;
+const CAP_ANGLES = Array.from({ length: 28 }, (_, i) => (i / 28) * Math.PI * 2);
 
-const CH_R = 0.5;
-const CH_H = 1.25;
-const PL_R = 0.45;
-const PL_H = 1.15;
-const TRAVEL = 0.95;
-/** how far the plunger sits inside the chamber before pressing (real AeroPress: about a quarter) */
-const SEATED = 0.3;
-
-/** Smoky grey polypropylene, the real AeroPress chamber look. */
-function Smoky() {
+function Markings() {
+  const map = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 256;
+    canvas.height = 768;
+    const ctx = canvas.getContext("2d");
+    if (ctx) {
+      ctx.fillStyle = "#ecd39c";
+      ctx.textAlign = "center";
+      ctx.font = "500 58px sans-serif";
+      for (let i = 1; i <= 4; i++) {
+        const y = 670 - (i - 1) * 155;
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#ecd39c";
+        ctx.beginPath();
+        ctx.arc(128, y - 18, 43, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillText(String(i), 128, y);
+      }
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  }, []);
+  useEffect(() => () => map.dispose(), [map]);
   return (
-    <meshPhysicalMaterial
-      color="#6b625b"
-      transparent
-      opacity={0.62}
-      roughness={0.35}
-      clearcoat={0.5}
-      clearcoatRoughness={0.3}
-      side={THREE.DoubleSide}
-      depthWrite={false}
-    />
+    <mesh position={[0, 0.59, 0]}>
+      <cylinderGeometry
+        args={[R + 0.005, R + 0.005, 0.96, 32, 1, true, -0.42, 0.84]}
+      />
+      <meshBasicMaterial
+        map={map}
+        transparent
+        depthWrite={false}
+        polygonOffset
+        polygonOffsetFactor={-1}
+      />
+    </mesh>
   );
 }
 
@@ -40,115 +57,145 @@ export function AeroPress({
   coffee,
   plunger,
   inverted,
-  quality: _quality,
+  pouring = false,
 }: {
   fill: number;
   coffee: number;
   plunger: number;
   inverted: boolean;
-  quality: "high" | "low";
+  pouring?: boolean;
 }) {
+  const chamberRef = useRef<THREE.Group>(null);
   const plungerRef = useRef<THREE.Group>(null);
-  const liquidRef = useRef<THREE.Mesh>(null);
-  const cur = useRef({ plunger: 0, fill: 0 });
-  const bedRef = useRef(0.1);
-
-  useFrame(() => {
-    const c = cur.current;
-    c.plunger = THREE.MathUtils.lerp(c.plunger, plunger, 0.08);
-    c.fill = THREE.MathUtils.lerp(c.fill, fill, 0.06);
-    const p = c.plunger;
-    if (plungerRef.current) {
-      // plunger seal starts at the chamber top and travels down
-      plungerRef.current.position.y = inverted
-        ? 0.02 + 0.0 // sits as the base when inverted
-        : CH_H - SEATED - p * TRAVEL;
-    }
-    if (liquidRef.current) {
-      const maxH = CH_H - 0.12;
-      const h = Math.max(0.001, c.fill * (maxH - SEATED) * (1 - p * 0.95));
-      liquidRef.current.scale.y = h;
-      // liquid rests on the cap (upright) or on the plunger seal (inverted)
-      liquidRef.current.position.y =
-        (inverted ? 0.12 : 0.08) + bedRef.current + h / 2;
+  const capRef = useRef<THREE.Group>(null);
+  const liquid = useRef<THREE.Mesh>(null);
+  const bed = useRef<THREE.Mesh>(null);
+  const cur = useRef({ plunger, fill });
+  const pose = pressPose(inverted, plunger);
+  const bedH = coffee > 0 ? 0.03 + Math.min(coffee, 1) * 0.07 : 0;
+  const wall = useMemo(
+    () =>
+      lathe([
+        [R, 0.035],
+        [R, HEIGHT - 0.025],
+        [R + 0.014, HEIGHT],
+        [R - 0.023, HEIGHT],
+        [R - 0.023, 0.035],
+        [R, 0.035],
+      ]),
+    [],
+  );
+  useFrame((_, dt) => {
+    cur.current.plunger = THREE.MathUtils.damp(
+      cur.current.plunger,
+      plunger,
+      8,
+      dt,
+    );
+    cur.current.fill = THREE.MathUtils.damp(cur.current.fill, fill, 8, dt);
+    const p = pressPose(inverted, cur.current.plunger);
+    if (chamberRef.current) chamberRef.current.position.y = p.chamber;
+    if (plungerRef.current) plungerRef.current.position.y = p.seal;
+    if (capRef.current) capRef.current.position.y = p.cap;
+    if (bed.current) bed.current.position.y = p.bed + bedH / 2;
+    if (liquid.current) {
+      const ceiling = inverted ? p.chamber + HEIGHT - 0.07 : p.seal - 0.045;
+      const height = Math.max(
+        0.001,
+        (ceiling - p.bed - bedH) *
+          THREE.MathUtils.clamp(cur.current.fill, 0, 1),
+      );
+      liquid.current.scale.y = height;
+      liquid.current.position.y = p.bed + bedH + height / 2;
     }
   });
-
-  const cup = !inverted;
-  const bedH = coffee <= 0 ? 0.0001 : 0.06 + Math.min(1, coffee) * 0.16;
-  bedRef.current = bedH;
-
   return (
-    <group position={[0, inverted ? PL_H - 0.09 : 0.55, 0]}>
-      {/* cup under an upright press */}
-      {cup ? (
-        <mesh position={[0, -0.4, 0]} castShadow>
-          <cylinderGeometry args={[0.5, 0.42, 0.8, 72]} />
-          <meshStandardMaterial color={COLORS.ceramic} roughness={0.35} />
-        </mesh>
-      ) : null}
-
-      {/* filter cap (bottom when upright, top when inverted) */}
-      <mesh position={[0, inverted ? CH_H + 0.06 : 0.0, 0]}>
-        <cylinderGeometry args={[CH_R + 0.05, CH_R + 0.05, 0.12, 72]} />
-        <meshStandardMaterial color={COLORS.plasticDark} roughness={0.55} />
-      </mesh>
-      <mesh position={[0, inverted ? CH_H + 0.125 : -0.065, 0]}>
-        <cylinderGeometry args={[CH_R - 0.05, CH_R - 0.05, 0.01, 48]} />
-        <meshStandardMaterial color={COLORS.paper} roughness={0.9} />
-      </mesh>
-
-      {/* chamber */}
-      <mesh position={[0, CH_H / 2 + 0.06, 0]}>
-        <cylinderGeometry args={[CH_R, CH_R, CH_H, 72, 1, true]} />
-        <Smoky />
-      </mesh>
-      {/* chamber marks */}
-      {[0.32, 0.56, 0.8, 1.04].map((y, i) => (
-        <mesh key={y} position={[0, y, 0]} rotation={[Math.PI / 2, 0, 0]}>
-          <torusGeometry args={[CH_R + 0.002, 0.004, 6, 48]} />
-          <meshStandardMaterial
-            color={i === 3 ? COLORS.crema : "#9c948b"}
-            roughness={0.5}
+    <group>
+      {!inverted && <Cup />}
+      <group ref={chamberRef} position={[0, pose.chamber, 0]}>
+        <mesh geometry={wall}>
+          <meshPhysicalMaterial
+            color="#626c6b"
+            transparent
+            opacity={0.46}
+            roughness={0.19}
+            clearcoat={1}
+            depthWrite={false}
+            side={THREE.DoubleSide}
           />
         </mesh>
-      ))}
-
-      {/* coffee bed */}
-      <mesh
-        position={[0, (inverted ? 0.12 : 0.08) + bedH / 2, 0]}
-        visible={coffee > 0}
+        <mesh
+          position={[0, inverted ? HEIGHT - 0.06 : 0.06, 0]}
+          rotation={[0, Math.PI / 8, 0]}
+          castShadow
+        >
+          <cylinderGeometry args={[0.435, 0.435, 0.055, 8]} />
+          <meshStandardMaterial color="#303736" roughness={0.36} />
+        </mesh>
+        <Markings />
+      </group>
+      <group
+        ref={capRef}
+        position={[0, pose.cap, 0]}
+        visible={!inverted || !pouring}
       >
-        <cylinderGeometry args={[CH_R - 0.03, CH_R - 0.03, bedH, 48]} />
-        <meshStandardMaterial color="#2e1b12" roughness={0.95} />
-      </mesh>
-
-      {/* liquid */}
-      <mesh ref={liquidRef} position={[0, 0.5, 0]} scale={[1, 0.001, 1]}>
-        <cylinderGeometry args={[CH_R - 0.03, CH_R - 0.03, 1, 48]} />
-        <meshStandardMaterial color={COLORS.coffeeLight} roughness={0.2} />
-      </mesh>
-
-      {/* plunger */}
+        <mesh castShadow>
+          <cylinderGeometry args={[0.332, 0.332, 0.085, 64]} />
+          <meshStandardMaterial color="#202625" roughness={0.48} />
+        </mesh>
+        {CAP_ANGLES.map((angle) => (
+          <mesh
+            key={angle}
+            position={[Math.sin(angle) * 0.332, 0, Math.cos(angle) * 0.332]}
+            rotation={[0, angle, 0]}
+          >
+            <boxGeometry args={[0.017, 0.066, 0.016]} />
+            <meshStandardMaterial color="#363d3c" roughness={0.55} />
+          </mesh>
+        ))}
+      </group>
       <group
         ref={plungerRef}
-        position={[0, inverted ? 0.02 : CH_H - SEATED, 0]}
+        position={[0, pose.seal, 0]}
+        visible={inverted || !pouring}
       >
-        <mesh position={[0, inverted ? -0.06 : 0.02, 0]}>
-          <cylinderGeometry args={[PL_R, PL_R, 0.16, 72]} />
-          <meshStandardMaterial color={COLORS.rubber} roughness={0.7} />
+        <mesh castShadow>
+          <cylinderGeometry args={[R - 0.025, R - 0.025, 0.09, 64]} />
+          <meshStandardMaterial color="#171d1c" roughness={0.76} />
         </mesh>
-        <mesh position={[0, inverted ? -PL_H / 2 - 0.1 : PL_H / 2, 0]}>
-          <cylinderGeometry
-            args={[PL_R - 0.05, PL_R - 0.05, PL_H, 72, 1, true]}
-          />
-          <Smoky />
-        </mesh>
-        <mesh position={[0, inverted ? -PL_H - 0.14 : PL_H + 0.04, 0]}>
-          <cylinderGeometry args={[PL_R + 0.02, PL_R + 0.02, 0.08, 72]} />
-          <meshStandardMaterial color={COLORS.plasticDark} roughness={0.55} />
-        </mesh>
+        <group scale={[1, inverted ? -1 : 1, 1]}>
+          <mesh position={[0, SHAFT / 2 + 0.025, 0]}>
+            <cylinderGeometry args={[0.245, 0.25, SHAFT, 64, 1, true]} />
+            <meshPhysicalMaterial
+              color="#454e4d"
+              transparent
+              opacity={0.73}
+              roughness={0.23}
+              clearcoat={0.8}
+              side={THREE.DoubleSide}
+              depthWrite={false}
+            />
+          </mesh>
+          <mesh position={[0, SHAFT + 0.045, 0]} castShadow>
+            <cylinderGeometry args={[0.37, 0.35, 0.07, 64]} />
+            <meshStandardMaterial color="#272e2d" roughness={0.34} />
+          </mesh>
+        </group>
       </group>
+      <mesh
+        ref={bed}
+        visible={coffee > 0}
+        position={[0, pose.bed + bedH / 2, 0]}
+      >
+        <cylinderGeometry
+          args={[R - 0.032, R - 0.032, Math.max(0.001, bedH), 64]}
+        />
+        <meshStandardMaterial color="#352015" roughness={1} />
+      </mesh>
+      <mesh ref={liquid} scale={[1, 0.001, 1]}>
+        <cylinderGeometry args={[R - 0.033, R - 0.033, 1, 64]} />
+        <meshStandardMaterial color="#513020" roughness={0.23} />
+      </mesh>
     </group>
   );
 }
