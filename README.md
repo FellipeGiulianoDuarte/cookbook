@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cookbook
 
-## Getting Started
+Brewing guide for Hario V60 and AeroPress. Pick a method, a recipe, your grinder, the dose and the bean; the app gives the exact recipe, the setting for your grinder, and a timer that talks you through the brew.
 
-First, run the development server:
+Every recipe number and every grinder band carries a source URL. See `data/` and the Sources page.
+
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm check      # biome + tsc + vitest
+pnpm e2e        # playwright (starts the dev server)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js 16 (App Router), React 19, TypeScript 7, Tailwind 4, XState 5, nuqs, next-intl, Zod, React Three Fiber, GSAP, Motion. Deployed on Vercel.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Add a grinder or a recipe
 
-## Learn More
+Add one JSON file under `data/grinders/` or `data/recipes/<method>/`. The Zod schema in `lib/schema.ts` validates it at build time and the `/debug` page lists it with its computed values. Every number needs a `source` with `url` and `kind` (`primary`, `transcription` or `community`).
 
-To learn more about Next.js, take a look at the following resources:
+## Plan
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The full plan (phases, data research, architecture) lives at `plans/brew-v2.html` in the author's workspace; a copy is checked in as `docs/plan.html`.

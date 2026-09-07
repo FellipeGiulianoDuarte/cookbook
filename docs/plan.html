@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan: Cookbook v2 — V60 + AeroPress brewing guide with 3D</title>
+<style>
+  :root {
+    --bg:#f7f6f3; --bg2:#f2f0ec; --card:#fffefb; --ink:#1c1b19;
+    --muted:#6b6864; --faint:#9a958d; --accent-bg:#efece6;
+    --line:rgba(28,27,25,.09); --line2:rgba(28,27,25,.16);
+    --brand:#e74c2e; --brand-strong:#d2411f; --brand-tint:#fdeee9; --brand-ink:#b5391b; --ring:rgba(231,76,46,.45);
+    --new:#3a9d57; --new-ink:#2f6b3c; --new-bg:#ecf4ec;
+    --mod:#e89a2b; --mod-ink:#8a5a12; --mod-bg:#fbf2dc;
+    --del:#e1473a; --del-ink:#9f2f2d; --del-bg:#fceae8;
+    --info:#3f86db; --info-ink:#1f5f9c; --info-bg:#e6f0fb;
+    --code-bg:#1b1a18; --code-ink:#ece9e3;
+    --radius:12px; --radius-lg:18px; --radius-sm:8px;
+    --sh-sm:0 1px 2px rgba(28,27,25,.04),0 2px 6px -2px rgba(28,27,25,.06);
+    --sh-md:0 2px 4px -2px rgba(28,27,25,.05),0 8px 20px -6px rgba(28,27,25,.09);
+    --hi:inset 0 1px 0 rgba(255,255,255,.7);
+    --ease:cubic-bezier(.32,.72,0,1);
+    --font:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not(.light) {
+    color-scheme:dark; --bg:#141312; --bg2:#100f0e; --card:#1e1c1a; --ink:#f4f2ee;
+    --muted:#a8a39b; --faint:#7c776f; --accent-bg:#2a2825; --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+    --brand-tint:#2c1812; --brand-ink:#f2a18f; --new-bg:#16241a; --mod-bg:#251d10; --del-bg:#2a1513; --info-bg:#11202e;
+    --new-ink:#7fc795; --mod-ink:#e3ab53; --del-ink:#ef8d83; --info-ink:#76aee6;
+    --sh-sm:0 1px 2px rgba(0,0,0,.4),0 2px 6px -2px rgba(0,0,0,.5);
+    --sh-md:0 2px 4px -2px rgba(0,0,0,.4),0 8px 20px -6px rgba(0,0,0,.55); --hi:inset 0 1px 0 rgba(255,255,255,.06);
+  }}
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); line-height:1.6; letter-spacing:-0.011em;
+    font:16px/1.6 var(--font); -webkit-font-smoothing:antialiased; }
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+  h1,h2,h3,h4 { letter-spacing:-0.025em; line-height:1.14; }
+  h3 { font-size:1.05rem; margin:1.6rem 0 .5rem; }
+  h4 { font-size:.95rem; margin:1.1rem 0 .35rem; color:var(--muted); }
+  a { color: var(--brand-ink); }
+  p { margin:.5rem 0 .9rem; }
+  ul, ol { margin:.3rem 0 .9rem; padding-left:1.2rem; } li { margin:.2rem 0; }
+  ::selection { background: var(--brand-tint); color: var(--brand-ink); }
+
+  .eyebrow { display:inline-flex; align-items:center; gap:.4rem; font-size:.6875rem; font-weight:600;
+    text-transform:uppercase; letter-spacing:.16em; color:var(--brand-ink); margin-bottom:.6rem; }
+  .eyebrow::before { content:""; width:1.25rem; height:1px; background:var(--brand); }
+  .eyebrow.quiet { color:var(--faint); } .eyebrow.quiet::before { background:var(--line2); }
+
+  header { padding-bottom:1.5rem; margin-bottom:1.75rem; border-bottom:1px solid var(--line); }
+  header h1 { margin:0 0 .5rem; font-size:2.1rem; }
+  .meta { display:flex; flex-wrap:wrap; gap:10px; color:var(--faint); font-size:13px; align-items:center; }
+  .meta .path { font-family:var(--mono); }
+  .badge { padding:3px 11px; border-radius:999px; font-weight:600; font-size:11px; letter-spacing:.06em; text-transform:uppercase; }
+  .badge.draft { background:var(--mod-bg); color:var(--mod-ink); }
+  .badge.ready { background:var(--new-bg); color:var(--new-ink); }
+
+  .tldr { background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--sh-sm), var(--hi); padding:1.25rem 1.5rem; margin-bottom:1.75rem; }
+  .tldr h2 { margin:0 0 .6rem; font-size:.6875rem; text-transform:uppercase; letter-spacing:.16em; color:var(--brand-ink); }
+  .tldr ul { margin:0; padding-left:1.1rem; } .tldr li { margin:5px 0; }
+
+  nav.tabs { display:flex; flex-wrap:wrap; gap:14px 22px; margin-bottom:1.5rem; align-items:flex-end; }
+  .tab-group { display:flex; flex-direction:column; gap:7px; }
+  .tab-group-label { font-size:.625rem; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--faint); padding-left:2px; }
+  .tab-group.review .tab-group-label { color:var(--brand-ink); }
+  .tab-group-row { display:flex; flex-wrap:wrap; gap:6px; }
+  .tab-group.impl { position:relative; padding-left:22px; }
+  .tab-group.impl::before { content:""; position:absolute; left:0; top:2px; bottom:6px; width:1px; background:var(--line2); }
+  nav.tabs button { border:1px solid var(--line2); background:var(--card); color:var(--muted);
+    padding:7px 14px; border-radius:999px; font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+    box-shadow:var(--sh-sm); transition:background .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease); }
+  nav.tabs button:hover { background:var(--accent-bg); color:var(--ink); }
+  nav.tabs button[aria-selected="true"] { background:var(--brand); border-color:var(--brand); color:#fff;
+    box-shadow:0 1px 2px rgba(231,76,46,.35), inset 0 1px 0 rgba(255,255,255,.22); }
+  .tab-group.impl button { background:transparent; border-color:var(--line); color:var(--faint); box-shadow:none; }
+  .tab-group.impl button:hover { background:var(--accent-bg); color:var(--ink); }
+
+  section.panel { background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--sh-sm), var(--hi); padding:1.6rem 1.8rem; margin-bottom:1.1rem; }
+  section.panel h2 { margin-top:0; font-size:1.375rem; }
+  body.js section.panel:not(.active) { display:none; }
+  @media print { body.js section.panel { display:block !important; } nav.tabs { display:none; } }
+
+  .tblwrap { overflow-x:auto; margin:.6rem 0 1rem; border:1px solid var(--line); border-radius:var(--radius-sm); }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; }
+  th, td { text-align:left; padding:.6rem .7rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--faint); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:.08em; white-space:nowrap; background:var(--bg2); }
+  tbody tr { transition:background .15s var(--ease); } tbody tr:hover { background:var(--accent-bg); }
+  tbody tr:last-child td { border-bottom:0; }
+  td code, .path, code { font-family:var(--mono); font-size:12.5px; }
+  code { background:var(--bg2); padding:1px 5px; border-radius:5px; }
+  .pill { display:inline-flex; align-items:center; padding:2px 10px; border-radius:999px; font-size:11px;
+    font-weight:600; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
+  .pill.new { background:var(--new-bg); color:var(--new-ink); }
+  .pill.mod { background:var(--mod-bg); color:var(--mod-ink); }
+  .pill.del { background:var(--del-bg); color:var(--del-ink); }
+  .pill.info { background:var(--info-bg); color:var(--info-ink); }
+  .pill.brand { background:var(--brand-tint); color:var(--brand-ink); }
+
+  pre.code { background:var(--code-bg); color:var(--code-ink); border-radius:var(--radius);
+    padding:1rem 1.15rem; overflow-x:auto; font-size:12.5px; line-height:1.6; box-shadow:var(--sh-sm); font-family:var(--mono); }
+  pre.code .c { color:#8f8a82; } pre.code .k { color:#f2a18f; } pre.code .s { color:#9ae6b4; } pre.code .n { color:#f9c784; }
+  .snippet-title { font-size:13px; color:var(--muted); margin:1.1rem 0 .35rem; }
+  .diff-del { color:#feb2b2; } .diff-add { color:#9ae6b4; }
+
+  .callout { display:flex; gap:.85rem; align-items:flex-start; border:1px solid var(--line);
+    border-radius:var(--radius); padding:1rem 1.15rem; margin:.85rem 0; box-shadow:var(--sh-sm), var(--hi); background:var(--card); }
+  .callout .ic { flex:none; width:1.85rem; height:1.85rem; border-radius:var(--radius-sm); display:inline-flex; align-items:center; justify-content:center; }
+  .callout .ic svg { width:1.05rem; height:1.05rem; }
+  .callout .bd { flex:1; min-width:0; } .callout .bd strong { display:block; margin-bottom:.1rem; }
+  .callout .bd p { margin:0; color:var(--muted); }
+  .callout.risk { background:linear-gradient(var(--del-bg),var(--del-bg)) 0/100% no-repeat,var(--card); }
+  .callout.risk .ic { background:var(--del-bg); color:var(--del-ink); }
+  .callout.warn { background:linear-gradient(var(--mod-bg),var(--mod-bg)) 0/100% no-repeat,var(--card); }
+  .callout.warn .ic { background:var(--mod-bg); color:var(--mod-ink); }
+  .callout.info { background:linear-gradient(var(--info-bg),var(--info-bg)) 0/100% no-repeat,var(--card); }
+  .callout.info .ic { background:var(--info-bg); color:var(--info-ink); }
+  .callout.ok { background:linear-gradient(var(--new-bg),var(--new-bg)) 0/100% no-repeat,var(--card); }
+  .callout.ok .ic { background:var(--new-bg); color:var(--new-ink); }
+
+  .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:.9rem; }
+  .grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.9rem; }
+  .mini { border:1px solid var(--line); border-radius:var(--radius); padding:1rem 1.1rem; background:var(--bg); }
+  .mini h4 { margin:0 0 .3rem; color:var(--ink); }
+  .mini p { margin:0; color:var(--muted); font-size:14px; }
+
+  /* Phase cards */
+  .phase { display:grid; grid-template-columns:64px 1fr; gap:1rem; border:1px solid var(--line); border-radius:var(--radius);
+    padding:1.1rem 1.25rem; margin:.8rem 0; background:var(--card); box-shadow:var(--sh-sm), var(--hi); }
+  .phase .num { font-family:var(--mono); font-size:11px; color:var(--faint); text-transform:uppercase; letter-spacing:.1em; }
+  .phase .num b { display:block; font:700 1.6rem/1 var(--font); color:var(--brand); letter-spacing:-.03em; margin-top:.2rem; }
+  .phase h3 { margin:0 0 .25rem; } .phase .est { color:var(--faint); font-size:13px; margin:0 0 .5rem; }
+  .phase ul { margin:.3rem 0; } .phase .done { font-size:13.5px; color:var(--muted); border-top:1px dashed var(--line2); padding-top:.5rem; margin-top:.6rem; }
+  @media (max-width:640px){ .phase { grid-template-columns:1fr; } }
+
+  /* Mockup */
+  .mock { --mbg:#141210; --msurf:#1f1b17; --mink:#f4efe8; --mmute:#a49a8e; --mcrema:#e0b077; --mcopper:#c47a3f;
+    background:var(--mbg); color:var(--mink); border-radius:34px; padding:14px; width:360px; max-width:100%; margin:0 auto;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06); font-size:14px; }
+  .mock .scr { background:linear-gradient(180deg,#1a1613 0%,#120f0d 100%); border-radius:24px; padding:18px 18px 22px; min-height:640px; position:relative; overflow:hidden; }
+  .mock .steps { display:flex; gap:5px; margin-bottom:16px; }
+  .mock .steps i { flex:1; height:3px; border-radius:2px; background:rgba(255,255,255,.12); display:block; }
+  .mock .steps i.on { background:var(--mcrema); } .mock .steps i.cur { background:var(--mcopper); }
+  .mock .kick { font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--mmute); }
+  .mock h5 { margin:.25rem 0 .35rem; font-size:1.55rem; line-height:1.1; letter-spacing:-.03em; font-weight:700; }
+  .mock .sub { color:var(--mmute); margin:0 0 14px; font-size:13px; }
+  .mock .stage { height:230px; border-radius:18px; background:radial-gradient(120px 80px at 50% 70%, rgba(224,176,119,.16), transparent 70%), #100d0b;
+    display:flex; align-items:center; justify-content:center; position:relative; margin-bottom:14px; border:1px solid rgba(255,255,255,.05); }
+  .mock .stage .tag { position:absolute; top:10px; left:12px; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--mmute); }
+  .mock .stage .tag b { color:var(--mcrema); }
+  .mock .big { display:flex; align-items:baseline; gap:6px; margin:6px 0 2px; }
+  .mock .big b { font-size:2.6rem; font-weight:700; letter-spacing:-.04em; line-height:1; font-variant-numeric:tabular-nums; }
+  .mock .big span { color:var(--mmute); font-size:13px; }
+  .mock .band { height:8px; border-radius:4px; background:rgba(255,255,255,.08); position:relative; margin:10px 0 6px; }
+  .mock .band .ok { position:absolute; left:32%; right:22%; top:0; bottom:0; border-radius:4px; background:rgba(224,176,119,.35); }
+  .mock .band .pt { position:absolute; left:52%; top:-4px; width:16px; height:16px; margin-left:-8px; border-radius:50%; background:var(--mcrema); box-shadow:0 0 0 4px rgba(224,176,119,.2); }
+  .mock .row { display:flex; justify-content:space-between; font-size:12px; color:var(--mmute); }
+  .mock .chips { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0 0; }
+  .mock .chip { padding:8px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.12); font-size:12.5px; color:var(--mink); }
+  .mock .chip.on { background:var(--mcrema); color:#1a1310; border-color:var(--mcrema); font-weight:600; }
+  .mock .cta { margin-top:16px; display:flex; gap:10px; }
+  .mock .cta .b { flex:1; text-align:center; padding:14px; border-radius:14px; font-weight:600; }
+  .mock .cta .b.p { background:var(--mcrema); color:#1a1310; } .mock .cta .b.g { border:1px solid rgba(255,255,255,.14); color:var(--mink); }
+  .mock .timer { text-align:center; padding:6px 0 0; }
+  .mock .timer .t { font-size:4rem; font-weight:700; letter-spacing:-.05em; line-height:1; font-variant-numeric:tabular-nums; }
+  .mock .timer .n { color:var(--mmute); font-size:12px; letter-spacing:.14em; text-transform:uppercase; margin-top:6px; }
+  .mock .instr { margin:14px 0 0; padding:14px; border-radius:14px; background:rgba(255,255,255,.05); }
+  .mock .instr b { display:block; font-size:1.15rem; margin-bottom:2px; }
+  .mock .instr span { color:var(--mmute); font-size:12.5px; }
+  .mock .next { margin-top:10px; font-size:12px; color:var(--mmute); display:flex; justify-content:space-between; }
+  .mockgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; align-items:start; margin-top:1rem; }
+  .mockgrid figcaption { text-align:center; }
+
+  .handoff { position:relative; }
+  .handoff button.copy { position:absolute; top:10px; right:10px; border:0; border-radius:var(--radius-sm);
+    background:var(--brand); color:#fff; padding:7px 13px; font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+    box-shadow:0 1px 2px rgba(231,76,46,.35), inset 0 1px 0 rgba(255,255,255,.22); transition:background .18s var(--ease); }
+  .handoff button.copy:hover { background:var(--brand-strong); }
+  input[type="checkbox"] { width:16px; height:16px; accent-color:var(--brand); }
+  figure { margin:1rem 0; } figcaption { font-size:13px; color:var(--muted); margin-top:.5rem; }
+  .legend { display:flex; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--muted); margin-top:.5rem; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:4px; vertical-align:-1px; margin-right:5px; }
+  .small { font-size:13px; color:var(--muted); }
+  @media (max-width:640px){ .wrap{padding:2rem 1.1rem 4rem} header h1{font-size:1.7rem} section.panel{padding:1.25rem}
+    .tab-group.impl{padding-left:0} .tab-group.impl::before{display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Implementation plan · 6 phases</div>
+    <h1>Cookbook v2 — V60 + AeroPress brewing guide with accurate data, 3D scenes and a brew timer</h1>
+    <div class="meta">
+      <span class="badge ready">READY TO IMPLEMENT</span>
+      <span>2026-09-07</span> ·
+      <span class="path">current: github.com/FellipeGiulianoDuarte/cookbook-v60 (GitHub Pages)</span> ·
+      <span class="path">target: new repo under FellipeGiulianoDuarte, hosted on Vercel</span>
+    </div>
+  </header>
+
+  <div class="tldr">
+    <h2>TL;DR</h2>
+    <ul>
+      <li><strong>What:</strong> Replace the one-file V60 page with a step-by-step brewing guide. The user picks method (V60, AeroPress), recipe, grinder, dose, bean and extra options. The app shows the exact recipe, the grinder setting for that grinder, and runs a timed, animated brew.</li>
+      <li><strong>How:</strong> Next.js 16 on Vercel. Recipes and grinders live in typed JSON with a source URL on every number. An XState machine drives the wizard and the timer. React Three Fiber renders procedural 3D brewers. GSAP and Motion animate the steps.</li>
+      <li><strong>Accuracy fix:</strong> 16 sourced recipes (8 V60, 8 AeroPress) replace the invented ones. About 40 grinders replace the single Timemore table. The grind converter uses each grinder's official click bands, not one "microns per click" number, because that number is burr travel and not particle size. The extraction simulator becomes a brewing control chart built only from SCA ranges, UC Davis Coffee Center sensory studies and the mass-balance formulas.</li>
+      <li><strong>Blast radius:</strong> New repo, about 60 new files, no shared code with the old repo. The old GitHub Pages site stays up until the new one is live, then redirects.</li>
+      <li><strong>Main risk:</strong> The 3D phase (Phase 4) is the largest and least predictable block: 5–7 days. Every earlier phase ships a usable site without it.</li>
+      <li><strong>Shape:</strong> 6 phases, about 17–22 working days total. Phases 0–3 give a correct, usable, bilingual mobile timer app in 9–11 days. Phases 4–5 add the 3D and the polish.</li>
+    </ul>
+  </div>
+
+  <nav class="tabs">
+    <div class="tab-group review" role="tablist" aria-label="For review">
+      <span class="tab-group-label">For review</span>
+      <div class="tab-group-row">
+        <button role="tab" aria-selected="true" data-panel="overview">Overview</button>
+        <button role="tab" aria-selected="false" data-panel="phases">Phases</button>
+        <button role="tab" aria-selected="false" data-panel="mockup">Mockup</button>
+        <button role="tab" aria-selected="false" data-panel="architecture">Architecture</button>
+        <button role="tab" aria-selected="false" data-panel="risks">Questions &amp; risks</button>
+      </div>
+    </div>
+    <div class="tab-group impl" role="tablist" aria-label="For implementation">
+      <span class="tab-group-label">For implementation</span>
+      <div class="tab-group-row">
+        <button role="tab" aria-selected="false" data-panel="data">Data</button>
+        <button role="tab" aria-selected="false" data-panel="stack">Stack</button>
+        <button role="tab" aria-selected="false" data-panel="changes">Files</button>
+        <button role="tab" aria-selected="false" data-panel="code">Code</button>
+        <button role="tab" aria-selected="false" data-panel="verification">Verification</button>
+        <button role="tab" aria-selected="false" data-panel="tests">Tests</button>
+        <button role="tab" aria-selected="false" data-panel="handoff">Handoff</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================================================== OVERVIEW -->
+  <section class="panel active" id="overview">
+    <h2>Overview</h2>
+
+    <div class="eyebrow quiet">Current state</div>
+    <p>The current site is one HTML file (<code>index.html</code>, 689 lines) that loads React 18 and Babel from unpkg at runtime (<code>index.html:9-11</code>) and compiles JSX in the browser (<code>index.html:120</code>). A second file, <code>CookbookV60.jsx</code>, is a copy of the same component with lucide icons; nothing imports it. There is no package.json, no build, no tests. GitHub Pages serves the <code>main</code> branch root. The UI is in Portuguese. It covers one method (V60) and one grinder (Timemore C3S Pro).</p>
+
+    <div class="eyebrow quiet">What is wrong today (grounded in the code)</div>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Where</th><th>What the site says</th><th>What the sources say</th></tr></thead>
+      <tbody>
+        <tr><td class="path">CookbookV60.jsx:4-10<br>index.html:139</td><td>Clicks by roast: light 13, medium 14, medium-dark 16, dark 18. Temperature by roast 96/95/94/90/88 °C.</td><td>No source gives clicks by roast. Roast changes temperature and grind direction, not a fixed click count. Kasuya/Philocoffea: 93/88/83 °C. Cafec: 92/90/83 °C. Hoffmann: boiling for light, cooler for dark. The numbers are invented.</td></tr>
+        <tr><td class="path">CookbookV60.jsx:12-19</td><td>Process changes ratio (washed 1:16, natural 1:16.6, anaerobic 1:17) and adds 0–2 clicks.</td><td>Only roaster blogs give process advice (naturals: slightly coarser, 92 °C, 1:16.5; anaerobic: 88–91 °C, 1:16.5–1:17). Hoffmann, Rao and Barista Hustle do not adjust by process. Keep as "community guidance", flagged.</td></tr>
+        <tr><td class="path">CookbookV60.jsx:195-198<br>index.html:489-492</td><td>"Hoffmann" schedule: bloom, 0:45 to 60 %, 1:15 to 100 %, 1:50 swirl, ~3:00.</td><td>Hoffmann Ultimate V60: bloom 2× dose, 0:45–1:15 pour to 60 %, 1:15–1:45 pour to 100 %, stir at 1:45, swirl, drawdown by 3:30. The site pours the second stage 30 s early and ends 30 s early.</td></tr>
+        <tr><td class="path">index.html:182-184</td><td>Presets: Rao = 20 g, 1:16, 96 °C, 2 pours.</td><td>Rao's current recipe (Hario UK, 2022): 20 g / 330 g (1:16.5), 97 °C, 60 g bloom with spin, pour to 200 g at 0:40, to 330 g at ~70 % drained, 4:00–4:30 total. Rao marked his 2017 single-pour video as old.</td></tr>
+        <tr><td class="path">index.html:187-230</td><td>Extraction simulator: formulas for time, extraction yield, TDS, sensory bars.</td><td>No source. The formulas are invented. Decision: rebuild on published measurements only (Data tab, "Simulator" section).</td></tr>
+        <tr><td class="path">index.html:214<br>CookbookV60.jsx:221</td><td>Golden Cup zone TDS 1.15–1.45 %; text says 1.15–1.35 %.</td><td>SCA: TDS 1.15–1.35 %, extraction 18–22 %, 93 ± 3 °C. SCAE (Europe): TDS 1.20–1.45 %. The code mixes the two ranges. Decision: SCA only.</td></tr>
+        <tr><td class="path">CookbookV60.jsx:45<br>index.html:174</td><td>Timemore C3S Pro clicks: espresso 5–10, moka 10–13, V60 11–18, Chemex 18–24, French press 19–25.</td><td id="timemore-claim-cell">V60 11–18 and French press 19–25 match Honest Coffee Guide (reviewers centre V60 on 14–16). Espresso 5–10 is wrong: Timemore says never grind at 1–6 clicks (burrs touch); usable espresso is 7–10, in practice one click near 8. Moka 10–13 is too narrow: HCG 10–17. Chemex 18–24 has no source (HCG has no Chemex row; pour-over ends at 24; reviewers 18–22). AeroPress is missing: HCG 9–25, reviewers 10–17.</td></tr>
+        <tr><td class="path">CookbookV60.jsx:244<br>index.html:642</td><td>"83 µm per click · 12 clicks per turn · 38 mm S2C660 burrs".</td><td id="timemore-spec-cell">All three are correct (Timemore knowledge base: 0.083 mm per click for S2C660 grinders; 12 clicks per turn, about 36 total; 38 mm S2C660, SUS420). But 83 µm is burr travel (12 × 83 µm = 1 mm thread pitch), not particle size. Honest Coffee Guide's particle estimate for the same dial is about 38 µm per click. The site must not present "clicks × 83 µm" as grind size. Missing warning: do not grind below 6 clicks.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="eyebrow quiet">Why the grind converter must change</div>
+    <p>Every published converter (Honest Coffee Guide, Beean, Basic Barista, BrewMark) is linear. But the two families of "microns per click" numbers differ by about 3×: manufacturers publish burr-gap travel (1Zpresso J: 25 µm/click; Kingrinder K6: 16 µm/click), while Honest Coffee Guide publishes an estimated particle-size range spread evenly over the dial (1Zpresso J: 9 µm/click; K6: 8.4 µm/click). If v2 divides a target micron value by the manufacturer's travel figure, a Kingrinder K6 user gets half the correct clicks. The fix in Phase 1: every grinder carries its <em>official</em> click band per brew method (for example Comandante V60 18–35 clicks, Kingrinder K6 pour-over 100 clicks, 1Zpresso K-Ultra 80–90 clicks). The recipe asks for a position inside the method band ("fine end of V60"), and the app interpolates inside that grinder's own band. Microns appear only as a secondary label from the Honest Coffee Guide scale.</p>
+
+    <div class="eyebrow quiet">What v2 is</div>
+    <div class="grid3">
+      <div class="mini"><h4>A state machine, not a page</h4><p>Method → recipe → grinder → dose → bean → options → summary → brew (timer) → done. Every choice changes the numbers downstream. The URL carries the choices, so a recipe is a shareable link.</p></div>
+      <div class="mini"><h4>Sourced data</h4><p>Every number in <code>data/</code> has a <code>source.url</code>, a year and a confidence flag (official / transcription / community). Disagreements between sources are stored, not hidden.</p></div>
+      <div class="mini"><h4>Kitchen-proof</h4><p>Big targets, screen stays awake, beeps at each pour, one Pause button during the brew, works offline after the first visit.</p></div>
+      <div class="mini"><h4>3D as the hero</h4><p>One WebGL canvas. The V60 and the AeroPress are procedural meshes with glass and liquid shaders. The grinder dial turns to the computed click count. The brew step animates the pours in time with the clock.</p></div>
+      <div class="mini"><h4>Two methods first</h4><p>V60 and AeroPress at launch. Chemex, French press, Kalita, moka and espresso are data additions later; the schema supports them from day one.</p></div>
+      <div class="mini"><h4>Ships in slices</h4><p>Phase 0 deploys an empty app. Phase 1 makes the data correct. Phase 2 makes it usable. Phase 3 makes it kitchen-ready. Phase 4 makes it beautiful. Phase 5 makes it shareable.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================================================== PHASES -->
+  <section class="panel" id="phases">
+    <h2>Phases</h2>
+    <p class="small">Each phase ends with a deployed Vercel preview and a short check list. Phases are commits in one repo; they are not separate PRs unless you say so. Estimates assume focused work and this plan as the spec.</p>
+
+    <div class="phase">
+      <div class="num">Phase<b>0</b></div>
+      <div>
+        <h3>Repo, toolchain, deploy pipeline</h3>
+        <p class="est">½ day · Output: an empty app live on Vercel with CI</p>
+        <ul>
+          <li>Switch the GitHub CLI to the personal account: <code>gh auth switch --user FellipeGiulianoDuarte</code>. Create the repo (name: open question Q1). Vercel Hobby cannot link organization repos, so the repo must be personal.</li>
+          <li>Scaffold Next.js 16.3 (App Router, Turbopack), React 19.2, TypeScript 7, Tailwind 4, pnpm 12, Biome 2. Pin exact versions.</li>
+          <li>Add Vitest 4/5 and Playwright 1.63. GitHub Actions: Biome + type-check + Vitest on push; Playwright against the Vercel preview URL on <code>deployment_status</code>.</li>
+          <li>Create the Vercel project from the GitHub repo (the Vercel connector in this session can do it, or the dashboard). Enable preview deployments.</li>
+          <li>Set design tokens in <code>globals.css</code> with Tailwind <code>@theme</code> (OKLCH browns, crema accent, copper secondary). Load two fonts with <code>next/font</code>.</li>
+        </ul>
+        <div class="done">Done when: <code>pnpm check</code> passes, the preview URL renders a page with the fonts and tokens, CI is green.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">Phase<b>1</b></div>
+      <div>
+        <h3>Data model, recipes, grinders, grind converter</h3>
+        <p class="est">2–3 days · Output: correct numbers, unit-tested, visible on a plain debug page</p>
+        <ul>
+          <li>Write Zod schemas for <code>BrewMethod</code>, <code>Recipe</code>, <code>Grinder</code>, <code>Bean</code>, <code>Adjustment</code> and <code>Source</code> (see Code tab). Validate all JSON at build time.</li>
+          <li>Enter the 8 V60 and 8 AeroPress recipes from the Data tab. Each step stores time, cumulative water as a function of dose, action and an optional animation cue. Each recipe stores its scaling rule and its roast/temperature table.</li>
+          <li>Enter about 40 grinders from the Data tab with official bands, community bands, clicks per rotation, notation, zero procedure and tolerance.</li>
+          <li>Implement <code>gridToSetting()</code>: recipe grind position (0–1 inside a method band) → grinder setting in that grinder's notation (clicks, R.N.T, dial, stepless mark), with ± tolerance and an "outside official band" flag. Implement a per-user offset ("my V60 sweet spot is 24") that shifts the band.</li>
+          <li>Implement <code>scaleRecipe()</code> (linear rules per recipe, with limits such as Hoffmann Ultimate ≥ 20 g) and <code>adjustForBean()</code> (roast → temperature; process → optional temperature, ratio and grind nudges, flagged as community guidance).</li>
+          <li>Implement <code>extraction.ts</code>: EY from a TDS reading (percolation and immersion forms), the TDS window for a ratio at EY 18–22 %, zone lookup on the chart, and the time bands. Enter <code>data/extraction.json</code> from the Data tab "Simulator" section with its sources.</li>
+          <li>Unit tests: every recipe at three doses, every grinder at V60 and AeroPress, monotonicity of the converter, the Kingrinder K6 case (must return about 100 clicks for pour-over, not 40).</li>
+        </ul>
+        <div class="done">Done when: tests pass; a <code>/debug</code> page lists every recipe and every grinder with computed values and source links.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">Phase<b>2</b></div>
+      <div>
+        <h3>Wizard state machine and UI shell (no 3D yet)</h3>
+        <p class="est">4–5 days · Output: a complete, usable app on the phone, in two languages, with the control chart</p>
+        <ul>
+          <li>XState 5 machine: <code>method → recipe → grinder → amount → bean → options → summary</code>, with <code>NEXT</code>/<code>BACK</code>/<code>JUMP</code>, guards per method (AeroPress adds orientation and filter; V60 adds filter paper). Context holds the full selection.</li>
+          <li>URL sync with nuqs: every selection is a query parameter. Opening a link restores the state. Timer state stays out of the URL.</li>
+          <li>Screens with Base UI primitives (via shadcn) and Tailwind. Motion <code>AnimatePresence</code> for step transitions and a <code>layoutId</code> for the chosen brewer card. A 3D slot component renders a static SVG placeholder for now.</li>
+          <li>i18n with <code>next-intl</code>: English and Portuguese message files, browser-locale default, manual toggle, <code>?lang=</code> in shared links. Recipe step text comes from the data in both locales.</li>
+          <li>Summary screen: recipe card with dose, water, ratio, temperature, grinder setting (with tolerance and band), pour schedule, filter and orientation. "Start brew" button.</li>
+          <li>Brewing control chart screen (reached from Summary and Done): SVG chart with the ratio diagonal, the SCA box, UC Davis corner descriptors; optional TDS input plots the brew and lists the zone's attribute directions; optional drain-time input checks the band. About one day.</li>
+          <li>First-run hints: one sentence per step on first visit, dismissed with the first tap (adoption path).</li>
+          <li>Playwright: full flow V60 + Comandante and AeroPress inverted + Kingrinder; deep-link restore; back navigation.</li>
+        </ul>
+        <div class="done">Done when: both end-to-end flows pass against the preview; Lighthouse mobile ≥ 90 on the shell.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">Phase<b>3</b></div>
+      <div>
+        <h3>Brew timer and kitchen mode</h3>
+        <p class="est">2 days · Output: you can brew with it, hands wet</p>
+        <ul>
+          <li>Extend the machine with a nested <code>brewing</code> state: one sub-state per recipe step, timed with <code>after</code>, plus <code>paused</code>, <code>done</code>. Pause/resume must not leak timers.</li>
+          <li>Screen Wake Lock during <code>brewing</code>; re-request on <code>visibilitychange</code>. Web Audio beeps synthesized on the "Start" tap (no asset, unlocks iOS audio). Vibration only where supported (Android).</li>
+          <li>Kitchen layout: 56 px targets, tabular digits, one full-width Pause, the current instruction in large type, the next instruction in small type, progress ring with GSAP.</li>
+          <li>PWA: <code>app/manifest.ts</code> + Serwist service worker; precache the app shell so the second brew works offline.</li>
+          <li>AeroPress-specific: inverted flip cue with a safety line; press duration countdown; bypass dilution step.</li>
+        </ul>
+        <div class="done">Done when: a full Hoffmann V60 and a full Hoffmann AeroPress run on an iPhone with the screen on, with beeps at every step.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">Phase<b>4</b></div>
+      <div>
+        <h3>3D scene and animation</h3>
+        <p class="est">5–7 days · Output: the visual hero. Highest variance of the plan.</p>
+        <ul>
+          <li>One <code>&lt;Canvas&gt;</code> mounted at the app root inside a <code>'use client'</code> wrapper loaded with <code>dynamic(..., { ssr:false })</code>. <code>dpr=[1,1.5]</code>, <code>frameloop="demand"</code> outside the brew step, drei <code>PerformanceMonitor</code> lowers quality on weak phones.</li>
+          <li>Day 1, go/no-go check: build the V60 procedurally (<code>LatheGeometry</code> cone, 40 instanced ribs, <code>MeshTransmissionMaterial</code> glass) and compare with a Hario product photo. Pass: continue procedurally. Fail: model that object in Blender, export glTF, compress with gltf-transform, keep the rest procedural.</li>
+          <li>Procedural models (no downloads, no licences): AeroPress = cylinders, torus seal, separate plunger mesh; gooseneck kettle = lathe body + <code>TubeGeometry</code> spout; hand grinder = body cylinder, crank arm, dial ring with N instanced ticks where N is that grinder's clicks per rotation.</li>
+          <li>Liquid: a fill mesh with a fragment-shader cut at <code>uFill</code> and a sine ripple, using <code>three-custom-shader-material</code> so lighting stays physically based. Pour stream = thin tube along a Bezier with a scrolling noise texture. Grounds = ~2 000 instanced icospheres with vertex noise for the bloom dome.</li>
+          <li>GSAP timelines per step: method step rotates both brewers; grinder step turns the dial to the computed setting with a click sound per tick; amount step fills the cup to the water target; brew step scrubs the pour timeline from the machine clock. Motion keeps owning React layout transitions.</li>
+          <li>Reduced-motion and no-WebGL fallback: the static SVG placeholder from Phase 2 stays, with fill level as a CSS variable.</li>
+          <li>Ship on WebGL (three r185, R3F 9.7, drei 10.7). Do not use WebGPU or drei 11 alpha (Safari partial, Firefox off, transmission material not ported).</li>
+        </ul>
+        <div class="done">Done when: 60 fps on a 2022 iPhone and ≥ 30 fps on a 2020 Android during the pour animation; every wizard step has its 3D state; reduced-motion path verified.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">Phase<b>5</b></div>
+      <div>
+        <h3>Share, polish, cut over</h3>
+        <p class="est">2–3 days · Output: public launch</p>
+        <ul>
+          <li>OG image route (<code>app/og/route.tsx</code>, <code>ImageResponse</code>) that reads the same query string and draws the recipe card. Share button copies the link.</li>
+          <li>Copy pass in both languages: plain words, what the user gets ("Water reaches the bed in 3 s").</li>
+          <li>Sources page: every recipe and grinder with its links. Credits footer.</li>
+          <li>Vercel Analytics + Speed Insights. Lighthouse CI on the shell route.</li>
+          <li>Cut-over: add a redirect page to the old <code>cookbook-v60</code> GitHub Pages repo, archive it, update the profile pin.</li>
+        </ul>
+        <div class="done">Done when: link preview shows the recipe card in iMessage/WhatsApp; old URL redirects; README documents data sources and how to add a grinder.</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="num">Later<b>6</b></div>
+      <div>
+        <h3>More methods and grinders (data only)</h3>
+        <p class="est">½–1 day per method · Not in the launch scope</p>
+        <ul>
+          <li>Chemex, Kalita Wave, French press, Clever, moka, espresso. Each needs a recipe set, a 3D model and step cues. The schema already supports them.</li>
+          <li>Grinders: add JSON records as they appear; no code change.</li>
+          <li>Brew log with per-user calibration ("this brew drained in 3:10 at 24 clicks") feeding the offset. Needs storage; out of scope for launch.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== MOCKUP -->
+  <section class="panel" id="mockup">
+    <h2>Mockup</h2>
+    <p class="small">Validation sketch of two screens: the grinder step and the brew timer. Dark surfaces, one crema accent, tabular digits. The 3D stage is shown as a box; in the app it is the shared WebGL canvas. Not pixel-final.</p>
+
+    <div class="mockgrid">
+      <figure>
+        <div class="mock"><div class="scr">
+          <div class="steps"><i class="on"></i><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><i></i></div>
+          <div class="kick">Step 3 of 7 · Grinder</div>
+          <h5>Set your Comandante to 26 clicks</h5>
+          <p class="sub">Hoffmann Ultimate V60 wants the fine end of the V60 band. Comandante's official V60 band is 18–35 clicks.</p>
+          <div class="stage">
+            <span class="tag">3D · dial turning to <b>26</b></span>
+            <svg width="200" height="150" viewBox="0 0 200 150" aria-hidden="true">
+              <ellipse cx="100" cy="128" rx="60" ry="10" fill="rgba(0,0,0,.45)"/>
+              <rect x="62" y="30" width="76" height="98" rx="14" fill="#2a2320" stroke="#4a3d35"/>
+              <rect x="62" y="30" width="76" height="30" rx="14" fill="#33291f" stroke="#4a3d35"/>
+              <circle cx="100" cy="30" r="30" fill="#1b1613" stroke="#e0b077" stroke-width="2"/>
+              <g stroke="#a49a8e" stroke-width="1.5">
+                <line x1="100" y1="4" x2="100" y2="10"/><line x1="126" y1="30" x2="120" y2="30"/><line x1="100" y1="56" x2="100" y2="50"/><line x1="74" y1="30" x2="80" y2="30"/>
+                <line x1="118.4" y1="11.6" x2="114.1" y2="15.9"/><line x1="118.4" y1="48.4" x2="114.1" y2="44.1"/><line x1="81.6" y1="48.4" x2="85.9" y2="44.1"/><line x1="81.6" y1="11.6" x2="85.9" y2="15.9"/>
+              </g>
+              <line x1="100" y1="30" x2="117" y2="12" stroke="#e0b077" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="100" cy="30" r="4" fill="#e0b077"/>
+            </svg>
+          </div>
+          <div class="big"><b>26</b><span>clicks from zero · ±1</span></div>
+          <div class="band"><div class="ok"></div><div class="pt"></div></div>
+          <div class="row"><span>18 · fine</span><span>official V60 band</span><span>35 · coarse</span></div>
+          <div class="chips"><span class="chip on">Comandante C40 MK4</span><span class="chip">Timemore C3S Pro</span><span class="chip">1Zpresso K-Ultra</span><span class="chip">Change…</span></div>
+          <div class="cta"><div class="b g">Back</div><div class="b p">Next: dose</div></div>
+        </div></div>
+        <figcaption>Grinder step. The dial in the 3D stage turns to the computed value with one click sound per tick. The band shows where the recipe sits inside the grinder's official range.</figcaption>
+      </figure>
+
+      <figure>
+        <div class="mock"><div class="scr">
+          <div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i></div>
+          <div class="kick">Brewing · Hoffmann Ultimate V60 · 15 g / 250 g</div>
+          <div class="stage" style="height:200px">
+            <span class="tag">3D · pour 2 of 2 · <b>212 g</b></span>
+            <svg width="200" height="140" viewBox="0 0 200 140" aria-hidden="true">
+              <ellipse cx="100" cy="128" rx="70" ry="9" fill="rgba(0,0,0,.45)"/>
+              <path d="M40 30 L160 30 L112 118 L88 118 Z" fill="rgba(224,176,119,.08)" stroke="#e0b077" stroke-width="1.5"/>
+              <path d="M58 62 L142 62 L112 118 L88 118 Z" fill="#5a3a26"/>
+              <path d="M52 52 L148 52 L142 62 L58 62 Z" fill="#8a5a3a"/>
+              <path d="M150 0 C150 22 118 26 104 50" stroke="#e0b077" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>
+              <rect x="150" y="0" width="0" height="0"/>
+            </svg>
+          </div>
+          <div class="timer"><div class="t">1:26</div><div class="n">pour to 250 g by 1:45</div></div>
+          <div class="instr"><b>Pour slowly to 250 g</b><span>Keep the cone topped up. Aim for the centre, then spiral out.</span></div>
+          <div class="next"><span>Next · 1:45 stir once each way</span><span>3:30 done</span></div>
+          <div class="cta"><div class="b g" style="flex:2">Pause</div></div>
+        </div></div>
+        <figcaption>Brew step. The clock drives both the instruction and the liquid level in the 3D cone. One large Pause target; nothing else to hit with wet hands.</figcaption>
+      </figure>
+    </div>
+
+    <h3>Flow of screens</h3>
+    <div class="tblwrap"><table>
+      <thead><tr><th>#</th><th>Screen</th><th>Controls</th><th>3D state</th><th>Changes downstream</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Method</td><td>V60 · AeroPress (cards)</td><td>Both brewers slowly rotate; chosen one comes forward</td><td>Recipe list, options available</td></tr>
+        <tr><td>2</td><td>Recipe</td><td>Cards with author, year, dose range, total time, style (pulse / two-pour / concentrate)</td><td>Brewer with the recipe's pour count as ghost rings</td><td>Grind band position, temperature table, schedule</td></tr>
+        <tr><td>3</td><td>Grinder</td><td>Search + favourites; per-user offset</td><td>Grinder dial turns to setting</td><td>Setting text and tolerance</td></tr>
+        <tr><td>4</td><td>Dose</td><td>Slider or cups; shows water and ratio</td><td>Water fills the server to the target</td><td>All step weights via <code>scaleRecipe</code></td></tr>
+        <tr><td>5</td><td>Bean</td><td>Roast (5), process (6), optional origin, rest days</td><td>Bean colour and bloom height change</td><td>Temperature, optional ratio and grind nudge (flagged)</td></tr>
+        <tr><td>6</td><td>Options</td><td>V60: filter paper. AeroPress: standard/inverted, paper/metal/Prismo, model (Go/XL), iced</td><td>Filter and orientation shown</td><td>Steps (flip cue, dilution), notes</td></tr>
+        <tr><td>7</td><td>Summary</td><td>Share link, Start brew, Edit any step</td><td>Full set on the table</td><td>—</td></tr>
+        <tr><td>8</td><td>Brewing</td><td>Pause, skip step (long-press)</td><td>Animated pours, plunger press</td><td>—</td></tr>
+        <tr><td>9</td><td>Done</td><td>Rate (drain time, taste), Brew again, Share</td><td>Steam idle</td><td>Future: feeds the offset</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ===================================================== ARCHITECTURE -->
+  <section class="panel" id="architecture">
+    <h2>Architecture</h2>
+
+    <h3>1. The state machine</h3>
+    <figure>
+      <svg viewBox="0 0 900 300" role="img" aria-label="Wizard and brew state machine" style="width:100%;height:auto">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9a958d"/></marker>
+          <marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#e74c2e"/></marker>
+        </defs>
+        <g font-family="ui-sans-serif,system-ui" font-size="12" fill="#1c1b19">
+          <!-- wizard row -->
+          <rect x="10" y="40" width="94" height="44" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="57" y="66" text-anchor="middle">method</text>
+          <line x1="104" y1="62" x2="126" y2="62" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="128" y="40" width="94" height="44" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="175" y="66" text-anchor="middle">recipe</text>
+          <line x1="222" y1="62" x2="244" y2="62" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="246" y="40" width="94" height="44" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="293" y="66" text-anchor="middle">grinder</text>
+          <line x1="340" y1="62" x2="362" y2="62" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="364" y="40" width="94" height="44" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="411" y="66" text-anchor="middle">amount</text>
+          <line x1="458" y1="62" x2="480" y2="62" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="482" y="40" width="94" height="44" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="529" y="66" text-anchor="middle">bean</text>
+          <line x1="576" y1="62" x2="598" y2="62" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="600" y="40" width="94" height="44" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="647" y="66" text-anchor="middle">options</text>
+          <line x1="694" y1="62" x2="716" y2="62" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="718" y="40" width="94" height="44" rx="10" fill="#fdeee9" stroke="#e74c2e"/><text x="765" y="66" text-anchor="middle" fill="#b5391b">summary</text>
+          <text x="410" y="24" text-anchor="middle" fill="#6b6864" font-size="11">NEXT / BACK / JUMP(step) · context = selection · synced to URL by nuqs</text>
+          <!-- down to brewing -->
+          <line x1="765" y1="84" x2="765" y2="118" stroke="#e74c2e" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrb)"/>
+          <text x="778" y="106" fill="#b5391b" font-size="11">START</text>
+          <!-- brewing compound -->
+          <rect x="120" y="120" width="692" height="150" rx="14" fill="#f7f6f3" stroke="#e74c2e" stroke-dasharray="5 4"/>
+          <text x="136" y="140" fill="#b5391b" font-size="11" font-weight="600">brewing (compound) · clock in context · `after` transitions per step</text>
+          <rect x="140" y="160" width="100" height="40" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="190" y="184" text-anchor="middle">step[0] bloom</text>
+          <line x1="240" y1="180" x2="262" y2="180" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="264" y="160" width="100" height="40" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="314" y="184" text-anchor="middle">step[1] pour</text>
+          <line x1="364" y1="180" x2="386" y2="180" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="388" y="160" width="100" height="40" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="438" y="184" text-anchor="middle">step[n] …</text>
+          <line x1="488" y1="180" x2="510" y2="180" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="512" y="160" width="100" height="40" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="562" y="184" text-anchor="middle">drawdown</text>
+          <line x1="612" y1="180" x2="634" y2="180" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <rect x="636" y="160" width="100" height="40" rx="10" fill="#ecf4ec" stroke="#3a9d57"/><text x="686" y="184" text-anchor="middle" fill="#2f6b3c">done</text>
+          <rect x="140" y="218" width="100" height="36" rx="10" fill="#fbf2dc" stroke="#e89a2b"/><text x="190" y="241" text-anchor="middle" fill="#8a5a12">paused</text>
+          <text x="256" y="241" fill="#6b6864" font-size="11">PAUSE from any step · RESUME returns to the same step with the remaining time · timers live in the actor, not in setTimeout</text>
+          <!-- side effects -->
+          <text x="10" y="292" fill="#6b6864" font-size="11">Entry actions on each brewing step: beep (Web Audio), haptic (Android), GSAP timeline seek, wake-lock check.</text>
+        </g>
+      </svg>
+      <figcaption>One XState 5 machine. The wizard states are linear; the brew state is a compound state whose children are generated from the recipe's step list at START.</figcaption>
+    </figure>
+    <div class="legend">
+      <span><span class="swatch" style="background:#fffefb;border:1px solid #9a958d"></span>Wizard / step state</span>
+      <span><span class="swatch" style="background:#fdeee9;border:1px dashed #e74c2e"></span>Transition into the brew</span>
+      <span><span class="swatch" style="background:#fbf2dc;border:1px solid #e89a2b"></span>Pause</span>
+      <span><span class="swatch" style="background:#ecf4ec;border:1px solid #3a9d57"></span>Terminal</span>
+    </div>
+
+    <h3>2. Data flow</h3>
+    <figure>
+      <svg viewBox="0 0 900 330" role="img" aria-label="Data flow" style="width:100%;height:auto">
+        <g font-family="ui-sans-serif,system-ui" font-size="12" fill="#1c1b19">
+          <!-- data -->
+          <rect x="10" y="20" width="170" height="54" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="95" y="42" text-anchor="middle">data/recipes/*.json</text><text x="95" y="60" text-anchor="middle" fill="#6b6864" font-size="11">16 recipes, sourced</text>
+          <rect x="10" y="90" width="170" height="54" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="95" y="112" text-anchor="middle">data/grinders/*.json</text><text x="95" y="130" text-anchor="middle" fill="#6b6864" font-size="11">~40 grinders, bands</text>
+          <rect x="10" y="160" width="170" height="54" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="95" y="182" text-anchor="middle">data/adjustments.json</text><text x="95" y="200" text-anchor="middle" fill="#6b6864" font-size="11">roast, process, filters</text>
+          <!-- schema -->
+          <rect x="220" y="90" width="150" height="54" rx="10" fill="#fdeee9" stroke="#e74c2e"/><text x="295" y="112" text-anchor="middle" fill="#b5391b">lib/schema.ts (zod)</text><text x="295" y="130" text-anchor="middle" fill="#b5391b" font-size="11">validated at build</text>
+          <line x1="180" y1="47" x2="220" y2="105" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="180" y1="117" x2="220" y2="117" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="180" y1="187" x2="220" y2="129" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- engine -->
+          <rect x="410" y="60" width="170" height="114" rx="10" fill="#fdeee9" stroke="#e74c2e"/>
+          <text x="495" y="84" text-anchor="middle" fill="#b5391b" font-weight="600">lib/engine/</text>
+          <text x="495" y="104" text-anchor="middle" fill="#b5391b" font-size="11">scaleRecipe()</text>
+          <text x="495" y="122" text-anchor="middle" fill="#b5391b" font-size="11">adjustForBean()</text>
+          <text x="495" y="140" text-anchor="middle" fill="#b5391b" font-size="11">gridToSetting()</text>
+          <text x="495" y="158" text-anchor="middle" fill="#b5391b" font-size="11">buildSchedule()</text>
+          <line x1="370" y1="117" x2="410" y2="117" stroke="#e74c2e" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrb)"/>
+          <!-- machine -->
+          <rect x="620" y="60" width="170" height="114" rx="10" fill="#fffefb" stroke="#9a958d"/>
+          <text x="705" y="84" text-anchor="middle" font-weight="600">lib/machine.ts</text>
+          <text x="705" y="104" text-anchor="middle" fill="#6b6864" font-size="11">XState 5 actor</text>
+          <text x="705" y="122" text-anchor="middle" fill="#6b6864" font-size="11">context = selection + clock</text>
+          <text x="705" y="140" text-anchor="middle" fill="#6b6864" font-size="11">useSelector() in UI</text>
+          <text x="705" y="158" text-anchor="middle" fill="#6b6864" font-size="11">← nuqs URL params</text>
+          <line x1="580" y1="117" x2="620" y2="117" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <!-- consumers -->
+          <rect x="410" y="230" width="120" height="50" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="470" y="251" text-anchor="middle">Wizard UI</text><text x="470" y="268" text-anchor="middle" fill="#6b6864" font-size="11">Motion · Base UI</text>
+          <rect x="550" y="230" width="120" height="50" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="610" y="251" text-anchor="middle">3D scene</text><text x="610" y="268" text-anchor="middle" fill="#6b6864" font-size="11">R3F · GSAP</text>
+          <rect x="690" y="230" width="120" height="50" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="750" y="251" text-anchor="middle">app/og/route</text><text x="750" y="268" text-anchor="middle" fill="#6b6864" font-size="11">recipe card image</text>
+          <rect x="270" y="230" width="120" height="50" rx="10" fill="#fffefb" stroke="#9a958d"/><text x="330" y="251" text-anchor="middle">Timer + audio</text><text x="330" y="268" text-anchor="middle" fill="#6b6864" font-size="11">wake lock · beeps</text>
+          <line x1="705" y1="174" x2="470" y2="230" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="705" y1="174" x2="610" y2="230" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="705" y1="174" x2="330" y2="230" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="495" y1="174" x2="750" y2="230" stroke="#9a958d" stroke-width="1.5" marker-end="url(#arr)"/>
+          <text x="450" y="312" text-anchor="middle" fill="#6b6864" font-size="11">The OG route imports the engine directly (server). Everything else reads the machine (client). The engine is pure and has no React.</text>
+        </g>
+      </svg>
+      <figcaption>Data is JSON, validated by Zod at build. The engine is pure TypeScript with unit tests. The machine is the single client-side source of truth. The 3D scene subscribes to it; it never owns state.</figcaption>
+    </figure>
+
+    <h3>3. Grind conversion model</h3>
+    <p>Input: the recipe's <code>grind</code> = <code>{ method: 'v60', pos: 0.25 }</code> (0 = finest end of that method's band, 1 = coarsest). Grinder record: <code>bands.v60.official = [18, 35]</code>. Output: <code>18 + 0.25 × (35 − 18) = 22.25 → 22 clicks</code>, tolerance from the grinder's zero tolerance, rendered in the grinder's notation. If a grinder has no official band for the method, use its community band and flag it. If it has neither, fall back to the Honest Coffee Guide linear model (<code>µm = min + (max − min) × tick / N</code>) with the method's Honest Coffee Guide micron range, and flag "estimated". Recipes that only give a texture word ("medium-fine") map to a position by a fixed table (fine end 0.2, middle 0.5, coarse end 0.8). Recipes with measured microns (Onyx 550 µm) map by the Honest Coffee Guide V60 range 400–700 → position 0.5.</p>
+    <p>Stepless grinders (Niche, DF64, Eureka, Varia) render a mark on a continuous ring plus the text "turn N marks from your zero". Dual-resolution grinders (Encore ESP 1–20 fine / 21–40 coarse, Fellow Opus outer + inner ring, Sette macro + micro) store two segments in <code>bands</code>. Labelled dials (Wilfa Svart) store label anchors, not numbers.</p>
+  </section>
+
+  <!-- ===================================================== RISKS -->
+  <section class="panel" id="risks">
+    <h2>Open questions and risks</h2>
+    <p class="small">Decisions taken on 2026-09-07 from your answers. Q1 and Q7 had no answer, so their defaults apply.</p>
+
+    <div class="callout ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div class="bd"><strong>Q1 · Repo and project name → <code>cookbook</code> (default)</strong><p>New public repo <code>FellipeGiulianoDuarte/cookbook</code>; Vercel project of the same name. Rename is cheap before the first deploy, expensive after (Vercel URL, OG links).</p></div></div>
+    <div class="callout ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div class="bd"><strong>Q2 · Language → English and Portuguese from Phase 2</strong><p>Two message files (<code>messages/en.json</code>, <code>messages/pt-BR.json</code>) loaded with <code>next-intl</code>; locale from the browser with a manual toggle stored per device; the URL carries <code>?lang=</code> so shared links keep their language. Recipe step text already carries both locales in the data. Adds about half a day to Phase 2.</p></div></div>
+    <div class="callout ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div class="bd"><strong>Q3 · Extraction simulator → keep it, but every number must come from a published measurement</strong><p>The invented formulas (<code>index.html:187-230</code>) go. The replacement is specified in the new "Simulator" section of the Data tab: the SCA brewing control chart with the exact SCA ranges, sensory zones from the UC Davis Coffee Center studies, early/late extraction fractions from the same group, and the extraction-yield arithmetic from dose, water and a measured or assumed TDS. Anything the literature cannot predict (drawdown time from clicks) is shown as a range with its source or not shown at all.</p></div></div>
+    <div class="callout ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div class="bd"><strong>Golden Cup → SCA only</strong><p>TDS 1.15–1.35 %, extraction 18–22 %, 93 ± 3 °C. The SCAE range (1.20–1.45 %) is stored in the data as a note but is not drawn on the chart.</p></div></div>
+    <div class="callout ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div class="bd"><strong>Q4 · Visual direction → dark</strong><p>Dark espresso surfaces, crema accent, copper secondary (the mockup). Tokens in OKLCH so the browns stay even.</p></div></div>
+    <div class="callout warn"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+      <div class="bd"><strong>Q5 · 3D models → procedural first, with a one-day go/no-go check (decided for you)</strong><p>You said you are not sure, so the plan takes the low-cost path and builds in a checkpoint. Day 1 of Phase 4 builds only the V60 procedurally (lathe cone, 40 instanced ribs, transmission glass) and puts it next to a Hario product photo. If it reads as a premium product render, the other three objects follow the same way (1–2 more days). If it does not, switch that object to Blender (1–2 days per object, glTF + Draco pipeline) and keep the rest procedural. Either way no downloaded models: no CC0 V60 exists and the CC-BY ones are 38–69k triangles. Spline is out (React export is a paid tier and loses drei).</p></div></div>
+    <div class="callout ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div class="bd"><strong>Q6 · Grinder scope → all ~40 at launch</strong><p>Data only. The grinder step gets search and a "recently used" list so 40 entries stay usable on a phone.</p></div></div>
+    <div class="callout ok"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+      <div class="bd"><strong>Q7 · Sound → on by default (default)</strong><p>Mute toggle remembered per device. The beep unlocks on the "Start" tap, which iOS requires.</p></div></div>
+
+    <h3>Risks</h3>
+    <div class="callout risk"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg></span>
+      <div class="bd"><strong>Phase 4 variance</strong><p>Liquid shaders and mobile GPU budgets are the one place estimates slip. Mitigation: Phases 0–3 ship a complete app first; the 3D slot has a static fallback from day one; <code>PerformanceMonitor</code> drops transmission (glass refraction renders the scene twice) before tuning visuals.</p></div></div>
+    <div class="callout warn"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+      <div class="bd"><strong>drei 11 alpha and WebGPU churn</strong><p>drei 11 (alpha, 2026-09-05) splits materials into legacy/WebGPU and has not ported <code>MeshTransmissionMaterial</code>. Pin drei <code>^10.7</code>, three <code>0.185</code>, R3F <code>^9.7</code>. Revisit when drei 11 is stable; budget one day.</p></div></div>
+    <div class="callout warn"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+      <div class="bd"><strong>Grinder data is a band, not a point</strong><p>Manufacturers state zero-point tolerances of ±2 to ±10 clicks (1Zpresso J-Max: ±10). Two units of the same model can differ by 5–7 marks (Niche). The app must always show a tolerance and offer the per-user offset. Never present one integer as "the" setting.</p></div></div>
+    <div class="callout warn"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+      <div class="bd"><strong>Recipe numbers from video transcriptions</strong><p>Hoffmann's numbers come from three matching written transcriptions (YouTube does not render for fetch). Kasuya's 5th pour is at 2:40, 2:45 or 3:00 depending on source. Store the disagreement in <code>source.notes</code> and show the primary source's value.</p></div></div>
+    <div class="callout info"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg></span>
+      <div class="bd"><strong>iOS has no web haptics</strong><p>The Vibration API is not in Safari. Timer feedback on iPhone is audio and visual only. Android gets vibration as a bonus.</p></div></div>
+    <div class="callout info"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg></span>
+      <div class="bd"><strong>Vercel Hobby limits</strong><p>Personal repo only, non-commercial, 100 GB/month transfer, 1 concurrent build, analytics pause at 50k events/month. All fine for a personal app.</p></div></div>
+    <div class="callout info"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5h.01"/></svg></span>
+      <div class="bd"><strong>Fresh major versions</strong><p>TypeScript 7 (Go compiler, July 2026), Vitest 5.0.0 (4 days old), pnpm 12. Pin exact versions; if Vitest 5 misbehaves, use 4.1.</p></div></div>
+  </section>
+
+  <!-- ===================================================== DATA -->
+  <section class="panel" id="data">
+    <h2>Data (research results)</h2>
+    <p class="small">Compiled 2026-09-07 from primary sources where reachable. "Primary" = author's or manufacturer's own page. "Transcription" = written copy of a video. Store every row with its URL. This tab is the content of <code>data/</code> in Phase 1.</p>
+
+    <h3>V60 recipes (8)</h3>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Recipe</th><th>Dose / water</th><th>Grind</th><th>Temp</th><th>Schedule (cumulative g)</th><th>Total</th><th>Scaling</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><b>Hoffmann · Ultimate V60</b> (2020)</td><td>30 g / 500 g · 1:16.7</td><td>medium-fine · pos 0.35</td><td>boiling for light; cooler for dark</td><td>0:00 bloom 60 g, swirl · 0:45–1:15 to 300 g · 1:15–1:45 to 500 g · 1:45 stir 1× each way · swirl when dropped</td><td>3:30</td><td>linear; not below 20 g</td><td>hario-usa.com transcription; youtube AI4ynXzkSQo</td></tr>
+        <tr><td><b>Hoffmann · Better 1 Cup</b> (2022)</td><td>15 g / 250 g · 1:16.7</td><td>medium-fine, finer than Ultimate · pos 0.25</td><td>boiling light; cooler dark</td><td>5 × 50 g at 0:00 (bloom, swirl), 0:45, 1:10, 1:30, 1:50 · gentle swirl</td><td>~3:00</td><td>fixed 15 g</td><td>opie-etc.com, peterthelander.com transcriptions; youtube 1oB1oDrDkHM</td></tr>
+        <tr><td><b>Kasuya · 4:6</b> (2016 WBrC)</td><td>20 g / 300 g · 1:15</td><td>coarse · pos 0.8</td><td>light 93 · medium 88 · dark 83 °C</td><td>0:00 60 · 0:45 120 · 1:30 180 · 2:15 240 · 2:45 300 · remove 3:30. Knobs: first 40 % split (50/70 sweeter, 70/50 brighter); last 60 % in 1–3 pours (strength)</td><td>3:30</td><td>pour = 3× dose; water = 15× dose</td><td>en.philocoffea.com (primary); hario.co.uk</td></tr>
+        <tr><td><b>Rao · V60</b> (2022)</td><td>20 g / 330 g · 1:16.5</td><td>medium-fine · pos 0.3</td><td>97 °C (fixed; change grind, not temp)</td><td>0:00 bloom 60 g, aggressive spin · 0:40 to 200 g, gentle spin · at ~70 % drained to 330 g, gentle spin</td><td>4:00–4:30</td><td>not below 20 g</td><td>hario.co.uk ambassador post (primary); scottrao.com 2024</td></tr>
+        <tr><td><b>Winton · Five-pour</b> (2021 WBrC)</td><td>20 g / 300 g · 1:15</td><td>coarse · pos 0.75</td><td>93 °C (competition: 93 bloom, 88 later)</td><td>5 × 60 g: 0:00 bloom, then each pour when the previous has just drained (~0:35–0:45 gaps); poured from height, no swirl</td><td>~3:30</td><td>pour = 3× dose</td><td>Hario Official channel YIC-2nFQ7vM; honestcoffeeguide transcription</td></tr>
+        <tr><td><b>Hedrick · One-and-done</b></td><td>15 g / 225 g · 1:15</td><td>medium-fine · pos 0.4</td><td>93 °C</td><td>0:00 45 g · 0:30 90 g · 1:00 to 225 g at ~10 ml/s · optional swirl</td><td>2:30</td><td>linear</td><td>beanbook.app transcription; youtube PNFVCmxBjQQ</td></tr>
+        <tr><td><b>Hario official</b></td><td>12 g / 168 g · 1:14</td><td>medium-fine · pos 0.4</td><td>not specified (use 93)</td><td>bloom 2× dose, wait 30 s · 3 pours of 4× dose each, spiral from centre</td><td>&lt; 3:00</td><td>ratios of dose</td><td>global.hario.com/v60 (primary)</td></tr>
+        <tr><td><b>Onyx · V60 guide</b></td><td>15 g / 250 g · 1:16.7</td><td>medium-fine, ~550 µm measured · pos 0.5</td><td>99 °C</td><td>0:00–0:30 bloom 50 g · 0:30–1:30 to 150 g tight circles · 1:30–2:30 to 250 g</td><td>2:30</td><td>linear</td><td>onyxcoffeelab.com brew guides (primary, with µm)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">Roast → temperature table (data/adjustments.json): Philocoffea 93/88/83 °C; Cafec 92/90/83 °C; Hedrick 100/92/85 °C with ratio 1:15–17 / 1:15 / 1:14; Hoffmann "boiling for light, cooler for dark"; Rao "fixed, change grind". Default in the app: the recipe's own table if it has one, else Philocoffea. Process → nudges (community only, flagged): natural −2 to −4 °C, slightly coarser, 1:16.5; anaerobic 88–91 °C, coarser, 1:16.5–1:17. V60 micron reference: Honest Coffee Guide 400–700; Onyx measured 530–817; Gagné "600–700". SCA Golden Cup: TDS 1.15–1.35 %, EY 18–22 %, 93 ± 3 °C. SCAE: TDS 1.20–1.45 %.</p>
+
+    <h3>AeroPress recipes (8)</h3>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Recipe</th><th>Dose / water</th><th>Grind</th><th>Temp</th><th>Orientation · filter</th><th>Steps</th><th>Total</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td><b>Hoffmann · Ultimate AeroPress</b> (2021)</td><td>11 g / 200 g · 1:18</td><td>fine end of medium · pos 0.35</td><td>light: boiling · medium 90–95 · dark 85–90</td><td>upright · 1 paper, not rinsed, no preheat</td><td>0:00 pour 200 g · ~0:10 insert plunger ~1 cm (vacuum) · 2:00 swirl · 2:30 press ~30 s, stop at hiss</td><td>~3:00</td><td>aeroprecipe, klaire.codes, fluentincoffee transcriptions; youtube j6VlT_jUVPc</td></tr>
+        <tr><td><b>AeroPress official</b> (current)</td><td>16–18 g / to mark 4</td><td>medium or medium-fine · pos 0.5</td><td>85 °C or boiling</td><td>upright · 1 paper</td><td>add coffee · fill to 4 · stir 3 s · steep 60 s (medium) or 30 s (medium-fine) · press until hiss</td><td>~1:30</td><td>aeropress.com/pages/how-to-use (primary)</td></tr>
+        <tr><td><b>Adler · Original concentrate</b></td><td>~15–17 g / ~90 g (mark 1–1.5) · 1:6, then dilute</td><td>fine · pos 0.15</td><td>80 °C (dark) · 85 °C (light/medium)</td><td>upright · 1 paper</td><td>pour to mark 1–1.5 · stir 10 s · press 20–40 s gently · add hot water to taste</td><td>~1:15</td><td>aeropress.com FAQ, honestcoffeeguide, wikipedia</td></tr>
+        <tr><td><b>Wendelboe</b></td><td>14 g / 200 g · 1:14.3</td><td>fine filter · pos 0.3</td><td>boiling (primary) · 96 °C (transcriptions)</td><td>upright · 1 paper, rinsed</td><td>0:00 pour 200 g · stir 3× · plunger on top · 1:00 stir 3× · press with body weight, don't over-press</td><td>~1:30</td><td>timwendelboe.no (primary)</td></tr>
+        <tr><td><b>WAC 2025 · Némo Pop</b></td><td>18 g / 100 g brew + 70 g bypass at 50 °C</td><td>Comandante 31 clicks, sifted &gt; 200 µm · pos 0.6</td><td>84 °C</td><td>upright · Flow Control cap + 2 papers</td><td>bypass water in carafe · add coffee · pour 100 g · 0:25 stir N-S-N-S-W-E-W-E · 0:50 press ~20 s</td><td>~1:15</td><td>worldaeropresschampionship.com/pages/recipes (primary)</td></tr>
+        <tr><td><b>WAC 2024 · Stanica</b></td><td>18 g / 100 g brew, dilute to 130–135 + 20–30 g room-temp</td><td>Comandante Red Clix 58 (870 µm) · pos 0.7</td><td>96 °C</td><td>inverted, plunger at mark 4 · 1 Aesir paper, rinsed</td><td>0:00 50 g · bloom 30 s · 50 g · stir NSEW 10 s · 1:20 cap, purge · 1:35 flip, press 30–40 s to 76–79 g · dilute</td><td>~2:15</td><td>same (primary)</td></tr>
+        <tr><td><b>WAC 2021 · Merikanto</b></td><td>18 g / 200 g · 1:11, no bypass</td><td>Macap 7.0 · pos 0.6</td><td>80 °C</td><td>inverted · 2 papers, rinsed</td><td>0:00–0:10 50 g · stir 3× · 0:15–0:30 to 200 g · 0:50 stir 3× · 1:00 cap · 1:40 flip, press to 2:00 · swirl to cool</td><td>2:30</td><td>same (primary)</td></tr>
+        <tr><td><b>Official Japanese iced</b> (2024)</td><td>22 g / 200 g over 150 g ice</td><td>medium-fine · pos 0.4</td><td>99 °C</td><td>upright · 1 paper</td><td>ice in glass · pour 200 g to mark 3 · stir 10× · plunger in, pull up · steep 3:00 · press 30–45 s</td><td>~4:00</td><td>aeropress.com blog (primary)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">Options data: standard vs inverted steps and the inverted safety note (seal ≥ 20 mm, never over thin glass); filters: paper 1 or 2 (slower, cleaner), stainless 178 µm holes, Able Disk 254 / Fine 152 µm, Prismo 150 µm valve (not Go/XL), Flow Control cap (not XL); models: Original/Clear 295 ml, Go 237 ml (use ≤ 15 g / 225 g), XL 590 ml (double dose). AeroPress grind by contact time: &lt; 1:00 → 300–450 µm; 1–2 min → 400–600 µm; 3–10 min or bypass style → 700–950 µm. Optional 9th recipe: Coffee ad Astra 10-minute steep (18 g / 260 g / 99 °C, swirl at 5:00 and 9:00, paper over Prismo disk).</p>
+
+    <h3>Grinders (~40). Bands are clicks from the manufacturer's zero unless the notation says otherwise</h3>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Grinder</th><th>Type</th><th>Clicks / rot</th><th>Travel µm/click</th><th>V60 / pour-over band</th><th>AeroPress band</th><th>Espresso</th><th>French press</th><th>Zero · tolerance</th><th>Best source</th></tr></thead>
+      <tbody>
+        <tr id="timemore-row"><td><b>Timemore C3S Pro / C3S / C3 / C3 Pro</b> (yours)</td><td>hand, stepped, unnumbered ring</td><td>12 (~36 total)</td><td>83 (Timemore KB; 1 mm pitch)</td><td>HCG 11–18; Timemore printed guide 13–16; reviewers 12–18</td><td>HCG 9–25; reviewers 10–17</td><td>7–10 (one usable click ≈ 8); never 1–6</td><td>HCG 19–25; Timemore guide 17–20</td><td>tighten clockwise until stop = 0 · ±1; unsafe below 6</td><td>timemore.cn KB id=28 and id=1; honestcoffeeguide C3S Pro</td></tr>
+        <tr><td>Timemore C2 / C2S</td><td>hand, stepped</td><td>12 (~36)</td><td>~80 (older standard burr)</td><td>HCG 13–22</td><td>HCG 11–30</td><td>HCG 6–12 (weak)</td><td>HCG 22–30</td><td>as C3 · unsafe below 6</td><td>honestcoffeeguide C2</td></tr>
+        <tr><td>Timemore C3 ESP / ESP Pro</td><td>hand, stepped, numbered dial</td><td>30 (10 numbers × 3), 3 turns</td><td>23 (0.7 mm pitch)</td><td>official 1.4–2.0 rot; HCG 1.2.0–2.0.2</td><td>HCG 0.9.2–2.8.1</td><td>official 0.6–1.0 rot</td><td>official 2.0–2.3 rot</td><td>washer flat-side up or dial misaligns</td><td>9barbenchmark; brewcoffeehome; iCup manual excerpt</td></tr>
+        <tr><td>Timemore Chestnut X</td><td>hand, dual: 24-step macro + 5-step micro</td><td>120 settings</td><td>80 macro / 15 micro</td><td>HCG 8.6–16.4 (macro)</td><td>HCG 6.4–23.4</td><td>HCG 2.8–8</td><td>HCG 16.4–24</td><td>unsafe below 3</td><td>timemore.cn KB; thecoffeefolk</td></tr>
+        <tr><td>Comandante C40 MK4 / MK3</td><td>hand, stepped</td><td>12 (Red Clix 24)</td><td>~30 (retailer figure; not on comandante.com)</td><td>official 18–35; HCG 15–25; blogs 22–28</td><td>official "depends on recipe"; HCG 12–35</td><td>official 7–13</td><td>official 25–35</td><td>handle stops falling = 0 · ±1</td><td>comandantegrinder.com/pages/faq</td></tr>
+        <tr><td>Kingrinder K6</td><td>hand, stepped, external</td><td>60</td><td>16</td><td>official 100; HCG 48–82; 9bar 60–80</td><td>official 65</td><td>official 40 (community 30–35)</td><td>official 120</td><td>nut to last "0" = 0 · not stated; never grind &lt; 15</td><td>K6 manual PDF; kingrinder.com</td></tr>
+        <tr><td>Kingrinder K4</td><td>hand, stepped</td><td>60</td><td>16 (official)</td><td>= K6</td><td>= K6</td><td>= K6</td><td>= K6</td><td>as K6</td><td>kingrinder.com/exterior-adjustment</td></tr>
+        <tr><td>Kingrinder K2 / K1 / K0</td><td>hand, stepped, internal</td><td>40</td><td>18</td><td>official 100</td><td>official 60</td><td>K1/K2 40; K0 not recommended</td><td>140</td><td>tighten to resistance · never &lt; 16</td><td>K0/K1/K2 manual PDF</td></tr>
+        <tr><td>1Zpresso JX-Pro (S)</td><td>hand, stepped, top dial</td><td>40 (10 numbers)</td><td>12.5</td><td>official 128–176 (3.2–4.4 rot)</td><td>official 96–120</td><td>official 48–64</td><td>official 168–200</td><td>resistance start, dial reads #0 · ±2</td><td>1zpresso.coffee/grind-setting; JX-Pro chart 2020-09</td></tr>
+        <tr><td>1Zpresso J-Max (S)</td><td>hand, stepped, external</td><td>90 (9 numbers)</td><td>8.8</td><td>official 240–300</td><td>official 180–240</td><td>official 90–150</td><td>official 360–400</td><td>resistance start · ±10</td><td>J-Max chart 2022-11</td></tr>
+        <tr><td>1Zpresso J-Ultra</td><td>hand, stepped, external</td><td>100</td><td>8</td><td>official 270–330</td><td>official 200–270</td><td>official 100–170</td><td>official 400–440</td><td>resistance start · ±10</td><td>J-Ultra chart 2023-11</td></tr>
+        <tr><td>1Zpresso K-Plus / K-Max / K-Pro</td><td>hand, stepped, external</td><td>90 (9 numbers)</td><td>22</td><td>official 80–90; community 55–75</td><td>official 50–70</td><td>official 30–45</td><td>official 90–100</td><td>resistance start, not tightest · ≥ ±2</td><td>K-series chart 2021-11</td></tr>
+        <tr><td>1Zpresso K-Ultra</td><td>hand, stepped, external</td><td>100 (10 numbers)</td><td>20</td><td>official 80–90; community 60–80</td><td>official 50–70</td><td>official 30–45</td><td>official 90–100</td><td>as K · ≥ ±2</td><td>K-Ultra chart 2023-03</td></tr>
+        <tr><td>1Zpresso ZP6 Special</td><td>hand, stepped, external</td><td>90</td><td>22</td><td>official 40–50; community 30–45</td><td>not listed; community 20–40</td><td>not possible</td><td>official 50–60</td><td>as K; 0–20 unusable (burr rub)</td><td>ZP6 chart 2022-10</td></tr>
+        <tr><td>1Zpresso Q2 / Q Air</td><td>hand, stepped, internal</td><td>30 (10 numbers)</td><td>25</td><td>official 54–96 (1.8–3.2 rot)</td><td>official 36–60</td><td>not listed; community 16–33</td><td>official 78–114</td><td>tightest = 0; number may not read 0</td><td>Q chart 2026-04</td></tr>
+        <tr><td>1Zpresso X-Pro (S) / X-Ultra</td><td>hand, stepped, external</td><td>60 (6 numbers)</td><td>12.5</td><td>official 120–160</td><td>official 70–110</td><td>official 40–70</td><td>official 160–190</td><td>resistance start</td><td>X-Pro chart 2022-08; X-Ultra 2023-08</td></tr>
+        <tr><td>Hario Skerton Pro</td><td>hand, stepped</td><td>not published</td><td>none</td><td>consensus 6–9</td><td>5–8</td><td>2–3 (nominal)</td><td>10–13</td><td>tighten until touch · wide spread</td><td>Coffee Chronicler (sieved); homegrounds</td></tr>
+        <tr><td>Hario Mini Slim Plus / Pro</td><td>hand, stepped</td><td>~20 usable</td><td>none</td><td>12 (CC); 10–14</td><td>7–11</td><td>n/a</td><td>15</td><td>tighten fully = 0</td><td>Coffee Chronicler; hario manuals (qualitative only)</td></tr>
+        <tr><td>Baratza Encore</td><td>electric, stepped 1–40</td><td>40 settings</td><td>~24 (HCG implied)</td><td>official 15; HCG 7–18</td><td>official 12</td><td>official 8 (not an espresso grinder)</td><td>official 28</td><td>inner ring notch; shim = 5 settings</td><td>Virtuoso+ manual table; Clive Coffee copy</td></tr>
+        <tr><td>Baratza Encore ESP</td><td>electric, dual: 1–20 micro, 21–40 macro</td><td>40</td><td>~20 (micro) / ~37 (macro)</td><td>official 25; HCG 15–25</td><td>official 22</td><td>official 15 (1–20 range)</td><td>official 32</td><td>factory calibrated</td><td>baratza.com dialing-in; frenchpresscoffee copy</td></tr>
+        <tr><td>Baratza Virtuoso+</td><td>electric, stepped 1–40</td><td>40</td><td>~25.6</td><td>official 15</td><td>official 12</td><td>official 8</td><td>official 28</td><td>ring + shims</td><td>Virtuoso+ manual v1.6 p.6 (primary)</td></tr>
+        <tr><td>Baratza Sette 270</td><td>electric, 30 macro + stepless micro</td><td>30 macro</td><td>~24 / macro</td><td>HCG 9–20</td><td>HCG 5–31</td><td>HCG 1–7</td><td>HCG 21–31</td><td>shim kit</td><td>honestcoffeeguide; Sette 30 manual</td></tr>
+        <tr><td>Fellow Ode Gen 2</td><td>electric, stepped 1–11 × 3</td><td>31 steps</td><td>~29.5</td><td>retailer 4–7; HCG 2.2–5.2; blogs 4–6</td><td>1–8 (clicks) / 3–5 (dial)</td><td>not supported</td><td>8–10 dial</td><td>official burr-touch procedure (dial 11, remove plate)</td><td>fellowproducts.com calibration article</td></tr>
+        <tr><td>Fellow Opus</td><td>electric, 1–11 × 4 + inner ring</td><td>41</td><td>~23</td><td>HCG 3–6; blogs 4.3–5.2</td><td>HCG 2–8.75</td><td>HCG 1–2.5</td><td>HCG 6–11</td><td>inner ring (undocumented)</td><td>fellowproducts.com gear guide</td></tr>
+        <tr><td>Wilfa Uniform (+)</td><td>electric, stepped 1–41</td><td>41</td><td>~20</td><td>official 14–28</td><td>official 14–26</td><td>official 3–7</td><td>official 30–38</td><td>none published</td><td>wilfa.com (primary)</td></tr>
+        <tr><td>Wilfa Svart / Aroma</td><td>electric, labelled zones</td><td>~18 dots (HCG)</td><td>~46 / dot</td><td>label "P" of AEROPRESS (Square Mile)</td><td>"R" of AEROPRESS</td><td>not capable</td><td>"O" of AEROPRESS</td><td>none</td><td>wilfa.com; squaremileblog 2018</td></tr>
+        <tr><td>Niche Zero</td><td>electric, stepless 0–50 (+ blank)</td><td>50 marks / rot</td><td>~13–20 / mark</td><td>official 35–45</td><td>official 30–35</td><td>official 5–20 (start 15)</td><td>official 45+</td><td>burrs touch → align "Calibrate" mark · 5–7 marks between units</td><td>nichecoffee.co.uk grind guide (primary)</td></tr>
+        <tr><td>Niche Duo</td><td>electric, stepless, swappable burrs</td><td>—</td><td>—</td><td>official 30–45</td><td>official 20–30</td><td>official 0–10 (espresso burrs)</td><td>official 45+</td><td>as Zero</td><td>nichecoffee.co.uk (primary)</td></tr>
+        <tr><td>DF64 Gen 2 / DF54 / DF64V</td><td>electric, stepless 0–90</td><td>90 marks</td><td>~9–10 / mark</td><td>official 50–80 (from your zero)</td><td>official 10–35</td><td>official 5–30</td><td>official 65–80</td><td>chirp with motor running = 0; printed 0 ≠ zero</td><td>DF Grinders chart PDF 2025-10 (primary)</td></tr>
+        <tr><td>Eureka Mignon Specialità / Silenzio</td><td>electric, stepless, multi-rotation</td><td>~300 µm / rot (HCG)</td><td>13–33 per half-mark</td><td>HCG 4.5 → 1+4</td><td>HCG 2.5 → 2+3</td><td>HCG 0–3.5</td><td>HCG 1+4 → 3+4</td><td>chirp then back off = 0 (Clive)</td><td>honestcoffeeguide; clivecoffee</td></tr>
+        <tr><td>Varia VS3 Gen 2</td><td>hand-set electric, stepless</td><td>~17 numbers × 10 sub</td><td>10 (official)</td><td>official filter "#10"; HCG 3.7–8.4</td><td>HCG 2.4–12.5</td><td>official "#4"</td><td>HCG 8.3–18</td><td>burr touch</td><td>variabrewing.com (primary)</td></tr>
+      </tbody>
+    </table></div>
+    <h3 id="simulator">Simulator: what stays, what goes, and the numbers behind it</h3>
+    <p>The old simulator predicted time, extraction and five taste scores from clicks, temperature and pours. No published data supports any of those predictions. The rebuilt panel is a <strong>brewing control chart</strong> that shows only what the literature measured. It has three modes: without a reading (ranges only), with a refractometer TDS reading (computed point), and with a logged drain time (band check).</p>
+
+    <div class="tblwrap"><table>
+      <thead><tr><th>Old output</th><th>Verdict</th><th>What the app shows instead</th><th>Grounding</th></tr></thead>
+      <tbody>
+        <tr><td>Drain time from clicks</td><td><span class="pill del">remove</span></td><td>Ranges: V60 at 22 g about 2:30–3:30; Pulsar 3:30–4:30; SCA drip contact 4–8 min. Directions only: finer grind, longer spin and more fines lengthen it. User may log the real time.</td><td>Gagné (Coffee ad Astra) repeatability post, 2019: five identical V60 brews finished at 3:07 ± 2.6 s; a 5 s longer spin added 50 s. SCA Golden Cup text. No published table maps particle size to V60 drain time.</td></tr>
+        <tr><td>Extraction yield from clicks/temp</td><td><span class="pill mod">compute from a reading</span></td><td>With a TDS reading: EY = TDS × beverage ÷ dose (weigh the cup), or EY = TDS ÷ (1 − TDS) × (water ÷ dose − 2.1) for percolation; for AeroPress (immersion) EY = TDS × (water + dose) ÷ dose. Without a reading: the SCA band 18–22 % and Rao's stated 22–24.5 % preference.</td><td>Ristenpart &amp; Kuhl, The Design of Coffee (2021) and Guinard et al. 2023 for the SCA form; Gagné 2019 for the retained-liquid derivation with LRR 2.0 g/g for V60. Worked example to pin in a test: 22 g, 374 g water, 350 g beverage, 1.42 % TDS → 22.6 % (simple) / 22.85 % (refined).</td></tr>
+        <tr><td>TDS from inputs</td><td><span class="pill mod">compute from ratio</span></td><td>The ratio diagonal on the chart, and the TDS window implied by EY 18–22 % at that ratio (60 g/L → about 1.16–1.42 %). Never a single predicted TDS.</td><td>Mass balance above; SCA Golden Cup ranges.</td></tr>
+        <tr><td>Five numeric taste bars</td><td><span class="pill del">remove numbers</span> <span class="pill new">keep as zone map</span></td><td>Corner descriptors on the TDS × EY plane, plus arrows that say which way each attribute moves. Driven by the measured or user-chosen point, never by clicks.</td><td>UC Davis Coffee Center: Batali, Ristenpart, Guinard 2020 (Sci Rep 10:16450, open access) and Guinard et al. 2023 (J Food Sci 88:2168, open access). Bitter, astringent, viscous, roasted/ashy rise with TDS; sour and citrus rise with TDS and fall with EY (largest effect, 20 points/100 across the grid); "sweet" impression is highest at low TDS and low EY and falls with TDS in every study; black tea is highest at low TDS and high EY.</td></tr>
+        <tr><td>Temperature changes taste</td><td><span class="pill del">remove</span></td><td>Between 87 and 93 °C, at equal TDS and EY, the panel found no sensory difference (only "nutty" by about 1 point in 100). Temperature changes how fast you get there: about 40 s (10 %) less brew time per +6 °C to hold EY.</td><td>Batali 2020, Table S1 and S3. Liang et al. 2021 (Sci Rep 11:6904): immersion plateaus near 21 % EY regardless of temperature 80–99 °C and grind 580–1310 µm; only time to plateau changes (20 min at 99 °C, 45 min at 80 °C).</td></tr>
+        <tr><td>"Over-extraction → astringent" keyed to EY</td><td><span class="pill del">reword</span></td><td>Astringency tracks TDS far more than EY in the 16–24 % range. Warning text keys on strength, not yield.</td><td>Batali 2020 Table S3: astringent F = 77.6 vs TDS, F = 5.7 vs EY.</td></tr>
+        <tr><td>Golden Cup box labelled "ideal"</td><td><span class="pill mod">relabel</span></td><td>Grey box labelled "Classic Standard (SCA)". A note: 57 % of tested consumers preferred low TDS near 18 % EY; 43 % preferred either high-TDS/low-EY fruity cups or high-EY roasty cups. Outside the box is preference, not defect.</td><td>Guinard 2023 streamlined chart; Cotter et al. 2021 (J Food Sci 86:194), 118 consumers, two clusters.</td></tr>
+        <tr><td>Roast note</td><td><span class="pill new">add</span></td><td>Light/medium roast bitterness comes mainly from chlorogenic acid lactones; dark roast adds harsher phenylindanes. Dark-roast bitter compounds extract slowly and are held in the grounds.</td><td>Frank, Zehentbauer, Hofmann 2006; Frank et al. 2007 (J Agric Food Chem 55:1945); Blumberg, Frank, Hofmann 2010.</td></tr>
+        <tr><td>Grind direction note</td><td><span class="pill new">add</span></td><td>"Finer grind raises extraction at equal time" with the one measured anchor: 1115 → 770 µm moved EY from 16 to 20–24 % at equal TDS and about 7 min in a drip brewer.</td><td>Batali 2020 Table S1 (laser-diffraction particle sizes, VST refractometer).</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">Chart constants for <code>data/extraction.json</code>: axes TDS 0.80–1.60 %, EY 14–26 % (Lingle, The Coffee Brewing Handbook, SCAA 2011); SCA box TDS 1.15–1.35 %, EY 18–22 %, ratio 55 g/L ± 10 %, 93 ± 3 °C, contact 4–8 min (SCAA Golden Cup Standard, rev. 2015). Corner descriptors and directions from Guinard 2023 Fig. 6 and Batali 2020 Table S3. LRR 2.0 (V60, Gagné) / 2.1 (UC Davis drip). Immersion formula for AeroPress. The Barista Hustle Coffee Compass could not be fetched (paywall); do not cite it. The SCAE range is stored as a note only.</p>
+
+    <p class="small">Micron reference bands (Honest Coffee Guide, used only as a secondary label): espresso 180–380 · moka 360–660 · AeroPress 320–960 · V60 400–700 · pour-over 410–930 · Chemex ≈ 600–900 · French press 690–1300 · cold brew 800+. Category words: fine 200–400, medium-fine 400–600, medium 600–800, medium-coarse 800–1000, coarse 1000–1200. Every published converter is linear over the dial; none models fines or burr geometry. Home-Barista consensus: converters match flow rate, not taste. Hence: bands with tolerance, plus a per-user offset.</p>
+  </section>
+
+  <!-- ===================================================== STACK -->
+  <section class="panel" id="stack">
+    <h2>Stack (versions read from the npm registry on 2026-09-07)</h2>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Package</th><th>Version</th><th>Purpose</th><th>Why this one</th></tr></thead>
+      <tbody>
+        <tr><td>next</td><td>16.3.4</td><td>App framework, App Router, Turbopack</td><td>Built-in OG images, manifest, preview deploys on Vercel. Vite SPA needs Nitro for OG images.</td></tr>
+        <tr><td>react / react-dom</td><td>19.2.8</td><td>UI runtime</td><td>R3F 9 requires ≥19 &lt;19.3.</td></tr>
+        <tr><td>typescript</td><td>7.0.2</td><td>Types</td><td>Go compiler, fast checks; Next 16.3 supports it.</td></tr>
+        <tr><td>three</td><td>0.185.1</td><td>3D engine (WebGL)</td><td>WebGPU not production-ready with drei in 2026-09.</td></tr>
+        <tr><td>@react-three/fiber</td><td>9.7.0</td><td>React renderer for three</td><td>Peer React 19.</td></tr>
+        <tr><td>@react-three/drei</td><td>10.7.8 (pin ^10.7)</td><td>Environment, ContactShadows, MeshTransmissionMaterial, PerformanceMonitor, Html</td><td>v11 is alpha with split material paths.</td></tr>
+        <tr><td>@react-three/postprocessing</td><td>3.1.1</td><td>Bloom, vignette</td><td>Needs fiber ≥ 9.7.</td></tr>
+        <tr><td>three-custom-shader-material</td><td>6.4.0</td><td>Liquid fill shader on a PBR material</td><td>Keeps lighting while injecting the cut and ripple.</td></tr>
+        <tr><td>gsap (+ @gsap/react)</td><td>3.15.0</td><td>Timelines: pours, dial, ring, counters</td><td>Free for all use since 2025; SplitText, DrawSVG included.</td></tr>
+        <tr><td>motion</td><td>13.2.0</td><td>Step transitions, layoutId, AnimatePresence</td><td>Import from <code>motion/react</code>. Owns React layout only.</td></tr>
+        <tr><td>xstate / @xstate/react</td><td>5.32.6 / 6.1.0</td><td>Wizard + brew timer machine</td><td>Nested timed states with pause; Stately Studio for visualising.</td></tr>
+        <tr><td>nuqs</td><td>2.10.1</td><td>URL query state</td><td>Shareable recipes; the OG route reads the same params.</td></tr>
+        <tr><td>next-intl</td><td>latest 4.x</td><td>English + Portuguese UI strings</td><td>App Router support, typed message keys, per-request locale for the OG route.</td></tr>
+        <tr><td>zod</td><td>latest 4.x</td><td>Data schemas</td><td>Build-time validation of JSON.</td></tr>
+        <tr><td>tailwindcss</td><td>4.3.3</td><td>Styling, <code>@theme</code> tokens</td><td>CSS-first config.</td></tr>
+        <tr><td>shadcn CLI + @base-ui/react</td><td>4.21.0 / 1.8.0</td><td>Accessible primitives</td><td>shadcn defaults to Base UI since 2026-07.</td></tr>
+        <tr><td>@serwist/next</td><td>9.5.12</td><td>Service worker, installable PWA</td><td>Works with Turbopack.</td></tr>
+        <tr><td>@vercel/analytics / speed-insights</td><td>2.0.x</td><td>Traffic and vitals</td><td>Hobby limits are ample.</td></tr>
+        <tr><td>pnpm · @biomejs/biome</td><td>12.3.4 · 2.5.12</td><td>Package manager · lint + format</td><td><code>next lint</code> is gone in Next 16.</td></tr>
+        <tr><td>vitest · @playwright/test</td><td>5.0.0 (or 4.1) · 1.63.0</td><td>Unit · end-to-end</td><td>Engine and machine tests need no DOM.</td></tr>
+        <tr><td>leva</td><td>0.10.1</td><td>Debug sliders behind <code>?debug</code></td><td>Instead of Storybook for the 3D work.</td></tr>
+      </tbody>
+    </table></div>
+    <p class="small">Not used: @react-three/rapier (no physics needed), Lenis/smooth scroll (a wizard is not a scroll page), Storybook, Spline (paid React export), Astro (wrong shape for one live scene). React <code>&lt;ViewTransition&gt;</code> is still canary; do not build on it.</p>
+    <h3>Reference sites for the target look</h3>
+    <ul>
+      <li>view-source-cumulus.myshopify.com — scroll-driven 3D coffee machine reveal.</li>
+      <li>caffe.design — explorable 3D studio, animation-heavy.</li>
+      <li>cartier.com/watchesandwonders — one 3D object per step, navigated step by step; the closest structure to this wizard.</li>
+      <li>oryzo.ai — one hero object with inertia; the "one beautiful object" model for the V60.</li>
+      <li>apple.com/airpods-pro — the reference for scrubbing a 3D animation with progress.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================== FILES -->
+  <section class="panel" id="changes">
+    <h2>Files</h2>
+    <p>All files are new (new repo). Checkboxes persist locally; use this as the tracker. Phase column says when each file first appears.</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th>File</th><th>Phase</th><th>What</th></tr></thead>
+      <tbody>
+        <tr><td><input type="checkbox" class="track" id="f01"></td><td class="path">package.json, pnpm-lock.yaml, biome.json, tsconfig.json, next.config.ts</td><td>0</td><td>Toolchain. <code>transpilePackages: ['three']</code>. Scripts: <code>dev, build, check (biome + tsc + vitest), e2e</code>.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f02"></td><td class="path">.github/workflows/ci.yml</td><td>0</td><td>Biome, type-check, Vitest on push. Playwright on <code>deployment_status</code> success against the preview URL.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f03"></td><td class="path">app/layout.tsx, app/globals.css</td><td>0</td><td>Fonts via next/font, Tailwind <code>@theme</code> tokens (OKLCH), nuqs adapter, Analytics.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f04"></td><td class="path">app/page.tsx</td><td>2</td><td>Renders <code>&lt;Wizard/&gt;</code>. Reads nothing itself.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f05"></td><td class="path">app/debug/page.tsx</td><td>1</td><td>Lists every recipe at 3 doses and every grinder at V60/AeroPress with sources. Dev aid and data review page.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f06"></td><td class="path">app/sources/page.tsx</td><td>5</td><td>Public sources and credits page generated from data.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f07"></td><td class="path">app/og/route.tsx</td><td>5</td><td><code>ImageResponse</code> recipe card from query params.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f08"></td><td class="path">app/manifest.ts, app/sw.ts</td><td>3</td><td>PWA manifest and Serwist worker; precache shell.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f09"></td><td class="path">data/methods.json</td><td>1</td><td>V60, AeroPress: options schema per method (filters, orientation, models).</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f10"></td><td class="path">data/recipes/v60/*.json (8)</td><td>1</td><td>One file per recipe from the Data tab.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f11"></td><td class="path">data/recipes/aeropress/*.json (8)</td><td>1</td><td>One file per recipe from the Data tab.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f12"></td><td class="path">data/grinders/*.json (~40)</td><td>1</td><td>One file per grinder; families share a <code>$extends</code> for identical charts (K-Plus/K-Max/K-Pro).</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f13"></td><td class="path">data/adjustments.json</td><td>1</td><td>Roast → temperature tables per source; process nudges (flagged); filter paper effects.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f14"></td><td class="path">data/microns.json</td><td>1</td><td>Honest Coffee Guide method and category bands (secondary label only).</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f15"></td><td class="path">messages/en.json, messages/pt-BR.json, i18n.ts</td><td>2</td><td>All UI strings in both languages via next-intl. Recipe step text lives in the recipe files with both locales.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f16"></td><td class="path">lib/schema.ts</td><td>1</td><td>Zod schemas + inferred types (Code tab).</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f17"></td><td class="path">lib/data.ts</td><td>1</td><td>Loads and validates all JSON at build; exports typed arrays and lookups.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f18"></td><td class="path">lib/engine/scale.ts</td><td>1</td><td><code>scaleRecipe(recipe, dose)</code> with per-recipe rules and limits.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f19"></td><td class="path">lib/engine/bean.ts</td><td>1</td><td><code>adjustForBean(recipe, bean)</code>: temperature table, flagged nudges.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f20"></td><td class="path">lib/engine/grind.ts</td><td>1</td><td><code>gridToSetting(grinder, method, pos, offset)</code>, notation formatters, tolerance.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f21"></td><td class="path">lib/engine/schedule.ts</td><td>1</td><td><code>buildSchedule()</code>: absolute times, cumulative grams, cues for timer and 3D.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f21b"></td><td class="path">lib/engine/extraction.ts, data/extraction.json</td><td>1</td><td>EY from TDS (percolation/immersion), TDS window from ratio, chart zones and descriptors, time bands. Constants and sources from the Data tab "Simulator" section.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f21c"></td><td class="path">components/chart/{ControlChart,ChartInputs}.tsx</td><td>2</td><td>SVG brewing control chart; TDS and drain-time inputs; zone attribute list.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f22"></td><td class="path">lib/engine/*.test.ts</td><td>1</td><td>Unit tests (Tests tab).</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f23"></td><td class="path">lib/machine.ts, lib/machine.test.ts</td><td>2, 3</td><td>XState machine; brewing compound state generated from the schedule.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f24"></td><td class="path">lib/url.ts</td><td>2</td><td>nuqs parsers for every selection; hydrate/persist helpers.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f25"></td><td class="path">lib/audio.ts, lib/wakelock.ts, lib/haptics.ts</td><td>3</td><td>Oscillator beeps, wake lock with re-request, vibration guard.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f26"></td><td class="path">components/wizard/Wizard.tsx</td><td>2</td><td>Actor provider, step router, progress bar, Motion transitions.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f27"></td><td class="path">components/wizard/steps/{Method,Recipe,Grinder,Amount,Bean,Options,Summary}.tsx</td><td>2</td><td>One file per step.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f28"></td><td class="path">components/brew/{BrewScreen,Timer,ProgressRing,Instruction}.tsx</td><td>3</td><td>Kitchen mode UI.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f29"></td><td class="path">components/ui/* (shadcn generated)</td><td>2</td><td>Button, Slider, Dialog, Tabs, Toggle.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f30"></td><td class="path">components/scene/SceneClient.tsx</td><td>2 (stub), 4</td><td><code>'use client'</code> wrapper with <code>dynamic(() =&gt; import('./Scene'), { ssr:false })</code>. Renders the SVG fallback until loaded.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f31"></td><td class="path">components/scene/Scene.tsx</td><td>4</td><td>Canvas, lights, Environment, PerformanceMonitor, camera per step.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f32"></td><td class="path">components/scene/models/{V60,AeroPress,Kettle,Grinder,Server}.tsx</td><td>4</td><td>Procedural meshes; animatable parts as separate meshes.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f33"></td><td class="path">components/scene/materials/{Liquid,Glass}.tsx, shaders/liquid.glsl</td><td>4</td><td>Fill cut + ripple via CSM; transmission glass with fallback.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f34"></td><td class="path">components/scene/fx/{PourStream,Grounds}.tsx</td><td>4</td><td>Tube along Bezier with scrolling noise; instanced icospheres.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f35"></td><td class="path">components/scene/timelines.ts</td><td>4</td><td>GSAP timelines per step; brew timeline seeks from the machine clock.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f36"></td><td class="path">components/scene/Fallback.tsx</td><td>2</td><td>Static SVG brewers with CSS-variable fill level (reduced motion, no WebGL).</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f37"></td><td class="path">e2e/{v60-comandante,aeropress-inverted-k6,deep-link}.spec.ts</td><td>2</td><td>Playwright flows.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f38"></td><td class="path">README.md, LICENSE</td><td>0, 5</td><td>How to run, how to add a grinder or recipe, data sources, credits.</td></tr>
+        <tr><td><input type="checkbox" class="track" id="f39"></td><td class="path">(old repo) cookbook-v60/index.html</td><td>5</td><td><span class="pill mod">modified</span> Replace with a redirect to the new URL; archive the repo.</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ===================================================== CODE -->
+  <section class="panel" id="code">
+    <h2>Key code</h2>
+
+    <p class="snippet-title">lib/schema.ts — the contract every JSON file must satisfy (excerpt)</p>
+<pre class="code"><span class="k">import</span> { z } <span class="k">from</span> <span class="s">'zod'</span>;
+
+<span class="k">export const</span> Source = z.object({
+  url: z.string().url(), title: z.string(), year: z.number().int().optional(),
+  kind: z.enum([<span class="s">'primary'</span>, <span class="s">'transcription'</span>, <span class="s">'community'</span>]),
+  notes: z.string().optional(),          <span class="c">// where sources disagree, say so here</span>
+});
+
+<span class="k">export const</span> Method = z.enum([<span class="s">'v60'</span>, <span class="s">'aeropress'</span>, <span class="s">'chemex'</span>, <span class="s">'frenchpress'</span>, <span class="s">'moka'</span>, <span class="s">'espresso'</span>]);
+
+<span class="c">// A step's water is a function of dose so scaling is data, not code.</span>
+<span class="k">export const</span> Step = z.object({
+  at: z.number().nonnegative(),                          <span class="c">// seconds from start</span>
+  until: z.number().nonnegative().optional(),            <span class="c">// pour end, if timed</span>
+  action: z.enum([<span class="s">'bloom'</span>,<span class="s">'pour'</span>,<span class="s">'stir'</span>,<span class="s">'swirl'</span>,<span class="s">'wait'</span>,<span class="s">'cap'</span>,<span class="s">'flip'</span>,<span class="s">'press'</span>,<span class="s">'dilute'</span>,<span class="s">'drawdown'</span>,<span class="s">'serve'</span>]),
+  water: z.union([
+    z.object({ times: z.number() }),                     <span class="c">// bloom: 2 × dose</span>
+    z.object({ share: z.number() }),                     <span class="c">// pour to 60 % of total</span>
+    z.object({ grams: z.number() }),                     <span class="c">// fixed grams (Kasuya 60 g pulses)</span>
+  ]).optional(),                                         <span class="c">// cumulative target</span>
+  text: z.record(z.enum([<span class="s">'pt-BR'</span>,<span class="s">'en'</span>]), z.string()),
+  cue: z.string().optional(),                            <span class="c">// 3D/GSAP label</span>
+});
+
+<span class="k">export const</span> Recipe = z.object({
+  id: z.string(), method: Method, name: z.string(), author: z.string(), year: z.number().optional(),
+  dose: z.object({ default: z.number(), min: z.number(), max: z.number() }),
+  ratio: z.number(),                                     <span class="c">// water = dose × ratio</span>
+  grind: z.object({ band: Method, pos: z.number().min(0).max(1), microns: z.number().optional(), label: z.string() }),
+  temperature: z.object({ default: z.number(), byRoast: z.record(z.string(), z.number()).optional(), note: z.string().optional() }),
+  steps: z.array(Step), totalSeconds: z.number(),
+  options: z.record(z.string(), z.unknown()).optional(), <span class="c">// aeropress: orientation, filter, model</span>
+  scaling: z.enum([<span class="s">'linear'</span>, <span class="s">'fixed'</span>, <span class="s">'dose-multiples'</span>]),
+  source: Source, alsoSee: z.array(Source).optional(),
+});
+
+<span class="k">export const</span> Grinder = z.object({
+  id: z.string(), brand: z.string(), model: z.string(),
+  kind: z.enum([<span class="s">'hand'</span>, <span class="s">'electric'</span>]),
+  adjustment: z.enum([<span class="s">'stepped'</span>, <span class="s">'stepless'</span>, <span class="s">'labelled'</span>, <span class="s">'dual'</span>]),
+  notation: z.enum([<span class="s">'clicks'</span>, <span class="s">'rot.num.tick'</span>, <span class="s">'dial'</span>, <span class="s">'dial.sub'</span>, <span class="s">'marks'</span>, <span class="s">'labels'</span>]),
+  clicksPerRotation: z.number().optional(), clicksPerNumber: z.number().optional(),
+  travelMicronsPerClick: z.number().optional(),         <span class="c">// informational; NOT particle size</span>
+  range: z.tuple([z.number(), z.number()]),              <span class="c">// usable min..max in clicks/marks</span>
+  bands: z.record(Method, z.object({
+    official: z.tuple([z.number(), z.number()]).optional(),
+    community: z.tuple([z.number(), z.number()]).optional(),
+    source: Source,
+  })),
+  zero: z.object({ procedure: z.string(), toleranceClicks: z.number(), unsafeBelow: z.number().optional() }),
+  espressoCapable: z.boolean(), notes: z.string().optional(),
+  hcg: z.object({ micronRange: z.tuple([z.number(), z.number()]), ticks: z.number() }).optional(), <span class="c">// fallback model</span>
+});</pre>
+
+    <p class="snippet-title">lib/engine/grind.ts — band interpolation, not microns ÷ travel</p>
+<pre class="code"><span class="k">export function</span> gridToSetting(g: Grinder, method: Method, pos: number, offset = 0): Setting {
+  <span class="k">const</span> band = g.bands[method];
+  <span class="k">let</span> lo: number, hi: number, basis: <span class="s">'official'</span> | <span class="s">'community'</span> | <span class="s">'estimated'</span>;
+  <span class="k">if</span> (band?.official)        { [lo, hi] = band.official;  basis = <span class="s">'official'</span>; }
+  <span class="k">else if</span> (band?.community) { [lo, hi] = band.community; basis = <span class="s">'community'</span>; }
+  <span class="k">else if</span> (g.hcg) {          <span class="c">// Honest Coffee Guide linear model as last resort</span>
+    <span class="k">const</span> [uMin, uMax] = MICRONS[method];                     <span class="c">// e.g. v60: [400, 700]</span>
+    <span class="k">const</span> toTick = (u: number) =&gt; (u - g.hcg.micronRange[0]) / (g.hcg.micronRange[1] - g.hcg.micronRange[0]) * g.hcg.ticks;
+    lo = toTick(uMin); hi = toTick(uMax); basis = <span class="s">'estimated'</span>;
+  } <span class="k">else</span> <span class="k">return</span> { kind: <span class="s">'unknown'</span>, basis: <span class="s">'estimated'</span> };
+
+  <span class="k">const</span> raw = lo + pos * (hi - lo) + offset;
+  <span class="k">const</span> value = g.adjustment === <span class="s">'stepless'</span> ? round(raw, 0.5) : Math.round(raw);
+  <span class="k">return</span> {
+    kind: <span class="s">'ok'</span>, value, basis,
+    tolerance: g.zero.toleranceClicks,
+    band: [lo, hi],
+    outOfRange: value &lt; g.range[0] || value &gt; g.range[1],
+    unsafe: g.zero.unsafeBelow !== undefined &amp;&amp; value &lt; g.zero.unsafeBelow,
+    text: format(g, value),               <span class="c">// "26 clicks" · "2.6.0 (2 turns + 6 numbers)" · "dial 5.1" · "mark 42 from your zero"</span>
+  };
+}
+
+<span class="c">// Kingrinder K6, V60 at pos 0.5 → official band [100,100] → 100 clicks.</span>
+<span class="c">// The old approach (600 µm ÷ 16 µm/click = 37 clicks) would have been espresso territory. Test pins this.</span></pre>
+
+    <p class="snippet-title">lib/engine/schedule.ts — cumulative grams from dose</p>
+<pre class="code"><span class="k">export function</span> buildSchedule(r: Recipe, dose: number): ScheduledStep[] {
+  <span class="k">const</span> total = Math.round(dose * r.ratio);
+  <span class="k">let</span> cum = 0;
+  <span class="k">return</span> r.steps.map(s =&gt; {
+    <span class="k">if</span> (s.water) {
+      <span class="k">if</span> (<span class="s">'times'</span> <span class="k">in</span> s.water) cum = Math.round(dose * s.water.times);          <span class="c">// Hoffmann bloom 2×</span>
+      <span class="k">if</span> (<span class="s">'share'</span> <span class="k">in</span> s.water) cum = Math.round(total * s.water.share);        <span class="c">// Hoffmann 60 %</span>
+      <span class="k">if</span> (<span class="s">'grams'</span> <span class="k">in</span> s.water) cum += r.scaling === <span class="s">'dose-multiples'</span>            <span class="c">// Kasuya 60 g at 20 g → 3× dose</span>
+        ? Math.round(s.water.grams / r.dose.default * dose) : s.water.grams;
+    }
+    <span class="k">return</span> { ...s, cumulative: Math.min(cum, total), total };
+  });
+}</pre>
+
+    <p class="snippet-title">lib/machine.ts — brewing is a compound state generated from the schedule</p>
+<pre class="code"><span class="k">const</span> brewing = (steps: ScheduledStep[]) =&gt; ({
+  initial: <span class="s">'s0'</span>,
+  states: Object.fromEntries(steps.map((s, i) =&gt; [<span class="s">`s${i}`</span>, {
+    entry: [<span class="s">'beep'</span>, <span class="s">'haptic'</span>, { type: <span class="s">'seekTimeline'</span>, params: { cue: s.cue } }],
+    after: { [durationMs(steps, i)]: i + 1 &lt; steps.length ? <span class="s">`s${i + 1}`</span> : <span class="s">'#brew.done'</span> },
+    on: { PAUSE: { target: <span class="s">'#brew.paused'</span>, actions: <span class="s">'storeRemaining'</span> } },
+  }])),
+});
+
+<span class="k">export const</span> machine = setup({ actions: { beep, haptic, seekTimeline, storeRemaining } }).createMachine({
+  id: <span class="s">'brew'</span>, initial: <span class="s">'method'</span>,
+  context: ({ input }) =&gt; hydrateFromUrl(input),
+  states: {
+    method: { on: { NEXT: <span class="s">'recipe'</span> } }, recipe: { on: { NEXT: <span class="s">'grinder'</span>, BACK: <span class="s">'method'</span> } },
+    grinder: { on: { NEXT: <span class="s">'amount'</span>, BACK: <span class="s">'recipe'</span> } }, amount: { on: { NEXT: <span class="s">'bean'</span>, BACK: <span class="s">'grinder'</span> } },
+    bean: { on: { NEXT: <span class="s">'options'</span>, BACK: <span class="s">'amount'</span> } }, options: { on: { NEXT: <span class="s">'summary'</span>, BACK: <span class="s">'bean'</span> } },
+    summary: { on: { START: { target: <span class="s">'brewing'</span>, actions: <span class="s">'wakeLock'</span> }, BACK: <span class="s">'options'</span> } },
+    brewing: brewing(schedule),            <span class="c">// built from context at START via a dynamic child actor</span>
+    paused:  { on: { RESUME: { target: <span class="s">'brewing.hist'</span> } } },  <span class="c">// history state restores the step; remaining ms in context</span>
+    done:    { on: { AGAIN: <span class="s">'summary'</span> } },
+  },
+});</pre>
+
+    <p class="snippet-title">components/scene/SceneClient.tsx — the only allowed way to load R3F in the App Router</p>
+<pre class="code"><span class="s">'use client'</span>;
+<span class="k">import</span> dynamic <span class="k">from</span> <span class="s">'next/dynamic'</span>;
+<span class="k">import</span> { Fallback } <span class="k">from</span> <span class="s">'./Fallback'</span>;
+<span class="k">const</span> Scene = dynamic(() =&gt; <span class="k">import</span>(<span class="s">'./Scene'</span>), { ssr: false, loading: () =&gt; &lt;Fallback /&gt; });
+<span class="k">export function</span> SceneClient() {
+  <span class="k">const</span> reduce = useReducedMotion(); <span class="k">const</span> webgl = useWebGLAvailable();
+  <span class="k">return</span> reduce || !webgl ? &lt;Fallback /&gt; : &lt;Scene /&gt;;   <span class="c">// dynamic() with ssr:false is illegal inside a Server Component</span>
+}</pre>
+
+    <p class="snippet-title">data/recipes/v60/hoffmann-ultimate.json — one recipe, as data</p>
+<pre class="code">{
+  <span class="s">"id"</span>: <span class="s">"v60-hoffmann-ultimate"</span>, <span class="s">"method"</span>: <span class="s">"v60"</span>, <span class="s">"name"</span>: <span class="s">"Ultimate V60 Technique"</span>, <span class="s">"author"</span>: <span class="s">"James Hoffmann"</span>, <span class="s">"year"</span>: <span class="n">2020</span>,
+  <span class="s">"dose"</span>: { <span class="s">"default"</span>: <span class="n">30</span>, <span class="s">"min"</span>: <span class="n">20</span>, <span class="s">"max"</span>: <span class="n">45</span> }, <span class="s">"ratio"</span>: <span class="n">16.67</span>,
+  <span class="s">"grind"</span>: { <span class="s">"band"</span>: <span class="s">"v60"</span>, <span class="s">"pos"</span>: <span class="n">0.35</span>, <span class="s">"label"</span>: <span class="s">"medium-fine"</span> },
+  <span class="s">"temperature"</span>: { <span class="s">"default"</span>: <span class="n">96</span>, <span class="s">"byRoast"</span>: { <span class="s">"light"</span>: <span class="n">100</span>, <span class="s">"medium"</span>: <span class="n">96</span>, <span class="s">"dark"</span>: <span class="n">90</span> },
+                   <span class="s">"note"</span>: <span class="s">"Video says: the hotter the better, especially for light roasts. Numeric values are transcriptions."</span> },
+  <span class="s">"steps"</span>: [
+    { <span class="s">"at"</span>: <span class="n">0</span>,   <span class="s">"until"</span>: <span class="n">10</span>,  <span class="s">"action"</span>: <span class="s">"bloom"</span>,    <span class="s">"water"</span>: { <span class="s">"times"</span>: <span class="n">2</span> },   <span class="s">"text"</span>: { <span class="s">"pt-BR"</span>: <span class="s">"Bloom: despeje {water} g e gire o suporte"</span>, <span class="s">"en"</span>: <span class="s">"Bloom: pour {water} g and swirl"</span> }, <span class="s">"cue"</span>: <span class="s">"bloom"</span> },
+    { <span class="s">"at"</span>: <span class="n">45</span>,  <span class="s">"until"</span>: <span class="n">75</span>,  <span class="s">"action"</span>: <span class="s">"pour"</span>,     <span class="s">"water"</span>: { <span class="s">"share"</span>: <span class="n">0.6</span> }, <span class="s">"text"</span>: { <span class="s">"pt-BR"</span>: <span class="s">"Despeje até {water} g"</span>, <span class="s">"en"</span>: <span class="s">"Pour to {water} g"</span> }, <span class="s">"cue"</span>: <span class="s">"pour1"</span> },
+    { <span class="s">"at"</span>: <span class="n">75</span>,  <span class="s">"until"</span>: <span class="n">105</span>, <span class="s">"action"</span>: <span class="s">"pour"</span>,     <span class="s">"water"</span>: { <span class="s">"share"</span>: <span class="n">1</span> },   <span class="s">"text"</span>: { <span class="s">"pt-BR"</span>: <span class="s">"Despeje devagar até {water} g"</span>, <span class="s">"en"</span>: <span class="s">"Pour slowly to {water} g"</span> }, <span class="s">"cue"</span>: <span class="s">"pour2"</span> },
+    { <span class="s">"at"</span>: <span class="n">105</span>, <span class="s">"action"</span>: <span class="s">"stir"</span>,  <span class="s">"text"</span>: { <span class="s">"pt-BR"</span>: <span class="s">"Mexa uma vez em cada sentido"</span>, <span class="s">"en"</span>: <span class="s">"Stir once each way"</span> } },
+    { <span class="s">"at"</span>: <span class="n">135</span>, <span class="s">"action"</span>: <span class="s">"swirl"</span>, <span class="s">"text"</span>: { <span class="s">"pt-BR"</span>: <span class="s">"Gire para nivelar a cama"</span>, <span class="s">"en"</span>: <span class="s">"Swirl to flatten the bed"</span> } },
+    { <span class="s">"at"</span>: <span class="n">210</span>, <span class="s">"action"</span>: <span class="s">"serve"</span>, <span class="s">"text"</span>: { <span class="s">"pt-BR"</span>: <span class="s">"Pronto"</span>, <span class="s">"en"</span>: <span class="s">"Done"</span> } }
+  ],
+  <span class="s">"totalSeconds"</span>: <span class="n">210</span>, <span class="s">"scaling"</span>: <span class="s">"linear"</span>,
+  <span class="s">"source"</span>: { <span class="s">"kind"</span>: <span class="s">"transcription"</span>, <span class="s">"url"</span>: <span class="s">"https://www.hario-usa.com/blogs/recipes-and-more-from-friends/james-hoffmann-uitimate-v60-technique"</span>, <span class="s">"title"</span>: <span class="s">"Hario USA transcription"</span>,
+              <span class="s">"notes"</span>: <span class="s">"Video: youtube.com/watch?v=AI4ynXzkSQo. Third parties list 95/97/100 °C; ratio is 1:16.7 not 1:15."</span> }
+}</pre>
+  </section>
+
+  <!-- ===================================================== VERIFICATION -->
+  <section class="panel" id="verification">
+    <h2>Verification</h2>
+    <h3>Phase 0</h3>
+<pre class="code">gh auth switch --user FellipeGiulianoDuarte &amp;&amp; gh auth status
+gh repo create FellipeGiulianoDuarte/&lt;NAME&gt; --public --clone
+pnpm dlx create-next-app@latest . --ts --app --tailwind --turbopack --use-pnpm
+pnpm add zod xstate @xstate/react nuqs motion gsap @gsap/react
+pnpm add three @react-three/fiber@^9.7 @react-three/drei@^10.7 @react-three/postprocessing three-custom-shader-material
+pnpm add -D @biomejs/biome vitest @playwright/test @types/three
+pnpm check            <span class="c"># biome ci . &amp;&amp; tsc --noEmit &amp;&amp; vitest run</span>
+vercel link &amp;&amp; git push  <span class="c"># or create the project from the Vercel dashboard / connector; confirm the preview URL renders</span></pre>
+    <h3>Phase 1</h3>
+<pre class="code">pnpm vitest run lib/engine   <span class="c"># all recipe/grinder tests green</span>
+pnpm dev &amp;&amp; open http://localhost:3000/debug
+<span class="c"># Observe: Hoffmann Ultimate at 15 g → bloom 30, 150 by 1:15, 250 by 1:45, done 3:30</span>
+<span class="c"># Observe: Kingrinder K6 V60 → 100 clicks ±?; Comandante V60 pos 0.35 → 24 clicks ±1; Niche Zero V60 → mark 38–40</span>
+<span class="c"># Negative: a recipe JSON missing source.url must fail `pnpm build` with a Zod path</span></pre>
+    <h3>Phase 2–3</h3>
+<pre class="code">pnpm exec playwright test --project=mobile-safari
+<span class="c"># Deep link: /?m=v60&amp;r=hoffmann-ultimate&amp;g=comandante-c40&amp;d=15&amp;roast=light restores every step</span>
+<span class="c"># On an iPhone: start a brew, lock nothing, screen must stay on for 3:30; a beep at 0:45, 1:15, 1:45, 3:30</span>
+<span class="c"># Pause at 1:00, wait 20 s, resume → next beep still lands at 0:45 + remaining (not early)</span>
+<span class="c"># Airplane mode after first load → app opens, brew runs</span></pre>
+    <h3>Phase 4</h3>
+<pre class="code"><span class="c"># Chrome DevTools → Performance, CPU 4× slowdown, mobile viewport: pour animation ≥ 30 fps</span>
+<span class="c"># Safari iOS: transmission glass renders; PerformanceMonitor drops DPR to 1 on decline (log it under ?debug)</span>
+<span class="c"># prefers-reduced-motion: the SVG fallback shows the fill level moving; no WebGL context created</span></pre>
+    <h3>Phase 5</h3>
+<pre class="code">curl -sI "https://&lt;app&gt;/og?m=v60&amp;r=kasuya-46&amp;d=20" | grep -i content-type   <span class="c"># image/png</span>
+<span class="c"># Paste a recipe link into WhatsApp/iMessage → card shows method, dose, ratio, temperature, setting</span>
+<span class="c"># Old URL fellipegiulianoduarte.github.io/cookbook-v60/ → 301/redirect page to the new app</span>
+pnpm dlx @lhci/cli autorun --collect.url=https://&lt;preview&gt;/   <span class="c"># performance ≥ 90 on the shell</span></pre>
+  </section>
+
+  <!-- ===================================================== TESTS -->
+  <section class="panel" id="tests">
+    <h2>Tests</h2>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Scenario</th><th>Type</th><th>Expected</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>Every recipe file validates against the schema; every number has a source</td><td><span class="pill new">positive</span></td><td>Build passes; count = 16</td><td>lib/data.test.ts</td></tr>
+        <tr><td>Hoffmann Ultimate scaled to 15 g</td><td><span class="pill new">positive</span></td><td>bloom 30 g, 150 g at 75 s, 250 g at 105 s, total 210 s</td><td>schedule.test.ts</td></tr>
+        <tr><td>Kasuya 4:6 at 30 g</td><td><span class="pill new">positive</span></td><td>5 pours of 90 g, cumulative 450 g</td><td>schedule.test.ts</td></tr>
+        <tr><td>Hoffmann Ultimate at 10 g</td><td><span class="pill del">negative</span></td><td>Rejected: below recipe minimum 20 g; UI suggests the 1-cup recipe</td><td>scale.test.ts</td></tr>
+        <tr><td>Kingrinder K6, V60, pos 0.5</td><td><span class="pill new">positive</span></td><td>100 clicks, basis official; not 37</td><td>grind.test.ts</td></tr>
+        <tr><td>Comandante C40, V60, pos 0 and pos 1</td><td><span class="pill mod">boundary</span></td><td>18 and 35 clicks, tolerance 1</td><td>grind.test.ts</td></tr>
+        <tr><td>1Zpresso K-Ultra, V60, pos 0.5</td><td><span class="pill new">positive</span></td><td>85 clicks rendered as "0.8.5" and "85 clicks"</td><td>grind.test.ts</td></tr>
+        <tr><td>1Zpresso ZP6, espresso</td><td><span class="pill del">negative</span></td><td>kind 'unknown' with reason "not espresso capable"</td><td>grind.test.ts</td></tr>
+        <tr><td>Niche Zero, V60, pos 0.5</td><td><span class="pill new">positive</span></td><td>mark 40 (stepless, half-mark rounding), text "from your zero"</td><td>grind.test.ts</td></tr>
+        <tr><td>Grinder with no bands, only HCG range</td><td><span class="pill mod">edge</span></td><td>basis 'estimated', flagged in UI</td><td>grind.test.ts</td></tr>
+        <tr><td>Setting below <code>zero.unsafeBelow</code> (Kingrinder &lt; 15)</td><td><span class="pill mod">boundary</span></td><td>unsafe = true, UI shows a warning</td><td>grind.test.ts</td></tr>
+        <tr><td>Per-user offset +3 on Comandante</td><td><span class="pill new">positive</span></td><td>All values shift by 3; band shifts too</td><td>grind.test.ts</td></tr>
+        <tr><td>Monotonicity: pos 0 → 1 never decreases the setting, for every grinder × method</td><td><span class="pill mod">property</span></td><td>true</td><td>grind.test.ts</td></tr>
+        <tr><td>Roast dark on Kasuya</td><td><span class="pill new">positive</span></td><td>83 °C and the "2 pours in the 60 %" note</td><td>bean.test.ts</td></tr>
+        <tr><td>EY from Gagné's worked example: 22 g, 374 g water, 350 g beverage, TDS 1.42 %</td><td><span class="pill new">positive</span></td><td>22.6 % (simple form); refined form with last-drop 0.8 % → 22.85 %</td><td>extraction.test.ts</td></tr>
+        <tr><td>AeroPress immersion: 11 g, 200 g, TDS 1.20 %</td><td><span class="pill new">positive</span></td><td>EY = 1.20 × 211 ÷ 11 = 23.0 %</td><td>extraction.test.ts</td></tr>
+        <tr><td>TDS window at 60 g/L without a reading</td><td><span class="pill new">positive</span></td><td>about 1.16–1.42 % for EY 18–22 %; no single value returned</td><td>extraction.test.ts</td></tr>
+        <tr><td>Zone lookup at TDS 1.5, EY 16</td><td><span class="pill new">positive</span></td><td>"acid/sour, citrus, berry" corner; attribute directions listed; no numeric taste score anywhere in the output type</td><td>extraction.test.ts</td></tr>
+        <tr><td>Temperature 87 vs 93 °C at the same TDS/EY point</td><td><span class="pill mod">edge</span></td><td>Identical sensory output (Batali 2020)</td><td>extraction.test.ts</td></tr>
+        <tr><td>Process natural on Rao</td><td><span class="pill mod">edge</span></td><td>No change (Rao does not adjust by process); community nudge shown as optional</td><td>bean.test.ts</td></tr>
+        <tr><td>Machine: START then PAUSE at 60 s, RESUME</td><td><span class="pill new">positive</span></td><td>Next transition fires at original time + pause duration; no duplicate timers</td><td>machine.test.ts (simulated clock)</td></tr>
+        <tr><td>Machine: AeroPress inverted adds 'flip' step before 'press'</td><td><span class="pill new">positive</span></td><td>Step list contains flip with safety text</td><td>machine.test.ts</td></tr>
+        <tr><td>E2E: V60 + Comandante full flow to Done on mobile Safari</td><td><span class="pill new">positive</span></td><td>All screens reachable; summary shows 24 clicks ±1</td><td>e2e/v60-comandante.spec.ts</td></tr>
+        <tr><td>E2E: AeroPress inverted + Kingrinder K6</td><td><span class="pill new">positive</span></td><td>Flip cue shown; setting 65 clicks</td><td>e2e/aeropress-inverted-k6.spec.ts</td></tr>
+        <tr><td>E2E: open a deep link, press Back on step 6</td><td><span class="pill mod">edge</span></td><td>Returns to step 5 with selections intact; URL updates</td><td>e2e/deep-link.spec.ts</td></tr>
+        <tr><td>OG route with malformed params</td><td><span class="pill del">negative</span></td><td>200 with a generic card, not 500</td><td>og.test.ts</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ===================================================== HANDOFF -->
+  <section class="panel" id="handoff">
+    <h2>Handoff</h2>
+    <p>Paste this into a fresh session to run Phase 0 and Phase 1. Later phases get their own prompt, each pointing at this file.</p>
+    <div class="handoff">
+      <button class="copy" onclick="copyHandoff(this)">Copy prompt</button>
+      <pre class="code" id="handoff-text">Implement Phase 0 and Phase 1 of the plan in /Users/duarte/dev/plans/brew-v2.html. Read the whole file first: the Phases tab for scope, the Data tab for every recipe and grinder value, the Code tab for the schemas and the grind conversion function, the Tests tab for the unit-test matrix, and the Questions tab for the answered defaults.
+
+Constraints:
+- New public repo FellipeGiulianoDuarte/cookbook (run `gh auth switch --user FellipeGiulianoDuarte` first). Personal repo, not an organization.
+- Stack exactly as the Stack tab: Next.js 16.3, React 19.2, TypeScript 7, Tailwind 4, pnpm, Biome, Vitest, Playwright, Zod, XState 5, nuqs, next-intl (English + Portuguese). Pin exact versions. Do not add three/R3F until Phase 4.
+- Dark theme tokens from Phase 0. Golden Cup = SCA ranges only (TDS 1.15–1.35 %, EY 18–22 %). The simulator uses only the numbers and sources listed in the Data tab "Simulator" section; no invented formula.
+- Every number in data/ carries a source object with url and kind. Copy values from the Data tab; where the tab records a disagreement, store it in source.notes and use the primary source's value.
+- The grind converter interpolates inside each grinder's official band per method. It never divides microns by the manufacturer's microns-per-click figure. The Kingrinder K6 V60 test must return 100 clicks.
+- Deliver a Vercel preview URL with /debug listing every recipe at 3 doses and every grinder at V60 and AeroPress.
+- Run `pnpm check` and `pnpm vitest run` before reporting. Report with the preview URL and the test output, not a summary.
+
+Stop after Phase 1 and report. Do not start Phase 2 without confirmation.</pre>
+    </div>
+  </section>
+
+</div>
+<script>
+  document.body.classList.add('js');
+  document.querySelectorAll('nav.tabs button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav.tabs button').forEach((b) => { b.setAttribute('aria-selected', 'false'); });
+      document.querySelectorAll('section.panel').forEach((p) => { p.classList.remove('active'); });
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById(btn.dataset.panel).classList.add('active');
+      try { history.replaceState(null, '', '#' + btn.dataset.panel); } catch (e) {}
+    });
+  });
+  (()=> { var h = location.hash.replace('#',''); var b = h && document.querySelector('nav.tabs button[data-panel="'+h+'"]'); if (b) b.click(); })();
+  var KEY = 'plan-progress:brew-v2';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+  document.querySelectorAll('input.track').forEach((cb) => {
+    cb.checked = !!saved[cb.id];
+    cb.addEventListener('change', () => { saved[cb.id] = cb.checked; try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} });
+  });
+  function copyHandoff(btn) {
+    navigator.clipboard.writeText(document.getElementById('handoff-text').textContent).then(() => {
+      btn.textContent = 'Copied!'; setTimeout(() => { btn.textContent = 'Copy prompt'; }, 1500);
+    });
+  }
+</script>
+</body>
+</html>
