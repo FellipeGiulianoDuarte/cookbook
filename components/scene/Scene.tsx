@@ -243,6 +243,7 @@ function Turntable({
       position={position.toArray()}
       scale={scale}
       rotation={[0, phase, 0]}
+      visible={visible}
     >
       {children}
     </group>
