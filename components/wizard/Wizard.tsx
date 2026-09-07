@@ -240,7 +240,7 @@ export function Wizard({
                 !WIZARD_STEPS.slice(0, i).every((p) => canLeave(p, selection))
               }
               onClick={() => actor.send({ type: "JUMP", step: s })}
-              className={`h-1.5 flex-1 rounded-full transition-colors duration-300 disabled:cursor-default ${
+              className={`h-1.5 flex-1 rounded-full transition-[background-color] duration-300 ease-[var(--ease-out)] disabled:cursor-default ${
                 i < index
                   ? "bg-accent/70"
                   : i === index
@@ -261,18 +261,22 @@ export function Wizard({
         <AnimatePresence mode="wait" initial={false}>
           <motion.section
             key={step}
-            initial={reduce ? false : { opacity: 0, x: 24 * dir.current }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={
+              reduce
+                ? false
+                : { opacity: 0, transform: `translateX(${20 * dir.current}px)` }
+            }
+            animate={{ opacity: 1, transform: "translateX(0px)" }}
             exit={
               reduce
                 ? undefined
                 : {
                     opacity: 0,
-                    x: -24 * dir.current,
-                    transition: { duration: 0.15 },
+                    transform: `translateX(${-16 * dir.current}px)`,
+                    transition: { duration: 0.12 },
                   }
             }
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
             aria-labelledby="step-title"
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">

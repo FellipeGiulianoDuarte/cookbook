@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { StepTitle } from "@/components/ui/choice";
+import { Crossfade } from "@/components/ui/crossfade";
 import type { DerivedStepProps } from "./types";
 
 export function AmountStep({ selection, derived, send }: DerivedStepProps) {
@@ -101,7 +102,7 @@ function Stat({
       <p
         className={`tabular mt-1 font-display text-3xl leading-none tracking-tight ${accent ? "text-accent" : "text-fg"}`}
       >
-        {value}
+        <Crossfade id={String(value)}>{value}</Crossfade>
         {unit ? (
           <span className="ml-1 text-base text-fg-faint">{unit}</span>
         ) : null}

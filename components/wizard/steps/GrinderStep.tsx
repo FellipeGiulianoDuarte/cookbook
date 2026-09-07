@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { type CSSProperties, useMemo, useState } from "react";
 import { Eyebrow, StepTitle } from "@/components/ui/choice";
 import { cn } from "@/lib/cn";
 import type { Grinder } from "@/lib/schema";
@@ -120,16 +120,20 @@ function GrinderList({
 }) {
   return (
     <ul className="mt-2 divide-y divide-line rounded-2xl border border-line bg-surface">
-      {grinders.map((g) => {
+      {grinders.map((g, i) => {
         const on = g.id === selectedId;
         return (
-          <li key={g.id}>
+          <li
+            key={g.id}
+            className="stagger-in"
+            style={{ "--i": Math.min(i, 8) } as CSSProperties}
+          >
             <button
               type="button"
               aria-pressed={on}
               onClick={() => onSelect(g)}
               className={cn(
-                "flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors hover:bg-surface-2",
+                "flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-[background-color] duration-150 hover:bg-surface-2 active:bg-surface-2",
                 on && "bg-surface-2",
               )}
             >

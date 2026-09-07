@@ -30,7 +30,7 @@ export function LanguageToggle() {
               router.refresh();
             })
           }
-          className={`h-8 rounded-full px-3 text-xs font-semibold transition-colors ${
+          className={`h-8 rounded-full px-3 text-xs font-semibold transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] active:scale-95 ${
             l === locale
               ? "bg-accent text-accent-ink"
               : "text-fg-muted hover:text-fg"

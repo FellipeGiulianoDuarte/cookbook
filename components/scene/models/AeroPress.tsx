@@ -79,7 +79,7 @@ export function AeroPress({
   bedRef.current = bedH;
 
   return (
-    <group position={[0, inverted ? 0 : 0.55, 0]}>
+    <group position={[0, inverted ? PL_H - 0.09 : 0.55, 0]}>
       {/* cup under an upright press */}
       {cup ? (
         <mesh position={[0, -0.4, 0]} castShadow>

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 /*
@@ -17,6 +17,7 @@ export function ChoiceCard({
   meta,
   aside,
   className,
+  style,
 }: {
   selected: boolean;
   onSelect: () => void;
@@ -25,14 +26,16 @@ export function ChoiceCard({
   meta?: ReactNode;
   aside?: ReactNode;
   className?: string;
+  style?: CSSProperties;
 }) {
   return (
     <button
       type="button"
       aria-pressed={selected}
       onClick={onSelect}
+      style={style}
       className={cn(
-        "group relative flex w-full items-start gap-4 rounded-2xl border p-4 text-left transition-[background-color,border-color,transform] duration-150 ease-[var(--ease)] active:scale-[0.99]",
+        "group relative flex w-full items-start gap-4 rounded-2xl border p-4 text-left transition-[background-color,border-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.98]",
         selected
           ? "border-accent/60 bg-surface-2"
           : "border-line bg-surface hover:border-line-strong hover:bg-surface-2/70",
@@ -81,7 +84,7 @@ export function Chip({
       aria-pressed={selected}
       onClick={onSelect}
       className={cn(
-        "inline-flex h-11 items-center rounded-full border px-4 text-sm font-medium transition-[background-color,color,border-color] duration-150 ease-[var(--ease)] active:scale-[0.98]",
+        "inline-flex h-11 items-center rounded-full border px-4 text-sm font-medium transition-[background-color,color,border-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96]",
         selected
           ? "border-accent bg-accent text-accent-ink"
           : "border-line-strong bg-transparent text-fg hover:bg-surface-2",

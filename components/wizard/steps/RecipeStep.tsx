@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import type { CSSProperties } from "react";
 import { ChoiceCard, StepTitle } from "@/components/ui/choice";
 import { formatClock } from "@/lib/engine/schedule";
 import { useLocalized } from "@/lib/use-localized";
@@ -14,9 +15,11 @@ export function RecipeStep({ catalog, selection, send }: CatalogStepProps) {
     <div>
       <StepTitle>{t("title")}</StepTitle>
       <div className="mt-6 grid gap-3">
-        {recipes.map((r) => (
+        {recipes.map((r, i) => (
           <ChoiceCard
             key={r.id}
+            className="stagger-in"
+            style={{ "--i": i } as CSSProperties}
             selected={selection.recipeId === r.id}
             onSelect={() => send({ type: "SELECT_RECIPE", recipeId: r.id })}
             title={

@@ -42,7 +42,8 @@
   --radius: 16px;
   --radius-lg: 24px;
   --shadow-soft: 0 24px 60px -30px oklch(0 0 0 / 0.7);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
@@ -72,6 +73,7 @@
   --radius-lg: var(--radius-lg);
 
   --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
   --ease-spring: var(--ease);
 }
 
@@ -153,4 +155,25 @@ body {
       transparent 60%
     ),
     linear-gradient(180deg, oklch(0.94 0.018 82) 0%, oklch(0.86 0.028 76) 100%);
+}
+
+/* Lists enter with a short cascade. Decorative: never blocks interaction. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.stagger-in {
+  animation: rise-in 260ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .stagger-in {
+    animation: none;
+  }
 }

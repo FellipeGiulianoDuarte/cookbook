@@ -1,11 +1,14 @@
 "use client";
 
 import { useActorRef, useSelector } from "@xstate/react";
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SceneClient } from "@/components/scene/SceneClient";
 import type { SceneState } from "@/components/scene/types";
 import { Button } from "@/components/ui/button";
+import { Crossfade } from "@/components/ui/crossfade";
+import { SoundOffIcon, SoundOnIcon } from "@/components/ui/icons";
 import { beep, unlockAudio } from "@/lib/audio";
 import { brewMachine, elapsedMs } from "@/lib/brew-machine";
 import {
@@ -149,12 +152,17 @@ function BrewTimer({
   };
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-32 pt-4 sm:px-6">
+    <motion.div
+      className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-32 pt-4 sm:px-6"
+      initial={{ opacity: 0, transform: "translateY(10px)" }}
+      animate={{ opacity: 1, transform: "translateY(0px)" }}
+      transition={{ duration: 0.24, ease: [0.23, 1, 0.32, 1] }}
+    >
       <header className="flex items-center justify-between text-xs text-fg-faint">
         <button
           type="button"
           onClick={onExit}
-          className="h-10 rounded-full px-3 text-fg-muted hover:bg-surface-2"
+          className="h-10 rounded-full px-3 text-fg-muted transition-[background-color] duration-150 hover:bg-surface-2"
         >
           ← {recipe.name}
         </button>
@@ -162,9 +170,13 @@ function BrewTimer({
           type="button"
           onClick={toggleMute}
           aria-pressed={muted}
-          className="h-10 rounded-full px-3 text-fg-muted hover:bg-surface-2"
+          aria-label={muted ? t("brew.soundOff") : t("brew.soundOn")}
+          title={muted ? t("brew.soundOff") : t("brew.soundOn")}
+          className="flex h-10 w-10 items-center justify-center rounded-full text-fg-muted transition-[background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-surface-2 active:scale-90"
         >
-          {muted ? t("brew.soundOff") : t("brew.soundOn")}
+          <Crossfade id={muted ? "off" : "on"}>
+            {muted ? <SoundOffIcon /> : <SoundOnIcon />}
+          </Crossfade>
         </button>
       </header>
 
@@ -198,23 +210,25 @@ function BrewTimer({
         </section>
       ) : step ? (
         <section className="mt-8 rounded-2xl bg-surface p-5" aria-live="polite">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
-            {formatClock(step.at)}
-            {step.until ? ` → ${formatClock(step.until)}` : ""}
-          </p>
-          <p className="mt-1 font-display text-2xl leading-tight text-fg sm:text-3xl">
-            {fillStepText(L(step.text), step, schedule.dose)}
-          </p>
-          {step.note ? (
-            <p className="mt-2 text-sm text-fg-muted">{L(step.note)}</p>
-          ) : null}
-          {nextStep ? (
-            <p className="mt-4 border-t border-line pt-3 text-sm text-fg-muted">
-              <span className="text-fg-faint">{t("brew.next")} · </span>
-              <span className="tabular">{formatClock(nextStep.at)}</span>{" "}
-              {fillStepText(L(nextStep.text), nextStep, schedule.dose)}
+          <Crossfade id={ctx.index} className="block">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
+              {formatClock(step.at)}
+              {step.until ? ` → ${formatClock(step.until)}` : ""}
             </p>
-          ) : null}
+            <p className="mt-1 font-display text-2xl leading-tight text-fg sm:text-3xl">
+              {fillStepText(L(step.text), step, schedule.dose)}
+            </p>
+            {step.note ? (
+              <p className="mt-2 text-sm text-fg-muted">{L(step.note)}</p>
+            ) : null}
+            {nextStep ? (
+              <p className="mt-4 border-t border-line pt-3 text-sm text-fg-muted">
+                <span className="text-fg-faint">{t("brew.next")} · </span>
+                <span className="tabular">{formatClock(nextStep.at)}</span>{" "}
+                {fillStepText(L(nextStep.text), nextStep, schedule.dose)}
+              </p>
+            ) : null}
+          </Crossfade>
         </section>
       ) : null}
 
@@ -257,7 +271,7 @@ function BrewTimer({
           )}
         </div>
       </nav>
-    </div>
+    </motion.div>
   );
 }
 
