@@ -12,8 +12,8 @@ import { Glass } from "./Glass";
   Dimensions in scene units (1 ≈ 8 cm).
 */
 
-const TOP_Y = 1.35;
-const SPOUT_Y = 0.42;
+const TOP_Y = 1.13;
+const SPOUT_Y = 0.2;
 const TOP_R = 1.0;
 const SPOUT_R = 0.17;
 const RIBS = 20;
@@ -41,11 +41,11 @@ export function V60({
       new THREE.Vector2(TOP_R + 0.06, TOP_Y + 0.02),
       new THREE.Vector2(SPOUT_R + 0.05, SPOUT_Y),
     ];
-    return new THREE.LatheGeometry(pts, 64);
+    return new THREE.LatheGeometry(pts, 96);
   }, []);
 
   const ribs = useMemo(() => {
-    const g = new THREE.BoxGeometry(0.012, TOP_Y - SPOUT_Y - 0.25, 0.02);
+    const g = new THREE.BoxGeometry(0.03, TOP_Y - SPOUT_Y - 0.18, 0.045);
     return g;
   }, []);
   const ribsRef = useRef<THREE.InstancedMesh>(null);
@@ -71,7 +71,7 @@ export function V60({
     m.userData.placed = true;
   });
 
-  const bedH = 0.12 + Math.min(1, Math.max(0, coffee)) * 0.3;
+  const bedH = coffee <= 0 ? 0.0001 : 0.12 + Math.min(1, coffee) * 0.3;
 
   // Slurry: a truncated cone whose top follows the fill level (quantised to keep geometry stable).
   const level = Math.round(Math.max(0, Math.min(1, fill)) * 40) / 40;
@@ -85,7 +85,7 @@ export function V60({
       new THREE.Vector2(radiusAt(topY) - 0.03, topY),
       new THREE.Vector2(0, topY),
     ];
-    return new THREE.LatheGeometry(pts, 48);
+    return new THREE.LatheGeometry(pts, 72);
   }, [level, bedH]);
 
   // Server: glass cylinder; its liquid rises with fill.
@@ -107,35 +107,48 @@ export function V60({
   return (
     <group>
       {/* server */}
-      <mesh position={[0, -serverH / 2 - 0.02, 0]}>
-        <cylinderGeometry args={[0.62, 0.55, serverH, 48, 1, true]} />
+      <mesh position={[0, 0, 0]} castShadow>
+        <cylinderGeometry args={[0.62, 0.55, serverH, 72, 1, true]} />
         <Glass quality={quality} />
       </mesh>
-      <mesh position={[0, -serverH - 0.02, 0]}>
-        <cylinderGeometry args={[0.55, 0.55, 0.04, 48]} />
+      <mesh position={[0, -serverH / 2, 0]}>
+        <cylinderGeometry args={[0.55, 0.55, 0.04, 72]} />
         <Glass quality={quality} />
       </mesh>
-      <mesh position={[0, -serverH + serverFill / 2 - 0.01, 0]}>
-        <cylinderGeometry args={[0.52 + level * 0.06, 0.5, serverFill, 48]} />
+      <mesh position={[0, -serverH / 2 + serverFill / 2 + 0.01, 0]}>
+        <cylinderGeometry args={[0.52 + level * 0.06, 0.5, serverFill, 72]} />
         <meshStandardMaterial color={COLORS.coffee} roughness={0.25} />
       </mesh>
 
       {/* dripper base ring */}
-      <mesh position={[0, 0.1, 0]}>
-        <cylinderGeometry args={[0.72, 0.78, 0.2, 48, 1, true]} />
+      <mesh position={[0, 0.66, 0]} castShadow>
+        <cylinderGeometry args={[0.7, 0.76, 0.22, 72, 1, true]} />
         <meshStandardMaterial
           color={COLORS.plasticDark}
           roughness={0.6}
           side={THREE.DoubleSide}
         />
       </mesh>
-      <mesh position={[0, 0.2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.74, 0.03, 12, 48]} />
+      <mesh position={[0, 0.77, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[0.72, 0.03, 12, 72]} />
         <meshStandardMaterial color={COLORS.plasticDark} roughness={0.6} />
       </mesh>
 
       {/* cone */}
-      <mesh geometry={cone}>
+      <mesh
+        position={[0, TOP_Y + 0.01, 0]}
+        rotation={[Math.PI / 2, 0, 0]}
+        castShadow
+      >
+        <torusGeometry args={[TOP_R + 0.03, 0.035, 16, 96]} />
+        <meshPhysicalMaterial
+          color="#f3ede4"
+          roughness={0.32}
+          clearcoat={0.7}
+          clearcoatRoughness={0.25}
+        />
+      </mesh>
+      <mesh geometry={cone} castShadow>
         <meshPhysicalMaterial
           color="#f3ede4"
           roughness={0.32}
@@ -149,7 +162,10 @@ export function V60({
       </instancedMesh>
 
       {/* coffee bed */}
-      <mesh position={[0, SPOUT_Y + 0.02 + bedH / 2 - 0.1, 0]}>
+      <mesh
+        position={[0, SPOUT_Y + 0.02 + bedH / 2 - 0.1, 0]}
+        visible={coffee > 0}
+      >
         <cylinderGeometry
           args={[
             radiusAt(SPOUT_Y + 0.02 + bedH) - 0.03,

@@ -25,19 +25,20 @@ import type { SceneState } from "./types";
 */
 
 const SPOTS = {
-  v60: new THREE.Vector3(-1.6, 0, 0),
+  v60: new THREE.Vector3(-1.6, -0.75, 0),
   aeropress: new THREE.Vector3(1.75, -0.85, 0),
   grinder: new THREE.Vector3(0, 0, -6),
   beans: new THREE.Vector3(6, 0, -6),
 } as const;
 
 export default function Scene({ state }: { state: SceneState }) {
-  const [dpr, setDpr] = useState(1.5);
+  const [dpr, setDpr] = useState(2);
   const [quality, setQuality] = useState<"high" | "low">("high");
 
   return (
     <Canvas
       dpr={dpr}
+      shadows="soft"
       camera={{ position: [0, 1.2, 8], fov: 30, near: 0.1, far: 40 }}
       gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
       style={{ background: "transparent" }}
@@ -48,7 +49,7 @@ export default function Scene({ state }: { state: SceneState }) {
             setDpr(1);
             setQuality("low");
           }}
-          onIncline={() => setDpr(1.5)}
+          onIncline={() => setDpr(2)}
           flipflops={2}
         />
         <ambientLight intensity={0.55} />
@@ -166,7 +167,11 @@ export default function Scene({ state }: { state: SceneState }) {
         </group>
 
         <group visible={state.focus === "brewing"}>
-          <Kettle pouring={state.pouring} />
+          <Kettle
+            pouring={state.pouring}
+            target={state.method === "aeropress" ? SPOTS.aeropress : SPOTS.v60}
+            spoutHeight={state.method === "aeropress" ? 2.05 : 1.75}
+          />
         </group>
 
         {/* floor: a dark disc under everything, lit by two pools */}
@@ -263,10 +268,20 @@ const VIEWS: Record<
     radius: 2.45,
     dir: new THREE.Vector3(0.12, 0.22, 1).normalize(),
   },
+  brewersV60: {
+    center: new THREE.Vector3(-0.7, 0.0, 0),
+    radius: 2.35,
+    dir: new THREE.Vector3(0.05, 0.22, 1).normalize(),
+  },
+  brewersAeropress: {
+    center: new THREE.Vector3(0.8, 0.0, 0),
+    radius: 2.35,
+    dir: new THREE.Vector3(0.2, 0.22, 1).normalize(),
+  },
   v60: {
-    center: new THREE.Vector3(SPOTS.v60.x, 0.12, 0),
-    radius: 1.55,
-    dir: new THREE.Vector3(0.35, 0.25, 1).normalize(),
+    center: new THREE.Vector3(SPOTS.v60.x, -0.05, 0),
+    radius: 1.5,
+    dir: new THREE.Vector3(0.35, 0.3, 1).normalize(),
   },
   aeropress: {
     center: new THREE.Vector3(SPOTS.aeropress.x, 0.35, 0),
@@ -292,7 +307,7 @@ const VIEWS: Record<
     dir: new THREE.Vector3(0.2, 0.75, 1).normalize(),
   },
   v60Brewing: {
-    center: new THREE.Vector3(SPOTS.v60.x + 0.2, 0.55, 0),
+    center: new THREE.Vector3(SPOTS.v60.x + 0.2, 0.35, 0),
     radius: 1.9,
     dir: new THREE.Vector3(0.3, 0.2, 1).normalize(),
   },
@@ -304,7 +319,12 @@ const VIEWS: Record<
 };
 
 function viewKey(state: SceneState): keyof typeof VIEWS {
-  if (state.focus === "brewers") return "brewers";
+  if (state.focus === "brewers")
+    return state.method === "v60"
+      ? "brewersV60"
+      : state.method === "aeropress"
+        ? "brewersAeropress"
+        : "brewers";
   if (state.focus === "grinder") return "grinder";
   if (state.focus === "bean") return "bean";
   const ap = state.method === "aeropress";

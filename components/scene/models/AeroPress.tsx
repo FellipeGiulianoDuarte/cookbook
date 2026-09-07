@@ -75,22 +75,22 @@ export function AeroPress({
   });
 
   const cup = !inverted;
-  const bedH = 0.06 + Math.min(1, Math.max(0, coffee)) * 0.16;
+  const bedH = coffee <= 0 ? 0.0001 : 0.06 + Math.min(1, coffee) * 0.16;
   bedRef.current = bedH;
 
   return (
     <group position={[0, inverted ? 0 : 0.55, 0]}>
       {/* cup under an upright press */}
       {cup ? (
-        <mesh position={[0, -0.4, 0]}>
-          <cylinderGeometry args={[0.5, 0.42, 0.8, 48]} />
+        <mesh position={[0, -0.4, 0]} castShadow>
+          <cylinderGeometry args={[0.5, 0.42, 0.8, 72]} />
           <meshStandardMaterial color={COLORS.ceramic} roughness={0.35} />
         </mesh>
       ) : null}
 
       {/* filter cap (bottom when upright, top when inverted) */}
       <mesh position={[0, inverted ? CH_H + 0.06 : 0.0, 0]}>
-        <cylinderGeometry args={[CH_R + 0.05, CH_R + 0.05, 0.12, 48]} />
+        <cylinderGeometry args={[CH_R + 0.05, CH_R + 0.05, 0.12, 72]} />
         <meshStandardMaterial color={COLORS.plasticDark} roughness={0.55} />
       </mesh>
       <mesh position={[0, inverted ? CH_H + 0.125 : -0.065, 0]}>
@@ -100,7 +100,7 @@ export function AeroPress({
 
       {/* chamber */}
       <mesh position={[0, CH_H / 2 + 0.06, 0]}>
-        <cylinderGeometry args={[CH_R, CH_R, CH_H, 48, 1, true]} />
+        <cylinderGeometry args={[CH_R, CH_R, CH_H, 72, 1, true]} />
         <Smoky />
       </mesh>
       {/* chamber marks */}
@@ -115,7 +115,10 @@ export function AeroPress({
       ))}
 
       {/* coffee bed */}
-      <mesh position={[0, (inverted ? 0.12 : 0.08) + bedH / 2, 0]}>
+      <mesh
+        position={[0, (inverted ? 0.12 : 0.08) + bedH / 2, 0]}
+        visible={coffee > 0}
+      >
         <cylinderGeometry args={[CH_R - 0.03, CH_R - 0.03, bedH, 48]} />
         <meshStandardMaterial color="#2e1b12" roughness={0.95} />
       </mesh>
@@ -132,17 +135,17 @@ export function AeroPress({
         position={[0, inverted ? 0.02 : CH_H - SEATED, 0]}
       >
         <mesh position={[0, inverted ? -0.06 : 0.02, 0]}>
-          <cylinderGeometry args={[PL_R, PL_R, 0.16, 48]} />
+          <cylinderGeometry args={[PL_R, PL_R, 0.16, 72]} />
           <meshStandardMaterial color={COLORS.rubber} roughness={0.7} />
         </mesh>
         <mesh position={[0, inverted ? -PL_H / 2 - 0.1 : PL_H / 2, 0]}>
           <cylinderGeometry
-            args={[PL_R - 0.05, PL_R - 0.05, PL_H, 48, 1, true]}
+            args={[PL_R - 0.05, PL_R - 0.05, PL_H, 72, 1, true]}
           />
           <Smoky />
         </mesh>
         <mesh position={[0, inverted ? -PL_H - 0.14 : PL_H + 0.04, 0]}>
-          <cylinderGeometry args={[PL_R + 0.02, PL_R + 0.02, 0.08, 48]} />
+          <cylinderGeometry args={[PL_R + 0.02, PL_R + 0.02, 0.08, 72]} />
           <meshStandardMaterial color={COLORS.plasticDark} roughness={0.55} />
         </mesh>
       </group>
