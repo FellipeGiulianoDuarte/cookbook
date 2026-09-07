@@ -171,7 +171,7 @@ export default function Scene({ state }: { state: SceneState }) {
           <Kettle
             pouring={state.pouring}
             target={state.method === "aeropress" ? SPOTS.aeropress : SPOTS.v60}
-            spoutHeight={state.method === "aeropress" ? 2.1 : 2.05}
+            spoutHeight={state.method === "aeropress" ? 1.45 : 1.15}
           />
         </group>
 

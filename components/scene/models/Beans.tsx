@@ -33,9 +33,9 @@ export function Beans({ roast, spin }: { roast: number; spin: boolean }) {
   });
   return (
     <group ref={group} position={[0, -1.1, 0]}>
-      {BEANS.map((b, i) => (
+      {BEANS.map((b) => (
         <group
-          key={i}
+          key={b.p.join(",")}
           position={b.p as unknown as [number, number, number]}
           rotation={b.r as unknown as [number, number, number]}
         >

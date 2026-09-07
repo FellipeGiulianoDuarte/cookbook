@@ -109,7 +109,7 @@ export function V60({
   );
 
   const ridges = useMemo(() => {
-    const geos: THREE.TubeGeometry[] = [];
+    const geos: { id: string; geo: THREE.TubeGeometry }[] = [];
     for (let i = 0; i < RIDGES; i++) {
       const a0 = (i / RIDGES) * Math.PI * 2;
       const pts: THREE.Vector3[] = [];
@@ -121,15 +121,16 @@ export function V60({
         const a = a0 + t * 0.9;
         pts.push(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r));
       }
-      geos.push(
-        new THREE.TubeGeometry(
+      geos.push({
+        id: `ridge-${Math.round(a0 * 1000)}`,
+        geo: new THREE.TubeGeometry(
           new THREE.CatmullRomCurve3(pts),
           24,
           0.018,
           8,
           false,
         ),
-      );
+      });
     }
     return geos;
   }, []);
@@ -214,8 +215,8 @@ export function V60({
           side={THREE.DoubleSide}
         />
       </mesh>
-      <mesh position={[0.62, 0.62, 0]} rotation={[0, 0, Math.PI / 2 - 0.15]}>
-        <torusGeometry args={[0.26, 0.04, 12, 40, Math.PI]} />
+      <mesh position={[0.72, 0.52, 0]} rotation={[0, 0, -Math.PI / 2 - 0.3]}>
+        <torusGeometry args={[0.3, 0.04, 12, 40, Math.PI]} />
         {glass}
       </mesh>
       {serverLiquid ? (
@@ -230,8 +231,8 @@ export function V60({
       <mesh geometry={cone} castShadow>
         {ceramic}
       </mesh>
-      {ridges.map((g, i) => (
-        <mesh key={`ridge-${i * 30}`} geometry={g}>
+      {ridges.map(({ id, geo }) => (
+        <mesh key={id} geometry={geo}>
           <meshPhysicalMaterial
             color="#e8e1d6"
             roughness={0.35}
@@ -240,8 +241,8 @@ export function V60({
         </mesh>
       ))}
       <mesh
-        position={[CONE_TOP_R + 0.02, CONE_TOP_Y - 0.28, 0]}
-        rotation={[0, 0, Math.PI / 2 + 0.35]}
+        position={[coneRadius(CONE_TOP_Y - 0.26) + 0.03, CONE_TOP_Y - 0.26, 0]}
+        rotation={[0, 0, -Math.PI / 2 + 0.25]}
       >
         <torusGeometry args={[0.2, 0.045, 12, 40, Math.PI]} />
         {ceramic}
