@@ -1,0 +1,131 @@
+{
+  "id": "v60-rao-2022",
+  "method": "v60",
+  "name": "V60 with the Rao Spin",
+  "author": "Scott Rao",
+  "year": 2022,
+  "style": "two-pour",
+  "summary": {
+    "en": "Bloom with an aggressive spin, then two pours from low height with a gentle spin after each. Hot water, medium-fine grind, a long 4:00–4:30 brew aiming at 22–24.5 % extraction.",
+    "pt-BR": "Bloom com um giro forte, depois dois despejos de baixa altura com um giro leve depois de cada um. Água quente, moagem média-fina, extração longa de 4:00–4:30 mirando 22–24,5 %."
+  },
+  "dose": { "default": 20, "min": 20, "max": 27 },
+  "ratio": 16.5,
+  "grind": {
+    "band": "v60",
+    "pos": 0.35,
+    "texture": "medium-fine",
+    "note": "Rao: medium-fine. Between coffees of similar roast level, change only the grind."
+  },
+  "temperature": {
+    "default": 97,
+    "note": "Rao keeps temperature, dose and ratio fixed and changes only the grind between coffees (blog, 2024-02-26). No per-roast values are published."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "text": {
+        "en": "Rinse the filter, discard the water, add {dose} g of coffee and make a bird's-nest indent in the centre",
+        "pt-BR": "Escalde o filtro, descarte a água, adicione {dose} g de café e faça uma cova em forma de ninho no centro"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": { "times": 3 },
+      "text": {
+        "en": "Bloom: pour {water} g, then spin the brewer aggressively so every ground is wet",
+        "pt-BR": "Bloom: despeje {water} g e gire o suporte com força para molhar todo o café"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 10,
+      "action": "wait",
+      "text": { "en": "Rest until 0:40", "pt-BR": "Aguarde até 0:40" }
+    },
+    {
+      "at": 40,
+      "until": 60,
+      "action": "pour",
+      "water": { "times": 10 },
+      "text": {
+        "en": "Pour to {water} g from low height with a near-vertical stream, across the whole slurry",
+        "pt-BR": "Despeje até {water} g de baixa altura com o jato quase vertical, cobrindo toda a superfície"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 60,
+      "action": "swirl",
+      "text": {
+        "en": "One very gentle spin, under a second, to close the channels along the ribs",
+        "pt-BR": "Um giro bem leve, de menos de um segundo, para fechar os canais junto às ranhuras"
+      },
+      "cue": "swirl"
+    },
+    {
+      "at": 105,
+      "until": 125,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "When the slurry is about 70 % drained, pour to {water} g the same way",
+        "pt-BR": "Quando cerca de 70 % da água tiver escoado, despeje até {water} g do mesmo jeito"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 125,
+      "action": "swirl",
+      "text": {
+        "en": "Another gentle spin to flatten the bed",
+        "pt-BR": "Outro giro leve para nivelar a cama"
+      },
+      "cue": "swirl"
+    },
+    {
+      "at": 130,
+      "action": "drawdown",
+      "text": {
+        "en": "Let it drain. Total time 4:00–4:30",
+        "pt-BR": "Deixe escoar. Tempo total de 4:00 a 4:30"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 255,
+      "action": "serve",
+      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+    }
+  ],
+  "totalSeconds": 255,
+  "scaling": "linear",
+  "options": {
+    "filter": "Standard Hario paper; plastic V60 02",
+    "model": "Plastic Hario V60 02"
+  },
+  "source": {
+    "url": "https://www.hario.co.uk/blogs/hario-ambassadors/hario-v60-recipe-interview-with-hario-ambassador-scott-rao",
+    "title": "Hario UK: V60 recipe interview with Hario ambassador Scott Rao",
+    "year": 2022,
+    "kind": "primary",
+    "notes": "This is Rao's current recipe; his 2017 single-pour video is retitled '(old) V60 Method' and superseded. Target extraction 22–24.5 %. Rao advises not going below 20–22 g on a V60 and down-dosing only for high-fines coffees (Ethiopians, decafs). The 4:00–4:30 total is entered here as 4:15."
+  },
+  "alsoSee": [
+    {
+      "url": "https://www.scottrao.com/blog/2017/9/14/v60-video",
+      "title": "Scott Rao blog: V60 Video (2017, superseded)",
+      "year": 2017,
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.scottrao.com/blog/2024/2/26/how-to-approach-brewing-different-coffees",
+      "title": "Scott Rao blog: How to approach brewing different coffees (fixed temperature, change only grind)",
+      "year": 2024,
+      "kind": "primary"
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "id": "aeropress-wac-2021-merikanto",
+  "method": "aeropress",
+  "name": "World AeroPress Championship 2021 winner",
+  "author": "Tuomas Merikanto",
+  "year": 2021,
+  "style": "immersion",
+  "summary": {
+    "en": "Inverted, two papers, no bypass. 200 g at 80 °C in two pours, two gentle stirs, cap at 1:00, flip at 1:40, press, then swirl to cool.",
+    "pt-BR": "Invertido, dois papéis, sem diluição. 200 g a 80 °C em dois despejos, duas mexidas leves, tampa em 1:00, vire em 1:40, pressione e gire para esfriar."
+  },
+  "dose": { "default": 18, "min": 18, "max": 18 },
+  "ratio": 11.11,
+  "grind": {
+    "band": "aeropress",
+    "pos": 0.6,
+    "texture": "medium",
+    "note": "Macap Labo 70D, setting 7.0. Position is an estimate; the WAC page gives no particle size."
+  },
+  "temperature": {
+    "default": 80,
+    "note": "Third Wave Water Formula 2 at 80 °C."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "add",
+      "text": {
+        "en": "Plunger on the counter, seal up. Push the chamber onto it so the seal sits at least 20 mm inside. Rinse 2 paper filters and leave them in the cap. Add {dose} g of coffee",
+        "pt-BR": "Êmbolo na bancada, vedação para cima. Encaixe a câmara de modo que a vedação fique pelo menos 20 mm para dentro. Escalde 2 filtros de papel e deixe-os na tampa. Adicione {dose} g de café"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "pour",
+      "water": { "share": 0.25 },
+      "text": {
+        "en": "Pour {water} g of water at 80 °C. Start the timer as you begin",
+        "pt-BR": "Despeje {water} g de água a 80 °C. Inicie o cronômetro ao começar"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 10,
+      "until": 15,
+      "action": "stir",
+      "text": { "en": "Stir gently 3 times", "pt-BR": "Mexa de leve 3 vezes" },
+      "cue": "stir"
+    },
+    {
+      "at": 15,
+      "until": 30,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": { "en": "Pour to {water} g", "pt-BR": "Despeje até {water} g" },
+      "cue": "pour2"
+    },
+    {
+      "at": 30,
+      "action": "wait",
+      "text": { "en": "Wait until 0:50", "pt-BR": "Aguarde até 0:50" }
+    },
+    {
+      "at": 50,
+      "action": "stir",
+      "text": { "en": "Stir gently 3 times", "pt-BR": "Mexa de leve 3 vezes" },
+      "cue": "stir"
+    },
+    {
+      "at": 60,
+      "action": "cap",
+      "text": {
+        "en": "Screw the cap on and press the air out",
+        "pt-BR": "Rosqueie a tampa e expulse o ar"
+      },
+      "cue": "cap"
+    },
+    {
+      "at": 65,
+      "action": "wait",
+      "text": {
+        "en": "Wait. At 1:35 set the pitcher upside down on the cap",
+        "pt-BR": "Aguarde. Em 1:35 coloque a jarra de boca para baixo sobre a tampa"
+      }
+    },
+    {
+      "at": 100,
+      "action": "flip",
+      "text": {
+        "en": "Grip chamber and plunger together and flip onto the pitcher",
+        "pt-BR": "Segure câmara e êmbolo juntos e vire sobre a jarra"
+      },
+      "note": {
+        "en": "The seal must sit at least 20 mm inside the chamber. Flip in one confident motion; a hesitant flip spills hot water. Never flip over thin glass.",
+        "pt-BR": "A vedação deve estar pelo menos 20 mm para dentro da câmara. Vire em um único movimento firme; um movimento hesitante derrama água quente. Nunca vire sobre vidro fino."
+      },
+      "cue": "flip"
+    },
+    {
+      "at": 100,
+      "until": 120,
+      "action": "press",
+      "text": {
+        "en": "Press until 2:00",
+        "pt-BR": "Pressione até 2:00"
+      },
+      "cue": "press"
+    },
+    {
+      "at": 120,
+      "until": 150,
+      "action": "swirl",
+      "text": {
+        "en": "Swirl the pitcher to cool the coffee until 2:30",
+        "pt-BR": "Gire a jarra para esfriar o café até 2:30"
+      },
+      "cue": "swirl"
+    },
+    {
+      "at": 150,
+      "action": "serve",
+      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+    }
+  ],
+  "totalSeconds": 150,
+  "scaling": "fixed",
+  "options": {
+    "orientation": "inverted",
+    "filter": "2 paper filters, rinsed"
+  },
+  "source": {
+    "url": "https://worldaeropresschampionship.com/pages/recipes",
+    "title": "World AeroPress Championship: winning recipes (2021, Tuomas Merikanto, Finland)",
+    "year": 2021,
+    "kind": "primary",
+    "notes": "Competition dose is fixed at 18 g. 18 g / 200 g = 1:11.1, no bypass. Water: Third Wave Water Formula 2."
+  },
+  "alsoSee": [
+    {
+      "url": "https://aeropress.com/blogs/w-a-c-aeropress-recipes",
+      "title": "AeroPress mirror of the W.A.C. recipes",
+      "kind": "primary"
+    },
+    {
+      "url": "https://perfectdailygrind.com/2020/10/the-inverted-aeropress-method-a-guide/",
+      "title": "Perfect Daily Grind: the inverted AeroPress method (seal depth and flip safety)",
+      "year": 2020,
+      "kind": "community"
+    }
+  ]
+}

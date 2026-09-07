@@ -1,0 +1,101 @@
+{
+  "id": "timemore-c3-esp-pro",
+  "brand": "Timemore",
+  "model": "Chestnut C3 ESP Pro",
+  "aliases": ["Timemore C3 ESP", "Timemore Chestnut C3 ESP"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "rot.num.tick",
+  "clicksPerRotation": 30,
+  "clicksPerNumber": 3,
+  "travelMicronsPerClick": 23,
+  "burr": "38 mm S2C 660 stainless conical (same burr as C3 / C3S)",
+  "range": [12, 90],
+  "bands": {
+    "turkish": {
+      "community": [4, 19],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3-esp-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3 ESP Pro grind settings (0.1.1–0.6.1)",
+        "kind": "community",
+        "notes": "Timemore's manual says do not grind at 0–0.4 circles (12 clicks on this 30-click ring)."
+      }
+    },
+    "espresso": {
+      "official": [18, 30],
+      "community": [17, 33],
+      "source": {
+        "url": "https://www.9barbenchmark.com/grinders/c3-esp-pro-review",
+        "title": "9barbenchmark: C3 ESP Pro review, quoting Timemore's guide (espresso 0.6–1.0 rotations)",
+        "kind": "primary",
+        "notes": "Timemore's guide is quoted as 0.6–1.0 rot (18–30 clicks) or 0.8–1.1 rot (24–33) by reviewers; iCup's manual copy says 0.7–0.9 rot (21–27). Honest Coffee Guide 0.5.2–1.1.0 = 17–33."
+      }
+    },
+    "moka": {
+      "community": [33, 58],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3-esp-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3 ESP Pro grind settings (1.1.0–1.9.1)",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [29, 85],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3-esp-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3 ESP Pro grind settings (0.9.2–2.8.1)",
+        "kind": "community",
+        "notes": "Full Honest Coffee Guide row (covers concentrate to long steep)."
+      }
+    },
+    "v60": {
+      "official": [42, 60],
+      "community": [36, 62],
+      "source": {
+        "url": "https://www.9barbenchmark.com/grinders/c3-esp-pro-review",
+        "title": "9barbenchmark: C3 ESP Pro review, quoting Timemore's guide (pour-over 1.4–2.0 rotations)",
+        "kind": "primary",
+        "notes": "iCup's manual copy says filter 1.1–1.5 rot (33–45 clicks). Honest Coffee Guide V60 1.2.0–2.0.2 = 36–62."
+      }
+    },
+    "pourover": {
+      "official": [42, 60],
+      "community": [37, 82],
+      "source": {
+        "url": "https://www.9barbenchmark.com/grinders/c3-esp-pro-review",
+        "title": "9barbenchmark: C3 ESP Pro review, quoting Timemore's guide (pour-over 1.4–2.0 rotations)",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide pour over 1.2.1–2.7.1 = 37–82."
+      }
+    },
+    "frenchpress": {
+      "official": [60, 69],
+      "community": [62, 90],
+      "source": {
+        "url": "https://www.9barbenchmark.com/grinders/c3-esp-pro-review",
+        "title": "9barbenchmark: C3 ESP Pro review, quoting Timemore's guide (French press 2.0–2.3 rotations)",
+        "kind": "primary",
+        "notes": "iCup's manual copy says 1.7–2.0 rot (51–60 clicks). Honest Coffee Guide 2.0.2–3.0.0 = 62–90."
+      }
+    },
+    "coldbrew": {
+      "community": [72, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3-esp-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3 ESP Pro grind settings (2.4.0–3.0.0)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the adjustment dial clockwise until it cannot move further. That is the start point. Count rotations, numbers and clicks counter-clockwise from there.",
+      "pt-BR": "Gire o ajuste no sentido horário até não se mover mais. Esse é o ponto inicial. Conte as voltas, os números e os cliques no sentido anti-horário a partir dali."
+    },
+    "toleranceClicks": 1,
+    "unsafeBelow": 12
+  },
+  "espressoCapable": true,
+  "notes": "Rotations.number.click: 30 clicks per rotation, 10 numbers of 3 clicks; about 90 clicks over 3 rotations. 23 µm per click (0.0233 mm) is burr travel quoted by reviewers and a retailer's manual excerpt (iCup), not particle size. Timemore's warning 'do not grind at 0–6 clicks / 0–0.4 circles' is 12 clicks on this ring. All values stored as clicks from zero (1.2.0 = 36).",
+  "hcg": { "micronRange": [0, 1009], "ticks": 90 }
+}

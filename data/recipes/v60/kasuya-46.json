@@ -1,0 +1,145 @@
+{
+  "id": "v60-kasuya-46",
+  "method": "v60",
+  "name": "4:6 Method",
+  "author": "Tetsu Kasuya",
+  "year": 2016,
+  "style": "pulse",
+  "summary": {
+    "en": "Coarse grind, five 60 g pours about 45 seconds apart, each after the previous has almost drained. The first 40 % of the water sets the taste, the last 60 % sets the strength.",
+    "pt-BR": "Moagem grossa, cinco despejos de 60 g com cerca de 45 segundos de intervalo, cada um depois que o anterior quase escoou. Os primeiros 40 % da água definem o sabor, os 60 % finais definem a intensidade."
+  },
+  "dose": { "default": 20, "min": 13, "max": 27 },
+  "ratio": 15,
+  "grind": {
+    "band": "v60",
+    "pos": 0.8,
+    "texture": "coarse",
+    "note": "Kasuya: medium-coarse to coarse, kosher-salt texture; deliberately coarser than other V60 recipes."
+  },
+  "temperature": {
+    "default": 93,
+    "byRoast": { "light": 93, "medium": 88, "dark": 83 },
+    "note": "Philocoffea (Kasuya's company) gives about 93 °C light, 88 °C medium, 83 °C dark. Hario UK and Hario Europe give 92 °C for Kasuya's own brew; Japanese Coffee Gear gives 92–94 / 88–91 / 85–88. Sources disagree by 2–3 °C per roast level; Philocoffea's values are used here."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "text": {
+        "en": "Rinse the filter, discard the water, add {dose} g of coarsely ground coffee and level the bed",
+        "pt-BR": "Escalde o filtro, descarte a água, adicione {dose} g de café moído grosso e nivele a cama"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": { "grams": 60 },
+      "text": {
+        "en": "Pour {add} g to wet all the grounds ({water} g in total)",
+        "pt-BR": "Despeje {add} g molhando todo o café ({water} g no total)"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 45,
+      "until": 55,
+      "action": "pour",
+      "water": { "grams": 60 },
+      "text": {
+        "en": "When the water has almost drained, pour {add} g to reach {water} g. This completes the first 40 %",
+        "pt-BR": "Quando a água quase tiver escoado, despeje {add} g até chegar a {water} g. Isso fecha os primeiros 40 %"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 90,
+      "until": 100,
+      "action": "pour",
+      "water": { "grams": 60 },
+      "text": {
+        "en": "Pour {add} g to reach {water} g",
+        "pt-BR": "Despeje {add} g até chegar a {water} g"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 135,
+      "until": 145,
+      "action": "pour",
+      "water": { "grams": 60 },
+      "text": {
+        "en": "Pour {add} g to reach {water} g",
+        "pt-BR": "Despeje {add} g até chegar a {water} g"
+      },
+      "cue": "pour3"
+    },
+    {
+      "at": 165,
+      "until": 175,
+      "action": "pour",
+      "water": { "grams": 60 },
+      "text": {
+        "en": "Pour the last {add} g to reach {water} g",
+        "pt-BR": "Despeje os últimos {add} g até chegar a {water} g"
+      },
+      "cue": "pour4"
+    },
+    {
+      "at": 175,
+      "action": "drawdown",
+      "text": {
+        "en": "Let it drain until 3:30",
+        "pt-BR": "Deixe escoar até 3:30"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 210,
+      "action": "serve",
+      "text": {
+        "en": "Remove the dripper even if some water is left, and serve",
+        "pt-BR": "Retire o suporte mesmo que ainda tenha um pouco de água, e sirva"
+      }
+    }
+  ],
+  "totalSeconds": 210,
+  "scaling": "dose-multiples",
+  "options": {
+    "filter": "Hario V60 paper; Hario V60 Kasuya model",
+    "model": "Hario V60 Kasuya model"
+  },
+  "source": {
+    "url": "https://en.philocoffea.com/blogs/blog/coffee-brewing-method",
+    "title": "Philocoffea: Tetsu Kasuya's 4:6 Method",
+    "year": 2022,
+    "kind": "primary",
+    "notes": "Each pour is 3 × dose and total water is 15 × dose. Adjustments: in the first 40 %, less water in pour 1 (50 + 70) gives a sweeter cup, more (70 + 50) gives a brighter one, 60 + 60 is balanced. In the last 60 %, one pour (180 g) is the lightest, two pours (90 + 90) medium, three pours (60 × 3) the strongest; Philocoffea suggests two pours for dark roasts. The 2016 competition schedule differs: 50 g, 70 g, then 60 g × 3, with pour 5 at 2:45 (Philocoffea), 2:40 (Hario UK/Europe) or 3:00 (Japanese Coffee Gear)."
+  },
+  "alsoSee": [
+    {
+      "url": "https://en.philocoffea.com/blogs/blog/hario-v60-beginner-brewing-guide",
+      "title": "Philocoffea beginner brewing guide",
+      "year": 2021,
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.hario.co.uk/blogs/hario-ambassadors/hario-v60-recipe-interview-with-hario-ambassador-tetsu-kasuya",
+      "title": "Hario UK ambassador interview (92 °C; competition schedule with pour 5 at 2:40)",
+      "year": 2022,
+      "kind": "transcription"
+    },
+    {
+      "url": "https://www.hario-europe.com/blogs/hario-community/v60-ambassadors-tetsu-kasuya",
+      "title": "Hario Europe ambassador Q&A (92 °C)",
+      "year": 2023,
+      "kind": "transcription"
+    },
+    {
+      "url": "https://japanesecoffeegear.com/tetsu-kasuya-world-brewers-cup-recipes-translated",
+      "title": "Japanese Coffee Gear: World Brewers Cup 2016 recipe translation (pour 5 at 3:00; 92–94 / 88–91 / 85–88 °C)",
+      "kind": "community"
+    }
+  ]
+}

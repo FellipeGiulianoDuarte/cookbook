@@ -1,0 +1,109 @@
+{
+  "id": "v60-hedrick-one-and-done",
+  "method": "v60",
+  "name": "One-and-Done V60",
+  "author": "Lance Hedrick",
+  "style": "pulse",
+  "summary": {
+    "en": "Two blooms of 45 g, then a single slow pour to the total in small circles. Hit the 2:30 time by adjusting the grind. Swirl at the end is optional.",
+    "pt-BR": "Dois blooms de 45 g e depois um único despejo lento até o total, em círculos pequenos. Acerte o tempo de 2:30 ajustando a moagem. O giro no final é opcional."
+  },
+  "dose": { "default": 15, "min": 10, "max": 20 },
+  "ratio": 15,
+  "grind": {
+    "band": "v60",
+    "pos": 0.35,
+    "texture": "medium-fine",
+    "note": "Hedrick: medium-fine. Aim for the time, not the grind number."
+  },
+  "temperature": {
+    "default": 93,
+    "note": "The recipe gives a single 93 °C. Hedrick's separate 'Ultimate Pourover' recipe uses 100 °C light / 92 °C medium / 85 °C dark, but that is a different recipe."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "text": {
+        "en": "Rinse the filter, discard the water, add {dose} g of coffee and level the bed",
+        "pt-BR": "Escalde o filtro, descarte a água, adicione {dose} g de café e nivele a cama"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": { "times": 3 },
+      "text": {
+        "en": "Bloom: pour {water} g and wet all the grounds",
+        "pt-BR": "Bloom: despeje {water} g molhando todo o café"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 30,
+      "until": 40,
+      "action": "bloom",
+      "water": { "times": 6 },
+      "text": {
+        "en": "Second bloom: pour another {add} g to reach {water} g",
+        "pt-BR": "Segundo bloom: despeje mais {add} g até chegar a {water} g"
+      },
+      "cue": "bloom2"
+    },
+    {
+      "at": 60,
+      "until": 75,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour to {water} g at about 10 mL per second in small circles",
+        "pt-BR": "Despeje até {water} g a cerca de 10 mL por segundo, em círculos pequenos"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 75,
+      "action": "swirl",
+      "text": {
+        "en": "Optional: a gentle swirl to flatten the bed",
+        "pt-BR": "Opcional: um giro leve para nivelar a cama"
+      },
+      "cue": "swirl"
+    },
+    {
+      "at": 80,
+      "action": "drawdown",
+      "text": {
+        "en": "Let it drain. If it finishes well before or after 2:30, change the grind next time",
+        "pt-BR": "Deixe escoar. Se terminar bem antes ou depois de 2:30, mude a moagem na próxima"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 150,
+      "action": "serve",
+      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+    }
+  ],
+  "totalSeconds": 150,
+  "scaling": "linear",
+  "source": {
+    "url": "http://beanbook.app/recipes/lance-hedrick--lance-hedrick-s-one-and-done-v60-recipe__15c20164-8b16-470a-9045-7452c1a4d129",
+    "title": "BeanBook: Lance Hedrick's One and Done V60 recipe (written transcription)",
+    "kind": "transcription",
+    "notes": "Video: 'The Last V60 Recipe You'll Ever Need', youtube.com/watch?v=PNFVCmxBjQQ. Hedrick has published at least three V60 recipes; this is the 15 g / 225 g one. The 10-second bloom pours and the 15-second main pour are timings chosen for the app; the video gives only the start times 0:00, 0:30 and 1:00."
+  },
+  "alsoSee": [
+    {
+      "url": "https://www.youtube.com/watch?v=wZst-D3eUm0",
+      "title": "Lance Hedrick: 'The World's Best Pourover' (different recipe: 15 g / 250 g, single main pour at 1:30)",
+      "kind": "primary"
+    },
+    {
+      "url": "https://www.coffeecalculator.app/blog/lance-hedrick-pour-over-recipe",
+      "title": "coffeecalculator.app: Hedrick 'Ultimate Pourover' transcription (different recipe: 20 g, four pours, ratio and temperature by roast)",
+      "kind": "transcription"
+    }
+  ]
+}

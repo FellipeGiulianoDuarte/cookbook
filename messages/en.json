@@ -1,0 +1,154 @@
+{
+  "app": {
+    "name": "Cookbook",
+    "tagline": "Brew it right every time.",
+    "intro": "V60 and AeroPress recipes from their authors, the setting for your grinder, and a timer that talks you through the pour.",
+    "language": "Language",
+    "sources": "Sources"
+  },
+  "steps": {
+    "method": "Method",
+    "recipe": "Recipe",
+    "grinder": "Grinder",
+    "amount": "Dose",
+    "bean": "Bean",
+    "options": "Options",
+    "summary": "Summary",
+    "brewing": "Brewing",
+    "done": "Done",
+    "progress": "Step {current} of {total}"
+  },
+  "nav": {
+    "next": "Next",
+    "back": "Back",
+    "start": "Start brew",
+    "pause": "Pause",
+    "resume": "Resume",
+    "skip": "Skip step",
+    "again": "Brew again",
+    "share": "Copy link",
+    "copied": "Link copied",
+    "edit": "Change"
+  },
+  "method": {
+    "title": "What are you brewing with?",
+    "v60": "Hario V60",
+    "v60Hint": "Pour-over. Clean, bright, shows the origin.",
+    "aeropress": "AeroPress",
+    "aeropressHint": "Immersion and press. Forgiving, fast, full body."
+  },
+  "recipe": {
+    "title": "Pick a recipe",
+    "by": "by {author}",
+    "style": {
+      "pulse": "pulse pours",
+      "two-pour": "two pours",
+      "continuous": "one pour",
+      "concentrate": "concentrate + dilute",
+      "immersion": "full immersion"
+    },
+    "total": "{time} total",
+    "dose": "{min}–{max} g"
+  },
+  "grinder": {
+    "title": "Which grinder?",
+    "search": "Search grinders",
+    "recent": "Recent",
+    "all": "All grinders",
+    "setting": "Set it to",
+    "tolerance": "±{n}",
+    "band": "{method} band on this grinder",
+    "basis": {
+      "official": "manufacturer's range",
+      "community": "community range",
+      "estimated": "estimated (no published range)"
+    },
+    "unsafe": "Too fine for this grinder: the maker says not to grind below {n}.",
+    "outOfRange": "Outside this grinder's usable range.",
+    "notCapable": "This grinder cannot grind for espresso.",
+    "noBand": "No published setting for this method on this grinder.",
+    "offset": "My grinder runs",
+    "offsetHint": "Shift every setting if your zero differs from the chart.",
+    "zero": "How to find zero",
+    "travelNote": "{n} µm per click is burr travel, not particle size.",
+    "fine": "fine",
+    "coarse": "coarse"
+  },
+  "amount": {
+    "title": "How much coffee?",
+    "dose": "Coffee",
+    "water": "Water",
+    "ratio": "Ratio",
+    "bypass": "plus {g} g to dilute",
+    "ice": "over {g} g of ice",
+    "cups": "{n, plural, =1 {about one cup} other {about # cups}}",
+    "outOfRange": "This recipe is written for {min}–{max} g."
+  },
+  "bean": {
+    "title": "What's the bean?",
+    "roast": "Roast",
+    "roasts": {
+      "light": "Light",
+      "medium-light": "Medium-light",
+      "medium": "Medium",
+      "medium-dark": "Medium-dark",
+      "dark": "Dark"
+    },
+    "process": "Process",
+    "temperature": "Water at {t} °C",
+    "tempFrom": {
+      "recipe": "from the recipe's own roast table",
+      "table": "from the {table} table",
+      "recipe-default": "the recipe's default"
+    },
+    "suggestion": "Roasters suggest for this process",
+    "apply": "Apply",
+    "communityNote": "Community guidance, not part of the recipe."
+  },
+  "options": {
+    "title": "A few more things",
+    "orientation": "Orientation",
+    "upright": "Upright",
+    "inverted": "Inverted",
+    "filter": "Filter",
+    "model": "Model",
+    "language": "Language"
+  },
+  "summary": {
+    "title": "Your recipe",
+    "grind": "Grind",
+    "temp": "Water",
+    "time": "Time",
+    "schedule": "Pours",
+    "source": "Source",
+    "chart": "Brewing control chart"
+  },
+  "brew": {
+    "next": "Next",
+    "until": "by {time}",
+    "done": "Done",
+    "doneTitle": "Enjoy",
+    "drainTime": "Drain time",
+    "log": "Log this brew"
+  },
+  "chart": {
+    "title": "Brewing control chart",
+    "intro": "Strength (TDS) against extraction. The grey box is the SCA Classic Standard. Enter a refractometer reading to place your brew; without one, only the window for your ratio is shown.",
+    "tds": "TDS %",
+    "ey": "Extraction %",
+    "reading": "TDS reading",
+    "beverage": "Beverage weight (g)",
+    "window": "At {ratio} g/L, 18–22 % extraction means {lo}–{hi} % TDS.",
+    "inside": "Inside the SCA Classic Standard.",
+    "outside": "Outside the SCA box. Nearest corner:",
+    "directions": "What moves where",
+    "withTds": "with strength",
+    "withEy": "with extraction",
+    "up": "rises",
+    "down": "falls",
+    "flat": "no change",
+    "timeBands": "Published time ranges",
+    "facts": "What the measurements say",
+    "preference": "Outside the box is a preference, not a defect."
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "id": "aeropress-adler-original",
+  "method": "aeropress",
+  "name": "Alan Adler's Original Recipe",
+  "author": "Alan Adler",
+  "style": "concentrate",
+  "summary": {
+    "en": "The inventor's recipe. Fine grind, 80 °C water to mark 1–1.5, stir 10 seconds, press gently, then top up with hot water like an americano.",
+    "pt-BR": "A receita do inventor. Moagem fina, água a 80 °C até a marca 1–1,5, mexa por 10 segundos, pressione de leve e complete com água quente como um americano."
+  },
+  "dose": { "default": 15, "min": 14, "max": 18 },
+  "ratio": 6,
+  "bypass": { "water": { "times": 8 } },
+  "grind": {
+    "band": "aeropress",
+    "pos": 0.15,
+    "texture": "fine",
+    "note": "Adler: 'fine drip grind', between espresso and drip."
+  },
+  "temperature": {
+    "default": 80,
+    "byRoast": { "light": 85, "medium": 85, "dark": 80 },
+    "note": "Adler's original: 80 °C (175 °F). The official FAQ recommends 80 °C for dark roasts and 85 °C for medium and light roasts."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "add",
+      "text": {
+        "en": "Paper filter in the cap, cap on, AeroPress upright on a sturdy mug. Add {dose} g of finely ground coffee (one scoop)",
+        "pt-BR": "Filtro de papel na tampa, tampa fechada, AeroPress em pé sobre uma caneca firme. Adicione {dose} g de café moído fino (uma colher)"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour {water} g of water at 80 °C, up to between mark 1 and 1.5. Start the timer",
+        "pt-BR": "Despeje {water} g de água a 80 °C, até entre a marca 1 e 1,5. Inicie o cronômetro"
+      },
+      "note": {
+        "en": "Marks 1 and 1.5 are volume lines on the chamber, about 90 g of water.",
+        "pt-BR": "As marcas 1 e 1,5 são linhas de volume na câmara, cerca de 90 g de água."
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 10,
+      "until": 20,
+      "action": "stir",
+      "text": { "en": "Stir for 10 seconds", "pt-BR": "Mexa por 10 segundos" },
+      "cue": "stir"
+    },
+    {
+      "at": 20,
+      "action": "cap",
+      "text": { "en": "Insert the plunger", "pt-BR": "Encaixe o êmbolo" },
+      "cue": "plunger"
+    },
+    {
+      "at": 20,
+      "until": 50,
+      "action": "press",
+      "text": {
+        "en": "Press gently for 20 to 40 seconds, until the hiss",
+        "pt-BR": "Pressione de leve por 20 a 40 segundos, até o chiado"
+      },
+      "cue": "press"
+    },
+    {
+      "at": 50,
+      "action": "dilute",
+      "text": {
+        "en": "Top up with hot water to taste, americano style",
+        "pt-BR": "Complete com água quente a gosto, estilo americano"
+      },
+      "note": {
+        "en": "Adler's instruction is 'add hot water to your tasting'. About 8 × the dose (120 g at 15 g) fills a mug; this is a starting point, not a rule.",
+        "pt-BR": "A instrução de Adler é 'adicione água quente a seu gosto'. Cerca de 8 × a dose (120 g para 15 g) enche uma caneca; é um ponto de partida, não uma regra."
+      },
+      "cue": "dilute"
+    },
+    {
+      "at": 60,
+      "action": "serve",
+      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+    }
+  ],
+  "totalSeconds": 60,
+  "scaling": "linear",
+  "options": { "orientation": "upright", "filter": "1 paper, not rinsed" },
+  "source": {
+    "url": "https://honestcoffeeguide.com/brew-recipes/original-aeropress-recipe/",
+    "title": "Honest Coffee Guide: the original AeroPress recipe (Alan Adler)",
+    "kind": "transcription",
+    "notes": "Dose is given as one scoop; grams disagree: aeroprecipe.com 15 g, Honest Coffee Guide 15–20 g, the current official site 16–18 g. 15 g is used here. Water is a fill line (mark 1 to 1.5, about 90 g). Total time about 1:00–1:30. The current official instructions (aeropress.com/pages/how-to-use) differ: fill to mark 4, stir 3 s, steep 60 s."
+  },
+  "alsoSee": [
+    {
+      "url": "https://aeroprecipe.com/recipes/alan-adler-original",
+      "title": "Aeroprecipe: Alan Adler original (15 g)",
+      "kind": "transcription"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/AeroPress",
+      "title": "Wikipedia: AeroPress",
+      "kind": "community"
+    },
+    {
+      "url": "https://help.aeropress.com/en-US/why-do-you-recommend-brewing-with-175%C2%B0f-(80%C2%B0c)-water-for-dark-roasts-and-185%C2%B0f-(85%C2%B0c)-for-medium-and-light-roasts-123203",
+      "title": "AeroPress FAQ: 80 °C for dark roasts, 85 °C for medium and light",
+      "kind": "primary"
+    }
+  ]
+}

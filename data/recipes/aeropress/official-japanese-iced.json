@@ -1,0 +1,112 @@
+{
+  "id": "aeropress-official-japanese-iced",
+  "method": "aeropress",
+  "name": "Japanese Iced Coffee",
+  "author": "AeroPress",
+  "year": 2024,
+  "style": "immersion",
+  "summary": {
+    "en": "The official flash-brew method. 150 g of ice in the glass, 200 g of boiling water on 22 g, three-minute steep, press straight onto the ice.",
+    "pt-BR": "O método oficial de flash brew. 150 g de gelo no copo, 200 g de água fervente sobre 22 g, infusão de três minutos, pressione direto sobre o gelo."
+  },
+  "dose": { "default": 22, "min": 18, "max": 24 },
+  "ratio": 9.09,
+  "grind": {
+    "band": "aeropress",
+    "pos": 0.35,
+    "texture": "medium-fine",
+    "note": "Official: medium-fine."
+  },
+  "temperature": {
+    "default": 99,
+    "note": "Official: 99 °C. The ice does the cooling."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "add",
+      "text": {
+        "en": "Put 150 g of large ice cubes in a sturdy glass. Paper filter in the cap, cap on, AeroPress upright on the glass. Add {dose} g of coffee",
+        "pt-BR": "Coloque 150 g de cubos grandes de gelo em um copo resistente. Filtro de papel na tampa, tampa fechada, AeroPress em pé sobre o copo. Adicione {dose} g de café"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour {water} g of water at 99 °C, up to mark 3. Start the timer as you begin",
+        "pt-BR": "Despeje {water} g de água a 99 °C, até a marca 3. Inicie o cronômetro ao começar"
+      },
+      "note": {
+        "en": "Mark 3 is a volume line on the chamber; the official recipe gives both the line and 200 g.",
+        "pt-BR": "A marca 3 é uma linha de volume na câmara; a receita oficial dá a linha e também 200 g."
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 10,
+      "action": "stir",
+      "text": {
+        "en": "Stir 10 times back and forth",
+        "pt-BR": "Mexa 10 vezes para frente e para trás"
+      },
+      "cue": "stir"
+    },
+    {
+      "at": 15,
+      "action": "cap",
+      "text": {
+        "en": "Insert the plunger and pull up slightly to stop the drips",
+        "pt-BR": "Encaixe o êmbolo e puxe um pouco para cima para parar o gotejamento"
+      },
+      "cue": "plunger"
+    },
+    {
+      "at": 20,
+      "action": "wait",
+      "text": { "en": "Steep until 3:00", "pt-BR": "Deixe em infusão até 3:00" }
+    },
+    {
+      "at": 180,
+      "until": 220,
+      "action": "press",
+      "text": {
+        "en": "Press slowly onto the ice, 30–45 seconds",
+        "pt-BR": "Pressione devagar sobre o gelo, 30–45 segundos"
+      },
+      "cue": "press"
+    },
+    {
+      "at": 240,
+      "action": "serve",
+      "text": {
+        "en": "Done. Stir over the ice and serve",
+        "pt-BR": "Pronto. Mexa sobre o gelo e sirva"
+      }
+    }
+  ],
+  "totalSeconds": 240,
+  "scaling": "linear",
+  "options": {
+    "orientation": "upright",
+    "filter": "1 paper micro-filter",
+    "iced": { "iceGrams": 150 }
+  },
+  "source": {
+    "url": "https://aeropress.com/blogs/aeropress-recipes/the-ultimate-guide-to-making-japanese-iced-coffee-with-aeropress",
+    "title": "AeroPress: The ultimate guide to making Japanese iced coffee with AeroPress",
+    "year": 2024,
+    "kind": "primary",
+    "notes": "22 g / 200 g = 1:9.1 over 150 g of ice. Ice stays at 150 g when the dose is scaled. Pour and stir durations are this app's choice; the page gives the steep (about 3:00) and press (30–45 s). The official Flash Brew (2024-04-16) is a sibling: 20 g, 200 g, 100 g ice, 2 papers or Flow Control cap."
+  },
+  "alsoSee": [
+    {
+      "url": "https://aeropress.com/blogs/aeropress-recipes/iced-aeropress-flash-brew",
+      "title": "AeroPress: Iced AeroPress Flash Brew (20 g / 200 g / 100 g ice)",
+      "year": 2024,
+      "kind": "primary"
+    }
+  ]
+}

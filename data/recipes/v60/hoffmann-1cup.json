@@ -1,0 +1,139 @@
+{
+  "id": "v60-hoffmann-1cup",
+  "method": "v60",
+  "name": "A Better 1 Cup V60 Technique",
+  "author": "James Hoffmann",
+  "year": 2022,
+  "style": "pulse",
+  "summary": {
+    "en": "Five equal 50 g pours, a swirl after the first and the last, no spoon stir. Ground finer than the Ultimate technique. Designed for one cup only.",
+    "pt-BR": "Cinco despejos iguais de 50 g, um giro depois do primeiro e do último, sem mexer com colher. Moagem mais fina que a técnica Ultimate. Feita só para uma xícara."
+  },
+  "dose": { "default": 15, "min": 15, "max": 15 },
+  "ratio": 16.67,
+  "grind": {
+    "band": "v60",
+    "pos": 0.25,
+    "texture": "medium-fine",
+    "note": "Hoffmann: medium-fine, as fine as you can go without bitterness or astringency; finer than the Ultimate technique."
+  },
+  "temperature": {
+    "default": 96,
+    "byRoast": { "light": 100, "medium": 96, "dark": 90 },
+    "note": "The video says freshly boiled water, boiling for light roasts and cooler for darker ones. The per-roast numbers are Opie etc.'s transcription and are not verified against the video."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "text": {
+        "en": "Rinse the filter with water just off the boil, discard it, add {dose} g of coffee and flatten the bed",
+        "pt-BR": "Escalde o filtro com água recém-fervida, descarte, adicione {dose} g de café e nivele a cama"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": { "grams": 50 },
+      "text": {
+        "en": "Bloom: pour {water} g over 10 seconds, then swirl the brewer until every ground is wet",
+        "pt-BR": "Bloom: despeje {water} g em 10 segundos e gire o suporte até molhar todo o café"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 10,
+      "action": "wait",
+      "text": { "en": "Rest until 0:45", "pt-BR": "Aguarde até 0:45" }
+    },
+    {
+      "at": 45,
+      "until": 55,
+      "action": "pour",
+      "water": { "grams": 50 },
+      "text": {
+        "en": "Pour {add} g to reach {water} g, over about 10 seconds",
+        "pt-BR": "Despeje {add} g até chegar a {water} g, em cerca de 10 segundos"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 70,
+      "until": 80,
+      "action": "pour",
+      "water": { "grams": 50 },
+      "text": {
+        "en": "Pour {add} g to reach {water} g, over about 10 seconds",
+        "pt-BR": "Despeje {add} g até chegar a {water} g, em cerca de 10 segundos"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 90,
+      "until": 100,
+      "action": "pour",
+      "water": { "grams": 50 },
+      "text": {
+        "en": "Pour {add} g to reach {water} g, over about 10 seconds",
+        "pt-BR": "Despeje {add} g até chegar a {water} g, em cerca de 10 segundos"
+      },
+      "cue": "pour3"
+    },
+    {
+      "at": 110,
+      "until": 120,
+      "action": "pour",
+      "water": { "grams": 50 },
+      "text": {
+        "en": "Pour the last {add} g to reach {water} g, over about 10 seconds",
+        "pt-BR": "Despeje os últimos {add} g até chegar a {water} g, em cerca de 10 segundos"
+      },
+      "cue": "pour4"
+    },
+    {
+      "at": 120,
+      "action": "swirl",
+      "text": {
+        "en": "Give the brewer a gentle swirl to flatten the bed",
+        "pt-BR": "Gire o suporte de leve para nivelar a cama"
+      },
+      "cue": "swirl"
+    },
+    {
+      "at": 125,
+      "action": "drawdown",
+      "text": {
+        "en": "Let it drain. Aim for a flat bed",
+        "pt-BR": "Deixe escoar. O objetivo é uma cama plana"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 180,
+      "action": "serve",
+      "text": {
+        "en": "Done. Swirl the server and serve",
+        "pt-BR": "Pronto. Gire a jarra e sirva"
+      }
+    }
+  ],
+  "totalSeconds": 180,
+  "scaling": "fixed",
+  "options": { "filter": "Hario V60 paper, rinsed; soft filtered water" },
+  "source": {
+    "url": "https://www.opie-etc.com/etc/commentary-on-james-hoffmanns-a-better-1-cup-v60-technique-for-pour-over-coffee/",
+    "title": "Opie etc.: commentary on James Hoffmann's 'A Better 1 Cup V60 Technique' (written transcription)",
+    "year": 2022,
+    "kind": "transcription",
+    "notes": "Video: youtube.com/watch?v=1oB1oDrDkHM. Designed for 15 g / 250 g (1:16.7) and not intended for larger batches; Hoffmann made it because the Ultimate technique scaled down to one cup underperforms. Bloom is 50 g (about 3.3 × dose), not 2 × dose."
+  },
+  "alsoSee": [
+    {
+      "url": "https://www.peterthelander.com/2023/08/27/a-better-1-cup-v60-technique/",
+      "title": "Peter Thelander transcription",
+      "year": 2023,
+      "kind": "transcription"
+    }
+  ]
+}

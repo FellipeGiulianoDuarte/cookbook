@@ -1,0 +1,102 @@
+{
+  "id": "kingrinder-k4",
+  "brand": "Kingrinder",
+  "model": "K4",
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "clicks",
+  "clicksPerRotation": 60,
+  "travelMicronsPerClick": 16,
+  "burr": "titanium-coated stainless conical (same external adjustment as K6)",
+  "range": [15, 240],
+  "bands": {
+    "turkish": {
+      "official": [20, 20],
+      "community": [5, 26],
+      "source": {
+        "url": "https://www.kingrinder.com/blog/comp-k4-k6",
+        "title": "Kingrinder: K4 vs K6 comparison (same mechanism, 16 µm per click); K6 manual Turkish 20 clicks",
+        "kind": "primary",
+        "notes": "K4 is discontinued; Kingrinder says it shares the K6 mechanism, so the K6 manual's numbers are used. Honest Coffee Guide K4 chart is identical to K6: 5–26."
+      }
+    },
+    "espresso": {
+      "official": [40, 40],
+      "community": [22, 45],
+      "source": {
+        "url": "https://www.kingrinder.com/blog/comp-k4-k6",
+        "title": "Kingrinder: K4 vs K6 comparison; K6 manual espresso 40 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K4 22–45 (identical to K6 chart)."
+      }
+    },
+    "moka": {
+      "official": [65, 65],
+      "community": [43, 78],
+      "source": {
+        "url": "https://www.kingrinder.com/blog/comp-k4-k6",
+        "title": "Kingrinder: K4 vs K6 comparison; K6 manual moka / AeroPress 65 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K4 43–78."
+      }
+    },
+    "aeropress": {
+      "official": [65, 65],
+      "community": [38, 113],
+      "source": {
+        "url": "https://www.kingrinder.com/blog/comp-k4-k6",
+        "title": "Kingrinder: K4 vs K6 comparison; K6 manual moka / AeroPress 65 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K4 38–113 (full row)."
+      }
+    },
+    "v60": {
+      "official": [100, 100],
+      "community": [48, 82],
+      "source": {
+        "url": "https://www.kingrinder.com/blog/comp-k4-k6",
+        "title": "Kingrinder: K4 vs K6 comparison; K6 manual pour-over 100 clicks",
+        "kind": "primary",
+        "notes": "The manual's row is 'pour-over'. Honest Coffee Guide K4 V60 48–82."
+      }
+    },
+    "pourover": {
+      "official": [100, 100],
+      "community": [49, 110],
+      "source": {
+        "url": "https://www.kingrinder.com/blog/comp-k4-k6",
+        "title": "Kingrinder: K4 vs K6 comparison; K6 manual pour-over 100 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K4 pour over 49–110."
+      }
+    },
+    "frenchpress": {
+      "official": [120, 120],
+      "community": [82, 154],
+      "source": {
+        "url": "https://www.kingrinder.com/blog/comp-k4-k6",
+        "title": "Kingrinder: K4 vs K6 comparison; K6 manual French press 120 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K4 82–154."
+      }
+    },
+    "coldbrew": {
+      "community": [95, 160],
+      "source": {
+        "url": "https://honestcoffeeguide.com/kingrinder-k4-grind-settings/",
+        "title": "Honest Coffee Guide: Kingrinder K4 grind settings",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the adjustment nut clockwise until it stops at the number 0 for the final time. That is zero; do not tighten it with force. Turn counter-clockwise and count clicks from there. The number on the nut may not equal the click count, so count clicks.",
+      "pt-BR": "Gire a porca de ajuste no sentido horário até parar no número 0 pela última vez. Esse é o zero; não force. Gire no sentido anti-horário e conte os cliques a partir dali. O número na porca pode não coincidir com a contagem de cliques, então conte os cliques."
+    },
+    "toleranceClicks": 2,
+    "unsafeBelow": 15
+  },
+  "espressoCapable": true,
+  "notes": "Discontinued. 60 clicks per rotation and 16 µm per click of burr travel (Kingrinder's K4 vs K6 comparison), not particle size. Kingrinder's own K4 click chart was not found; the K6 manual's values are used because Kingrinder states the two share the mechanism, and Honest Coffee Guide publishes the same chart for both. The K6 manual's 'do not grind below 15 clicks' warning is applied."
+}

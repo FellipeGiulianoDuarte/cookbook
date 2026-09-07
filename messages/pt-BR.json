@@ -1,0 +1,154 @@
+{
+  "app": {
+    "name": "Cookbook",
+    "tagline": "Faça o café certo toda vez.",
+    "intro": "Receitas de V60 e AeroPress dos próprios autores, o ajuste para o seu moedor e um cronômetro que guia cada despejo.",
+    "language": "Idioma",
+    "sources": "Fontes"
+  },
+  "steps": {
+    "method": "Método",
+    "recipe": "Receita",
+    "grinder": "Moedor",
+    "amount": "Dose",
+    "bean": "Grão",
+    "options": "Opções",
+    "summary": "Resumo",
+    "brewing": "Preparo",
+    "done": "Pronto",
+    "progress": "Passo {current} de {total}"
+  },
+  "nav": {
+    "next": "Avançar",
+    "back": "Voltar",
+    "start": "Começar",
+    "pause": "Pausar",
+    "resume": "Continuar",
+    "skip": "Pular passo",
+    "again": "Preparar de novo",
+    "share": "Copiar link",
+    "copied": "Link copiado",
+    "edit": "Trocar"
+  },
+  "method": {
+    "title": "Com o que você vai preparar?",
+    "v60": "Hario V60",
+    "v60Hint": "Coado. Limpo, brilhante, mostra a origem.",
+    "aeropress": "AeroPress",
+    "aeropressHint": "Imersão e pressão. Tolerante, rápido, corpo cheio."
+  },
+  "recipe": {
+    "title": "Escolha uma receita",
+    "by": "de {author}",
+    "style": {
+      "pulse": "despejos em pulsos",
+      "two-pour": "dois despejos",
+      "continuous": "um despejo",
+      "concentrate": "concentrado + diluição",
+      "immersion": "imersão total"
+    },
+    "total": "{time} no total",
+    "dose": "{min}–{max} g"
+  },
+  "grinder": {
+    "title": "Qual moedor?",
+    "search": "Buscar moedor",
+    "recent": "Recentes",
+    "all": "Todos os moedores",
+    "setting": "Ajuste em",
+    "tolerance": "±{n}",
+    "band": "faixa de {method} neste moedor",
+    "basis": {
+      "official": "faixa do fabricante",
+      "community": "faixa da comunidade",
+      "estimated": "estimada (sem faixa publicada)"
+    },
+    "unsafe": "Fino demais para este moedor: o fabricante diz para não moer abaixo de {n}.",
+    "outOfRange": "Fora da faixa útil deste moedor.",
+    "notCapable": "Este moedor não mói para espresso.",
+    "noBand": "Não há ajuste publicado para este método neste moedor.",
+    "offset": "Meu moedor fica",
+    "offsetHint": "Desloque todos os ajustes se o seu zero for diferente da tabela.",
+    "zero": "Como achar o zero",
+    "travelNote": "{n} µm por clique é o avanço das mós, não o tamanho da partícula.",
+    "fine": "fino",
+    "coarse": "grosso"
+  },
+  "amount": {
+    "title": "Quanto café?",
+    "dose": "Café",
+    "water": "Água",
+    "ratio": "Proporção",
+    "bypass": "mais {g} g para diluir",
+    "ice": "sobre {g} g de gelo",
+    "cups": "{n, plural, =1 {cerca de uma xícara} other {cerca de # xícaras}}",
+    "outOfRange": "Esta receita foi escrita para {min}–{max} g."
+  },
+  "bean": {
+    "title": "Qual é o grão?",
+    "roast": "Torra",
+    "roasts": {
+      "light": "Clara",
+      "medium-light": "Média-clara",
+      "medium": "Média",
+      "medium-dark": "Média-escura",
+      "dark": "Escura"
+    },
+    "process": "Processo",
+    "temperature": "Água a {t} °C",
+    "tempFrom": {
+      "recipe": "da tabela de torra da própria receita",
+      "table": "da tabela {table}",
+      "recipe-default": "o padrão da receita"
+    },
+    "suggestion": "Torrefadores sugerem para este processo",
+    "apply": "Aplicar",
+    "communityNote": "Orientação da comunidade, não faz parte da receita."
+  },
+  "options": {
+    "title": "Mais alguns detalhes",
+    "orientation": "Posição",
+    "upright": "Em pé",
+    "inverted": "Invertido",
+    "filter": "Filtro",
+    "model": "Modelo",
+    "language": "Idioma"
+  },
+  "summary": {
+    "title": "Sua receita",
+    "grind": "Moagem",
+    "temp": "Água",
+    "time": "Tempo",
+    "schedule": "Despejos",
+    "source": "Fonte",
+    "chart": "Gráfico de controle"
+  },
+  "brew": {
+    "next": "Próximo",
+    "until": "até {time}",
+    "done": "Pronto",
+    "doneTitle": "Aproveite",
+    "drainTime": "Tempo de escoamento",
+    "log": "Registrar este preparo"
+  },
+  "chart": {
+    "title": "Gráfico de controle de extração",
+    "intro": "Força (TDS) contra extração. A caixa cinza é o padrão clássico da SCA. Informe uma leitura de refratômetro para posicionar seu café; sem ela, só a janela da sua proporção aparece.",
+    "tds": "TDS %",
+    "ey": "Extração %",
+    "reading": "Leitura de TDS",
+    "beverage": "Peso da bebida (g)",
+    "window": "A {ratio} g/L, 18–22 % de extração dá {lo}–{hi} % de TDS.",
+    "inside": "Dentro do padrão clássico da SCA.",
+    "outside": "Fora da caixa da SCA. Canto mais próximo:",
+    "directions": "O que muda e para onde",
+    "withTds": "com a força",
+    "withEy": "com a extração",
+    "up": "sobe",
+    "down": "cai",
+    "flat": "não muda",
+    "timeBands": "Tempos publicados",
+    "facts": "O que as medições dizem",
+    "preference": "Fora da caixa é preferência, não defeito."
+  }
+}

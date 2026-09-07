@@ -1,0 +1,99 @@
+{
+  "id": "baratza-encore-esp",
+  "brand": "Baratza",
+  "model": "Encore ESP",
+  "kind": "electric",
+  "adjustment": "dual",
+  "notation": "dial",
+  "travelMicronsPerClick": 20,
+  "burr": "40 mm conical steel (M2)",
+  "range": [1, 40],
+  "bands": {
+    "espresso": {
+      "official": [15, 15],
+      "community": [1, 15],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-encore-esp-grind-settings",
+        "title": "Baratza-derived Encore ESP starting points: espresso 15",
+        "kind": "primary",
+        "notes": "Volcano Coffee Works 1–15 (espresso and moka); Honest Coffee Guide 0–13. Settings 1–20 are the micro-step espresso zone."
+      }
+    },
+    "moka": {
+      "community": [12, 24],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-encore-esp-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Encore ESP grind settings",
+        "kind": "community",
+        "notes": "Volcano Coffee Works lumps espresso and moka at 1–15."
+      }
+    },
+    "aeropress": {
+      "official": [22, 22],
+      "community": [8, 30],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-encore-esp-grind-settings",
+        "title": "Baratza-derived Encore ESP starting points: AeroPress 22",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 8–30; Volcano Coffee Works 6–20."
+      }
+    },
+    "v60": {
+      "official": [25, 25],
+      "community": [15, 25],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-encore-esp-grind-settings",
+        "title": "Baratza-derived Encore ESP starting points: V60 25",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 15–25."
+      }
+    },
+    "pourover": {
+      "community": [16, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-encore-esp-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Encore ESP grind settings (pour over 16–30)",
+        "kind": "community",
+        "notes": "Volcano Coffee Works 18–28. Baratza-derived table gives Auto brewer 28."
+      }
+    },
+    "chemex": {
+      "official": [30, 30],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-encore-esp-grind-settings",
+        "title": "Baratza-derived Encore ESP starting points: Chemex 30",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide has no Chemex row."
+      }
+    },
+    "frenchpress": {
+      "official": [32, 32],
+      "community": [25, 38],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-encore-esp-grind-settings",
+        "title": "Baratza-derived Encore ESP starting points: French press 32",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 25–38; Volcano Coffee Works 30–40."
+      }
+    },
+    "coldbrew": {
+      "community": [27, 40],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-encore-esp-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Encore ESP grind settings",
+        "kind": "community",
+        "notes": "Volcano Coffee Works 35–40."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Ships factory-calibrated for espresso. There is no zero to find: setting 1 is the finest position on the printed 1–40 hopper ring.",
+      "pt-BR": "Sai de fábrica calibrado para espresso. Não há zero a ser encontrado: a posição 1 é a mais fina do anel impresso de 1 a 40 no reservatório."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": true,
+  "notes": "Two resolutions on one dial: settings 1–20 are micro-steps for espresso (Baratza: about 20 µm per step), settings 21–40 are macro-steps for brewed coffee. Do not treat the dial as one linear slope. Honest Coffee Guide's computed slope for the macro zone is about 37 µm per step; both figures are estimates. Baratza's micro/macro description: baratza.com/en-us/blog/product-guides/dialing-in-espresso.",
+  "hcg": { "micronRange": [230, 1380], "ticks": 40 }
+}

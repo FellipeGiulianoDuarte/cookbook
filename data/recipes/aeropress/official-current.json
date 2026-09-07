@@ -1,0 +1,102 @@
+{
+  "id": "aeropress-official-current",
+  "method": "aeropress",
+  "name": "Official AeroPress Instructions",
+  "author": "AeroPress",
+  "style": "immersion",
+  "summary": {
+    "en": "The manufacturer's current method. Upright, one scoop, fill to mark 4, stir 3 seconds, steep one minute, press until the hiss.",
+    "pt-BR": "O método atual do fabricante. Na posição normal, uma colher de café, água até a marca 4, mexa por 3 segundos, infusão de um minuto, pressione até o chiado."
+  },
+  "dose": { "default": 17, "min": 14, "max": 18 },
+  "ratio": 12.94,
+  "grind": {
+    "band": "aeropress",
+    "pos": 0.5,
+    "texture": "medium",
+    "note": "Official: medium (pre-ground) or medium-fine. Medium-fine shortens the steep to 30 seconds."
+  },
+  "temperature": {
+    "default": 85,
+    "byRoast": { "light": 85, "medium": 85, "dark": 80 },
+    "note": "Official instructions: 85 °C (185 °F) or boiling. The official FAQ recommends 80 °C for dark roasts and 85 °C for medium and light roasts."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "add",
+      "text": {
+        "en": "Paper filter in the cap, cap on, AeroPress upright on a sturdy mug. Add {dose} g of coffee (one heaping scoop)",
+        "pt-BR": "Filtro de papel na tampa, tampa fechada, AeroPress em pé sobre uma caneca firme. Adicione {dose} g de café (uma colher cheia)"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour {water} g of water, filling to the mark 4 line. Start the timer as you begin",
+        "pt-BR": "Despeje {water} g de água, até a linha da marca 4. Inicie o cronômetro ao começar"
+      },
+      "note": {
+        "en": "Mark 4 is a volume line on the chamber, not a weight. 220 g at 17 g of coffee is this app's estimate; the line is the official reference.",
+        "pt-BR": "A marca 4 é uma linha de volume na câmara, não um peso. 220 g para 17 g de café é a estimativa deste app; a linha é a referência oficial."
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 10,
+      "action": "stir",
+      "text": { "en": "Stir for 3 seconds", "pt-BR": "Mexa por 3 segundos" },
+      "cue": "stir"
+    },
+    {
+      "at": 15,
+      "action": "wait",
+      "text": {
+        "en": "Steep until 1:10 (60 seconds for a medium grind, 30 seconds for medium-fine)",
+        "pt-BR": "Deixe em infusão até 1:10 (60 segundos para moagem média, 30 segundos para média-fina)"
+      },
+      "note": {
+        "en": "To stop the drip while it steeps, insert the plunger slightly so it makes a vacuum.",
+        "pt-BR": "Para parar o gotejamento durante a infusão, encaixe o êmbolo de leve para criar vácuo."
+      }
+    },
+    {
+      "at": 70,
+      "until": 90,
+      "action": "press",
+      "text": {
+        "en": "Press with gentle, constant pressure until the hiss, about 20 seconds",
+        "pt-BR": "Pressione com força leve e constante até o chiado, cerca de 20 segundos"
+      },
+      "cue": "press"
+    },
+    {
+      "at": 90,
+      "action": "serve",
+      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+    }
+  ],
+  "totalSeconds": 90,
+  "scaling": "linear",
+  "options": {
+    "orientation": "upright",
+    "filter": "1 paper micro-filter, not rinsed",
+    "model": "Original, Clear, Premium, Go Plus. XL: 2 scoops (32–36 g), fill to mark 8. Go: slightly less coffee"
+  },
+  "source": {
+    "url": "https://aeropress.com/pages/how-to-use",
+    "title": "AeroPress: How to use (current official instructions)",
+    "kind": "primary",
+    "notes": "Dose is given as 1 heaping scoop or 16–18 g; 17 g is the midpoint. Water is given as a fill line (mark 4), not in grams; the 220 g default is an estimate. Steep is 60 s for medium grind, 30 s for medium-fine."
+  },
+  "alsoSee": [
+    {
+      "url": "https://help.aeropress.com/en-US/why-do-you-recommend-brewing-with-175%C2%B0f-(80%C2%B0c)-water-for-dark-roasts-and-185%C2%B0f-(85%C2%B0c)-for-medium-and-light-roasts-123203",
+      "title": "AeroPress FAQ: 80 °C for dark roasts, 85 °C for medium and light",
+      "kind": "primary"
+    }
+  ]
+}

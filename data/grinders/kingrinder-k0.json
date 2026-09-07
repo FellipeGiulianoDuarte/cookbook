@@ -1,0 +1,90 @@
+{
+  "id": "kingrinder-k0",
+  "brand": "Kingrinder",
+  "model": "K0",
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "clicks",
+  "clicksPerRotation": 40,
+  "travelMicronsPerClick": 18,
+  "range": [16, 140],
+  "bands": {
+    "espresso": {
+      "community": [25, 51],
+      "source": {
+        "url": "https://honestcoffeeguide.com/kingrinder-k2-grind-settings/",
+        "title": "Honest Coffee Guide: Kingrinder K0/K1/K2 grind settings (identical chart)",
+        "kind": "community",
+        "notes": "Kingrinder's manual marks espresso and Turkish as 'not recommended' on the K0; this row is Honest Coffee Guide's only."
+      }
+    },
+    "moka": {
+      "official": [60, 60],
+      "community": [49, 89],
+      "source": {
+        "url": "https://uploads.strikinglycdn.com/files/c2fe81a7-0e17-4f03-8ad5-ddcc6a52aa68/KINGrinder+K0.K1.K2-EN.pdf",
+        "title": "Kingrinder K0/K1/K2 manual: moka / AeroPress 60 clicks (shared row)",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 49–89."
+      }
+    },
+    "aeropress": {
+      "official": [60, 60],
+      "community": [44, 130],
+      "source": {
+        "url": "https://uploads.strikinglycdn.com/files/c2fe81a7-0e17-4f03-8ad5-ddcc6a52aa68/KINGrinder+K0.K1.K2-EN.pdf",
+        "title": "Kingrinder K0/K1/K2 manual: moka / AeroPress 60 clicks (shared row)",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 44–130 (full row, concentrate to long steep)."
+      }
+    },
+    "v60": {
+      "official": [100, 100],
+      "community": [55, 95],
+      "source": {
+        "url": "https://uploads.strikinglycdn.com/files/c2fe81a7-0e17-4f03-8ad5-ddcc6a52aa68/KINGrinder+K0.K1.K2-EN.pdf",
+        "title": "Kingrinder K0/K1/K2 manual: pour-over 100 clicks",
+        "kind": "primary",
+        "notes": "The manual's row is 'pour-over'. Honest Coffee Guide V60 55–95."
+      }
+    },
+    "pourover": {
+      "official": [100, 100],
+      "community": [56, 126],
+      "source": {
+        "url": "https://uploads.strikinglycdn.com/files/c2fe81a7-0e17-4f03-8ad5-ddcc6a52aa68/KINGrinder+K0.K1.K2-EN.pdf",
+        "title": "Kingrinder K0/K1/K2 manual: pour-over 100 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide pour over 56–126."
+      }
+    },
+    "frenchpress": {
+      "official": [140, 140],
+      "community": [94, 140],
+      "source": {
+        "url": "https://uploads.strikinglycdn.com/files/c2fe81a7-0e17-4f03-8ad5-ddcc6a52aa68/KINGrinder+K0.K1.K2-EN.pdf",
+        "title": "Kingrinder K0/K1/K2 manual: French press 140 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 94–140."
+      }
+    },
+    "coldbrew": {
+      "community": [109, 140],
+      "source": {
+        "url": "https://honestcoffeeguide.com/kingrinder-k2-grind-settings/",
+        "title": "Honest Coffee Guide: Kingrinder K0/K1/K2 grind settings (identical chart)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Remove the catch cup. Turn the adjustment nut clockwise until you feel resistance; do not overtighten. Note the number under the triangle marker as your reference. Turn counter-clockwise and count clicks from there.",
+      "pt-BR": "Remova o recipiente de pó. Gire a porca de ajuste no sentido horário até sentir resistência; não aperte demais. Anote o número sob a marca do triângulo como referência. Gire no sentido anti-horário e conte os cliques a partir dali."
+    },
+    "toleranceClicks": 2,
+    "unsafeBelow": 16
+  },
+  "espressoCapable": false,
+  "notes": "Internal adjustment, 40 clicks per rotation, 18 µm per click of burr travel (Kingrinder), not particle size. Kingrinder's manual lists Turkish and espresso as 'not recommended' on the K0, so no official band exists for either and the Turkish row is omitted. Burr diameter not published. The manual: 'Do not rotate the handle when the grind setting is at 0 or below 16 clicks.' Zero tolerance of 2 clicks is not stated by Kingrinder; it mirrors the K6."
+}

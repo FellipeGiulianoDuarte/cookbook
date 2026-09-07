@@ -1,0 +1,88 @@
+{
+  "id": "v60-onyx-guide",
+  "method": "v60",
+  "name": "Onyx Coffee Lab V60 Brew Guide",
+  "author": "Onyx Coffee Lab",
+  "style": "continuous",
+  "summary": {
+    "en": "Very hot water and three timed stages with no rest between them: a 30-second bloom, a minute of tight centre circles to 150 g, then a minute to 250 g. Done at 2:30.",
+    "pt-BR": "Água bem quente e três etapas cronometradas sem pausa entre elas: bloom de 30 segundos, um minuto de círculos fechados no centro até 150 g, depois um minuto até 250 g. Pronto em 2:30."
+  },
+  "dose": { "default": 15, "min": 10, "max": 20 },
+  "ratio": 16.67,
+  "grind": {
+    "band": "v60",
+    "pos": 0.5,
+    "texture": "medium-fine",
+    "microns": 550,
+    "note": "The brew-guide video says medium-fine. Onyx's per-coffee Hario recipes at 20 g / 300 g use 550 µm; their catalogue ranges 530–817 µm."
+  },
+  "temperature": {
+    "default": 99,
+    "note": "210 °F (about 99 °C) in the brew-guide video. Onyx's per-coffee recipes use 200–206 °F (93–97 °C)."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "text": {
+        "en": "Rinse the filter, discard the water, add {dose} g of coffee and level the bed",
+        "pt-BR": "Escalde o filtro, descarte a água, adicione {dose} g de café e nivele a cama"
+      }
+    },
+    {
+      "at": 0,
+      "until": 30,
+      "action": "bloom",
+      "water": { "share": 0.2 },
+      "text": {
+        "en": "Bloom: pour {water} g and break up any clumps with a stick. Let it sit until 0:30",
+        "pt-BR": "Bloom: despeje {water} g e desfaça os grumos com um palito. Deixe descansar até 0:30"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 30,
+      "until": 90,
+      "action": "pour",
+      "water": { "share": 0.6 },
+      "text": {
+        "en": "Pour to {water} g over a minute in heavy, tight circles in the centre",
+        "pt-BR": "Despeje até {water} g ao longo de um minuto, em círculos fechados e firmes no centro"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 90,
+      "until": 150,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour to {water} g over the next minute, finishing as the brew ends at 2:30",
+        "pt-BR": "Despeje até {water} g no minuto seguinte, terminando junto com a extração em 2:30"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 150,
+      "action": "serve",
+      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+    }
+  ],
+  "totalSeconds": 150,
+  "scaling": "linear",
+  "options": { "filter": "Hario V60 paper, rinsed" },
+  "source": {
+    "url": "https://beanbook.app/recipes/onyx-coffee-lab--onyx-coffee-lab-v60-brewguide__c0276b02-71b0-4485-8e64-a16dfc44ac2a",
+    "title": "BeanBook: Onyx Coffee Lab V60 brew guide (written transcription)",
+    "kind": "transcription",
+    "notes": "Video: youtube.com/watch?v=V30qg_pQ9mY. 15 g / 250 g (1:16.7) at 210 °F. The 550 µm grind comes from Onyx's per-coffee 20 g / 300 g Hario recipes on their brew-guides page, not from this video."
+  },
+  "alsoSee": [
+    {
+      "url": "https://onyxcoffeelab.com/pages/brew-guides",
+      "title": "Onyx Coffee Lab brew guides (per-coffee recipes with microns: 550 µm at 20 g / 300 g, 725 µm at 25 g / 400 g)",
+      "kind": "primary"
+    }
+  ]
+}

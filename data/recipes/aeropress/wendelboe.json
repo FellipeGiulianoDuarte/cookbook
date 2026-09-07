@@ -1,0 +1,100 @@
+{
+  "id": "aeropress-wendelboe",
+  "method": "aeropress",
+  "name": "Tim Wendelboe AeroPress",
+  "author": "Tim Wendelboe",
+  "style": "immersion",
+  "summary": {
+    "en": "Upright, rinsed filter, boiling water. Stir three times, plunger on top, stir again at one minute, press with your body weight.",
+    "pt-BR": "Na posição normal, filtro escaldado, água fervente. Mexa três vezes, êmbolo por cima, mexa de novo em um minuto, pressione com o peso do corpo."
+  },
+  "dose": { "default": 14, "min": 12, "max": 18 },
+  "ratio": 14.29,
+  "grind": {
+    "band": "aeropress",
+    "pos": 0.35,
+    "texture": "medium-fine",
+    "note": "Wendelboe: 'fine filter grind'. Aggregators: medium, 15–20 clicks on a Comandante."
+  },
+  "temperature": {
+    "default": 99,
+    "note": "Wendelboe's own page says boiling temperature. Aggregators list 96 °C."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "add",
+      "text": {
+        "en": "Rinse the paper filter under the tap for about 10 seconds, cap on, AeroPress upright on a large cup. Add {dose} g of light-roast coffee",
+        "pt-BR": "Escalde o filtro de papel na torneira por uns 10 segundos, tampa fechada, AeroPress em pé sobre uma xícara grande. Adicione {dose} g de café de torra clara"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour {water} g of boiling water. Start the timer as you begin",
+        "pt-BR": "Despeje {water} g de água fervente. Inicie o cronômetro ao começar"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 10,
+      "action": "stir",
+      "text": { "en": "Stir 3 times", "pt-BR": "Mexa 3 vezes" },
+      "cue": "stir"
+    },
+    {
+      "at": 15,
+      "action": "cap",
+      "text": {
+        "en": "Place the plunger on top to stop the coffee draining",
+        "pt-BR": "Coloque o êmbolo por cima para parar o escoamento"
+      },
+      "cue": "plunger"
+    },
+    {
+      "at": 20,
+      "action": "wait",
+      "text": { "en": "Wait until 1:00", "pt-BR": "Aguarde até 1:00" }
+    },
+    {
+      "at": 60,
+      "action": "stir",
+      "text": {
+        "en": "Remove the plunger and stir 3 times, front to back",
+        "pt-BR": "Retire o êmbolo e mexa 3 vezes, de frente para trás"
+      },
+      "cue": "stir"
+    },
+    {
+      "at": 65,
+      "until": 85,
+      "action": "press",
+      "text": {
+        "en": "Press with your body weight, about 20 seconds. Don't over press",
+        "pt-BR": "Pressione com o peso do corpo, cerca de 20 segundos. Não pressione demais"
+      },
+      "cue": "press"
+    },
+    {
+      "at": 90,
+      "action": "serve",
+      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+    }
+  ],
+  "totalSeconds": 90,
+  "scaling": "linear",
+  "options": {
+    "orientation": "upright",
+    "filter": "1 paper, rinsed under the tap for about 10 s"
+  },
+  "source": {
+    "url": "https://timwendelboe.no/pages/how-to-brew-with-an-aeropress",
+    "title": "Tim Wendelboe: How to brew with an AeroPress",
+    "kind": "primary",
+    "notes": "14 g / 200 g = 1:14.3. The page says boiling water; aggregator transcriptions list 96 °C. Grind is 'fine filter grind'; aggregators translate it as medium, 15–20 clicks on a Comandante. Timings for the first stir, plunger placement and the press are read from the page's sequence, not stated as clock times."
+  }
+}

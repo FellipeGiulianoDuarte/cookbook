@@ -1,0 +1,93 @@
+{
+  "id": "timemore-c2",
+  "brand": "Timemore",
+  "model": "Chestnut C2",
+  "aliases": ["Timemore C2S", "Timemore Chestnut C2S"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "clicks",
+  "clicksPerRotation": 12,
+  "travelMicronsPerClick": 80,
+  "burr": "38 mm standard CNC stainless conical (pre-S2C)",
+  "range": [6, 36],
+  "bands": {
+    "turkish": {
+      "community": [2, 6],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community",
+        "notes": "Timemore says never grind at 1–6 clicks; the burrs may touch."
+      }
+    },
+    "espresso": {
+      "community": [6, 12],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community",
+        "notes": "Timemore forbids 1–6 clicks (https://www.timemore.cn/en/index.php?c=show&id=1). 80 µm per click is too coarse a step for espresso dialing."
+      }
+    },
+    "moka": {
+      "community": [12, 20],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [11, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community",
+        "notes": "Full Honest Coffee Guide row (covers concentrate to long steep)."
+      }
+    },
+    "v60": {
+      "community": [13, 22],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community"
+      }
+    },
+    "pourover": {
+      "community": [13, 29],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community"
+      }
+    },
+    "frenchpress": {
+      "community": [22, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community"
+      }
+    },
+    "coldbrew": {
+      "community": [26, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c2-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C2 grind settings",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the adjustment dial clockwise until it cannot move further. That is the start point. Count clicks counter-clockwise from there.",
+      "pt-BR": "Gire o ajuste no sentido horário até não se mover mais. Esse é o ponto inicial. Conte os cliques no sentido anti-horário a partir dali."
+    },
+    "toleranceClicks": 1,
+    "unsafeBelow": 6
+  },
+  "espressoCapable": true,
+  "notes": "80 µm per click is the burr travel Timemore lists for its older standard-burr grinders (Timemore knowledge base), not particle size. 12 clicks per rotation, about 36 clicks total. C2S shares burrs and clicks with C2. No manufacturer click ranges were found for the C2; every band is Honest Coffee Guide.",
+  "hcg": { "micronRange": [0, 950], "ticks": 30 }
+}

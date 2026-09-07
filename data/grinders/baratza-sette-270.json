@@ -1,0 +1,79 @@
+{
+  "id": "baratza-sette-270",
+  "brand": "Baratza",
+  "model": "Sette 270",
+  "aliases": ["Baratza Sette 270Wi"],
+  "kind": "electric",
+  "adjustment": "dual",
+  "notation": "dial",
+  "burr": "40 mm conical steel",
+  "range": [1, 31],
+  "bands": {
+    "espresso": {
+      "community": [1, 7],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-sette-270-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Sette 270 grind settings (macro 1–31)",
+        "kind": "community"
+      }
+    },
+    "moka": {
+      "community": [7, 18],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-sette-270-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Sette 270 grind settings (macro 1–31)",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [5, 31],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-sette-270-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Sette 270 grind settings (macro 1–31)",
+        "kind": "community"
+      }
+    },
+    "v60": {
+      "community": [9, 20],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-sette-270-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Sette 270 grind settings (macro 1–31)",
+        "kind": "community"
+      }
+    },
+    "pourover": {
+      "community": [9, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-sette-270-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Sette 270 grind settings (macro 1–31)",
+        "kind": "community"
+      }
+    },
+    "frenchpress": {
+      "community": [21, 31],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-sette-270-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Sette 270 grind settings (macro 1–31)",
+        "kind": "community"
+      }
+    },
+    "coldbrew": {
+      "community": [25, 31],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-sette-270-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Sette 270 grind settings (macro 1–31)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "There is no zero to find: the macro ring is printed A–E with 1–9 inside each letter, and the finest macro position is the first. Baratza sells a shim kit to recalibrate the range.",
+      "pt-BR": "Não há zero a ser encontrado: o anel macro é impresso de A a E com 1 a 9 dentro de cada letra, e a posição macro mais fina é a primeira. A Baratza vende um kit de calços para recalibrar a faixa."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": true,
+  "notes": "Values are Honest Coffee Guide's macro numbering 1–31 across the 30 macro steps (Baratza prints A–E × 1–9). A separate stepless micro ring 1–9 sits inside each macro step, which is how Baratza gets '270 settings'; the micro ring is not modelled here, so use it for fine-tuning around the macro value. Honest Coffee Guide's computed slope is about 24 µm per macro step ((950 − 230) ÷ 30), a particle-size estimate, not burr travel. Baratza product page: baratza.com/en-us/product/settetm-270-zcg1270.",
+  "hcg": { "micronRange": [230, 950], "ticks": 30 }
+}

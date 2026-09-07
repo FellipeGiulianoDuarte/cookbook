@@ -1,0 +1,90 @@
+{
+  "id": "timemore-chestnut-x",
+  "brand": "Timemore",
+  "model": "Chestnut X",
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "dial",
+  "travelMicronsPerClick": 80,
+  "burr": "42 mm S2C 860, 440 stainless conical (HRC 58.5–60)",
+  "range": [3, 24],
+  "bands": {
+    "turkish": {
+      "community": [0, 3.6],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community",
+        "notes": "Honest Coffee Guide: avoid settings below 3."
+      }
+    },
+    "espresso": {
+      "community": [2.8, 8],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community",
+        "notes": "Honest Coffee Guide: avoid settings below 3."
+      }
+    },
+    "moka": {
+      "community": [7.6, 15.4],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [6.4, 23.4],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community",
+        "notes": "Full Honest Coffee Guide row (covers concentrate to long steep)."
+      }
+    },
+    "v60": {
+      "community": [8.6, 16.4],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community"
+      }
+    },
+    "pourover": {
+      "community": [8.8, 22.6],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community"
+      }
+    },
+    "frenchpress": {
+      "community": [16.4, 24],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community"
+      }
+    },
+    "coldbrew": {
+      "community": [19.2, 24],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-chestnut-x-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore Chestnut X grind settings",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the macro dial clockwise until it cannot move further. That is the start point. Read the number on the macro dial from there.",
+      "pt-BR": "Gire o dial principal no sentido horário até não se mover mais. Esse é o ponto inicial. Leia o número no dial principal a partir dali."
+    },
+    "toleranceClicks": 1
+  },
+  "espressoCapable": true,
+  "notes": "Values are Honest Coffee Guide numbers on the 24-position macro dial; decimals fall on the 5-step micro dial (each micro step 0.2 of a macro step). Macro step 0.08 mm = 80 µm and micro step 0.015 mm = 15 µm of burr travel (Timemore knowledge base), not particle size; 120 positions total. Honest Coffee Guide says avoid settings below 3; Timemore's own click ranges for the Chestnut X were not found.",
+  "hcg": { "micronRange": [80, 980], "ticks": 24 }
+}

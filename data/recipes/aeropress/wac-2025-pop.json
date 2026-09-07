@@ -1,0 +1,112 @@
+{
+  "id": "aeropress-wac-2025-pop",
+  "method": "aeropress",
+  "name": "World AeroPress Championship 2025 winner",
+  "author": "Némo Pop",
+  "year": 2025,
+  "style": "concentrate",
+  "summary": {
+    "en": "Upright with the Flow Control cap and two papers. Sifted grind, 100 g at 84 °C, one cross stir at 0:25, press at 0:50 onto 70 g of 50 °C water already in the carafe.",
+    "pt-BR": "Na posição normal com a tampa Flow Control e dois papéis. Moagem peneirada, 100 g a 84 °C, uma mexida em cruz em 0:25, pressione em 0:50 sobre 70 g de água a 50 °C já na jarra."
+  },
+  "dose": { "default": 18, "min": 18, "max": 18 },
+  "ratio": 5.56,
+  "bypass": { "water": { "grams": 70 }, "tempC": 50 },
+  "grind": {
+    "band": "aeropress",
+    "pos": 0.6,
+    "texture": "medium",
+    "note": "Comandante Trailmaster x25, 31 clicks, sifted at 200 µm to remove the fines. Position is an estimate for a medium-coarse setting; the WAC page gives no particle size."
+  },
+  "temperature": {
+    "default": 84,
+    "note": "Brew water 84 °C at 125 ppm. Bypass water 50 °C."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "dilute",
+      "text": {
+        "en": "Before brewing, pour 70 g of water at 50 °C into the carafe. Flow Control Filter Cap with 2 paper filters, AeroPress upright on the carafe",
+        "pt-BR": "Antes de preparar, despeje 70 g de água a 50 °C na jarra. Tampa Flow Control com 2 filtros de papel, AeroPress em pé sobre a jarra"
+      },
+      "cue": "dilute"
+    },
+    {
+      "at": 0,
+      "action": "add",
+      "text": {
+        "en": "Add {dose} g of coffee",
+        "pt-BR": "Adicione {dose} g de café"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour {water} g of water at 84 °C, wetting all the grounds. Start the timer as you begin",
+        "pt-BR": "Despeje {water} g de água a 84 °C molhando todo o café. Inicie o cronômetro ao começar"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 10,
+      "action": "wait",
+      "text": { "en": "Wait until 0:25", "pt-BR": "Aguarde até 0:25" }
+    },
+    {
+      "at": 25,
+      "action": "stir",
+      "text": {
+        "en": "Stir north–south, north–south, then west–east, west–east",
+        "pt-BR": "Mexa norte–sul, norte–sul, depois oeste–leste, oeste–leste"
+      },
+      "cue": "stir"
+    },
+    {
+      "at": 30,
+      "action": "wait",
+      "text": { "en": "Wait until 0:50", "pt-BR": "Aguarde até 0:50" }
+    },
+    {
+      "at": 50,
+      "until": 70,
+      "action": "press",
+      "text": {
+        "en": "Press gently, about 20 seconds",
+        "pt-BR": "Pressione de leve, cerca de 20 segundos"
+      },
+      "cue": "press"
+    },
+    {
+      "at": 75,
+      "action": "serve",
+      "text": {
+        "en": "Done. Swirl the carafe and serve, about 170 g in the cup",
+        "pt-BR": "Pronto. Gire a jarra e sirva, cerca de 170 g na xícara"
+      }
+    }
+  ],
+  "totalSeconds": 75,
+  "scaling": "fixed",
+  "options": {
+    "orientation": "upright",
+    "filter": "Flow Control Filter Cap + 2 paper filters"
+  },
+  "source": {
+    "url": "https://worldaeropresschampionship.com/pages/recipes",
+    "title": "World AeroPress Championship: winning recipes (2025, Némo Pop, Australia)",
+    "year": 2025,
+    "kind": "primary",
+    "notes": "Competition dose is fixed at 18 g. The page gives the pour as 'wetting all grounds' without a duration; 10 s is this app's choice. Total time is given as about 1:10–1:20; 1:15 is used."
+  },
+  "alsoSee": [
+    {
+      "url": "https://aeropress.com/blogs/w-a-c-aeropress-recipes",
+      "title": "AeroPress mirror of the W.A.C. recipes",
+      "kind": "primary"
+    }
+  ]
+}

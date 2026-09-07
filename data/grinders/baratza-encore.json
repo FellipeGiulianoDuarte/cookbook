@@ -1,0 +1,99 @@
+{
+  "id": "baratza-encore",
+  "brand": "Baratza",
+  "model": "Encore",
+  "kind": "electric",
+  "adjustment": "stepped",
+  "notation": "dial",
+  "burr": "40 mm conical steel (M2)",
+  "range": [1, 40],
+  "bands": {
+    "espresso": {
+      "official": [8, 8],
+      "community": [4, 10],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-grind-size-settings",
+        "title": "Baratza grind-settings table (Encore and Virtuoso+): espresso 8",
+        "kind": "primary",
+        "notes": "Baratza's single starting point; the same table is printed in the Virtuoso+ manual p.6. Roasty Coffee 4–10. Honest Coffee Guide 0–5 is nominal: the Encore is not considered an espresso-level grinder."
+      }
+    },
+    "moka": {
+      "community": [5, 17],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-encore-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Encore grind settings",
+        "kind": "community",
+        "notes": "Roasty Coffee 10–12."
+      }
+    },
+    "aeropress": {
+      "official": [12, 12],
+      "community": [3, 29],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-grind-size-settings",
+        "title": "Baratza grind-settings table (Encore and Virtuoso+): AeroPress 12",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 3–29 (covers concentrate to long steep). Roasty Coffee 12–14 for short brews, 20–22 for long steeps."
+      }
+    },
+    "v60": {
+      "official": [15, 15],
+      "community": [7, 18],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-grind-size-settings",
+        "title": "Baratza grind-settings table (Encore and Virtuoso+): Hario V60 15",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 7–18; Roasty Coffee 14–16."
+      }
+    },
+    "pourover": {
+      "community": [7, 28],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-encore-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Encore grind settings (pour over 7–28)",
+        "kind": "community",
+        "notes": "Baratza's table gives Automatic brewer 18."
+      }
+    },
+    "chemex": {
+      "official": [20, 20],
+      "community": [18, 22],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-grind-size-settings",
+        "title": "Baratza grind-settings table (Encore and Virtuoso+): Chemex 20",
+        "kind": "primary",
+        "notes": "Roasty Coffee 18–22. Honest Coffee Guide has no Chemex row."
+      }
+    },
+    "frenchpress": {
+      "official": [28, 28],
+      "community": [19, 40],
+      "source": {
+        "url": "https://www.frenchpresscoffee.com/blogs/perfect-cup-of-coffee/baratza-grind-size-settings",
+        "title": "Baratza grind-settings table (Encore and Virtuoso+): French press 28",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 19–40; Roasty Coffee 20–28."
+      }
+    },
+    "coldbrew": {
+      "community": [24, 40],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-encore-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Encore grind settings",
+        "kind": "community",
+        "notes": "Roasty Coffee 24–30."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "There is no zero to find: setting 1 is the finest position on the printed 1–40 hopper ring. Calibration is done with the adjustable inner ring under the hopper or with Baratza's shim kit; one shim moves the whole range about 5 settings finer.",
+      "pt-BR": "Não há zero a ser encontrado: a posição 1 é a mais fina do anel impresso de 1 a 40 no reservatório. A calibração é feita pelo anel interno ajustável sob o reservatório ou com o kit de calços da Baratza; um calço desloca toda a faixa cerca de 5 posições para o fino."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": true,
+  "notes": "Not an espresso-level grinder (Honest Coffee Guide); Baratza's espresso starting point 8 is a nominal entry in its table. Honest Coffee Guide's computed slope is about 24 µm per setting ((1200 − 250) ÷ 40); that is a particle-size estimate, not burr travel. Calibration reference: coffeegrinderguide.com/baratza-encore-maintenance/.",
+  "hcg": { "micronRange": [250, 1200], "ticks": 40 }
+}

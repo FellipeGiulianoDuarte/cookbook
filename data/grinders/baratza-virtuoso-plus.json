@@ -1,0 +1,97 @@
+{
+  "id": "baratza-virtuoso-plus",
+  "brand": "Baratza",
+  "model": "Virtuoso+",
+  "aliases": ["Baratza Virtuoso Plus"],
+  "kind": "electric",
+  "adjustment": "stepped",
+  "notation": "dial",
+  "burr": "40 mm conical steel (M3)",
+  "range": [1, 40],
+  "bands": {
+    "espresso": {
+      "official": [8, 8],
+      "community": [1, 7],
+      "source": {
+        "url": "https://assets.breville.com/ZCG587/manual-virtuosoplus-en-v1-6.pdf",
+        "title": "Virtuoso+ Operations Manual v1.6 p.6: suggested settings, espresso 8",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide lists 0–7; the dial starts at 1, so the community band is clamped to 1–7."
+      }
+    },
+    "moka": {
+      "community": [7, 18],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-virtuoso-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Virtuoso+ grind settings",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "official": [12, 12],
+      "community": [5, 30],
+      "source": {
+        "url": "https://assets.breville.com/ZCG587/manual-virtuosoplus-en-v1-6.pdf",
+        "title": "Virtuoso+ Operations Manual v1.6 p.6: suggested settings, AeroPress 12",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 5–30."
+      }
+    },
+    "v60": {
+      "official": [15, 15],
+      "community": [8, 20],
+      "source": {
+        "url": "https://assets.breville.com/ZCG587/manual-virtuosoplus-en-v1-6.pdf",
+        "title": "Virtuoso+ Operations Manual v1.6 p.6: suggested settings, Hario V60 15",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 8–20."
+      }
+    },
+    "pourover": {
+      "community": [9, 29],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-virtuoso-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Virtuoso+ grind settings (pour over 9–29)",
+        "kind": "community",
+        "notes": "The manual gives Automatic brewer 18."
+      }
+    },
+    "chemex": {
+      "official": [20, 20],
+      "source": {
+        "url": "https://assets.breville.com/ZCG587/manual-virtuosoplus-en-v1-6.pdf",
+        "title": "Virtuoso+ Operations Manual v1.6 p.6: suggested settings, Chemex 20",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide has no Chemex row."
+      }
+    },
+    "frenchpress": {
+      "official": [28, 28],
+      "community": [20, 40],
+      "source": {
+        "url": "https://assets.breville.com/ZCG587/manual-virtuosoplus-en-v1-6.pdf",
+        "title": "Virtuoso+ Operations Manual v1.6 p.6: suggested settings, French press 28",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 20–40."
+      }
+    },
+    "coldbrew": {
+      "community": [24, 40],
+      "source": {
+        "url": "https://honestcoffeeguide.com/baratza-virtuoso-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Baratza Virtuoso+ grind settings",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Ships factory-calibrated. There is no zero to find: setting 1 is the finest position on the printed 1–40 hopper ring (Operations Manual v1.6 p.5).",
+      "pt-BR": "Sai de fábrica calibrado. Não há zero a ser encontrado: a posição 1 é a mais fina do anel impresso de 1 a 40 no reservatório (manual de operação v1.6, p.5)."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": true,
+  "notes": "Baratza's suggested settings are the same table as the Encore's. Honest Coffee Guide's computed slope is about 25.6 µm per setting ((1200 − 200) ÷ 39); that is a particle-size estimate, not burr travel.",
+  "hcg": { "micronRange": [200, 1200], "ticks": 40 }
+}
