@@ -5,7 +5,7 @@ export default function Home() {
         Cookbook
       </p>
       <h1 className="font-display text-5xl leading-[1.02] tracking-tight text-fg sm:text-6xl">
-        Brew it <span className="text-accent">right</span>, every time.
+        Brew it <span className="text-accent">right</span> every time.
       </h1>
       <p className="max-w-md text-balance text-fg-muted">
         V60 and AeroPress recipes from their authors, the setting for your

@@ -1,0 +1,131 @@
+{
+  "id": "v60-hoffmann-ultimate",
+  "method": "v60",
+  "name": "Ultimate V60 Technique",
+  "author": "James Hoffmann",
+  "year": 2020,
+  "style": "two-pour",
+  "summary": {
+    "en": "Two long pours after the bloom, a spoon stir and a swirl. Low agitation, clean and sweet. Best at 20 g and above.",
+    "pt-BR": "Dois despejos longos depois do bloom, uma mexida com colher e um giro. Pouca agitação, xícara limpa e doce. Melhor a partir de 20 g."
+  },
+  "dose": { "default": 30, "min": 20, "max": 45 },
+  "ratio": 16.67,
+  "grind": {
+    "band": "v60",
+    "pos": 0.35,
+    "texture": "medium-fine",
+    "note": "Hoffmann: medium-fine. Grind coarser for darker roasts."
+  },
+  "temperature": {
+    "default": 96,
+    "byRoast": { "light": 100, "medium": 96, "dark": 90 },
+    "note": "The video says: the hotter the better, especially for light roasts; cooler for darker roasts. The numeric values are from written transcriptions (Hario Europe lists 97 °C, Honest Coffee Guide 100 °C)."
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "text": {
+        "en": "Rinse the filter with water just off the boil, discard it, add {dose} g of coffee and make a small well in the centre",
+        "pt-BR": "Escalde o filtro com água recém-fervida, descarte, adicione {dose} g de café e faça uma pequena cova no centro"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": { "times": 2 },
+      "text": {
+        "en": "Bloom: pour {water} g and swirl the brewer until every ground is wet",
+        "pt-BR": "Bloom: despeje {water} g e gire o suporte até molhar todo o café"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 10,
+      "action": "wait",
+      "text": { "en": "Rest until 0:45", "pt-BR": "Aguarde até 0:45" }
+    },
+    {
+      "at": 45,
+      "until": 75,
+      "action": "pour",
+      "water": { "share": 0.6 },
+      "text": {
+        "en": "Pour to {water} g over 30 seconds (60 % of the total)",
+        "pt-BR": "Despeje até {water} g em 30 segundos (60 % do total)"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 75,
+      "until": 105,
+      "action": "pour",
+      "water": { "share": 1 },
+      "text": {
+        "en": "Pour slowly to {water} g, keeping the cone topped up",
+        "pt-BR": "Despeje devagar até {water} g, mantendo o cone cheio"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 105,
+      "action": "stir",
+      "text": {
+        "en": "Stir once clockwise and once counter-clockwise with a spoon to knock grounds off the paper",
+        "pt-BR": "Mexa uma vez em cada sentido com uma colher para soltar o café do papel"
+      },
+      "cue": "stir"
+    },
+    {
+      "at": 135,
+      "action": "swirl",
+      "text": {
+        "en": "When the water has dropped a little, give the brewer a gentle swirl to flatten the bed",
+        "pt-BR": "Quando a água baixar um pouco, gire o suporte de leve para nivelar a cama"
+      },
+      "cue": "swirl"
+    },
+    {
+      "at": 150,
+      "action": "drawdown",
+      "text": {
+        "en": "Let it drain. Aim for a flat bed",
+        "pt-BR": "Deixe escoar. O objetivo é uma cama plana"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 210,
+      "action": "serve",
+      "text": {
+        "en": "Done. Swirl the server and serve",
+        "pt-BR": "Pronto. Gire a jarra e sirva"
+      }
+    }
+  ],
+  "totalSeconds": 210,
+  "scaling": "linear",
+  "options": { "filter": "Hario V60 paper, plastic V60 02 recommended" },
+  "source": {
+    "url": "https://www.hario-usa.com/blogs/recipes-and-more-from-friends/james-hoffmann-uitimate-v60-technique",
+    "title": "Hario USA: James Hoffmann Ultimate V60 Technique (written transcription)",
+    "year": 2020,
+    "kind": "transcription",
+    "notes": "Video: youtube.com/watch?v=AI4ynXzkSQo. Ratio is 30 g / 500 g = 1:16.7, not 1:15 as some pages state. Hoffmann says the technique underperforms below about 20 g; use the 1-cup recipe for 15 g."
+  },
+  "alsoSee": [
+    {
+      "url": "https://www.hario-europe.com/blogs/hario-community/v60-ambassadors-james-hoffmann",
+      "title": "Hario Europe ambassador Q&A (lists 97 °C)",
+      "year": 2021,
+      "kind": "transcription"
+    },
+    {
+      "url": "https://honestcoffeeguide.com/brew-recipes/james-hoffmann-v60/",
+      "title": "Honest Coffee Guide transcription (lists 100 °C)",
+      "kind": "transcription"
+    }
+  ]
+}

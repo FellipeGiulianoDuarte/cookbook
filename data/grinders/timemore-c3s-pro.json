@@ -1,0 +1,108 @@
+{
+  "id": "timemore-c3s-pro",
+  "brand": "Timemore",
+  "model": "Chestnut C3S Pro",
+  "aliases": ["Timemore C3S", "Timemore C3", "Timemore C3 Pro"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "clicks",
+  "clicksPerRotation": 12,
+  "travelMicronsPerClick": 83,
+  "burr": "38 mm S2C 660 stainless conical (SUS420, HRC 55–58)",
+  "range": [6, 36],
+  "bands": {
+    "turkish": {
+      "community": [2, 5],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3s-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3S Pro grind settings",
+        "kind": "community",
+        "notes": "Below 6 clicks the burrs may touch; Timemore says never grind at 1–6 clicks."
+      }
+    },
+    "espresso": {
+      "community": [7, 10],
+      "source": {
+        "url": "https://www.timemore.cn/en/index.php?c=show&id=1",
+        "title": "Timemore knowledge base: why would the burrs contact?",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide lists 5–10, but Timemore forbids 1–6 clicks. Reviewers find one usable click near 8 (7 chokes, 9 runs fast). 83 µm per click is too coarse a step for espresso dialing."
+      }
+    },
+    "moka": {
+      "community": [10, 17],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3s-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3S Pro grind settings",
+        "kind": "community",
+        "notes": "Reviewers: 9–11 (Craft Coffee Spot), 11–14 (BrewMark), 11–16 (coffeemaster)."
+      }
+    },
+    "aeropress": {
+      "community": [10, 17],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3s-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3S Pro grind settings",
+        "kind": "community",
+        "notes": "Honest Coffee Guide's full AeroPress row is 9–25 (covers concentrate to long steep). Reviewer centre 10–17: Craft Coffee Spot 9–11, Coffee Locator 10, Beean 13–17, BrewMark 14–18."
+      }
+    },
+    "v60": {
+      "official": [13, 16],
+      "community": [11, 18],
+      "source": {
+        "url": "https://www.brewcoffeehome.com/timemore-c3-review/",
+        "title": "Brew Coffee Home: Timemore C3 review, quoting Timemore's printed dial guide (pour-over 13–16)",
+        "kind": "primary",
+        "notes": "Official range is Timemore's printed guide as quoted by reviewers; the manual PDF was not directly readable. Honest Coffee Guide 11–18; reviewers 12–18, centre 14–16."
+      }
+    },
+    "pourover": {
+      "official": [13, 16],
+      "community": [11, 24],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3s-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3S Pro grind settings (pour over 11–24)",
+        "kind": "community"
+      }
+    },
+    "chemex": {
+      "community": [18, 22],
+      "source": {
+        "url": "https://coffeemaster.app/guides/timemore-chestnut-c3s-pro-grind-settings",
+        "title": "Reviewer consensus for Chemex on the C3 family (Coffee Locator 14, coffeemaster 19–20, BrewMark 22–24)",
+        "kind": "community",
+        "notes": "No official or Honest Coffee Guide Chemex row exists for this grinder."
+      }
+    },
+    "frenchpress": {
+      "official": [17, 20],
+      "community": [19, 25],
+      "source": {
+        "url": "https://homecoffeeexpert.com/timemore-c3-review/",
+        "title": "Home Coffee Expert: Timemore C3 review, quoting the printed guide (French press to 20)",
+        "kind": "primary",
+        "notes": "Timemore's guide caps French press at 20; Honest Coffee Guide 19–25; reviewers 17–27."
+      }
+    },
+    "coldbrew": {
+      "community": [22, 25],
+      "source": {
+        "url": "https://honestcoffeeguide.com/timemore-c3s-pro-grind-settings/",
+        "title": "Honest Coffee Guide: Timemore C3S Pro grind settings",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the adjustment dial clockwise until it stops. That is zero. Count clicks counter-clockwise from there.",
+      "pt-BR": "Gire o ajuste no sentido horário até travar. Esse é o zero. Conte os cliques no sentido anti-horário a partir dali."
+    },
+    "toleranceClicks": 1,
+    "unsafeBelow": 6
+  },
+  "espressoCapable": true,
+  "notes": "83 µm per click is burr travel (12 clicks × 83 µm = 1 mm thread pitch), not particle size. The Pro adds a folding handle; burrs, thread and clicks are the same as C3S and C3. About 36 clicks total.",
+  "hcg": { "micronRange": [0, 950], "ticks": 25 }
+}

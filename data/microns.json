@@ -1,0 +1,27 @@
+{
+  "bands": {
+    "turkish": [40, 220],
+    "espresso": [180, 380],
+    "moka": [360, 660],
+    "aeropress": [320, 960],
+    "v60": [400, 700],
+    "pourover": [410, 930],
+    "chemex": [600, 900],
+    "frenchpress": [690, 1300],
+    "coldbrew": [800, 1400]
+  },
+  "textures": {
+    "extra-fine": [0, 200],
+    "fine": [200, 400],
+    "medium-fine": [400, 600],
+    "medium": [600, 800],
+    "medium-coarse": [800, 1000],
+    "coarse": [1000, 1200]
+  },
+  "source": {
+    "url": "https://honestcoffeeguide.com/coffee-grind-size-chart/",
+    "title": "Honest Coffee Guide: coffee grind size chart",
+    "kind": "community",
+    "notes": "Estimated particle-size ranges compiled from recipes and reader feedback, not laser-diffraction measurements. Chemex has no row on the chart; 600–900 is the pour-over upper half (JayArr Coffee lists the same). Used only as a secondary label and as the fallback when a grinder has no published band."
+  }
+}

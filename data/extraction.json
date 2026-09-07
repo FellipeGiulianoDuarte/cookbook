@@ -1,0 +1,251 @@
+{
+  "chart": {
+    "tdsAxis": [0.8, 1.6],
+    "eyAxis": [14, 26],
+    "sca": {
+      "tds": [1.15, 1.35],
+      "ey": [18, 22],
+      "ratioGPerL": [49.5, 60.5],
+      "tempC": [90, 96],
+      "contactSeconds": [240, 480],
+      "label": {
+        "en": "Classic Standard (SCA)",
+        "pt-BR": "Padrão clássico (SCA)"
+      },
+      "source": {
+        "url": "https://www.scribd.com/document/428096402/Golden-cup-standard",
+        "title": "SCAA Golden Cup Standard (rev. 2015-12-23): 55 g/L ± 10 %, 93 ± 3 °C, TDS 1.15–1.35 %, extraction 18–22 %, contact 4–8 min",
+        "year": 2015,
+        "kind": "primary",
+        "notes": "The SCA does not link the PDF from its standards index; this is a hosted copy. Axes from Lingle, The Coffee Brewing Handbook (SCAA 2011), as reproduced in Guinard et al. 2023 Fig. 1. The label follows Guinard 2023: 'Classic Standard', not 'ideal'."
+      }
+    },
+    "scae": {
+      "tds": [1.2, 1.45],
+      "source": {
+        "url": "https://coffeeperception.wordpress.com/2017/05/14/understanding-the-coffee-control-brewing-chart/",
+        "title": "SCAE (Europe) brewing chart: TDS 1.20–1.45 %, extraction 18–22 %",
+        "kind": "community",
+        "notes": "Stored for reference only; the app draws the SCA box."
+      }
+    }
+  },
+  "lrr": { "percolation": 2.0, "drip": 2.1 },
+  "corners": [
+    {
+      "id": "high-tds-low-ey",
+      "tds": "high",
+      "ey": "low",
+      "attributes": [
+        { "en": "acid / sour", "pt-BR": "ácido / azedo" },
+        { "en": "citrus", "pt-BR": "cítrico" },
+        { "en": "berry, red fruit", "pt-BR": "frutas vermelhas" }
+      ]
+    },
+    {
+      "id": "high-tds-high-ey",
+      "tds": "high",
+      "ey": "high",
+      "attributes": [
+        { "en": "bitter", "pt-BR": "amargo" },
+        { "en": "astringent", "pt-BR": "adstringente" },
+        { "en": "roasted, burnt / ash", "pt-BR": "torrado, queimado / cinzas" }
+      ]
+    },
+    {
+      "id": "low-tds-high-ey",
+      "tds": "low",
+      "ey": "high",
+      "attributes": [{ "en": "black tea", "pt-BR": "chá preto" }]
+    },
+    {
+      "id": "low-tds-low-ey",
+      "tds": "low",
+      "ey": "low",
+      "attributes": [
+        {
+          "en": "'sweet' (an aroma-driven impression, not sugar)",
+          "pt-BR": "'doce' (impressão vinda do aroma, não de açúcar)"
+        }
+      ]
+    }
+  ],
+  "directions": [
+    {
+      "attribute": { "en": "Bitterness", "pt-BR": "Amargor" },
+      "withTds": "up",
+      "withEy": "flat",
+      "note": "Batali 2020 Table S3: F = 49.2 vs TDS; not significant vs EY within 16–24 %."
+    },
+    {
+      "attribute": { "en": "Astringency", "pt-BR": "Adstringência" },
+      "withTds": "up",
+      "withEy": "up",
+      "note": "F = 77.6 vs TDS, F = 5.7 vs EY. It follows strength far more than yield."
+    },
+    {
+      "attribute": { "en": "Body (viscous)", "pt-BR": "Corpo (viscoso)" },
+      "withTds": "up",
+      "withEy": "flat"
+    },
+    {
+      "attribute": { "en": "Sourness, citrus", "pt-BR": "Acidez, cítrico" },
+      "withTds": "up",
+      "withEy": "down",
+      "note": "Largest effect in the study: 20 points out of 100 between high-TDS/low-EY and low-TDS/high-EY."
+    },
+    {
+      "attribute": { "en": "'Sweet' impression", "pt-BR": "Impressão 'doce'" },
+      "withTds": "down",
+      "withEy": "down",
+      "note": "Inverse to TDS in every UC Davis study. No sugar above threshold in any fraction (Batali et al. 2020, J Sci Food Agric)."
+    },
+    {
+      "attribute": {
+        "en": "Roasted, ashy, rubber",
+        "pt-BR": "Torrado, cinzas, borracha"
+      },
+      "withTds": "up",
+      "withEy": "flat"
+    },
+    {
+      "attribute": { "en": "Black tea", "pt-BR": "Chá preto" },
+      "withTds": "down",
+      "withEy": "up"
+    }
+  ],
+  "timeBands": [
+    {
+      "method": "v60",
+      "label": { "en": "V60, about 22 g", "pt-BR": "V60, cerca de 22 g" },
+      "seconds": [150, 210],
+      "source": {
+        "url": "https://coffeeadastra.com/2018/11/30/brewing-better-coffee/",
+        "title": "Coffee ad Astra (Jonathan Gagné): typical V60 total time 2:30–3:30",
+        "year": 2018,
+        "kind": "community"
+      }
+    },
+    {
+      "method": "v60",
+      "label": {
+        "en": "SCA drip contact time",
+        "pt-BR": "Tempo de contato SCA (filtro)"
+      },
+      "seconds": [240, 480],
+      "source": {
+        "url": "https://www.scribd.com/document/428096402/Golden-cup-standard",
+        "title": "SCAA Golden Cup Standard: contact time 4–8 min (batch brewers)",
+        "year": 2015,
+        "kind": "primary"
+      }
+    },
+    {
+      "method": "aeropress",
+      "label": {
+        "en": "AeroPress, published recipes",
+        "pt-BR": "AeroPress, receitas publicadas"
+      },
+      "seconds": [60, 240],
+      "source": {
+        "url": "https://worldaeropresschampionship.com/pages/recipes",
+        "title": "World AeroPress Championship recipes 2018–2025 (1:00–2:30) and Hoffmann (3:00)",
+        "kind": "primary"
+      }
+    }
+  ],
+  "facts": [
+    {
+      "text": {
+        "en": "Between 87 and 93 °C, at equal strength and extraction, a trained panel found no difference in taste (only 'nutty' moved by about 1 point in 100). Temperature changes how fast you get there: about 40 s less brew time per +6 °C to hold extraction.",
+        "pt-BR": "Entre 87 e 93 °C, com a mesma força e extração, um painel treinado não achou diferença de sabor (só 'nozes' mudou cerca de 1 ponto em 100). A temperatura muda a velocidade: cerca de 40 s menos por +6 °C para manter a extração."
+      },
+      "source": {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7536440/",
+        "title": "Batali, Ristenpart, Guinard 2020, Sci Rep 10:16450 (open access), Tables S1 and S3",
+        "year": 2020,
+        "kind": "primary"
+      }
+    },
+    {
+      "text": {
+        "en": "A finer grind raises extraction at equal time: going from 1115 µm to 770 µm average particle size moved extraction from 16 % to 20–24 % at equal strength in a 7-minute drip brew.",
+        "pt-BR": "Moagem mais fina aumenta a extração no mesmo tempo: ir de 1115 µm para 770 µm de tamanho médio levou a extração de 16 % para 20–24 % com a mesma força em um filtro de 7 minutos."
+      },
+      "source": {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7536440/",
+        "title": "Batali 2020, Table S1 (laser-diffraction particle sizes, VST refractometer)",
+        "year": 2020,
+        "kind": "primary"
+      }
+    },
+    {
+      "text": {
+        "en": "In immersion, extraction plateaus near 21 % regardless of grind (580–1310 µm) or temperature (80–99 °C). Only the time to the plateau changes: about 20 min at 99 °C, 45 min at 80 °C.",
+        "pt-BR": "Em imersão, a extração estabiliza perto de 21 % independente da moagem (580–1310 µm) ou da temperatura (80–99 °C). Só o tempo até estabilizar muda: cerca de 20 min a 99 °C, 45 min a 80 °C."
+      },
+      "source": {
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7994670/",
+        "title": "Liang, Chan, Ristenpart 2021, Sci Rep 11:6904 (open access)",
+        "year": 2021,
+        "kind": "primary"
+      }
+    },
+    {
+      "text": {
+        "en": "Two groups of coffee drinkers exist: 57 % preferred low strength near 18 % extraction; 43 % preferred either strong low-extraction fruity cups or high-extraction roasty cups. Outside the box is a preference, not a defect.",
+        "pt-BR": "Existem dois grupos de consumidores: 57 % preferiram força baixa perto de 18 % de extração; 43 % preferiram xícaras fortes e frutadas de baixa extração ou xícaras torradas de alta extração. Fora da caixa é preferência, não defeito."
+      },
+      "source": {
+        "url": "https://doi.org/10.1111/1750-3841.15561",
+        "title": "Cotter, Batali, Ristenpart, Guinard 2021, J Food Sci 86:194 (118 consumers, two clusters)",
+        "year": 2021,
+        "kind": "primary"
+      }
+    },
+    {
+      "text": {
+        "en": "Light and medium roast bitterness comes mainly from chlorogenic acid lactones; dark roast adds harsher phenylindanes, which extract slowly and stay largely in the grounds.",
+        "pt-BR": "O amargor de torras claras e médias vem principalmente de lactonas do ácido clorogênico; torras escuras somam fenilindanos mais ásperos, que extraem devagar e ficam em boa parte no pó."
+      },
+      "source": {
+        "url": "https://doi.org/10.1021/jf0632280",
+        "title": "Frank, Blumberg, Kunert, Zehentbauer, Hofmann 2007, J Agric Food Chem 55:1945; Blumberg, Frank, Hofmann 2010",
+        "year": 2007,
+        "kind": "primary"
+      }
+    },
+    {
+      "text": {
+        "en": "Five identical V60 brews finished within 3 s of each other; a 5 s longer swirl added about 50 s to the drain. Drain time cannot be predicted from a grinder setting.",
+        "pt-BR": "Cinco V60 idênticos terminaram com 3 s de diferença; um giro 5 s mais longo somou uns 50 s ao escoamento. O tempo de escoamento não se prevê a partir do ajuste do moedor."
+      },
+      "source": {
+        "url": "https://coffeeadastra.com/2019/06/11/the-repeatability-of-manual-v60-pour-overs/",
+        "title": "Coffee ad Astra: the repeatability of manual V60 pour-overs; 'Why spin the slurry' (2019)",
+        "year": 2019,
+        "kind": "community"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://doi.org/10.1111/1750-3841.16531",
+      "title": "Guinard, Frost, Batali, Cotter, Lim, Ristenpart 2023: a new brewing control chart (open access)",
+      "year": 2023,
+      "kind": "primary"
+    },
+    {
+      "url": "https://doi.org/10.1111/1750-3841.15326",
+      "title": "Frost, Ristenpart, Guinard 2020: effects of brew strength, brew yield and roast on drip coffee sensory quality",
+      "year": 2020,
+      "kind": "primary"
+    },
+    {
+      "url": "https://coffeeadastra.com/2019/02/17/measuring-and-reporting-extraction-yields/",
+      "title": "Coffee ad Astra: measuring and reporting extraction yields (mass balance, LRR ≈ 2.0)",
+      "year": 2019,
+      "kind": "community"
+    }
+  ]
+}

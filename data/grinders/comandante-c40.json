@@ -1,0 +1,100 @@
+{
+  "id": "comandante-c40",
+  "brand": "Comandante",
+  "model": "C40 MK4 / MK3 Nitro Blade",
+  "aliases": ["Comandante C40 MK3", "Comandante C40 MK4"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "clicks",
+  "clicksPerRotation": 12,
+  "travelMicronsPerClick": 30,
+  "burr": "39 mm high-nitrogen martensitic stainless conical (Nitro Blade)",
+  "range": [3, 40],
+  "bands": {
+    "turkish": {
+      "official": [3, 8],
+      "source": {
+        "url": "https://www.comandantegrinder.com/pages/faq",
+        "title": "Comandante FAQ: grind settings",
+        "kind": "primary"
+      }
+    },
+    "espresso": {
+      "official": [7, 13],
+      "source": {
+        "url": "https://www.comandantegrinder.com/pages/faq",
+        "title": "Comandante FAQ: grind settings",
+        "kind": "primary"
+      }
+    },
+    "moka": {
+      "official": [14, 20],
+      "source": {
+        "url": "https://www.comandantegrinder.com/pages/faq",
+        "title": "Comandante FAQ: grind settings",
+        "kind": "primary"
+      }
+    },
+    "aeropress": {
+      "community": [12, 35],
+      "source": {
+        "url": "https://honestcoffeeguide.com/comandante-c40-mk4-grind-settings/",
+        "title": "Honest Coffee Guide: Comandante C40 MK4 grind settings",
+        "kind": "community",
+        "notes": "Comandante's FAQ says AeroPress 'depends on recipe'. Coffeedesk: 10–15 concentrate, 20–22 standard, 24–28 long steep."
+      }
+    },
+    "v60": {
+      "official": [18, 35],
+      "community": [22, 28],
+      "source": {
+        "url": "https://www.comandantegrinder.com/pages/faq",
+        "title": "Comandante FAQ: pour over 18–35 clicks",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 15–25; most blogs 22–28."
+      }
+    },
+    "pourover": {
+      "official": [18, 35],
+      "source": {
+        "url": "https://www.comandantegrinder.com/pages/faq",
+        "title": "Comandante FAQ: pour over 18–35 clicks",
+        "kind": "primary"
+      }
+    },
+    "chemex": {
+      "community": [26, 34],
+      "source": {
+        "url": "https://honestcoffeeguide.com/comandante-c40-mk4-grind-settings/",
+        "title": "Honest Coffee Guide pour-over upper half (16–34); Coffeedesk 40–45 is an outlier beyond most units' range",
+        "kind": "community"
+      }
+    },
+    "frenchpress": {
+      "official": [25, 35],
+      "source": {
+        "url": "https://www.comandantegrinder.com/pages/faq",
+        "title": "Comandante FAQ: French press 25–35 clicks",
+        "kind": "primary"
+      }
+    },
+    "coldbrew": {
+      "community": [30, 40],
+      "source": {
+        "url": "https://honestcoffeeguide.com/comandante-c40-mk4-grind-settings/",
+        "title": "Honest Coffee Guide: Comandante C40 MK4 grind settings",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Hold the grinder horizontally. With the burrs open the handle falls to 6 o'clock. Tighten click by click; zero is the first click where the handle no longer falls. Count clicks counter-clockwise from there.",
+      "pt-BR": "Segure o moedor na horizontal. Com as mós abertas a manivela cai para as 6 horas. Aperte clique a clique; o zero é o primeiro clique em que a manivela não cai mais. Conte os cliques no sentido anti-horário a partir dali."
+    },
+    "toleranceClicks": 1
+  },
+  "espressoCapable": true,
+  "notes": "30 µm per click is retailer copy (Prima Coffee, Rogue Wave); Comandante does not publish it. MK3 and MK4 share burrs and clicks; MK4's polymer jar adds static, so some users go 1–2 clicks finer. Red Clix doubles the click count (24 per rotation): multiply every value by 2.",
+  "hcg": { "micronRange": [0, 1090], "ticks": 40 }
+}

@@ -1,0 +1,146 @@
+{
+  "defaultRoastTable": "philocoffea",
+  "roastTemperature": [
+    {
+      "id": "philocoffea",
+      "label": "Tetsu Kasuya / Philocoffea",
+      "byRoast": {
+        "light": 93,
+        "medium-light": 90,
+        "medium": 88,
+        "medium-dark": 85,
+        "dark": 83
+      },
+      "source": {
+        "url": "https://en.philocoffea.com/blogs/blog/coffee-brewing-method",
+        "title": "Philocoffea: the 4:6 method (light ~93 °C, medium ~88 °C, dark ~83 °C)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "medium-light and medium-dark are midpoints between the published levels. Japanese Coffee Gear's translation gives 92–94 / 88–91 / 85–88 °C."
+      }
+    },
+    {
+      "id": "cafec",
+      "label": "Cafec filter papers",
+      "byRoast": {
+        "light": 92,
+        "medium-light": 91,
+        "medium": 90,
+        "medium-dark": 86,
+        "dark": 83
+      },
+      "source": {
+        "url": "https://cafec-jp.com/products/filterpaper/",
+        "title": "Cafec roast-level papers: T-92 light 92 °C, T-90 medium 90 °C, T-83 dark 83 °C",
+        "kind": "primary",
+        "notes": "medium-light and medium-dark are midpoints."
+      }
+    },
+    {
+      "id": "hedrick",
+      "label": "Lance Hedrick",
+      "byRoast": {
+        "light": 100,
+        "medium-light": 96,
+        "medium": 92,
+        "medium-dark": 88,
+        "dark": 85
+      },
+      "source": {
+        "url": "https://www.coffeecalculator.app/blog/lance-hedrick-pour-over-recipe",
+        "title": "Transcription of Lance Hedrick's 'Ultimate Pourover Recipe' (light 100, medium 92, dark 85 °C)",
+        "kind": "transcription",
+        "notes": "Also gives ratio by roast: light 1:15–1:17, medium 1:15, dark 1:14. medium-light and medium-dark are midpoints."
+      }
+    }
+  ],
+  "process": {
+    "washed": {
+      "label": { "en": "Washed", "pt-BR": "Lavado" },
+      "description": {
+        "en": "Clean and bright. Shows the origin clearly. The reference process; recipes assume it.",
+        "pt-BR": "Limpo e brilhante. Mostra a origem com clareza. É o processo de referência; as receitas assumem ele."
+      },
+      "tempDeltaC": 0,
+      "grindPosDelta": 0,
+      "ratioDelta": 0
+    },
+    "natural": {
+      "label": { "en": "Natural", "pt-BR": "Natural" },
+      "description": {
+        "en": "Dried in the whole cherry. Full body, heavy sweetness, wild fruit. Roasters suggest a slightly coarser grind, a little less heat and a touch more water.",
+        "pt-BR": "Secado na cereja inteira. Corpo cheio, doçura intensa, frutas selvagens. Torrefadores sugerem moagem um pouco mais grossa, um pouco menos calor e um pouco mais água."
+      },
+      "tempDeltaC": -3,
+      "grindPosDelta": 0.1,
+      "ratioDelta": 0.5,
+      "source": {
+        "url": "https://us.theroasterspack.com/blogs/news/how-to-best-brew-natural-coffees",
+        "title": "The Roasters Pack: how to brew natural coffees (coarser, 96 → 92 °C, 1:16.5, gentler pours)",
+        "year": 2022,
+        "kind": "community",
+        "notes": "Roaster guidance. Hoffmann, Rao and Barista Hustle publish no process-specific brewing changes; Rao (2024) changes only grind between coffees."
+      }
+    },
+    "honey": {
+      "label": { "en": "Honey", "pt-BR": "Honey" },
+      "description": {
+        "en": "Part of the mucilage stays on the seed while drying. Sweet, medium-full body. Brew as washed; go a degree cooler if it tastes heavy.",
+        "pt-BR": "Parte da mucilagem fica no grão durante a secagem. Doce, corpo médio a cheio. Prepare como lavado; baixe um grau se ficar pesado."
+      },
+      "tempDeltaC": -1,
+      "grindPosDelta": 0,
+      "ratioDelta": 0,
+      "source": {
+        "url": "https://us.theroasterspack.com/blogs/news/how-to-best-brew-natural-coffees",
+        "title": "Roaster guidance; treated as between washed and natural",
+        "kind": "community"
+      }
+    },
+    "anaerobic": {
+      "label": { "en": "Anaerobic", "pt-BR": "Anaeróbico" },
+      "description": {
+        "en": "Fermented in a sealed tank without oxygen. Winey, intense, tropical. Roasters suggest 88–91 °C, a coarser grind and 1:16.5–1:17.",
+        "pt-BR": "Fermentado em tanque selado sem oxigênio. Vinhoso, intenso, tropical. Torrefadores sugerem 88–91 °C, moagem mais grossa e 1:16,5–1:17."
+      },
+      "tempDeltaC": -4,
+      "grindPosDelta": 0.15,
+      "ratioDelta": 0.75,
+      "source": {
+        "url": "https://www.theblindcoffeeroaster.com.au/blogs/news/how-to-brew-anaerobic-process-coffee",
+        "title": "The Blind Coffee Roaster: how to brew anaerobic process coffee (88–91 °C, 750–800 µm vs ~600, 1:16.5–1:17)",
+        "kind": "community"
+      }
+    },
+    "carbonic": {
+      "label": { "en": "Carbonic maceration", "pt-BR": "Maceração carbônica" },
+      "description": {
+        "en": "Whole cherries fermented under CO₂, borrowed from wine. Very aromatic. Treat like an anaerobic coffee.",
+        "pt-BR": "Cerejas inteiras fermentadas em CO₂, técnica emprestada do vinho. Muito aromático. Trate como um café anaeróbico."
+      },
+      "tempDeltaC": -4,
+      "grindPosDelta": 0.15,
+      "ratioDelta": 0.75,
+      "source": {
+        "url": "https://www.theblindcoffeeroaster.com.au/blogs/news/how-to-brew-anaerobic-process-coffee",
+        "title": "Same guidance as anaerobic",
+        "kind": "community"
+      }
+    },
+    "cofermented": {
+      "label": { "en": "Co-fermented", "pt-BR": "Co-fermentado" },
+      "description": {
+        "en": "Fermented with added fruit or yeast. Extreme, divisive flavour. Treat like an anaerobic coffee and taste often.",
+        "pt-BR": "Fermentado com frutas ou leveduras adicionadas. Sabor extremo e divisivo. Trate como anaeróbico e prove com frequência."
+      },
+      "tempDeltaC": -4,
+      "grindPosDelta": 0.15,
+      "ratioDelta": 0.75,
+      "source": {
+        "url": "https://us.theroasterspack.com/blogs/news/how-to-best-brew-natural-coffees",
+        "title": "The Roasters Pack: experimental ferments treated like naturals",
+        "kind": "community"
+      }
+    }
+  }
+}
