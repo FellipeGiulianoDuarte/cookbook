@@ -3,7 +3,8 @@
 import { useActorRef, useSelector } from "@xstate/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Fallback } from "@/components/scene/Fallback";
+import { SceneClient } from "@/components/scene/SceneClient";
+import type { SceneState } from "@/components/scene/types";
 import { Button } from "@/components/ui/button";
 import { beep, unlockAudio } from "@/lib/audio";
 import { brewMachine, elapsedMs } from "@/lib/brew-machine";
@@ -28,11 +29,13 @@ const MUTE_KEY = "cookbook:muted";
 function BrewTimer({
   recipe,
   schedule,
+  inverted,
   onExit,
   onDone,
 }: {
   recipe: Recipe;
   schedule: Schedule;
+  inverted: boolean;
   onExit: () => void;
   onDone: () => void;
 }) {
@@ -110,6 +113,32 @@ function BrewTimer({
   );
   const progress = elapsed / schedule.totalSeconds;
   const fill = step ? step.cumulative / schedule.water : 0;
+  const pouring =
+    running && !!step && (step.action === "pour" || step.action === "bloom");
+  // plunger travel during a press step: fraction of the step already elapsed
+  const inStep = step
+    ? Math.min(
+        1,
+        Math.max(0, (elapsed - step.at) / Math.max(1, step.durationSeconds)),
+      )
+    : 0;
+  const pressed = ctx.steps
+    .slice(0, ctx.index)
+    .some((s) => s.action === "press");
+  const plunger = step?.action === "press" ? inStep : pressed || done ? 1 : 0;
+  const scene: SceneState = {
+    method: recipe.method,
+    focus: "brewing",
+    fill,
+    coffee: schedule.dose / Math.max(schedule.dose, recipe.dose.max),
+    roast: 0.5,
+    pouring,
+    plunger,
+    inverted,
+    dialTicks: 12,
+    dialValue: 0,
+    idle: false,
+  };
 
   const toggleMute = () => {
     const next = !muted;
@@ -139,8 +168,8 @@ function BrewTimer({
         </button>
       </header>
 
-      <div className="relative mt-3 h-40 rounded-2xl bg-surface p-3 sm:h-48">
-        <Fallback method={recipe.method} fill={fill} className="h-full" />
+      <div className="stage relative mt-3 h-52 overflow-hidden rounded-2xl sm:h-60">
+        <SceneClient state={scene} className="h-full" />
         {step?.water ? (
           <span className="tabular absolute right-4 top-3 text-xs text-fg-faint">
             {step.cumulative} g / {schedule.water} g
@@ -287,11 +316,13 @@ export function primeBrewAudio() {
 export function BrewScreen({
   recipe,
   schedule,
+  inverted,
   onExit,
   onDone,
 }: {
   recipe: Recipe;
   schedule: Schedule;
+  inverted: boolean;
   onExit: () => void;
   onDone: () => void;
 }) {
@@ -309,6 +340,7 @@ export function BrewScreen({
       <BrewTimer
         recipe={recipe}
         schedule={timed}
+        inverted={inverted}
         onExit={onExit}
         onDone={onDone}
       />
@@ -326,8 +358,23 @@ export function BrewScreen({
           ← {recipe.name}
         </button>
       </header>
-      <div className="mt-3 h-40 rounded-2xl bg-surface p-3 sm:h-48">
-        <Fallback method={recipe.method} fill={0} className="h-full" />
+      <div className="stage mt-3 h-52 overflow-hidden rounded-2xl sm:h-60">
+        <SceneClient
+          state={{
+            method: recipe.method,
+            focus: "brewer",
+            fill: 0,
+            coffee: schedule.dose / Math.max(schedule.dose, recipe.dose.max),
+            roast: 0.5,
+            pouring: false,
+            plunger: 0,
+            inverted,
+            dialTicks: 12,
+            dialValue: 0,
+            idle: true,
+          }}
+          className="h-full"
+        />
       </div>
       <p className="mt-8 text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
         {schedule.dose} g · {schedule.water} g ·{" "}

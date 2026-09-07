@@ -12,6 +12,9 @@ export default defineConfig({
   use: {
     baseURL,
     trace: "on-first-retry",
+    // The wizard tests exercise logic, not WebGL: reduced motion makes the scene render its
+    // static fallback, which keeps headless runs fast and deterministic. scene.spec.ts opts out.
+    contextOptions: { reducedMotion: "reduce" },
   },
   projects: [
     { name: "mobile-safari", use: { ...devices["iPhone 14"] } },

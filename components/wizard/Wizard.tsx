@@ -6,7 +6,8 @@ import { useTranslations } from "next-intl";
 import { useQueryStates } from "nuqs";
 import { useEffect, useMemo, useRef } from "react";
 import { BrewScreen } from "@/components/brew/BrewScreen";
-import { Fallback } from "@/components/scene/Fallback";
+import { SceneClient } from "@/components/scene/SceneClient";
+import type { SceneState } from "@/components/scene/types";
 import { Button } from "@/components/ui/button";
 import { type ClientCatalog, derive } from "@/lib/derive";
 import {
@@ -27,6 +28,14 @@ import { MethodStep } from "./steps/MethodStep";
 import { OptionsStep } from "./steps/OptionsStep";
 import { RecipeStep } from "./steps/RecipeStep";
 import { SummaryStep } from "./steps/SummaryStep";
+
+const ROAST_INDEX = {
+  light: 0,
+  "medium-light": 0.25,
+  medium: 0.5,
+  "medium-dark": 0.75,
+  dark: 1,
+} as const;
 
 /*
   The wizard shell. One XState actor owns the selection; nuqs mirrors it into the URL so a
@@ -111,12 +120,37 @@ export function Wizard({
     actor.send({ type });
   };
 
+  const inverted =
+    (selection.orientation ?? derived.recipe?.options?.orientation) ===
+    "inverted";
+  const scene: SceneState = {
+    method: selection.method,
+    focus:
+      step === "method"
+        ? "brewers"
+        : step === "grinder"
+          ? "grinder"
+          : step === "bean"
+            ? "bean"
+            : "brewer",
+    fill: step === "amount" || step === "summary" ? 0.55 : 0.1,
+    coffee: derived.recipe ? derived.dose / derived.recipe.dose.max : 0.5,
+    roast: ROAST_INDEX[selection.roast],
+    pouring: false,
+    plunger: 0,
+    inverted,
+    dialTicks: derived.grinder?.clicksPerRotation ?? 12,
+    dialValue: derived.setting?.kind === "ok" ? derived.setting.value : 0,
+    idle: true,
+  };
+
   if (brewing && derived.recipe && derived.schedule) {
     return (
       <BrewScreen
         key={`${derived.recipe.id}-${derived.schedule.dose}`}
         recipe={derived.recipe}
         schedule={derived.schedule}
+        inverted={inverted}
         onExit={() => actor.send({ type: "EXIT" })}
         onDone={() => actor.send({ type: "DONE" })}
       />
@@ -215,12 +249,8 @@ export function Wizard({
         <LanguageToggle />
       </header>
 
-      <div className="mt-5 h-44 rounded-2xl bg-surface p-3 sm:h-52">
-        <Fallback
-          method={selection.method}
-          fill={step === "amount" || step === "summary" ? 0.6 : 0.15}
-          className="h-full"
-        />
+      <div className="stage mt-5 h-64 overflow-hidden rounded-2xl sm:h-72">
+        <SceneClient state={scene} className="h-full" />
       </div>
 
       <div className="relative mt-6 flex-1">
