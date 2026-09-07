@@ -1,0 +1,64 @@
+{
+  "id": "niche-duo",
+  "brand": "Niche",
+  "model": "Duo",
+  "kind": "electric",
+  "adjustment": "stepless",
+  "notation": "marks",
+  "burr": "83 mm flat, swappable espresso and filter burr sets",
+  "range": [0, 60],
+  "bands": {
+    "espresso": {
+      "official": [0, 10],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/products/niche-duo",
+        "title": "Niche Duo product page: espresso 0–10",
+        "kind": "primary",
+        "notes": "Espresso burr set only; the filter burrs cannot reach espresso."
+      }
+    },
+    "moka": {
+      "official": [10, 20],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/products/niche-duo",
+        "title": "Niche Duo product page: moka 10–20",
+        "kind": "primary"
+      }
+    },
+    "aeropress": {
+      "official": [20, 30],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/products/niche-duo",
+        "title": "Niche Duo product page: AeroPress 20–30",
+        "kind": "primary"
+      }
+    },
+    "v60": {
+      "official": [30, 45],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/products/niche-duo",
+        "title": "Niche Duo product page: V60 30–45",
+        "kind": "primary"
+      }
+    },
+    "frenchpress": {
+      "official": [45, 60],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/products/niche-duo",
+        "title": "Niche Duo product page: French press 45+",
+        "kind": "primary",
+        "notes": "Niche gives '45+' with no upper limit; 60 is the end of the usable ring."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Niche's published procedure: clean the grinder, fit the funnel hand-tight, rotate the top dial clockwise until the burrs touch, then rotate the black bezel until the silver ball lines up with the 'Calibrate' mark. Turn counter-clockwise to your setting. Never grind at the calibrate position.",
+      "pt-BR": "Procedimento publicado pela Niche: limpe o moedor, encaixe o funil apertando com a mão, gire o dial superior no sentido horário até as mós se tocarem e então gire o bezel preto até a bolinha prateada alinhar com a marca 'Calibrate'. Gire no sentido anti-horário até o seu ajuste. Nunca moa na posição de calibração."
+    },
+    "toleranceClicks": 5,
+    "unsafeBelow": 1
+  },
+  "espressoCapable": true,
+  "notes": "Stepless; values are marks from your own calibrated zero. Two swappable 83 mm flat burr sets: the espresso burrs can also do filter, the filter burrs cannot reach espresso. No Honest Coffee Guide page and no micron data. The zero procedure is Niche's calibration article (nichecoffee.co.uk/blogs/exploring-coffee/how-to-calibrate-your-grinder-for-optimum-performance), written for the Niche range."
+}

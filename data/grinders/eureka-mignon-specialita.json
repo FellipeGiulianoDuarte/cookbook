@@ -1,0 +1,99 @@
+{
+  "id": "eureka-mignon-specialita",
+  "brand": "Eureka",
+  "model": "Mignon Specialità",
+  "aliases": [
+    "Eureka Mignon Specialita",
+    "Eureka Mignon Silenzio",
+    "Eureka Mignon Manuale"
+  ],
+  "kind": "electric",
+  "adjustment": "stepless",
+  "notation": "rotations",
+  "clicksPerRotation": 10,
+  "burr": "55 mm flat (Specialità, Silenzio); 50 mm flat (Manuale)",
+  "range": [0, 40],
+  "bands": {
+    "espresso": {
+      "community": [0, 3.5],
+      "source": {
+        "url": "https://honestcoffeeguide.com/eureka-mignon-specialita-grind-settings/",
+        "title": "Honest Coffee Guide: Eureka Mignon Specialità grind settings (espresso 0–3.5)",
+        "kind": "community",
+        "notes": "coffeemaster light-roast start 1.5. Clive Coffee: start three whole numbers coarser than zero."
+      }
+    },
+    "moka": {
+      "community": [3.5, 13],
+      "source": {
+        "url": "https://honestcoffeeguide.com/eureka-mignon-specialita-grind-settings/",
+        "title": "Honest Coffee Guide: Eureka Mignon Specialità grind settings (moka 3.5 to 1+3)",
+        "kind": "community",
+        "notes": "coffeemaster light-roast start 1+0 (10)."
+      }
+    },
+    "aeropress": {
+      "community": [2.5, 23],
+      "source": {
+        "url": "https://honestcoffeeguide.com/eureka-mignon-specialita-grind-settings/",
+        "title": "Honest Coffee Guide: Eureka Mignon Specialità grind settings (AeroPress 2.5 to 2+3)",
+        "kind": "community",
+        "notes": "coffeemaster light-roast start 1+0 (10)."
+      }
+    },
+    "v60": {
+      "community": [4.5, 14],
+      "source": {
+        "url": "https://honestcoffeeguide.com/eureka-mignon-specialita-grind-settings/",
+        "title": "Honest Coffee Guide: Eureka Mignon Specialità grind settings (V60 4.5 to 1+4)",
+        "kind": "community",
+        "notes": "coffeemaster light-roast start 1+1.5 (11.5)."
+      }
+    },
+    "pourover": {
+      "community": [4.5, 22.5],
+      "source": {
+        "url": "https://honestcoffeeguide.com/eureka-mignon-specialita-grind-settings/",
+        "title": "Honest Coffee Guide: Eureka Mignon Specialità grind settings (pour over 4.5 to 2+2.5)",
+        "kind": "community",
+        "notes": "Honest Coffee Guide filter machine 2.5 to 2+2."
+      }
+    },
+    "chemex": {
+      "community": [13.5, 13.5],
+      "source": {
+        "url": "https://coffeemaster.app/guides/eureka-mignon-specialita-grind-settings",
+        "title": "coffeemaster: Eureka Mignon Specialità light-roast starting point, Chemex 1+3.5",
+        "kind": "community",
+        "notes": "A single starting point, not a range. Honest Coffee Guide has no Chemex row."
+      }
+    },
+    "frenchpress": {
+      "community": [14, 34],
+      "source": {
+        "url": "https://honestcoffeeguide.com/eureka-mignon-specialita-grind-settings/",
+        "title": "Honest Coffee Guide: Eureka Mignon Specialità grind settings (French press 1+4 to 3+4)",
+        "kind": "community",
+        "notes": "coffeemaster light-roast start 2+4 (24)."
+      }
+    },
+    "coldbrew": {
+      "community": [20.5, 40],
+      "source": {
+        "url": "https://honestcoffeeguide.com/eureka-mignon-specialita-grind-settings/",
+        "title": "Honest Coffee Guide: Eureka Mignon Specialità grind settings (cold brew 2+0.5 to 4+0)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Hopper off, grinder running. Turn the top dial clockwise (finer) until the burrs chirp, then back off until they are silent: that is your zero. Start espresso about three whole numbers coarser than zero.",
+      "pt-BR": "Sem o reservatório, com o moedor ligado. Gire o dial superior no sentido horário (mais fino) até as mós chiarem, depois volte até ficarem silenciosas: esse é o seu zero. Para espresso, comece cerca de três números inteiros mais grosso que o zero."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": true,
+  "notes": "Stepless micrometric dial that spins 360° repeatedly; the printed numbers are only a reference, so values are numbers counted from your own zero with 10 numbers per full turn (1+4 = 14, 3.5 = 3.5, 2+3 = 23). Honest Coffee Guide covers about 4 turns for 195–1400 µm, about 300 µm per turn computed; coffeemaster: each half-mark shifts 13 to 33 µm in the espresso zone. Both are particle-size estimates, not burr travel. Specialità and Silenzio share 55 mm burrs; the Manuale has 50 mm burrs, so its numbers will differ. Zero procedure: support.clivecoffee.com/en/eureka-mignon-series-how-to-dial-in-from-the-zero-point.",
+  "hcg": { "micronRange": [195, 1400], "ticks": 40 }
+}

@@ -1,5 +1,6 @@
 import {
   createSearchParamsCache,
+  parseAsBoolean,
   parseAsFloat,
   parseAsInteger,
   parseAsString,
@@ -21,6 +22,7 @@ export const urlParsers = {
   proc: parseAsStringLiteral(Process.options),
   orient: parseAsStringLiteral(["upright", "inverted"] as const),
   off: parseAsInteger.withDefault(0),
+  nudge: parseAsBoolean.withDefault(false),
   step: parseAsStringLiteral([
     "method",
     "recipe",

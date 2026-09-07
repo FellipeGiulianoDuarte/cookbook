@@ -1,0 +1,93 @@
+{
+  "id": "turin-df64-gen2",
+  "brand": "Turin",
+  "model": "DF64 Gen 2",
+  "aliases": ["DF64 Gen 2", "DF64 II", "G-IOTA"],
+  "kind": "electric",
+  "adjustment": "stepless",
+  "notation": "marks",
+  "burr": "64 mm flat",
+  "range": [0, 90],
+  "bands": {
+    "espresso": {
+      "official": [5, 30],
+      "community": [0, 20],
+      "source": {
+        "url": "https://cdn.shopify.com/s/files/1/0774/3632/2009/files/1_DF64_Grind_Size_US.pdf",
+        "title": "DF Grinders grind-size chart (marks from your zero): espresso 5–30",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 0–20; Grind Logic 5–18."
+      }
+    },
+    "moka": {
+      "official": [15, 40],
+      "community": [19, 49],
+      "source": {
+        "url": "https://cdn.shopify.com/s/files/1/0774/3632/2009/files/1_DF64_Grind_Size_US.pdf",
+        "title": "DF Grinders grind-size chart (marks from your zero): moka 15–40",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 19–49; Grind Logic 12–25."
+      }
+    },
+    "aeropress": {
+      "official": [10, 35],
+      "community": [15, 80],
+      "source": {
+        "url": "https://cdn.shopify.com/s/files/1/0774/3632/2009/files/1_DF64_Grind_Size_US.pdf",
+        "title": "DF Grinders grind-size chart (marks from your zero): AeroPress 10–35",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 15–80; Grind Logic 15–45."
+      }
+    },
+    "v60": {
+      "official": [50, 80],
+      "community": [23, 53],
+      "source": {
+        "url": "https://cdn.shopify.com/s/files/1/0774/3632/2009/files/1_DF64_Grind_Size_US.pdf",
+        "title": "DF Grinders grind-size chart (marks from your zero): pour over 50–80",
+        "kind": "primary",
+        "notes": "DF publishes a pour-over range, not a V60 row; it is used here as the official V60 band. Honest Coffee Guide V60 is much finer at 23–53; Grind Logic pour over 30–60."
+      }
+    },
+    "pourover": {
+      "official": [50, 80],
+      "community": [24, 77],
+      "source": {
+        "url": "https://cdn.shopify.com/s/files/1/0774/3632/2009/files/1_DF64_Grind_Size_US.pdf",
+        "title": "DF Grinders grind-size chart (marks from your zero): pour over 50–80",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 24–77; Grind Logic pour over 30–60, drip 32–65."
+      }
+    },
+    "frenchpress": {
+      "official": [65, 80],
+      "community": [53, 90],
+      "source": {
+        "url": "https://cdn.shopify.com/s/files/1/0774/3632/2009/files/1_DF64_Grind_Size_US.pdf",
+        "title": "DF Grinders grind-size chart (marks from your zero): French press 65–80",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 53–90; Grind Logic French press and cold brew 55–85."
+      }
+    },
+    "coldbrew": {
+      "official": [80, 90],
+      "community": [65, 90],
+      "source": {
+        "url": "https://cdn.shopify.com/s/files/1/0774/3632/2009/files/1_DF64_Grind_Size_US.pdf",
+        "title": "DF Grinders grind-size chart (marks from your zero): cold brew 80–90",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 65–90; Grind Logic 55–85."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "With the grinder running, turn the collar finer until you hear a light chirping sound: that is where the burrs make contact. That point is your zero; count marks coarser from there. The printed 0 is not the zero, and two grinders will not share the same number.",
+      "pt-BR": "Com o moedor ligado, gire o anel para o fino até ouvir um leve chiado: é onde as mós se tocam. Esse ponto é o seu zero; conte as marcas para o grosso a partir dali. O 0 impresso não é o zero, e dois moedores não terão o mesmo número."
+    },
+    "toleranceClicks": 3
+  },
+  "espressoCapable": true,
+  "notes": "Stepless collar printed 0–90 (0 fine, 90 coarse); values are marks from your own chirp zero, not from the printed 0. Honest Coffee Guide's computed slope is about 9.7 µm per mark ((1050 − 180) ÷ 90), a particle-size estimate, not burr travel. Zero procedure and unit variance: grindlogic.com.au/blogs/articles/how-to-dial-in-df54-df64-gen-2-espresso. Grind Logic guide: grindlogic.com.au/blogs/articles/df64-coffee-grinder-grind-size-guide. Product page: df64coffee.com/products/df64-gen-2-single-dose-coffee-grinder.",
+  "hcg": { "micronRange": [180, 1050], "ticks": 90 }
+}

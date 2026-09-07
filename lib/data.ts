@@ -51,7 +51,33 @@ export function loadRecipes(): Recipe[] {
   );
   const recipes = parseAll(files, Recipe);
   assertUniqueIds(recipes, "recipe");
-  return recipes;
+  return recipes.sort(
+    (a, b) => rank(a.id) - rank(b.id) || a.name.localeCompare(b.name),
+  );
+}
+
+/** Display order: the recipes most people look for first. Anything unlisted follows alphabetically. */
+const FEATURED_ORDER = [
+  "v60-hoffmann-ultimate",
+  "v60-hoffmann-1cup",
+  "v60-kasuya-46",
+  "v60-rao-2022",
+  "v60-winton-five-pour",
+  "v60-hedrick-one-and-done",
+  "v60-onyx-guide",
+  "v60-hario-official",
+  "aeropress-hoffmann-ultimate",
+  "aeropress-official-current",
+  "aeropress-wendelboe",
+  "aeropress-adler-original",
+  "aeropress-wac-2025-pop",
+  "aeropress-wac-2024-stanica",
+  "aeropress-wac-2021-merikanto",
+  "aeropress-official-japanese-iced",
+];
+function rank(id: string) {
+  const i = FEATURED_ORDER.indexOf(id);
+  return i === -1 ? FEATURED_ORDER.length : i;
 }
 
 export function loadGrinders(): Grinder[] {

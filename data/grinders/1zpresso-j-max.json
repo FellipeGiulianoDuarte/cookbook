@@ -1,0 +1,113 @@
+{
+  "id": "1zpresso-j-max",
+  "brand": "1Zpresso",
+  "model": "J-Max",
+  "aliases": ["1Zpresso J-Max S"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "rot.num.tick",
+  "clicksPerRotation": 90,
+  "clicksPerNumber": 10,
+  "travelMicronsPerClick": 8.8,
+  "burr": "48 mm titanium-coated conical",
+  "range": [0, 405],
+  "bands": {
+    "turkish": {
+      "official": [70, 110],
+      "community": [16, 83],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/11/J-Max-Grind-setting-reference-20221130.jpg",
+        "title": "1Zpresso J-Max grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 16–83."
+      }
+    },
+    "espresso": {
+      "official": [90, 150],
+      "community": [69, 143],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/11/J-Max-Grind-setting-reference-20221130.jpg",
+        "title": "1Zpresso J-Max grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 69–143."
+      }
+    },
+    "moka": {
+      "official": [180, 240],
+      "community": [137, 249],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/11/J-Max-Grind-setting-reference-20221130.jpg",
+        "title": "1Zpresso J-Max grind setting reference chart (shared moka / AeroPress band)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 137–249."
+      }
+    },
+    "aeropress": {
+      "official": [180, 240],
+      "community": [122, 363],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/11/J-Max-Grind-setting-reference-20221130.jpg",
+        "title": "1Zpresso J-Max grind setting reference chart (shared moka / AeroPress band)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 122–363 (full row, concentrate to long steep)."
+      }
+    },
+    "v60": {
+      "official": [240, 300],
+      "community": [152, 264],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/11/J-Max-Grind-setting-reference-20221130.jpg",
+        "title": "1Zpresso J-Max grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide V60 152–264."
+      }
+    },
+    "pourover": {
+      "official": [240, 300],
+      "community": [156, 351],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/11/J-Max-Grind-setting-reference-20221130.jpg",
+        "title": "1Zpresso J-Max grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide pour over 156–351."
+      }
+    },
+    "frenchpress": {
+      "official": [360, 400],
+      "community": [261, 405],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/11/J-Max-Grind-setting-reference-20221130.jpg",
+        "title": "1Zpresso J-Max grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 261–405."
+      }
+    },
+    "coldbrew": {
+      "community": [303, 405],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-j-max-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso J-Max grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's chart does not list cold brew."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the external ring clockwise to where resistance starts, not the tightest position. That is zero. Count rotations, numbers and clicks counter-clockwise from there. 1Zpresso allows about 10 clicks of variance at zero. Do not turn the handle within the first few clicks from zero.",
+      "pt-BR": "Gire o anel externo no sentido horário até o ponto em que a resistência começa, não a posição mais apertada. Esse é o zero. Conte as voltas, os números e os cliques no sentido anti-horário a partir dali. A 1Zpresso admite cerca de 10 cliques de variação no zero. Não gire a manivela nos primeiros cliques a partir do zero."
+    },
+    "toleranceClicks": 10,
+    "unsafeBelow": 3
+  },
+  "espressoCapable": true,
+  "notes": "External ring: 9 numbers per rotation, 90 clicks per rotation, 10 clicks per number; 4.5 rotations, about 405 clicks. 8.8 µm per click (0.0088 mm) is 1Zpresso's published burr travel, not particle size. J-Max S differs only by the foldable handle. All values stored as clicks from zero; the official chart carries a cumulative click axis.",
+  "hcg": { "micronRange": [0, 1190], "ticks": 405 }
+}

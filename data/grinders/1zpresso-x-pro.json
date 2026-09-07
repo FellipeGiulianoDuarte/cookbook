@@ -1,0 +1,113 @@
+{
+  "id": "1zpresso-x-pro",
+  "brand": "1Zpresso",
+  "model": "X-Pro",
+  "aliases": ["1Zpresso X-Pro S", "1Zpresso X-Ultra"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "rot.num.tick",
+  "clicksPerRotation": 60,
+  "clicksPerNumber": 10,
+  "travelMicronsPerClick": 12.5,
+  "burr": "40 mm stainless heptagonal conical",
+  "range": [0, 270],
+  "bands": {
+    "turkish": {
+      "official": [20, 40],
+      "community": [8, 42],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/08/X-Pro-Grind-setting-reference-20220818.jpg",
+        "title": "1Zpresso X-Pro grind setting reference chart (cumulative clicks, 'for reference only')",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide X-Pro 8–42, X-Ultra 8–43."
+      }
+    },
+    "espresso": {
+      "official": [40, 70],
+      "community": [35, 73],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/08/X-Pro-Grind-setting-reference-20220818.jpg",
+        "title": "1Zpresso X-Pro grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide X-Pro 35–73, X-Ultra 36–75."
+      }
+    },
+    "moka": {
+      "official": [70, 110],
+      "community": [70, 127],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/08/X-Pro-Grind-setting-reference-20220818.jpg",
+        "title": "1Zpresso X-Pro grind setting reference chart (shared moka / AeroPress band)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide X-Pro 70–127, X-Ultra 72–130."
+      }
+    },
+    "aeropress": {
+      "official": [70, 110],
+      "community": [62, 185],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/08/X-Pro-Grind-setting-reference-20220818.jpg",
+        "title": "1Zpresso X-Pro grind setting reference chart (shared moka / AeroPress band)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide X-Pro 62–185 (full row), X-Ultra 64–190."
+      }
+    },
+    "v60": {
+      "official": [120, 160],
+      "community": [78, 135],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/08/X-Pro-Grind-setting-reference-20220818.jpg",
+        "title": "1Zpresso X-Pro grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide V60 X-Pro 78–135, X-Ultra 80–138."
+      }
+    },
+    "pourover": {
+      "official": [120, 160],
+      "community": [80, 180],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/08/X-Pro-Grind-setting-reference-20220818.jpg",
+        "title": "1Zpresso X-Pro grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide pour over X-Pro 80–180, X-Ultra 82–184."
+      }
+    },
+    "frenchpress": {
+      "official": [160, 190],
+      "community": [134, 240],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/08/X-Pro-Grind-setting-reference-20220818.jpg",
+        "title": "1Zpresso X-Pro grind setting reference chart (cumulative clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide X-Pro 134–240, X-Ultra 137–240."
+      }
+    },
+    "coldbrew": {
+      "community": [155, 240],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-x-pro-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso X-Pro grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's chart does not list cold brew. Honest Coffee Guide X-Ultra 159–240."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the external ring clockwise to the starting point where resistance starts, not the tightest position. That is zero; check that the indicator sits at #0. Count rotations, numbers and clicks counter-clockwise from there. Do not turn the handle within the first few clicks from zero.",
+      "pt-BR": "Gire o anel externo no sentido horário até o ponto inicial em que a resistência começa, não a posição mais apertada. Esse é o zero; confira se o indicador está no #0. Conte as voltas, os números e os cliques no sentido anti-horário a partir dali. Não gire a manivela nos primeiros cliques a partir do zero."
+    },
+    "toleranceClicks": 2,
+    "unsafeBelow": 3
+  },
+  "espressoCapable": true,
+  "notes": "External ring: 6 numbers per rotation (0–5), 60 clicks per rotation, 10 clicks per number; 4.5 rotations = 270 clicks. 12.5 µm per click (0.0125 mm) is 1Zpresso's published burr travel, not particle size. X-Pro S differs only by the foldable handle; the X-Ultra's official chart is pixel-identical and its Honest Coffee Guide values differ by 1–5 clicks (see band notes). Zero tolerance of 2 clicks is a working figure: 1Zpresso states none for the X series. All values stored as clicks from zero.",
+  "hcg": { "micronRange": [0, 1240], "ticks": 240 }
+}

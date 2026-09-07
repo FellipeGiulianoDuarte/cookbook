@@ -110,8 +110,11 @@ export default function DebugPage() {
                         {s.bypass ? ` + ${s.bypass.grams} g bypass` : ""}
                       </div>
                       <ol className="space-y-0.5">
-                        {s.steps.map((st, i) => (
-                          <li key={`${st.at}-${i}`} className="flex gap-2">
+                        {s.steps.map((st) => (
+                          <li
+                            key={`${st.at}-${st.action}-${st.cumulative}`}
+                            className="flex gap-2"
+                          >
                             <span className="tabular w-10 shrink-0 text-fg-faint">
                               {formatClock(st.at)}
                             </span>

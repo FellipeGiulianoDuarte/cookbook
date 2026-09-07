@@ -1,0 +1,87 @@
+{
+  "id": "fellow-ode-gen2",
+  "brand": "Fellow",
+  "model": "Ode Brew Grinder Gen 2",
+  "aliases": ["Fellow Ode Gen 2", "Fellow Ode 2"],
+  "kind": "electric",
+  "adjustment": "stepped",
+  "notation": "dial.sub",
+  "clicksPerNumber": 3,
+  "dialStart": 1,
+  "burr": "64 mm flat stainless (Gen 2 brew burrs)",
+  "range": [0, 30],
+  "bands": {
+    "moka": {
+      "community": [3, 13],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-ode-brew-grinder-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Ode Gen 2 grind settings (moka 2–5.1)",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [2, 23],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-ode-brew-grinder-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Ode Gen 2 grind settings (AeroPress 1.2–8.2)",
+        "kind": "community",
+        "notes": "Seattle Coffee Gear clicks 1–8 (dial 1–3.1); blog consensus 3.0–5.0."
+      }
+    },
+    "v60": {
+      "community": [9, 15],
+      "source": {
+        "url": "https://www.seattlecoffeegear.com/pages/product-resources/fellow-ode-coffee-grinder-gen-2-product-guide",
+        "title": "Seattle Coffee Gear Ode Gen 2 product guide (V60 and Chemex clicks 10–20 = dial 4.0–7.1) and blog consensus 4.0–6.0, start 5.0",
+        "kind": "community",
+        "notes": "Stored band is dial 4.0–6.0 (blog consensus, inside the retailer range). Honest Coffee Guide is wider and finer: 2.2–5.2 (step index 5–14)."
+      }
+    },
+    "pourover": {
+      "community": [5, 22],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-ode-brew-grinder-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Ode Gen 2 grind settings (pour over 2.2–8.1)",
+        "kind": "community",
+        "notes": "Seattle Coffee Gear: Kalita clicks 12–18 (dial 4.2–6.2), drip 15–22 (dial 5.2–8.0)."
+      }
+    },
+    "chemex": {
+      "community": [9, 19],
+      "source": {
+        "url": "https://www.seattlecoffeegear.com/pages/product-resources/fellow-ode-coffee-grinder-gen-2-product-guide",
+        "title": "Seattle Coffee Gear Ode Gen 2 product guide: V60 and Chemex clicks 10–20 (dial 4.0–7.1)",
+        "kind": "community",
+        "notes": "Honest Coffee Guide has no Chemex row."
+      }
+    },
+    "frenchpress": {
+      "community": [15, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-ode-brew-grinder-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Ode Gen 2 grind settings (French press 6–11)",
+        "kind": "community",
+        "notes": "Seattle Coffee Gear clicks 22–28 (dial 8.0–10.0); blog start 6.0."
+      }
+    },
+    "coldbrew": {
+      "community": [18, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-ode-brew-grinder-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Ode Gen 2 grind settings (cold brew 7–11)",
+        "kind": "community",
+        "notes": "Seattle Coffee Gear clicks 25–31 (dial 9.0–11)."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Ships pre-calibrated. To recalibrate: set the dial to 11, remove the front plate and the dial, run the grinder, turn counter-clockwise one click at a time until the burrs touch, then one click clockwise and power off. The burrs are now at 1.",
+      "pt-BR": "Sai de fábrica calibrado. Para recalibrar: coloque o dial em 11, retire a placa frontal e o dial, ligue o moedor, gire no sentido anti-horário um clique por vez até as mós se tocarem, depois um clique no sentido horário e desligue. As mós estão agora na posição 1."
+    },
+    "toleranceClicks": 1
+  },
+  "espressoCapable": false,
+  "notes": "Fellow: 'Ode is not suitable for espresso'; Honest Coffee Guide's espresso row 1–2 is nominal. Values are a step index from 0: dial number = 1 + floor(index ÷ 3), sub-click = index mod 3, so 4.0 = 9, 5.2 = 14, 6.0 = 15, 11 = 30 (31 steps in total). Honest Coffee Guide writes x.1 and x.2 for the two clicks after number x; Seattle Coffee Gear numbers clicks 1–31 (their click 1 = index 0). Fellow's stated range starts at '250–300 microns and up'. Honest Coffee Guide's computed slope is about 29.5 µm per click ((1160 − 275) ÷ 30), a particle-size estimate, not burr travel. Calibration article: fellowproducts.com/blogs/learn/how-to-install-and-calibrate-ode-gen-2-brew-burrs-and-ssp-mp-burrs. Product page: fellowproducts.com/products/ode-brew-grinder-gen-2.",
+  "hcg": { "micronRange": [275, 1160], "ticks": 30 }
+}

@@ -1,0 +1,113 @@
+{
+  "id": "1zpresso-k-plus",
+  "brand": "1Zpresso",
+  "model": "K-Plus",
+  "aliases": ["1Zpresso K-Max", "1Zpresso K-Pro"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "rot.num.tick",
+  "clicksPerRotation": 90,
+  "clicksPerNumber": 10,
+  "travelMicronsPerClick": 22,
+  "burr": "48 mm stainless heptagonal conical",
+  "range": [0, 160],
+  "bands": {
+    "turkish": {
+      "official": [20, 35],
+      "community": [5, 26],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2021/11/K-series-Grind-Setting-Reference-211129.pdf",
+        "title": "1Zpresso K-series grind setting reference (Point axis = dial numbers × 10 clicks)",
+        "year": 2021,
+        "kind": "primary",
+        "notes": "Band edges read to the nearest half-number; treat as ±2–3 clicks. Honest Coffee Guide K-Plus 5–26, K-Max 5–27."
+      }
+    },
+    "espresso": {
+      "official": [30, 45],
+      "community": [22, 45],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2021/11/K-series-Grind-Setting-Reference-211129.pdf",
+        "title": "1Zpresso K-series grind setting reference (Point axis = dial numbers × 10 clicks)",
+        "year": 2021,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K-Plus 22–45, K-Max 23–47; Coffee Chronicler dial 3 (30 clicks)."
+      }
+    },
+    "moka": {
+      "official": [50, 70],
+      "community": [44, 79],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2021/11/K-series-Grind-Setting-Reference-211129.pdf",
+        "title": "1Zpresso K-series grind setting reference (shared moka / AeroPress band)",
+        "year": 2021,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K-Plus 44–79, K-Max 45–82; Coffee Chronicler dial 4–5 (40–50 clicks)."
+      }
+    },
+    "aeropress": {
+      "official": [50, 70],
+      "community": [39, 115],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2021/11/K-series-Grind-Setting-Reference-211129.pdf",
+        "title": "1Zpresso K-series grind setting reference (shared moka / AeroPress band)",
+        "year": 2021,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K-Plus 39–115 (full row), K-Max 40–119; Coffee Chronicler dial 5–6 (50–60 clicks)."
+      }
+    },
+    "v60": {
+      "official": [80, 90],
+      "community": [55, 75],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2021/11/K-series-Grind-Setting-Reference-211129.pdf",
+        "title": "1Zpresso K-series grind setting reference (Point axis = dial numbers × 10 clicks)",
+        "year": 2021,
+        "kind": "primary",
+        "notes": "Official pour-over 80–90 vs community 55–75: Honest Coffee Guide V60 49–84 (K-Max 50–87); Coffee Chronicler dial 6.5–7.5 (65–75 clicks)."
+      }
+    },
+    "pourover": {
+      "official": [80, 90],
+      "community": [50, 111],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2021/11/K-series-Grind-Setting-Reference-211129.pdf",
+        "title": "1Zpresso K-series grind setting reference (Point axis = dial numbers × 10 clicks)",
+        "year": 2021,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K-Plus pour over 50–111, K-Max 51–115."
+      }
+    },
+    "frenchpress": {
+      "official": [90, 100],
+      "community": [84, 156],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2021/11/K-series-Grind-Setting-Reference-211129.pdf",
+        "title": "1Zpresso K-series grind setting reference (Point axis = dial numbers × 10 clicks)",
+        "year": 2021,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide K-Plus 84–156, K-Max 86–161; Coffee Chronicler dial 8.0 (80 clicks)."
+      }
+    },
+    "coldbrew": {
+      "community": [107, 160],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-k-plus-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso K-Plus grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's chart does not list cold brew. Honest Coffee Guide K-Max 110–174."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the external ring clockwise until you feel resistance, not the tightest position. That is zero; it may be offset by two or more clicks from the printed 0. Count rotations, numbers and clicks counter-clockwise from there. Do not turn the handle within the first few clicks from zero.",
+      "pt-BR": "Gire o anel externo no sentido horário até sentir resistência, não a posição mais apertada. Esse é o zero; ele pode ficar dois ou mais cliques fora do 0 impresso. Conte as voltas, os números e os cliques no sentido anti-horário a partir dali. Não gire a manivela nos primeiros cliques a partir do zero."
+    },
+    "toleranceClicks": 2,
+    "unsafeBelow": 3
+  },
+  "espressoCapable": true,
+  "notes": "External ring: 9 numbers per rotation, 90 clicks per rotation, 10 clicks per number; range goes above one rotation (Honest Coffee Guide charts to 160). 22 µm per click (0.022 mm) is 1Zpresso's published burr travel, not particle size. K-Max and K-Pro share the mechanism and the official chart; Honest Coffee Guide's K-Max numbers differ by 1–5 clicks (see band notes). All values stored as clicks from zero; the official chart's Point axis is dial numbers (10 clicks each).",
+  "hcg": { "micronRange": [0, 1330], "ticks": 160 }
+}

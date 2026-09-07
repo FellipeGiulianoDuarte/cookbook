@@ -1,0 +1,74 @@
+{
+  "id": "niche-zero",
+  "brand": "Niche",
+  "model": "Zero",
+  "aliases": ["Niche Zero NG63"],
+  "kind": "electric",
+  "adjustment": "stepless",
+  "notation": "marks",
+  "burr": "63 mm conical (Mazzer)",
+  "range": [0, 60],
+  "bands": {
+    "espresso": {
+      "official": [5, 20],
+      "community": [10, 20],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/blogs/exploring-coffee/the-ultimate-grind-size-guide-for-niche-grinders",
+        "title": "Niche: the ultimate grind size guide for Niche grinders (espresso 5–20)",
+        "kind": "primary",
+        "notes": "Niche's dial-in article narrows it to 10–20, start at 15, and maps 10–20 to 200–400 µm. Honest Coffee Guide 15–30; Coffee Chronicler 9–24; completehomebarista 10–20."
+      }
+    },
+    "moka": {
+      "official": [20, 30],
+      "community": [18, 24],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/blogs/exploring-coffee/the-ultimate-grind-size-guide-for-niche-grinders",
+        "title": "Niche: the ultimate grind size guide for Niche grinders (moka 20–30)",
+        "kind": "primary",
+        "notes": "Coffee Chronicler 18–24. Honest Coffee Guide 30–53 sits far coarser than Niche's range."
+      }
+    },
+    "aeropress": {
+      "official": [30, 35],
+      "community": [24, 40],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/blogs/exploring-coffee/the-ultimate-grind-size-guide-for-niche-grinders",
+        "title": "Niche: the ultimate grind size guide for Niche grinders (AeroPress 30–35)",
+        "kind": "primary",
+        "notes": "Coffee Chronicler 24–40; completehomebarista 20–28; Honest Coffee Guide 26–77."
+      }
+    },
+    "v60": {
+      "official": [35, 45],
+      "community": [33, 56],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/blogs/exploring-coffee/the-ultimate-grind-size-guide-for-niche-grinders",
+        "title": "Niche: the ultimate grind size guide for Niche grinders (V60 35–45)",
+        "kind": "primary",
+        "notes": "Niche's dial-in article says V60 35–50 and maps 35–50 to 600–800 µm. Honest Coffee Guide 33–56; completehomebarista 30–40; Coffee Chronicler pour over 40–50."
+      }
+    },
+    "frenchpress": {
+      "official": [45, 60],
+      "community": [45, 55],
+      "source": {
+        "url": "https://www.nichecoffee.co.uk/blogs/exploring-coffee/the-ultimate-grind-size-guide-for-niche-grinders",
+        "title": "Niche: the ultimate grind size guide for Niche grinders (French press 45+)",
+        "kind": "primary",
+        "notes": "Niche gives '45+' with no upper limit; 60 is the end of the usable blank zone past the printed 50. completehomebarista 45–55; Coffee Chronicler 55; Honest Coffee Guide 56–64."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Clean the grinder and fit the funnel hand-tight. Rotate the top dial clockwise until the burrs touch. Rotate the black bezel until the silver ball lines up with the 'Calibrate' mark. Turn counter-clockwise to your setting. Never grind at the calibrate position.",
+      "pt-BR": "Limpe o moedor e encaixe o funil apertando com a mão. Gire o dial superior no sentido horário até as mós se tocarem. Gire o bezel preto até a bolinha prateada alinhar com a marca 'Calibrate'. Gire no sentido anti-horário até o seu ajuste. Nunca moa na posição de calibração."
+    },
+    "toleranceClicks": 5,
+    "unsafeBelow": 1
+  },
+  "espressoCapable": true,
+  "notes": "Stepless. The funnel ring is numbered 0–50 with a blank zone usable past 50; values here are marks from your own calibrated zero. Niche says a 5–7 mark difference between units is normal. Niche's micron map: 10–20 = 200–400 µm, 35–50 = 600–800 µm (about 13–20 µm per mark, computed). Community rows without a Niche counterpart are not stored as bands: Honest Coffee Guide Turkish 4–17, pour over 34–75, cold brew 65–73; completehomebarista Chemex 35–45, cold brew 50–60. Calibration article: nichecoffee.co.uk/blogs/exploring-coffee/how-to-calibrate-your-grinder-for-optimum-performance. Dial-in article: nichecoffee.co.uk/blogs/exploring-coffee/how-to-dial-in-your-niche-zero.",
+  "hcg": { "micronRange": [0, 1400], "ticks": 60 }
+}

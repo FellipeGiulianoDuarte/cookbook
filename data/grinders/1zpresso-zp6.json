@@ -1,0 +1,96 @@
+{
+  "id": "1zpresso-zp6",
+  "brand": "1Zpresso",
+  "model": "ZP6 Special",
+  "aliases": ["1Zpresso ZP6"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "rot.num.tick",
+  "clicksPerRotation": 90,
+  "clicksPerNumber": 10,
+  "travelMicronsPerClick": 22,
+  "burr": "48 mm stainless conical, pour-over-specific",
+  "range": [20, 100],
+  "bands": {
+    "moka": {
+      "community": [14, 46],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-zp6-special-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso ZP6 Special grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's chart has no moka band. Coffee Chronicler 20–30; coffeemaster 23–37. Below 20 clicks the burrs rub."
+      }
+    },
+    "aeropress": {
+      "community": [9, 80],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-zp6-special-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso ZP6 Special grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's chart has no AeroPress band. Full Honest Coffee Guide row; Coffee Chronicler 20–35; coffeemaster 20–40. Below 20 clicks the burrs rub."
+      }
+    },
+    "v60": {
+      "official": [40, 50],
+      "community": [30, 51],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/10/ZP6-special-Grind-Setting-Reference-20221031.jpg",
+        "title": "1Zpresso ZP6 Special grind setting reference chart ('begin around 40–50 clicks')",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide V60 18–51; Coffee Chronicler 30–45; coffeemaster 29–51; Kaffebox 'start 4.5–5.0 for 15 g' (45–50 clicks)."
+      }
+    },
+    "pourover": {
+      "official": [40, 50],
+      "community": [19, 76],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/10/ZP6-special-Grind-Setting-Reference-20221031.jpg",
+        "title": "1Zpresso ZP6 Special grind setting reference chart (Point axis = dial numbers × 10 clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide pour over 19–76."
+      }
+    },
+    "chemex": {
+      "community": [47, 60],
+      "source": {
+        "url": "https://coffeemaster.app/guides/1zpresso-zp6-grind-settings",
+        "title": "coffeemaster: 1Zpresso ZP6 grind settings (Chemex 47–60)",
+        "kind": "community",
+        "notes": "Neither 1Zpresso nor Honest Coffee Guide lists Chemex."
+      }
+    },
+    "frenchpress": {
+      "official": [50, 60],
+      "community": [50, 90],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2022/10/ZP6-special-Grind-Setting-Reference-20221031.jpg",
+        "title": "1Zpresso ZP6 Special grind setting reference chart (Point axis = dial numbers × 10 clicks)",
+        "year": 2022,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 50–90; Coffee Chronicler 45–55; coffeemaster 73–100."
+      }
+    },
+    "coldbrew": {
+      "community": [63, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-zp6-special-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso ZP6 Special grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's chart does not list cold brew."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the external ring clockwise until you feel resistance, not the tightest position. That is zero; it may be offset by two or more clicks from the printed 0. Count rotations, numbers and clicks counter-clockwise from there. Numbers 0 to about 2 (0–20 clicks) are unusable: the burrs rub.",
+      "pt-BR": "Gire o anel externo no sentido horário até sentir resistência, não a posição mais apertada. Esse é o zero; ele pode ficar dois ou mais cliques fora do 0 impresso. Conte as voltas, os números e os cliques no sentido anti-horário a partir dali. Os números de 0 a cerca de 2 (0–20 cliques) não são utilizáveis: as mós se atritam."
+    },
+    "toleranceClicks": 2,
+    "unsafeBelow": 20
+  },
+  "espressoCapable": false,
+  "notes": "Pour-over-specific burr. External ring with the K-Plus mechanism: 9 numbers per rotation, 90 clicks per rotation, 10 clicks per number; the official chart axis runs to 100 clicks, Honest Coffee Guide to 90. 22 µm per click (0.022 mm) is 1Zpresso's published burr travel, not particle size. 1Zpresso's chart has no espresso, Turkish, moka or AeroPress band and Honest Coffee Guide says espresso is not possible on the ZP6. Anything under 20 clicks is invalid (burr rub after calibration). All values stored as clicks from zero.",
+  "hcg": { "micronRange": [240, 1050], "ticks": 90 }
+}

@@ -1,0 +1,109 @@
+{
+  "id": "1zpresso-q2",
+  "brand": "1Zpresso",
+  "model": "Q2",
+  "aliases": ["1Zpresso Q2 S", "1Zpresso Q Air"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "rot.num.tick",
+  "clicksPerRotation": 30,
+  "clicksPerNumber": 3,
+  "travelMicronsPerClick": 25,
+  "burr": "38 mm heptagonal stainless conical",
+  "range": [0, 120],
+  "bands": {
+    "turkish": {
+      "community": [4, 19],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-q2-heptagonal-burrs-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso Q2 (heptagonal burrs) grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's Q chart does not list Turkish."
+      }
+    },
+    "espresso": {
+      "community": [16, 33],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-q2-heptagonal-burrs-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso Q2 (heptagonal burrs) grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's Q chart does not list espresso. Coffee Chronicler: Q2 33, Q Air 16–22. Kaffebox: espresso 'technically possible but slow'."
+      }
+    },
+    "moka": {
+      "official": [36, 60],
+      "community": [32, 58],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2026/04/grind-setting_q_en_20260423.jpg",
+        "title": "1Zpresso Q series grind setting reference chart (shared moka / AeroPress band; dial numbers × 3 clicks)",
+        "year": 2026,
+        "kind": "primary",
+        "notes": "Band edges read to the nearest half-number; treat as ±2–3 clicks. Honest Coffee Guide 32–58; Coffee Chronicler Q2 40, Q Air 30."
+      }
+    },
+    "aeropress": {
+      "official": [36, 60],
+      "community": [29, 84],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2026/04/grind-setting_q_en_20260423.jpg",
+        "title": "1Zpresso Q series grind setting reference chart (shared moka / AeroPress band; dial numbers × 3 clicks)",
+        "year": 2026,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 29–84 (full row); Coffee Chronicler 45."
+      }
+    },
+    "v60": {
+      "official": [54, 96],
+      "community": [36, 61],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2026/04/grind-setting_q_en_20260423.jpg",
+        "title": "1Zpresso Q series grind setting reference chart (dial numbers × 3 clicks)",
+        "year": 2026,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide V60 36–61; Coffee Chronicler Q2 60–75, Q Air 60–90."
+      }
+    },
+    "pourover": {
+      "official": [54, 96],
+      "community": [37, 82],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2026/04/grind-setting_q_en_20260423.jpg",
+        "title": "1Zpresso Q series grind setting reference chart (dial numbers × 3 clicks)",
+        "year": 2026,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide pour over 37–82."
+      }
+    },
+    "frenchpress": {
+      "official": [78, 114],
+      "community": [61, 114],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2026/04/grind-setting_q_en_20260423.jpg",
+        "title": "1Zpresso Q series grind setting reference chart (dial numbers × 3 clicks)",
+        "year": 2026,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 61–114; Coffee Chronicler Q2 80, Q Air 80–110."
+      }
+    },
+    "coldbrew": {
+      "community": [71, 120],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-q2-heptagonal-burrs-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso Q2 (heptagonal burrs) grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's Q chart does not list cold brew."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the adjustment dial under the burr clockwise to the tightest position. The number marked at the dot is your zero; it might not be 0. Count rotations, numbers and clicks counter-clockwise from there. Do not turn the handle within the first few clicks from zero.",
+      "pt-BR": "Gire o dial de ajuste sob a mó no sentido horário até a posição mais apertada. O número marcado no ponto é o seu zero; pode não ser 0. Conte as voltas, os números e os cliques no sentido anti-horário a partir dali. Não gire a manivela nos primeiros cliques a partir do zero."
+    },
+    "toleranceClicks": 3,
+    "unsafeBelow": 3
+  },
+  "espressoCapable": true,
+  "notes": "Internal dial under the burr: 10 numbers per rotation, 30 clicks per rotation, 3 clicks per number; the official chart spans 4 rotations = 120 clicks. 25 µm per click (0.025 mm) is 1Zpresso's published burr travel, not particle size. Unlike the external-ring models, zero is the tightest position and the dial number there may not read 0. Q2 S differs only by the foldable handle; Q Air shares the chart. Zero tolerance of 3 clicks (one dial number) is a working figure: 1Zpresso states none for the Q. All values stored as clicks from zero.",
+  "hcg": { "micronRange": [0, 1360], "ticks": 120 }
+}

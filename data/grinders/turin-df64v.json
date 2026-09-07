@@ -1,0 +1,79 @@
+{
+  "id": "turin-df64v",
+  "brand": "Turin",
+  "model": "DF64V",
+  "aliases": ["DF64V"],
+  "kind": "electric",
+  "adjustment": "stepless",
+  "notation": "marks",
+  "burr": "64 mm flat, DLC-coated",
+  "range": [0, 90],
+  "bands": {
+    "espresso": {
+      "community": [8, 27],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df64v-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF64V grind settings",
+        "kind": "community"
+      }
+    },
+    "moka": {
+      "community": [26, 55],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df64v-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF64V grind settings",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [22, 85],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df64v-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF64V grind settings",
+        "kind": "community"
+      }
+    },
+    "v60": {
+      "community": [30, 59],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df64v-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF64V grind settings",
+        "kind": "community"
+      }
+    },
+    "pourover": {
+      "community": [31, 82],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df64v-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF64V grind settings",
+        "kind": "community"
+      }
+    },
+    "frenchpress": {
+      "community": [59, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df64v-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF64V grind settings",
+        "kind": "community"
+      }
+    },
+    "coldbrew": {
+      "community": [70, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df64v-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF64V grind settings",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "With the grinder running, turn the collar finer until you hear a light chirping sound: that is where the burrs make contact. That point is your zero; count marks coarser from there. The printed 0 is not the zero.",
+      "pt-BR": "Com o moedor ligado, gire o anel para o fino até ouvir um leve chiado: é onde as mós se tocam. Esse ponto é o seu zero; conte as marcas para o grosso a partir dali. O 0 impresso não é o zero."
+    },
+    "toleranceClicks": 3
+  },
+  "espressoCapable": true,
+  "notes": "Stepless collar printed 0–90; values are marks from your own chirp zero, not from the printed 0. Variable speed 600–1800 RPM: changing RPM changes the particle distribution at a fixed gap, so published marks assume a fixed speed. No maker chart in the source; only Honest Coffee Guide. Honest Coffee Guide's computed slope is about 9.9 µm per mark ((1000 − 110) ÷ 90), a particle-size estimate, not burr travel. Review: brewcoffeehome.com/df64v-coffee-grinder-review/.",
+  "hcg": { "micronRange": [110, 1000], "ticks": 90 }
+}

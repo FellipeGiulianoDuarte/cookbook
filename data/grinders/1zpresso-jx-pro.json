@@ -1,0 +1,113 @@
+{
+  "id": "1zpresso-jx-pro",
+  "brand": "1Zpresso",
+  "model": "JX-Pro",
+  "aliases": ["1Zpresso JX-Pro S", "1Zpresso JE-Plus"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "rot.num.tick",
+  "clicksPerRotation": 40,
+  "clicksPerNumber": 4,
+  "travelMicronsPerClick": 12.5,
+  "burr": "48 mm stainless conical",
+  "range": [0, 200],
+  "bands": {
+    "turkish": {
+      "official": [32, 48],
+      "community": [9, 48],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2020/09/JX-Pro-Grind-Setting-Reference-20200909.jpg",
+        "title": "1Zpresso JX-Pro grind setting reference chart (0.8–1.2 rotations)",
+        "year": 2020,
+        "kind": "primary",
+        "notes": "Band edges read off the chart image to the nearest half-number; treat as ±2–3 clicks. Honest Coffee Guide 9–48."
+      }
+    },
+    "espresso": {
+      "official": [48, 64],
+      "community": [40, 83],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2020/09/JX-Pro-Grind-Setting-Reference-20200909.jpg",
+        "title": "1Zpresso JX-Pro grind setting reference chart (1.2–1.6 rotations)",
+        "year": 2020,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 40–83."
+      }
+    },
+    "moka": {
+      "official": [96, 120],
+      "community": [79, 144],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2020/09/JX-Pro-Grind-Setting-Reference-20200909.jpg",
+        "title": "1Zpresso JX-Pro grind setting reference chart (2.4–3.0 rotations, shared moka / AeroPress band)",
+        "year": 2020,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 79–144."
+      }
+    },
+    "aeropress": {
+      "official": [96, 120],
+      "community": [70, 200],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2020/09/JX-Pro-Grind-Setting-Reference-20200909.jpg",
+        "title": "1Zpresso JX-Pro grind setting reference chart (2.4–3.0 rotations, shared moka / AeroPress band)",
+        "year": 2020,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 70–200 (full row, concentrate to long steep)."
+      }
+    },
+    "v60": {
+      "official": [128, 176],
+      "community": [88, 153],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2020/09/JX-Pro-Grind-Setting-Reference-20200909.jpg",
+        "title": "1Zpresso JX-Pro grind setting reference chart (3.2–4.4 rotations)",
+        "year": 2020,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide V60 88–153."
+      }
+    },
+    "pourover": {
+      "official": [128, 176],
+      "community": [90, 200],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2020/09/JX-Pro-Grind-Setting-Reference-20200909.jpg",
+        "title": "1Zpresso JX-Pro grind setting reference chart (3.2–4.4 rotations)",
+        "year": 2020,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide pour over 90–200."
+      }
+    },
+    "frenchpress": {
+      "official": [168, 200],
+      "community": [151, 200],
+      "source": {
+        "url": "https://1zpresso.coffee/wp-content/uploads/2020/09/JX-Pro-Grind-Setting-Reference-20200909.jpg",
+        "title": "1Zpresso JX-Pro grind setting reference chart (4.2–5.0 rotations)",
+        "year": 2020,
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 151–200."
+      }
+    },
+    "coldbrew": {
+      "community": [175, 200],
+      "source": {
+        "url": "https://honestcoffeeguide.com/1zpresso-jx-pro-grind-settings/",
+        "title": "Honest Coffee Guide: 1Zpresso JX-Pro grind settings",
+        "kind": "community",
+        "notes": "1Zpresso's chart does not list cold brew."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the top dial clockwise to where the handle starts to spin with resistance, not the tightest position. That is zero; the dial should read #0 within about 2 clicks. Count rotations, numbers and clicks counter-clockwise from there. Do not turn the handle within the first few clicks from zero.",
+      "pt-BR": "Gire o dial superior no sentido horário até o ponto em que a manivela começa a girar com resistência, não a posição mais apertada. Esse é o zero; o dial deve marcar #0 com cerca de 2 cliques de diferença. Conte as voltas, os números e os cliques no sentido anti-horário a partir dali. Não gire a manivela nos primeiros cliques a partir do zero."
+    },
+    "toleranceClicks": 2,
+    "unsafeBelow": 3
+  },
+  "espressoCapable": true,
+  "notes": "Top dial inside the hopper: 10 numbers per rotation, 40 clicks per rotation, 4 clicks per number; the official chart spans 5 rotations = 200 clicks. 12.5 µm per click (0.0125 mm) is 1Zpresso's published burr travel, not particle size. JX-Pro S differs only by the foldable handle; JE-Plus shares the adjustment. All values stored as clicks from zero.",
+  "hcg": { "micronRange": [0, 915], "ticks": 200 }
+}

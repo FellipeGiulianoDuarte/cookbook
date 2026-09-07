@@ -9,7 +9,7 @@
     "pt-BR": "O método atual do fabricante. Na posição normal, uma colher de café, água até a marca 4, mexa por 3 segundos, infusão de um minuto, pressione até o chiado."
   },
   "dose": { "default": 17, "min": 14, "max": 18 },
-  "ratio": 12.94,
+  "ratio": 14.71,
   "grind": {
     "band": "aeropress",
     "pos": 0.5,
@@ -40,8 +40,8 @@
         "pt-BR": "Despeje {water} g de água, até a linha da marca 4. Inicie o cronômetro ao começar"
       },
       "note": {
-        "en": "Mark 4 is a volume line on the chamber, not a weight. 220 g at 17 g of coffee is this app's estimate; the line is the official reference.",
-        "pt-BR": "A marca 4 é uma linha de volume na câmara, não um peso. 220 g para 17 g de café é a estimativa deste app; a linha é a referência oficial."
+        "en": "Mark 4 is a volume line on the chamber, not a weight. 250 g at 17 g of coffee is this app’s estimate (mark 3 holds about 200 g with 22 g of coffee); the line is the official reference.",
+        "pt-BR": "A marca 4 é uma linha de volume na câmara, não um peso. 250 g para 17 g de café é a estimativa deste app (a marca 3 recebe cerca de 200 g com 22 g de café); a linha é a referência oficial."
       },
       "cue": "pour1"
     },
@@ -90,7 +90,7 @@
     "url": "https://aeropress.com/pages/how-to-use",
     "title": "AeroPress: How to use (current official instructions)",
     "kind": "primary",
-    "notes": "Dose is given as 1 heaping scoop or 16–18 g; 17 g is the midpoint. Water is given as a fill line (mark 4), not in grams; the 220 g default is an estimate. Steep is 60 s for medium grind, 30 s for medium-fine."
+    "notes": "Dose is given as 1 heaping scoop or 16–18 g; 17 g is the midpoint. Water is given as a fill line (mark 4), not in grams; the 250 g default is an estimate derived from the official iced recipe (200 g reaches mark 3 with 22 g of coffee). Steep is 60 s for medium grind, 30 s for medium-fine."
   },
   "alsoSee": [
     {

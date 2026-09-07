@@ -27,9 +27,15 @@ export interface Selection {
   orientation?: "upright" | "inverted";
   /** per-user click offset applied to every grinder setting */
   grindOffset: number;
+  /** apply the community process nudge (temperature, grind, ratio) */
+  nudge: boolean;
 }
 
-export const EMPTY_SELECTION: Selection = { roast: "medium", grindOffset: 0 };
+export const EMPTY_SELECTION: Selection = {
+  roast: "medium",
+  grindOffset: 0,
+  nudge: false,
+};
 
 export type WizardEvent =
   | { type: "SELECT_METHOD"; method: Method }
@@ -39,6 +45,7 @@ export type WizardEvent =
   | { type: "SET_BEAN"; roast?: RoastLevel; process?: Process }
   | { type: "SET_ORIENTATION"; orientation: "upright" | "inverted" }
   | { type: "SET_OFFSET"; offset: number }
+  | { type: "SET_NUDGE"; nudge: boolean }
   | { type: "NEXT" }
   | { type: "BACK" }
   | { type: "JUMP"; step: WizardStep };
@@ -120,6 +127,9 @@ export const wizardMachine = setup({
     setOffset: assign(({ event }) =>
       event.type === "SET_OFFSET" ? { grindOffset: event.offset } : {},
     ),
+    setNudge: assign(({ event }) =>
+      event.type === "SET_NUDGE" ? { nudge: event.nudge } : {},
+    ),
   },
 }).createMachine({
   id: "wizard",
@@ -133,6 +143,7 @@ export const wizardMachine = setup({
     SET_BEAN: { actions: "setBean" },
     SET_ORIENTATION: { actions: "setOrientation" },
     SET_OFFSET: { actions: "setOffset" },
+    SET_NUDGE: { actions: "setNudge" },
     JUMP: Object.values(jumpTargets),
   },
   states: {

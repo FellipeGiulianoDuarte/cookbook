@@ -1,0 +1,91 @@
+{
+  "id": "wilfa-uniform",
+  "brand": "Wilfa",
+  "model": "Uniform",
+  "aliases": ["Wilfa Uniform+", "Wilfa Uniform Plus", "Wilfa WSFB"],
+  "kind": "electric",
+  "adjustment": "stepped",
+  "notation": "dial",
+  "burr": "58 mm flat stainless",
+  "range": [1, 41],
+  "bands": {
+    "espresso": {
+      "official": [3, 7],
+      "community": [1, 9],
+      "source": {
+        "url": "https://wilfa.com/pages/uniform-wsfb-use",
+        "title": "Wilfa Uniform use guide: espresso 3–7, start at 5",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 1–9."
+      }
+    },
+    "moka": {
+      "community": [9, 23],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-uniform-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Uniform grind settings",
+        "kind": "community",
+        "notes": "Wilfa gives no moka row."
+      }
+    },
+    "aeropress": {
+      "official": [14, 26],
+      "community": [7, 38],
+      "source": {
+        "url": "https://wilfa.com/pages/uniform-wsfb-use",
+        "title": "Wilfa Uniform use guide: AeroPress 14–26",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 7–38."
+      }
+    },
+    "v60": {
+      "official": [14, 28],
+      "community": [11, 25],
+      "source": {
+        "url": "https://wilfa.com/pages/uniform-wsfb-use",
+        "title": "Wilfa Uniform use guide: pour over 14–28",
+        "kind": "primary",
+        "notes": "Wilfa publishes a pour-over range, not a V60 row; it is used here as the official V60 band. Honest Coffee Guide V60 11–25."
+      }
+    },
+    "pourover": {
+      "official": [14, 28],
+      "community": [11, 36],
+      "source": {
+        "url": "https://wilfa.com/pages/uniform-wsfb-use",
+        "title": "Wilfa Uniform use guide: pour over 14–28",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 11–36. Wilfa also lists filter (batch) 22–32."
+      }
+    },
+    "frenchpress": {
+      "official": [30, 38],
+      "community": [25, 41],
+      "source": {
+        "url": "https://wilfa.com/pages/uniform-wsfb-use",
+        "title": "Wilfa Uniform use guide: French press 30–38",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 25–41. Wilfa lists steep 39–41."
+      }
+    },
+    "coldbrew": {
+      "community": [31, 41],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-uniform-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Uniform grind settings",
+        "kind": "community",
+        "notes": "Wilfa gives no cold-brew row; its steep range is 39–41."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "There is no user zero: the ring clicks through 41 printed positions and 1 is the finest. Wilfa says every grinder will vary slightly in calibration, so treat published numbers as starting points.",
+      "pt-BR": "Não há zero a ser ajustado pelo usuário: o anel percorre 41 posições impressas com cliques e o 1 é a mais fina. A Wilfa avisa que cada moedor varia um pouco na calibração, então trate os números publicados como pontos de partida."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": true,
+  "notes": "Uniform+ is the same grinder with a scale lid. Honest Coffee Guide's computed slope is about 20 µm per step ((1010 − 220) ÷ 40), a particle-size estimate, not burr travel.",
+  "hcg": { "micronRange": [220, 1010], "ticks": 40 }
+}

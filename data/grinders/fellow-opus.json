@@ -1,0 +1,95 @@
+{
+  "id": "fellow-opus",
+  "brand": "Fellow",
+  "model": "Opus",
+  "aliases": ["Fellow Opus Conical Burr Grinder"],
+  "kind": "electric",
+  "adjustment": "dual",
+  "notation": "dial.sub",
+  "clicksPerNumber": 4,
+  "dialStart": 1,
+  "burr": "40 mm conical, DLC-coated",
+  "range": [0, 40],
+  "bands": {
+    "espresso": {
+      "community": [0, 6],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-opus-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Opus grind settings (espresso 1–2.5)",
+        "kind": "community",
+        "notes": "coffeemaster 1.1–2.2 (index 1–6)."
+      }
+    },
+    "moka": {
+      "community": [6, 18],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-opus-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Opus grind settings (moka 2.5–5.5)",
+        "kind": "community",
+        "notes": "coffeemaster 3.3–4.1 (index 11–13)."
+      }
+    },
+    "aeropress": {
+      "community": [4, 31],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-opus-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Opus grind settings (AeroPress 2–8.75)",
+        "kind": "community",
+        "notes": "coffeemaster 4.0–4.2 (index 12–14)."
+      }
+    },
+    "v60": {
+      "community": [8, 20],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-opus-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Opus grind settings (V60 3–6)",
+        "kind": "community",
+        "notes": "coffeemaster 4.3–5.2 (index 15–18)."
+      }
+    },
+    "pourover": {
+      "community": [8, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-opus-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Opus grind settings (pour over 3–8.5)",
+        "kind": "community"
+      }
+    },
+    "chemex": {
+      "community": [24, 27],
+      "source": {
+        "url": "https://coffeemaster.app/guides/fellow-opus-grind-settings",
+        "title": "coffeemaster: Fellow Opus grind settings (Chemex 7.0–7.3)",
+        "kind": "community",
+        "notes": "Honest Coffee Guide has no Chemex row."
+      }
+    },
+    "frenchpress": {
+      "community": [20, 40],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-opus-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Opus grind settings (French press 6–11)",
+        "kind": "community",
+        "notes": "coffeemaster 9.1–9.3 (index 33–35)."
+      }
+    },
+    "coldbrew": {
+      "community": [25, 40],
+      "source": {
+        "url": "https://honestcoffeeguide.com/fellow-opus-grind-settings/",
+        "title": "Honest Coffee Guide: Fellow Opus grind settings (cold brew 7.25–11)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "There is no zero to find on the outer ring: it is printed 1–11 and 1 is the finest click. The blue inner ring adds micro-adjustment and extends the range to 0 and 12.",
+      "pt-BR": "Não há zero a ser encontrado no anel externo: ele é impresso de 1 a 11 e o 1 é o clique mais fino. O anel interno azul acrescenta um ajuste fino e estende a faixa até 0 e 12."
+    },
+    "toleranceClicks": 1
+  },
+  "espressoCapable": true,
+  "notes": "Values are a step index 0–40 on the stepped outer ring: dial number = 1 + floor(index ÷ 4), sub-click = index mod 4 (4 clicks of 0.25 between numbers; 41 positions). Honest Coffee Guide writes decimals (2.5, 8.75); coffeemaster writes x.0–x.3. Conversions: 2.5 = 6, 3–6 = 8–20, 8.75 = 31. The blue inner ring is a second, finer adjustment whose resolution Fellow does not document; it is not modelled here. Honest Coffee Guide's computed slope is about 23 µm per outer click ((1160 − 230) ÷ 40), a particle-size estimate, not burr travel. Fellow gear guide: fellowproducts.com/pages/gear-guide-opus.",
+  "hcg": { "micronRange": [230, 1160], "ticks": 40 }
+}

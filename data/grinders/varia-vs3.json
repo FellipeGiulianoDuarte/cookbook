@@ -1,0 +1,85 @@
+{
+  "id": "varia-vs3",
+  "brand": "Varia",
+  "model": "VS3 Gen 2",
+  "aliases": ["Varia VS3", "Varia VS3 2nd Gen"],
+  "kind": "electric",
+  "adjustment": "stepless",
+  "notation": "marks",
+  "travelMicronsPerClick": 10,
+  "burr": "Conical 48/38 mm",
+  "range": [0, 19.6],
+  "bands": {
+    "espresso": {
+      "official": [4, 4],
+      "community": [0.2, 3.3],
+      "source": {
+        "url": "https://www.variabrewing.com/products/varia-vs3-grinder",
+        "title": "Varia VS3 product page: espresso reference point #4 (18 g in 34 s)",
+        "kind": "primary",
+        "notes": "Honest Coffee Guide 0.2–3.3, which ends finer than Varia's reference point."
+      }
+    },
+    "moka": {
+      "community": [3.1, 7.8],
+      "source": {
+        "url": "https://honestcoffeeguide.com/varia-vs3-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Varia VS3 Gen 2 grind settings (dial number, decimal = sub-mark)",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [2.4, 12.5],
+      "source": {
+        "url": "https://honestcoffeeguide.com/varia-vs3-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Varia VS3 Gen 2 grind settings (dial number, decimal = sub-mark)",
+        "kind": "community"
+      }
+    },
+    "v60": {
+      "community": [3.7, 8.4],
+      "source": {
+        "url": "https://honestcoffeeguide.com/varia-vs3-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Varia VS3 Gen 2 grind settings (dial number, decimal = sub-mark)",
+        "kind": "community",
+        "notes": "Varia's filter reference point is #10 (18 g in 25 s), coarser than this band."
+      }
+    },
+    "pourover": {
+      "official": [10, 10],
+      "community": [3.9, 12.1],
+      "source": {
+        "url": "https://www.variabrewing.com/products/varia-vs3-grinder",
+        "title": "Varia VS3 product page: filter reference point #10 (18 g in 25 s)",
+        "kind": "primary",
+        "notes": "Varia says 'filter', not pour over. Honest Coffee Guide pour over 3.9–12.1."
+      }
+    },
+    "frenchpress": {
+      "community": [8.3, 18],
+      "source": {
+        "url": "https://honestcoffeeguide.com/varia-vs3-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Varia VS3 Gen 2 grind settings (dial number, decimal = sub-mark)",
+        "kind": "community"
+      }
+    },
+    "coldbrew": {
+      "community": [10.1, 19.6],
+      "source": {
+        "url": "https://honestcoffeeguide.com/varia-vs3-gen-2-grind-settings/",
+        "title": "Honest Coffee Guide: Varia VS3 Gen 2 grind settings (dial number, decimal = sub-mark)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Varia does not document a zero. Community method: rotate the hopper finer until the burrs just touch, then count back to your setting. Values are dial numbers with the decimal as the sub-mark (3.7 = number 3, sub-mark 7).",
+      "pt-BR": "A Varia não documenta um zero. Método da comunidade: gire o reservatório para o fino até as mós apenas se tocarem, depois conte de volta até o seu ajuste. Os valores são números do dial com o decimal como submarca (3.7 = número 3, submarca 7)."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": true,
+  "notes": "Stepless hopper rotation with about 17 main numbers and 10 sub-marks each over two rotations. Varia states 10 µm of vertical burr shift per increment; that is burr travel, not particle size. Honest Coffee Guide covers 170–1400 µm across the 0–19.6 dial. The engine rounds stepless values to 0.5, coarser than the printed 0.1 sub-marks.",
+  "hcg": { "micronRange": [170, 1400], "ticks": 196 }
+}

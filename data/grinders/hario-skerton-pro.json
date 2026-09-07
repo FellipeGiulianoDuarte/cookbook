@@ -1,0 +1,84 @@
+{
+  "id": "hario-skerton-pro",
+  "brand": "Hario",
+  "model": "Skerton Pro (MMCS-2B)",
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "clicks",
+  "burr": "ceramic conical",
+  "range": [1, 16],
+  "bands": {
+    "espresso": {
+      "community": [2, 3],
+      "source": {
+        "url": "https://coffeechronicler.com/grind-size-chart/",
+        "title": "Reviewer consensus: Coffee Chronicler 3 (Kruve-sieved), Homegrounds 2 (pressurised basket), Brew Coffee Home 2",
+        "kind": "community",
+        "notes": "Honest Coffee Guide 1; The Coffee Folk 4; Balance Journal 1–5. Hario publishes no click numbers for any model."
+      }
+    },
+    "moka": {
+      "community": [3, 5],
+      "source": {
+        "url": "https://coffeechronicler.com/grind-size-chart/",
+        "title": "Reviewer consensus: Coffee Chronicler 5, Homegrounds 3, Brew Coffee Home 3, The Coffee Folk 4–6",
+        "kind": "community",
+        "notes": "Honest Coffee Guide 2–3."
+      }
+    },
+    "aeropress": {
+      "community": [5, 8],
+      "source": {
+        "url": "https://coffeechronicler.com/grind-size-chart/",
+        "title": "Reviewer consensus: Coffee Chronicler 8, Homegrounds 4–7, The Coffee Folk 4–9",
+        "kind": "community",
+        "notes": "Honest Coffee Guide 1–5 (its Skerton Pro chart is identical to its Skerton Plus chart, so it was likely not measured on the Pro)."
+      }
+    },
+    "v60": {
+      "community": [6, 9],
+      "source": {
+        "url": "https://coffeechronicler.com/grind-size-chart/",
+        "title": "Reviewer consensus: Coffee Chronicler 10 (pour over), Homegrounds 5–6, Brew Coffee Home 6, Balance Journal 6–9",
+        "kind": "community",
+        "notes": "Honest Coffee Guide 2–3; The Coffee Folk 4–6."
+      }
+    },
+    "chemex": {
+      "community": [7, 9],
+      "source": {
+        "url": "https://www.homegrounds.co/hario-skerton-hand-grinder-review/",
+        "title": "Reviewer consensus: Homegrounds 6–7, Brew Coffee Home 7",
+        "kind": "community",
+        "notes": "Honest Coffee Guide has no Chemex row (pour over 2–5)."
+      }
+    },
+    "frenchpress": {
+      "community": [10, 13],
+      "source": {
+        "url": "https://coffeechronicler.com/grind-size-chart/",
+        "title": "Reviewer consensus: Coffee Chronicler 13, Homegrounds 8–10, Balance Journal 10–13, The Coffee Folk 12–14",
+        "kind": "community",
+        "notes": "Honest Coffee Guide 4–8; Brew Coffee Home 9+."
+      }
+    },
+    "coldbrew": {
+      "community": [12, 16],
+      "source": {
+        "url": "https://thecoffeefolk.com/hario-skerton-pro/",
+        "title": "The Coffee Folk: Hario Skerton Pro (cold brew 12–16)",
+        "kind": "community",
+        "notes": "Homegrounds 10; Honest Coffee Guide 5–9."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Turn the adjustment nut under the burr clockwise until it is tight and the burrs touch. That is zero. Count clicks counter-clockwise from there. Do not grind at zero: the ceramic burrs rub.",
+      "pt-BR": "Gire a porca de ajuste sob a mó no sentido horário até apertar e as mós se tocarem. Esse é o zero. Conte os cliques no sentido anti-horário a partir dali. Não moa no zero: as mós de cerâmica se atritam."
+    },
+    "toleranceClicks": 1
+  },
+  "espressoCapable": true,
+  "notes": "Hario's manual gives no click numbers, only 'rotate to the right for finer, to the left for coarser' and a Fine / Medium-fine / Medium / Coarse chart. Clicks per rotation are not published; Homegrounds counts about 10 usable sizes at roughly 100 µm of travel per step. Bands are the midpoint of reviewer counts (Coffee Chronicler, Homegrounds, The Coffee Folk, Brew Coffee Home, Balance Journal). Honest Coffee Guide's chart (notches 0–9, 350–1400 µm) is on a different scale and duplicates its Skerton Plus chart, so it is not used as a fallback here."
+}

@@ -1,0 +1,86 @@
+{
+  "id": "turin-df54",
+  "brand": "Turin",
+  "model": "DF54",
+  "aliases": ["DF54"],
+  "kind": "electric",
+  "adjustment": "stepless",
+  "notation": "marks",
+  "burr": "54 mm flat",
+  "range": [0, 90],
+  "bands": {
+    "espresso": {
+      "community": [8, 30],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df54-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF54 grind settings",
+        "kind": "community",
+        "notes": "Grind Logic 5–30."
+      }
+    },
+    "moka": {
+      "community": [29, 62],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df54-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF54 grind settings",
+        "kind": "community",
+        "notes": "Grind Logic 20–50."
+      }
+    },
+    "aeropress": {
+      "community": [24, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df54-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF54 grind settings",
+        "kind": "community",
+        "notes": "Grind Logic 10–35."
+      }
+    },
+    "v60": {
+      "community": [34, 67],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df54-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF54 grind settings",
+        "kind": "community",
+        "notes": "Grind Logic has no V60 row; its pour over is 45–75."
+      }
+    },
+    "pourover": {
+      "community": [35, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df54-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF54 grind settings",
+        "kind": "community",
+        "notes": "Grind Logic 45–75."
+      }
+    },
+    "frenchpress": {
+      "community": [67, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df54-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF54 grind settings",
+        "kind": "community",
+        "notes": "Grind Logic 70–85."
+      }
+    },
+    "coldbrew": {
+      "community": [79, 90],
+      "source": {
+        "url": "https://honestcoffeeguide.com/turin-df54-grind-settings/",
+        "title": "Honest Coffee Guide: Turin DF54 grind settings",
+        "kind": "community",
+        "notes": "Grind Logic 80–90."
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "With the grinder running, turn the collar finer until you hear a light chirping sound: that is where the burrs make contact. That point is your zero; count marks coarser from there. The printed 0 is not the zero, and two grinders will not share the same number.",
+      "pt-BR": "Com o moedor ligado, gire o anel para o fino até ouvir um leve chiado: é onde as mós se tocam. Esse ponto é o seu zero; conte as marcas para o grosso a partir dali. O 0 impresso não é o zero, e dois moedores não terão o mesmo número."
+    },
+    "toleranceClicks": 3
+  },
+  "espressoCapable": true,
+  "notes": "Stepless collar printed 0–90; values are marks from your own chirp zero, not from the printed 0. No DF Grinders chart for the DF54 in the source; the retailer guide is Grind Logic (grindlogic.com.au/blogs/articles/df54-coffee-grinder-grind-settings), kept in the band notes. Honest Coffee Guide's computed slope is about 8.8 µm per mark ((900 − 110) ÷ 90), a particle-size estimate, not burr travel. Zero procedure: grindlogic.com.au/blogs/articles/how-to-dial-in-df54-df64-gen-2-espresso. DF Grinders page: dfgrinders.ca/pages/df54-grind-size-guide.",
+  "hcg": { "micronRange": [110, 900], "ticks": 90 }
+}

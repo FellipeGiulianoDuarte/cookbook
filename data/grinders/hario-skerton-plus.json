@@ -1,0 +1,84 @@
+{
+  "id": "hario-skerton-plus",
+  "brand": "Hario",
+  "model": "Skerton Plus (MSCS-2DTB)",
+  "aliases": ["Hario Skerton", "Hario Ceramic Coffee Mill"],
+  "kind": "hand",
+  "adjustment": "stepped",
+  "notation": "clicks",
+  "burr": "ceramic conical",
+  "range": [1, 9],
+  "bands": {
+    "espresso": {
+      "community": [1, 1],
+      "source": {
+        "url": "https://honestcoffeeguide.com/hario-skerton-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Hario Skerton Plus grind settings (notches)",
+        "kind": "community",
+        "notes": "Turning too far clockwise grinds the ceramic burrs together (Hario manual)."
+      }
+    },
+    "moka": {
+      "community": [2, 3],
+      "source": {
+        "url": "https://honestcoffeeguide.com/hario-skerton-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Hario Skerton Plus grind settings (notches)",
+        "kind": "community"
+      }
+    },
+    "aeropress": {
+      "community": [1, 5],
+      "source": {
+        "url": "https://honestcoffeeguide.com/hario-skerton-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Hario Skerton Plus grind settings (notches)",
+        "kind": "community",
+        "notes": "Fourbarrel: AeroPress 2."
+      }
+    },
+    "v60": {
+      "community": [2, 3],
+      "source": {
+        "url": "https://honestcoffeeguide.com/hario-skerton-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Hario Skerton Plus grind settings (notches)",
+        "kind": "community",
+        "notes": "Fourbarrel: V60 2, drip cone 3."
+      }
+    },
+    "pourover": {
+      "community": [2, 5],
+      "source": {
+        "url": "https://honestcoffeeguide.com/hario-skerton-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Hario Skerton Plus grind settings (notches)",
+        "kind": "community",
+        "notes": "Fourbarrel: drip cone 3, metal filter / Clever 5."
+      }
+    },
+    "frenchpress": {
+      "community": [4, 8],
+      "source": {
+        "url": "https://honestcoffeeguide.com/hario-skerton-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Hario Skerton Plus grind settings (notches)",
+        "kind": "community",
+        "notes": "Fourbarrel: French press 7."
+      }
+    },
+    "coldbrew": {
+      "community": [5, 9],
+      "source": {
+        "url": "https://honestcoffeeguide.com/hario-skerton-plus-grind-settings/",
+        "title": "Honest Coffee Guide: Hario Skerton Plus grind settings (notches)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "Loosen the fixing screw and remove the handle and stopper. Turn the adjustment nut clockwise until tight. That is zero. Count notches counter-clockwise from there, then reattach the stopper and handle.",
+      "pt-BR": "Solte o parafuso de fixação e remova a manivela e a trava. Gire a porca de ajuste no sentido horário até apertar. Esse é o zero. Conte os entalhes no sentido anti-horário a partir dali e recoloque a trava e a manivela."
+    },
+    "toleranceClicks": 1
+  },
+  "espressoCapable": true,
+  "notes": "Coarse notches on the adjustment nut under the handle; the handle and stopper must come off to adjust. Hario's manual gives no click numbers. Honest Coffee Guide's chart is identical for the Plus and the original Skerton. Values are Honest Coffee Guide notches from zero. The Honest Coffee Guide micron range (350–1400 µm) is read from its Skerton Pro page, whose chart is identical to this one.",
+  "hcg": { "micronRange": [350, 1400], "ticks": 9 }
+}

@@ -1,0 +1,76 @@
+{
+  "id": "wilfa-svart",
+  "brand": "Wilfa",
+  "model": "Svart",
+  "aliases": ["Wilfa Svart Aroma", "Wilfa Svart Precision"],
+  "kind": "electric",
+  "adjustment": "labelled",
+  "notation": "dial",
+  "burr": "Conical steel",
+  "range": [1, 18],
+  "bands": {
+    "moka": {
+      "community": [3, 8],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-svart-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Svart grind settings (dot positions, 1 = finest)",
+        "kind": "community",
+        "notes": "The dial's MOCCA zone is its finest printed zone."
+      }
+    },
+    "aeropress": {
+      "community": [2, 14],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-svart-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Svart grind settings (dot positions, 1 = finest)",
+        "kind": "community",
+        "notes": "Square Mile: the 'R' of AEROPRESS on the printed dial."
+      }
+    },
+    "v60": {
+      "community": [3, 9],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-svart-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Svart grind settings (dot positions, 1 = finest)",
+        "kind": "community",
+        "notes": "Square Mile: V60 250 ml = 'P' of AEROPRESS, 500 ml = first 'E', 750 ml = the dot between FILTER and AEROPRESS."
+      }
+    },
+    "pourover": {
+      "community": [4, 14],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-svart-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Svart grind settings (dot positions, 1 = finest)",
+        "kind": "community",
+        "notes": "Honest Coffee Guide filter machine 1–13. Square Mile: batch brewer = 'T' of FILTER; Clever = between 'O' and 'P' of AEROPRESS."
+      }
+    },
+    "frenchpress": {
+      "community": [10, 18],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-svart-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Svart grind settings (dot positions, 1 = finest)",
+        "kind": "community",
+        "notes": "Square Mile puts French press at the 'O' of AEROPRESS, well finer than the printed FRENCH PRESS zone."
+      }
+    },
+    "coldbrew": {
+      "community": [12, 18],
+      "source": {
+        "url": "https://honestcoffeeguide.com/wilfa-svart-grind-settings/",
+        "title": "Honest Coffee Guide: Wilfa Svart grind settings (dot positions, 1 = finest)",
+        "kind": "community"
+      }
+    }
+  },
+  "zero": {
+    "procedure": {
+      "en": "There is no user zero. Rotate the hopper; the dial is printed with brew-method zones from coarse to fine (STEEP, FRENCH PRESS, FILTER, AEROPRESS, MOCCA) with fine-tune dots between them. Position 1 is the finest dot.",
+      "pt-BR": "Não há zero a ser ajustado pelo usuário. Gire o reservatório; o dial é impresso com zonas por método, do grosso ao fino (STEEP, FRENCH PRESS, FILTER, AEROPRESS, MOCCA), com pontos de ajuste fino entre elas. A posição 1 é o ponto mais fino."
+    },
+    "toleranceClicks": 2
+  },
+  "espressoCapable": false,
+  "notes": "Not espresso capable: Wilfa says the finest setting is roughly medium; Honest Coffee Guide's espresso row 1–2 is nominal. Values are Honest Coffee Guide's 18 dot positions (1 = finest, 18 = coarsest) across Wilfa's '5 grinding degrees'. Square Mile's roaster guide (squaremileblog.com/2018/06/26/wilfa-grind-size-guide/) is keyed to the printed letters: AeroPress = 'R' of AEROPRESS; V60 250 ml = 'P', 500 ml = first 'E', 750 ml = dot between FILTER and AEROPRESS; Clever = between 'O' and 'P'; French press = 'O' of AEROPRESS; batch brewer = 'T' of FILTER. Honest Coffee Guide's computed slope is about 46 µm per dot ((1100 − 310) ÷ 17), a particle-size estimate, not burr travel. Wilfa product page: wilfa.com/products/svart-aroma.",
+  "hcg": { "micronRange": [310, 1100], "ticks": 18 }
+}
