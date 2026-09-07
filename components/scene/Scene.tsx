@@ -25,8 +25,8 @@ import type { SceneState } from "./types";
 */
 
 const SPOTS = {
-  v60: new THREE.Vector3(-1.6, -0.75, 0),
-  aeropress: new THREE.Vector3(1.75, -0.85, 0),
+  v60: new THREE.Vector3(-1.6, -1.3, 0),
+  aeropress: new THREE.Vector3(1.75, -1.06, 0),
   grinder: new THREE.Vector3(0, 0, -6),
   beans: new THREE.Vector3(6, 0, -6),
 } as const;
@@ -52,7 +52,8 @@ export default function Scene({ state }: { state: SceneState }) {
           onIncline={() => setDpr(2)}
           flipflops={2}
         />
-        <ambientLight intensity={0.55} />
+        <ambientLight intensity={0.4} />
+        <hemisphereLight args={["#fff7ec", "#c9b8a2", 0.9]} />
         <directionalLight
           position={[4, 6, 3]}
           intensity={2.0}
@@ -170,7 +171,7 @@ export default function Scene({ state }: { state: SceneState }) {
           <Kettle
             pouring={state.pouring}
             target={state.method === "aeropress" ? SPOTS.aeropress : SPOTS.v60}
-            spoutHeight={state.method === "aeropress" ? 2.05 : 1.75}
+            spoutHeight={state.method === "aeropress" ? 2.1 : 2.05}
           />
         </group>
 
@@ -264,28 +265,28 @@ const VIEWS: Record<
   { center: THREE.Vector3; radius: number; dir: THREE.Vector3 }
 > = {
   brewers: {
-    center: new THREE.Vector3(0.05, 0.0, 0),
-    radius: 2.45,
-    dir: new THREE.Vector3(0.12, 0.22, 1).normalize(),
+    center: new THREE.Vector3(0.05, -0.35, 0),
+    radius: 2.3,
+    dir: new THREE.Vector3(0.12, 0.2, 1).normalize(),
   },
   brewersV60: {
-    center: new THREE.Vector3(-0.7, 0.0, 0),
-    radius: 2.35,
-    dir: new THREE.Vector3(0.05, 0.22, 1).normalize(),
+    center: new THREE.Vector3(-0.7, -0.35, 0),
+    radius: 2.2,
+    dir: new THREE.Vector3(0.05, 0.2, 1).normalize(),
   },
   brewersAeropress: {
-    center: new THREE.Vector3(0.8, 0.0, 0),
-    radius: 2.35,
-    dir: new THREE.Vector3(0.2, 0.22, 1).normalize(),
+    center: new THREE.Vector3(0.8, -0.35, 0),
+    radius: 2.2,
+    dir: new THREE.Vector3(0.2, 0.2, 1).normalize(),
   },
   v60: {
-    center: new THREE.Vector3(SPOTS.v60.x, -0.05, 0),
-    radius: 1.5,
-    dir: new THREE.Vector3(0.35, 0.3, 1).normalize(),
+    center: new THREE.Vector3(SPOTS.v60.x, -0.42, 0),
+    radius: 1.35,
+    dir: new THREE.Vector3(0.35, 0.28, 1).normalize(),
   },
   aeropress: {
-    center: new THREE.Vector3(SPOTS.aeropress.x, 0.35, 0),
-    radius: 1.5,
+    center: new THREE.Vector3(SPOTS.aeropress.x, -0.2, 0),
+    radius: 1.35,
     dir: new THREE.Vector3(0.35, 0.22, 1).normalize(),
   },
   grinder: {
@@ -307,13 +308,13 @@ const VIEWS: Record<
     dir: new THREE.Vector3(0.2, 0.75, 1).normalize(),
   },
   v60Brewing: {
-    center: new THREE.Vector3(SPOTS.v60.x + 0.2, 0.35, 0),
-    radius: 1.9,
+    center: new THREE.Vector3(SPOTS.v60.x + 0.15, 0.0, 0),
+    radius: 1.75,
     dir: new THREE.Vector3(0.3, 0.2, 1).normalize(),
   },
   aeropressBrewing: {
-    center: new THREE.Vector3(SPOTS.aeropress.x + 0.1, 0.6, 0),
-    radius: 1.75,
+    center: new THREE.Vector3(SPOTS.aeropress.x + 0.1, 0.2, 0),
+    radius: 1.65,
     dir: new THREE.Vector3(0.3, 0.2, 1).normalize(),
   },
 };

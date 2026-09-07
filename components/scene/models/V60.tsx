@@ -4,180 +4,252 @@ import { useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COLORS } from "../materials";
-import { Glass } from "./Glass";
 
 /*
-  Procedural V60: a 60° cone lathe with 24 ribs, a base ring, a coffee bed, the slurry
-  whose level follows `fill`, a glass server underneath, and a pour stream when pouring.
-  Dimensions in scene units (1 ≈ 8 cm).
+  Hario V60 02 on the 600 ml range server, modelled after the real set.
+  Units: 1 = 8 cm. Local origin = server bottom, resting on the floor.
+
+  Server: bell-shaped glass body, white silicone band at the neck, glass handle.
+  Dripper: 60° ceramic cone, wide flat base plate that sits on the server, short skirt
+  inside the neck, side handle, twelve spiral ridges inside, small drip hole.
 */
 
-const TOP_Y = 1.13;
-const SPOUT_Y = 0.2;
-const TOP_R = 1.0;
-const SPOUT_R = 0.17;
-const RIBS = 20;
+const SERVER_H = 1.0;
+const SERVER_PROFILE: [number, number][] = [
+  [0, 0],
+  [0.62, 0],
+  [0.7, 0.05],
+  [0.72, 0.16],
+  [0.7, 0.4],
+  [0.62, 0.62],
+  [0.5, 0.78],
+  [0.43, 0.86],
+  [0.42, 0.93],
+  [0.43, SERVER_H],
+];
+const NECK_R = 0.42;
 
-function radiusAt(y: number) {
-  const t = (y - SPOUT_Y) / (TOP_Y - SPOUT_Y);
-  return SPOUT_R + t * (TOP_R - SPOUT_R);
+const PLATE_Y = SERVER_H + 0.02;
+const CONE_BOTTOM_Y = PLATE_Y + 0.05;
+const CONE_TOP_Y = CONE_BOTTOM_Y + 0.66;
+const HOLE_R = 0.24;
+const CONE_TOP_R = 0.74;
+const WALL = 0.045;
+const RIDGES = 12;
+
+function coneRadius(y: number) {
+  const t = (y - CONE_BOTTOM_Y) / (CONE_TOP_Y - CONE_BOTTOM_Y);
+  return HOLE_R + t * (CONE_TOP_R - HOLE_R);
+}
+
+function toLathe(points: [number, number][], segments = 96) {
+  return new THREE.LatheGeometry(
+    points.map(([r, y]) => new THREE.Vector2(r, y)),
+    segments,
+  );
+}
+
+function splineLathe(points: [number, number][], segments = 96) {
+  const curve = new THREE.SplineCurve(
+    points.map(([r, y]) => new THREE.Vector2(r, y)),
+  );
+  return new THREE.LatheGeometry(curve.getPoints(48), segments);
 }
 
 export function V60({
   fill,
   coffee,
   pouring,
-  quality,
+  quality: _quality,
 }: {
   fill: number;
   coffee: number;
   pouring: boolean;
   quality: "high" | "low";
 }) {
-  const cone = useMemo(() => {
-    const pts = [
-      new THREE.Vector2(SPOUT_R, SPOUT_Y),
-      new THREE.Vector2(TOP_R, TOP_Y),
-      new THREE.Vector2(TOP_R + 0.06, TOP_Y + 0.02),
-      new THREE.Vector2(SPOUT_R + 0.05, SPOUT_Y),
-    ];
-    return new THREE.LatheGeometry(pts, 96);
-  }, []);
+  const server = useMemo(() => splineLathe(SERVER_PROFILE), []);
 
-  const ribs = useMemo(() => {
-    const g = new THREE.BoxGeometry(0.03, TOP_Y - SPOUT_Y - 0.18, 0.045);
-    return g;
-  }, []);
-  const ribsRef = useRef<THREE.InstancedMesh>(null);
-  useMemo(() => {
-    // placed once the ref exists (first frame)
-  }, []);
-  useFrame(() => {
-    const m = ribsRef.current;
-    if (!m || m.userData.placed) return;
-    const dummy = new THREE.Object3D();
-    const tilt = Math.atan((TOP_R - SPOUT_R) / (TOP_Y - SPOUT_Y));
-    for (let i = 0; i < RIBS; i++) {
-      const a = (i / RIBS) * Math.PI * 2;
-      const midY = (TOP_Y + SPOUT_Y) / 2;
-      const r = radiusAt(midY) - 0.03;
-      dummy.position.set(Math.cos(a) * r, midY, Math.sin(a) * r);
-      dummy.rotation.set(0, -a, 0);
-      dummy.rotateZ(-tilt);
-      dummy.updateMatrix();
-      m.setMatrixAt(i, dummy.matrix);
-    }
-    m.instanceMatrix.needsUpdate = true;
-    m.userData.placed = true;
-  });
-
-  const bedH = coffee <= 0 ? 0.0001 : 0.12 + Math.min(1, coffee) * 0.3;
-
-  // Slurry: a truncated cone whose top follows the fill level (quantised to keep geometry stable).
   const level = Math.round(Math.max(0, Math.min(1, fill)) * 40) / 40;
+  const serverLiquid = useMemo(() => {
+    if (level <= 0) return null;
+    const h = 0.04 + level * 0.6;
+    const pts = SERVER_PROFILE.filter(([, y]) => y < h).map(
+      ([r, y]) => [Math.max(0, r - 0.03), y] as [number, number],
+    );
+    const rAtH = pts[pts.length - 1][0];
+    pts.push([rAtH, h], [0, h]);
+    return toLathe(pts);
+  }, [level]);
+
+  const cone = useMemo(
+    () =>
+      toLathe([
+        [HOLE_R, CONE_BOTTOM_Y],
+        [CONE_TOP_R, CONE_TOP_Y],
+        [CONE_TOP_R + WALL, CONE_TOP_Y - 0.01],
+        [HOLE_R + WALL, CONE_BOTTOM_Y - 0.02],
+      ]),
+    [],
+  );
+
+  const plate = useMemo(
+    () =>
+      toLathe([
+        [NECK_R - 0.03, PLATE_Y - 0.14],
+        [NECK_R - 0.03, PLATE_Y],
+        [HOLE_R + WALL, PLATE_Y],
+        [HOLE_R + WALL, PLATE_Y + 0.05],
+        [0.88, PLATE_Y + 0.05],
+        [0.9, PLATE_Y + 0.02],
+        [0.88, PLATE_Y - 0.02],
+        [NECK_R + 0.01, PLATE_Y - 0.02],
+        [NECK_R + 0.01, PLATE_Y - 0.14],
+      ]),
+    [],
+  );
+
+  const ridges = useMemo(() => {
+    const geos: THREE.TubeGeometry[] = [];
+    for (let i = 0; i < RIDGES; i++) {
+      const a0 = (i / RIDGES) * Math.PI * 2;
+      const pts: THREE.Vector3[] = [];
+      for (let k = 0; k <= 10; k++) {
+        const t = k / 10;
+        const y =
+          CONE_BOTTOM_Y + 0.05 + t * (CONE_TOP_Y - CONE_BOTTOM_Y - 0.12);
+        const r = coneRadius(y) - 0.02;
+        const a = a0 + t * 0.9;
+        pts.push(new THREE.Vector3(Math.cos(a) * r, y, Math.sin(a) * r));
+      }
+      geos.push(
+        new THREE.TubeGeometry(
+          new THREE.CatmullRomCurve3(pts),
+          24,
+          0.018,
+          8,
+          false,
+        ),
+      );
+    }
+    return geos;
+  }, []);
+
+  const bedH = coffee <= 0 ? 0.0001 : 0.1 + Math.min(1, coffee) * 0.24;
+  const bed = useMemo(() => {
+    const y0 = CONE_BOTTOM_Y + 0.01;
+    const y1 = y0 + bedH;
+    return toLathe(
+      [
+        [0, y0],
+        [HOLE_R, y0],
+        [coneRadius(y1) - 0.025, y1],
+        [0, y1 + 0.01],
+      ],
+      72,
+    );
+  }, [bedH]);
   const slurry = useMemo(() => {
     if (level <= 0) return null;
-    const base = SPOUT_Y + bedH - 0.02;
-    const topY = Math.max(base + 0.02, base + level * (TOP_Y - base - 0.15));
-    const pts = [
-      new THREE.Vector2(0, base),
-      new THREE.Vector2(radiusAt(base) - 0.03, base),
-      new THREE.Vector2(radiusAt(topY) - 0.03, topY),
-      new THREE.Vector2(0, topY),
-    ];
-    return new THREE.LatheGeometry(pts, 72);
+    const base = CONE_BOTTOM_Y + 0.01 + bedH;
+    const top = Math.min(
+      CONE_TOP_Y - 0.08,
+      base + 0.02 + level * (CONE_TOP_Y - base - 0.1),
+    );
+    return toLathe(
+      [
+        [0, base],
+        [coneRadius(base) - 0.025, base],
+        [coneRadius(top) - 0.025, top],
+        [0, top],
+      ],
+      72,
+    );
   }, [level, bedH]);
-
-  // Server: glass cylinder; its liquid rises with fill.
-  const serverH = 1.1;
-  const serverFill = Math.max(0.02, level * (serverH - 0.15));
 
   const stream = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
     if (!stream.current) return;
-    const target = pouring ? 1 : 0;
     const s = stream.current.scale;
-    s.x = THREE.MathUtils.lerp(s.x, target, 0.15);
+    s.x = THREE.MathUtils.lerp(s.x, pouring ? 1 : 0, 0.15);
     s.z = s.x;
     stream.current.position.x = pouring
-      ? Math.sin(clock.elapsedTime * 9) * 0.01
-      : 0;
+      ? 0.12 + Math.sin(clock.elapsedTime * 9) * 0.01
+      : 0.12;
   });
+
+  const glass = (
+    <meshPhysicalMaterial
+      color="#ffffff"
+      transparent
+      opacity={0.32}
+      roughness={0.04}
+      metalness={0}
+      clearcoat={1}
+      clearcoatRoughness={0.05}
+      reflectivity={0.9}
+      side={THREE.DoubleSide}
+      depthWrite={false}
+    />
+  );
+  const ceramic = (
+    <meshPhysicalMaterial
+      color="#f4efe7"
+      roughness={0.28}
+      clearcoat={0.8}
+      clearcoatRoughness={0.2}
+      side={THREE.DoubleSide}
+    />
+  );
 
   return (
     <group>
-      {/* server */}
-      <mesh position={[0, 0, 0]} castShadow>
-        <cylinderGeometry args={[0.62, 0.55, serverH, 72, 1, true]} />
-        <Glass quality={quality} />
-      </mesh>
-      <mesh position={[0, -serverH / 2, 0]}>
-        <cylinderGeometry args={[0.55, 0.55, 0.04, 72]} />
-        <Glass quality={quality} />
-      </mesh>
-      <mesh position={[0, -serverH / 2 + serverFill / 2 + 0.01, 0]}>
-        <cylinderGeometry args={[0.52 + level * 0.06, 0.5, serverFill, 72]} />
-        <meshStandardMaterial color={COLORS.coffee} roughness={0.25} />
-      </mesh>
-
-      {/* dripper base ring */}
-      <mesh position={[0, 0.66, 0]} castShadow>
-        <cylinderGeometry args={[0.7, 0.76, 0.22, 72, 1, true]} />
+      <mesh geometry={server}>{glass}</mesh>
+      <mesh position={[0, 0.9, 0]}>
+        <cylinderGeometry
+          args={[NECK_R + 0.03, NECK_R + 0.03, 0.12, 96, 1, true]}
+        />
         <meshStandardMaterial
-          color={COLORS.plasticDark}
-          roughness={0.6}
+          color="#f6f2ec"
+          roughness={0.7}
           side={THREE.DoubleSide}
         />
       </mesh>
-      <mesh position={[0, 0.77, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.72, 0.03, 12, 72]} />
-        <meshStandardMaterial color={COLORS.plasticDark} roughness={0.6} />
+      <mesh position={[0.62, 0.62, 0]} rotation={[0, 0, Math.PI / 2 - 0.15]}>
+        <torusGeometry args={[0.26, 0.04, 12, 40, Math.PI]} />
+        {glass}
       </mesh>
+      {serverLiquid ? (
+        <mesh geometry={serverLiquid}>
+          <meshStandardMaterial color={COLORS.coffee} roughness={0.15} />
+        </mesh>
+      ) : null}
 
-      {/* cone */}
-      <mesh
-        position={[0, TOP_Y + 0.01, 0]}
-        rotation={[Math.PI / 2, 0, 0]}
-        castShadow
-      >
-        <torusGeometry args={[TOP_R + 0.03, 0.035, 16, 96]} />
-        <meshPhysicalMaterial
-          color="#f3ede4"
-          roughness={0.32}
-          clearcoat={0.7}
-          clearcoatRoughness={0.25}
-        />
+      <mesh geometry={plate} castShadow>
+        {ceramic}
       </mesh>
       <mesh geometry={cone} castShadow>
-        <meshPhysicalMaterial
-          color="#f3ede4"
-          roughness={0.32}
-          clearcoat={0.7}
-          clearcoatRoughness={0.25}
-          side={THREE.DoubleSide}
-        />
+        {ceramic}
       </mesh>
-      <instancedMesh ref={ribsRef} args={[ribs, undefined, RIBS]}>
-        <meshStandardMaterial color="#e2d9cc" roughness={0.4} />
-      </instancedMesh>
-
-      {/* coffee bed */}
+      {ridges.map((g, i) => (
+        <mesh key={`ridge-${i * 30}`} geometry={g}>
+          <meshPhysicalMaterial
+            color="#e8e1d6"
+            roughness={0.35}
+            clearcoat={0.5}
+          />
+        </mesh>
+      ))}
       <mesh
-        position={[0, SPOUT_Y + 0.02 + bedH / 2 - 0.1, 0]}
-        visible={coffee > 0}
+        position={[CONE_TOP_R + 0.02, CONE_TOP_Y - 0.28, 0]}
+        rotation={[0, 0, Math.PI / 2 + 0.35]}
       >
-        <cylinderGeometry
-          args={[
-            radiusAt(SPOUT_Y + 0.02 + bedH) - 0.03,
-            SPOUT_R - 0.02,
-            bedH,
-            48,
-          ]}
-        />
+        <torusGeometry args={[0.2, 0.045, 12, 40, Math.PI]} />
+        {ceramic}
+      </mesh>
+
+      <mesh geometry={bed} visible={coffee > 0}>
         <meshStandardMaterial color={COLORS.coffee} roughness={0.95} />
       </mesh>
-
-      {/* slurry */}
       {slurry ? (
         <mesh geometry={slurry}>
           <meshStandardMaterial
@@ -188,13 +260,16 @@ export function V60({
         </mesh>
       ) : null}
 
-      {/* pour stream */}
-      <mesh ref={stream} position={[0.15, TOP_Y + 0.55, 0]} scale={[0, 1, 0]}>
-        <cylinderGeometry args={[0.02, 0.028, 1.1, 12]} />
+      <mesh
+        ref={stream}
+        position={[0.12, CONE_TOP_Y + 0.5, 0]}
+        scale={[0, 1, 0]}
+      >
+        <cylinderGeometry args={[0.018, 0.026, 1.0, 12]} />
         <meshPhysicalMaterial
-          color="#cfe6ff"
+          color="#d8ecff"
           transparent
-          opacity={0.7}
+          opacity={0.75}
           roughness={0}
           transmission={0.6}
           thickness={0.2}
@@ -203,3 +278,6 @@ export function V60({
     </group>
   );
 }
+
+/** Height of the assembled V60 set, for camera framing. */
+export const V60_HEIGHT = CONE_TOP_Y;

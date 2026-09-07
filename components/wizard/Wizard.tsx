@@ -133,8 +133,12 @@ export function Wizard({
           : step === "bean"
             ? "bean"
             : "brewer",
-    fill: step === "amount" || step === "summary" ? 0.55 : 0.1,
-    coffee: derived.recipe ? derived.dose / derived.recipe.dose.max : 0.5,
+    fill: 0,
+    coffee:
+      derived.recipe &&
+      WIZARD_STEPS.indexOf(step) >= WIZARD_STEPS.indexOf("amount")
+        ? derived.dose / derived.recipe.dose.max
+        : 0,
     roast: ROAST_INDEX[selection.roast],
     pouring: false,
     plunger: 0,
