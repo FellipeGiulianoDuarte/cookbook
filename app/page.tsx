@@ -10,7 +10,13 @@ export default async function Home({
   searchParams: Promise<SearchParams>;
 }) {
   const initial = await searchParamsCache.parse(searchParams);
-  const { recipes, grinders, adjustments, microns } = loadCatalog();
-  const catalog: ClientCatalog = { recipes, grinders, adjustments, microns };
+  const { recipes, grinders, adjustments, microns, extraction } = loadCatalog();
+  const catalog: ClientCatalog = {
+    recipes,
+    grinders,
+    adjustments,
+    microns,
+    extraction,
+  };
   return <Wizard catalog={catalog} initial={initial} />;
 }

@@ -76,14 +76,17 @@ export function Wizard({
     if (restored.current) return;
     restored.current = true;
     // Never restore a step the selection cannot support (old link, dropped id).
-    const first = firstIncompleteStep(initialSelection);
+    // A dose outside the recipe's range (old link) sends the user back to the dose step.
+    const first = derive(catalog, initialSelection).doseError
+      ? "amount"
+      : firstIncompleteStep(initialSelection);
     const wanted = initial.step ?? first;
     const target =
       WIZARD_STEPS.indexOf(wanted) <= WIZARD_STEPS.indexOf(first)
         ? wanted
         : first;
     if (target !== "method") actor.send({ type: "JUMP", step: target });
-  }, [actor, initial.step, initialSelection]);
+  }, [actor, initial.step, initialSelection, catalog]);
 
   // Entering the dose step with no dose yet: start from the recipe's default.
   useEffect(() => {
@@ -169,6 +172,7 @@ export function Wizard({
       case "summary":
         return (
           <SummaryStep
+            catalog={catalog}
             selection={selection}
             derived={derived}
             send={actor.send}

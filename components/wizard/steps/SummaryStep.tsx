@@ -3,13 +3,19 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { primeBrewAudio } from "@/components/brew/BrewScreen";
+import { ControlChart } from "@/components/chart/ControlChart";
 import { Button } from "@/components/ui/button";
 import { Eyebrow, StepTitle } from "@/components/ui/choice";
 import { fillStepText, formatClock } from "@/lib/engine/schedule";
 import { useLocalized } from "@/lib/use-localized";
-import type { DerivedStepProps } from "./types";
+import type { CatalogStepProps, DerivedStepProps } from "./types";
 
-export function SummaryStep({ selection, derived, send }: DerivedStepProps) {
+export function SummaryStep({
+  catalog,
+  selection,
+  derived,
+  send,
+}: CatalogStepProps & DerivedStepProps) {
   const t = useTranslations();
   const L = useLocalized();
   const [copied, setCopied] = useState(false);
@@ -94,6 +100,20 @@ export function SummaryStep({ selection, derived, send }: DerivedStepProps) {
           ))}
         </ol>
       </div>
+
+      <details className="mt-4">
+        <summary className="cursor-pointer text-sm text-fg-muted">
+          {t("summary.chart")}
+        </summary>
+        <div className="mt-2">
+          <ControlChart
+            extraction={catalog.extraction}
+            method={r.method}
+            dose={s.dose}
+            water={s.water}
+          />
+        </div>
+      </details>
 
       <p className="mt-4 text-xs text-fg-faint">
         {t("summary.source")}:{" "}

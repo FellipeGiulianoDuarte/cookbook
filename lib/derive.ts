@@ -6,7 +6,13 @@ import {
   type Schedule,
 } from "./engine/schedule";
 import type { Selection } from "./machine";
-import type { Adjustments, Grinder, Microns, Recipe } from "./schema";
+import type {
+  Adjustments,
+  Extraction,
+  Grinder,
+  Microns,
+  Recipe,
+} from "./schema";
 
 /** The data the client needs. Loaded on the server, passed as props, never fetched. */
 export interface ClientCatalog {
@@ -14,6 +20,7 @@ export interface ClientCatalog {
   grinders: Grinder[];
   adjustments: Adjustments;
   microns: Microns;
+  extraction: Extraction;
 }
 
 export interface Derived {

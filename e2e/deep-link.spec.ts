@@ -46,3 +46,16 @@ test("language toggle switches the UI to Portuguese", async ({ page }) => {
     "Com o que você vai preparar?",
   );
 });
+
+test("a link with a dose outside the recipe range lands on the dose step", async ({
+  page,
+}) => {
+  // Hoffmann Ultimate is written for 20–45 g; 15 g is below the minimum
+  await page.goto(
+    "/?m=v60&r=v60-hoffmann-ultimate&g=comandante-c40&d=15&step=summary",
+  );
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "How much coffee?",
+  );
+  await expect(page.getByText(/written for 20–45 g/)).toBeVisible();
+});
