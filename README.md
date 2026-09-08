@@ -21,7 +21,7 @@ pnpm e2e        # playwright (starts the dev server; wizard specs run in reduced
 - **Engine** (`lib/engine/`): `buildSchedule` (times and cumulative grams), `gridToSetting` (interpolates inside the grinder's band; never divides microns by "microns per click", which is burr travel), `adjustForBean` (roast tables, community process nudges kept separate), `extraction` (mass balance and the SCA chart only).
 - **State**: one XState machine for the wizard, one per brew for the timer (pause keeps the remaining time). Selections mirror into the URL with nuqs so a recipe is a shareable link.
 - **3D**: React Three Fiber with procedural models (V60, AeroPress, kettle, grinder, beans). Static illustration under `prefers-reduced-motion` or without WebGL.
-- **Stack**: Next.js 16 (App Router), React 19, TypeScript 7, Tailwind 4, next-intl, Motion, three.js, drei. Deployed on Vercel.
+- **Stack**: Next.js 16 (App Router), React 19, TypeScript 7, Tailwind 4, next-intl, Motion, three.js, drei. Deployed on Vercel at https://duartes-cookbook.vercel.app; every push to `main` goes live, and CI then runs the Playwright suite against the live site.
 
 ## Add a grinder or a recipe
 

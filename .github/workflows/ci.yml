@@ -24,8 +24,11 @@ jobs:
       - run: pnpm vitest run
 
   e2e:
-    # Runs against the Vercel preview URL once the deployment succeeds.
-    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    # Runs against the live site once Vercel reports the production deployment as ready.
+    # Per-deployment URLs (…-fellipes-projects-….vercel.app) sit behind Vercel Authentication
+    # and answer with a login page, so the job targets the public production alias instead.
+    # Preview deployments are not tested here; that needs a protection-bypass secret.
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +41,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps chromium webkit
       - run: pnpm exec playwright test
         env:
-          E2E_BASE_URL: ${{ github.event.deployment_status.environment_url }}
+          E2E_BASE_URL: https://duartes-cookbook.vercel.app
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
