@@ -60,7 +60,7 @@
     "band": "{method} band on this grinder",
     "basis": {
       "official": "manufacturer's range",
-      "community": "community range",
+      "community": "community chart",
       "estimated": "estimated (no published range)"
     },
     "unsafe": "Too fine for this grinder: the maker says not to grind below {n}.",
@@ -72,7 +72,8 @@
     "zero": "How to find zero",
     "travelNote": "{n} µm per click is burr travel, not particle size.",
     "fine": "fine",
-    "coarse": "coarse"
+    "coarse": "coarse",
+    "officialRef": "{brand}'s own guide: {range}"
   },
   "amount": {
     "title": "How much coffee?",

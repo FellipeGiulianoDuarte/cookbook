@@ -49,8 +49,12 @@ export default function SourcesPage() {
       <p className="mt-3 text-fg-muted">
         Recipes are entered from the author's own page where one exists,
         otherwise from a written transcription of the author's video. Grinder
-        settings use the manufacturer's published band first and community
-        charts second. "Primary" means the author's or maker's own page;
+        settings are read off community charts, which place every grinder on one
+        shared particle-size scale; the maker's own band is shown next to the
+        number as a reference, because makers' bands do not cover the same range
+        (Comandante's pour-over band runs medium-fine to coarse, Timemore's
+        printed guide covers only the centre, and Baratza and Kingrinder publish
+        a single point). "Primary" means the author's or maker's own page;
         "transcription" means a written copy of a video; "community" means a
         review site or reader-compiled chart.
       </p>

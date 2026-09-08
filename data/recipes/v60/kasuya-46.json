@@ -9,17 +9,26 @@
     "en": "Coarse grind, five 60 g pours about 45 seconds apart, each after the previous has almost drained. The first 40 % of the water sets the taste, the last 60 % sets the strength.",
     "pt-BR": "Moagem grossa, cinco despejos de 60 g com cerca de 45 segundos de intervalo, cada um depois que o anterior quase escoou. Os primeiros 40 % da água definem o sabor, os 60 % finais definem a intensidade."
   },
-  "dose": { "default": 20, "min": 13, "max": 27 },
+  "dose": {
+    "default": 20,
+    "min": 13,
+    "max": 27
+  },
   "ratio": 15,
   "grind": {
     "band": "v60",
-    "pos": 0.8,
-    "texture": "coarse",
-    "note": "Kasuya: medium-coarse to coarse, kosher-salt texture; deliberately coarser than other V60 recipes."
+    "pos": 1.0,
+    "texture": "medium-coarse",
+    "microns": 800,
+    "note": "Philocoffea: medium-coarse to coarse; kosher-salt texture. Japanese Coffee Gear puts Kasuya's grind at 28–30 clicks on a Comandante C40, the top of that grinder's pour-over chart, so the recipe sits at the coarse edge of the V60 window (800 µm on the Honest Coffee Guide scale). Coarser than every other V60 recipe here."
   },
   "temperature": {
     "default": 93,
-    "byRoast": { "light": 93, "medium": 88, "dark": 83 },
+    "byRoast": {
+      "light": 93,
+      "medium": 88,
+      "dark": 83
+    },
     "note": "Philocoffea (Kasuya's company) gives about 93 °C light, 88 °C medium, 83 °C dark. Hario UK and Hario Europe give 92 °C for Kasuya's own brew; Japanese Coffee Gear gives 92–94 / 88–91 / 85–88. Sources disagree by 2–3 °C per roast level; Philocoffea's values are used here."
   },
   "steps": [
@@ -35,7 +44,9 @@
       "at": 0,
       "until": 10,
       "action": "bloom",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "Pour {add} g to wet all the grounds ({water} g in total)",
         "pt-BR": "Despeje {add} g molhando todo o café ({water} g no total)"
@@ -46,7 +57,9 @@
       "at": 45,
       "until": 55,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "When the water has almost drained, pour {add} g to reach {water} g. This completes the first 40 %",
         "pt-BR": "Quando a água quase tiver escoado, despeje {add} g até chegar a {water} g. Isso fecha os primeiros 40 %"
@@ -57,7 +70,9 @@
       "at": 90,
       "until": 100,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "Pour {add} g to reach {water} g",
         "pt-BR": "Despeje {add} g até chegar a {water} g"
@@ -68,7 +83,9 @@
       "at": 135,
       "until": 145,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "Pour {add} g to reach {water} g",
         "pt-BR": "Despeje {add} g até chegar a {water} g"
@@ -79,7 +96,9 @@
       "at": 165,
       "until": 175,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "Pour the last {add} g to reach {water} g",
         "pt-BR": "Despeje os últimos {add} g até chegar a {water} g"

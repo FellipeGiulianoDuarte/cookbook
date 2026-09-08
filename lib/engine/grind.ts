@@ -5,9 +5,16 @@ import type { GrindBand, Grinder } from "../schema";
   Input: a position 0..1 inside a brew-method band (0 = finest end, 1 = coarsest end).
   Output: a setting in the grinder's own units and notation, with a tolerance and flags.
 
-  It interpolates inside the grinder's OFFICIAL band for that method. It never divides a
-  micron value by the maker's "microns per click" figure: that figure is burr travel, and
-  it differs from particle-size estimates by about 3×.
+  It interpolates inside the grinder's COMMUNITY band for that method (Honest Coffee Guide
+  and reviewer charts, which place every grinder on one shared particle-size scale), and
+  falls back to the maker's own band, then to the Honest Coffee Guide linear model. The
+  maker's band is returned separately as a reference. Makers' bands are not comparable with
+  each other: Comandante's pour-over band spans medium-fine to coarse, Timemore's printed
+  guide covers only the centre, and Baratza and Kingrinder publish a single point, so the
+  same recipe position would mean a different texture on each grinder.
+
+  It never divides a micron value by the maker's "microns per click" figure: that figure is
+  burr travel, and it differs from particle-size estimates by about 3×.
 */
 
 export type Basis = "official" | "community" | "estimated";
@@ -19,6 +26,8 @@ export type Setting =
       basis: Basis;
       band: [number, number];
       tolerance: number;
+      /** the maker's own band for this method, shifted by the offset, when it exists */
+      official?: [number, number];
       outOfRange: boolean;
       unsafe: boolean;
       text: string;
@@ -46,12 +55,12 @@ export function gridToSetting(
   let hi: number;
   let basis: Basis;
   const b = grinder.bands[band];
-  if (b?.official) {
-    [lo, hi] = b.official;
-    basis = "official";
-  } else if (b?.community) {
+  if (b?.community) {
     [lo, hi] = b.community;
     basis = "community";
+  } else if (b?.official) {
+    [lo, hi] = b.official;
+    basis = "official";
   } else if (grinder.hcg && options.microns?.[band]) {
     const [uMin, uMax] = options.microns[band];
     const [gMin, gMax] = grinder.hcg.micronRange;
@@ -76,6 +85,9 @@ export function gridToSetting(
     basis,
     band: [round1(lo + offset), round1(hi + offset)],
     tolerance: grinder.zero.toleranceClicks,
+    official: b?.official
+      ? [round1(b.official[0] + offset), round1(b.official[1] + offset)]
+      : undefined,
     outOfRange: value < rMin || value > rMax,
     unsafe:
       grinder.zero.unsafeBelow !== undefined &&

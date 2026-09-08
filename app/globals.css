@@ -90,6 +90,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   touch-action: manipulation;
+  overflow-x: clip;
 }
 
 ::selection {

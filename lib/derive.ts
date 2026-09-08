@@ -59,7 +59,9 @@ export function derive(catalog: ClientCatalog, s: Selection): Derived {
   out.bean = bean;
   const nudge = s.nudge && bean.suggestions ? bean.suggestions : null;
   out.tempC = Math.round(bean.tempC + (nudge?.tempDeltaC ?? 0));
-  out.grindPos = clamp01(recipe.grind.pos + (nudge?.grindPosDelta ?? 0));
+  out.grindPos = clamp01(
+    grindPosition(recipe, catalog.microns) + (nudge?.grindPosDelta ?? 0),
+  );
   out.ratio = recipe.ratio + (nudge?.ratioDelta ?? 0);
 
   const nudgedRecipe = nudge ? { ...recipe, ratio: out.ratio } : recipe;
@@ -78,6 +80,19 @@ export function derive(catalog: ClientCatalog, s: Selection): Derived {
     });
   }
   return out;
+}
+
+/**
+ * Where the recipe sits inside its band, 0 = finest, 1 = coarsest. A stated particle size
+ * is mapped into the band's micron window (Onyx 550 µm, Stanica 870 µm, Kasuya 800 µm);
+ * otherwise the position entered from the author's texture words is used.
+ */
+export function grindPosition(recipe: Recipe, microns: Microns): number {
+  const u = recipe.grind.microns;
+  const window = microns.bands[recipe.grind.band];
+  if (u === undefined || !window) return recipe.grind.pos;
+  const [lo, hi] = window;
+  return clamp01((u - lo) / Math.max(hi - lo, 1));
 }
 
 function clamp01(v: number) {

@@ -16,23 +16,35 @@ const ok = (s: ReturnType<typeof gridToSetting>) => {
 };
 
 describe("gridToSetting", () => {
-  it("Comandante V60: pos 0 and 1 hit the official band edges 18 and 35", () => {
+  it("Comandante V60: pos 0 and 1 hit the chart edges 22 and 28; the maker's 18–35 comes along as a reference", () => {
     const g = byId("comandante-c40");
     expect(ok(gridToSetting(g, "v60", 0))).toMatchObject({
-      value: 18,
-      basis: "official",
+      value: 22,
+      basis: "community",
+      official: [18, 35],
       tolerance: 1,
     });
-    expect(ok(gridToSetting(g, "v60", 1))).toMatchObject({ value: 35 });
+    expect(ok(gridToSetting(g, "v60", 1))).toMatchObject({ value: 28 });
+    // Hoffmann's Ultimate V60 sits at 0.35: 24 clicks, the number he gives on camera
     expect(ok(gridToSetting(g, "v60", 0.35)).value).toBe(24);
   });
 
-  it("Timemore C3S Pro V60 at pos 0.35 lands inside 13–16 and flags nothing", () => {
+  it("Timemore C3S Pro V60 at pos 0.35 lands inside the 11–18 chart and flags nothing", () => {
     const s = ok(gridToSetting(byId("timemore-c3s-pro"), "v60", 0.35));
-    expect(s.value).toBe(14);
+    expect(s.value).toBe(13);
+    expect(s.official).toEqual([13, 16]);
     expect(s.unsafe).toBe(false);
     expect(s.outOfRange).toBe(false);
-    expect(s.text).toBe("14 clicks");
+    expect(s.text).toBe("13 clicks");
+  });
+
+  it("the coarse end of the V60 window is coarse on every grinder, not the centre of the maker's guide", () => {
+    // Kasuya 4:6 → Comandante 28–30 clicks (Japanese Coffee Gear); Timemore's printed guide
+    // stops at 16, which is medium, so the old official-first order gave 15 here.
+    expect(ok(gridToSetting(byId("timemore-c3s-pro"), "v60", 1)).value).toBe(
+      18,
+    );
+    expect(ok(gridToSetting(byId("comandante-c40"), "v60", 1)).value).toBe(28);
   });
 
   it("Timemore below 6 clicks is unsafe", () => {
@@ -44,7 +56,8 @@ describe("gridToSetting", () => {
     const g = byId("comandante-c40");
     const s = ok(gridToSetting(g, "v60", 0.35, { offset: 3 }));
     expect(s.value).toBe(27);
-    expect(s.band).toEqual([21, 38]);
+    expect(s.band).toEqual([25, 31]);
+    expect(s.official).toEqual([21, 38]);
   });
 
   it("falls back to the Honest Coffee Guide linear model when no band exists", () => {

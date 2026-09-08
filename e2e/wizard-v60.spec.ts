@@ -23,7 +23,9 @@ test("V60 + Comandante flow reaches the summary with 24 clicks ±1", async ({
   await page.getByRole("button", { name: /Comandante C40/ }).click();
   await expect(page.getByText("24 clicks")).toBeVisible();
   await expect(page.getByText("±1")).toBeVisible();
-  await expect(page.getByText("manufacturer's range")).toBeVisible();
+  // The chart band drives the number; Comandante's own 18–35 is shown as the reference.
+  await expect(page.getByText("community chart")).toBeVisible();
+  await expect(page.getByText("Comandante's own guide: 18–35")).toBeVisible();
   await next.click();
 
   // Dose step starts from the recipe default and shows the water

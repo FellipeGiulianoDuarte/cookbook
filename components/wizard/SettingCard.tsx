@@ -32,7 +32,7 @@ export function SettingCard({
   const s = derived.setting;
 
   return (
-    <div className="rounded-2xl border border-line bg-surface p-5">
+    <div className="overflow-x-clip rounded-2xl border border-line bg-surface p-5">
       <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
         {t("setting")} · {grinder.brand} {grinder.model}
       </p>
@@ -63,6 +63,18 @@ export function SettingCard({
           />
           <p className="mt-1 text-xs text-fg-faint">
             {t("band", { method: recipe.grind.band })} · {t(`basis.${s.basis}`)}
+            {s.official && s.basis !== "official" ? (
+              <>
+                {" · "}
+                {t("officialRef", {
+                  brand: grinder.brand,
+                  range:
+                    s.official[0] === s.official[1]
+                      ? `${s.official[0]}`
+                      : `${s.official[0]}–${s.official[1]}`,
+                })}
+              </>
+            ) : null}
           </p>
 
           {s.unsafe ? (

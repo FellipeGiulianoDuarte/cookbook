@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 /* AeroPress, Hoffmann, Kingrinder K6, inverted override. */
-test("AeroPress + Kingrinder K6 shows the official 65-click point and the inverted option", async ({
+test("AeroPress + Kingrinder K6 shows 64 clicks from the chart, the maker's 65-click point as reference, and the inverted option", async ({
   page,
 }) => {
   await page.goto("/");
@@ -16,8 +16,11 @@ test("AeroPress + Kingrinder K6 shows the official 65-click point and the invert
 
   await page.getByPlaceholder("Search grinders").fill("k6");
   await page.getByRole("button", { name: /Kingrinder K6/ }).click();
-  // Kingrinder publishes a single point for AeroPress (65); the app must not divide microns by 16 µm.
-  await expect(page.getByText("65 clicks")).toBeVisible();
+  // Hoffmann's AeroPress grind sits at 0.35 of the Kingrinder AeroPress chart (38–113): 64.
+  // Kingrinder's single published point (65) is shown as the maker's reference. The app must
+  // never divide microns by the 16 µm-per-click travel figure.
+  await expect(page.getByText("64 clicks")).toBeVisible();
+  await expect(page.getByText("Kingrinder's own guide: 65")).toBeVisible();
   await next.click();
 
   await expect(page).toHaveURL(/d=11/);

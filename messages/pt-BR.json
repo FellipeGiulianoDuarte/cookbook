@@ -60,7 +60,7 @@
     "band": "faixa de {method} neste moedor",
     "basis": {
       "official": "faixa do fabricante",
-      "community": "faixa da comunidade",
+      "community": "tabela da comunidade",
       "estimated": "estimada (sem faixa publicada)"
     },
     "unsafe": "Fino demais para este moedor: o fabricante diz para não moer abaixo de {n}.",
@@ -72,7 +72,8 @@
     "zero": "Como achar o zero",
     "travelNote": "{n} µm por clique é o avanço das mós, não o tamanho da partícula.",
     "fine": "fino",
-    "coarse": "grosso"
+    "coarse": "grosso",
+    "officialRef": "guia da {brand}: {range}"
   },
   "amount": {
     "title": "Quanto café?",
