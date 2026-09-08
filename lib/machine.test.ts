@@ -143,3 +143,23 @@ describe("brew machine", () => {
     expect(snap().status).toBe("done");
   });
 });
+
+describe("RESTORE (browser back/forward)", () => {
+  it("replaces the selection and lands on the asked step", () => {
+    const actor = createActor(wizardMachine, { input: {} }).start();
+    actor.send({ type: "SELECT_METHOD", method: "aeropress" });
+    actor.send({ type: "SELECT_RECIPE", recipeId: "aeropress-wendelboe" });
+    actor.send({ type: "NEXT" });
+    actor.send({ type: "NEXT" });
+    expect(actor.getSnapshot().value).toBe("grinder");
+    actor.send({
+      type: "RESTORE",
+      selection: { ...EMPTY_SELECTION, method: "v60" },
+      step: "recipe",
+    });
+    const snap = actor.getSnapshot();
+    expect(snap.value).toBe("recipe");
+    expect(snap.context.method).toBe("v60");
+    expect(snap.context.recipeId).toBeUndefined();
+  });
+});

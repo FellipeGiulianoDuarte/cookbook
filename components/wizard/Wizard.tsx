@@ -105,13 +105,64 @@ export function Wizard({
     }
   }, [step, selection.dose, derived.recipe, actor]);
 
-  // Mirror selection and step into the URL.
+  // Mirror selection and step into the URL. A step change is a history entry so the
+  // browser's back button walks the wizard backwards; edits within a step replace.
+  const lastStep = useRef(step);
   useEffect(() => {
-    setUrl({
-      ...urlFromSelection(selection),
-      step: step === "method" ? null : step,
-    });
+    const push =
+      lastStep.current !== step && restored.current && !fromHistory.current;
+    fromHistory.current = false;
+    lastStep.current = step;
+    setUrl(
+      { ...urlFromSelection(selection), step: step === "method" ? null : step },
+      { history: push ? "push" : "replace" },
+    );
   }, [selection, step, setUrl]);
+
+  // Browser back/forward: the URL is the truth, so read it, replace the selection and land
+  // on its step. Only popstate triggers this; our own pushState/replaceState never does,
+  // so the state → URL mirror above cannot feed back into it.
+  const latest = useRef({ selection, step, brewing });
+  latest.current = { selection, step, brewing };
+  const fromHistory = useRef(false);
+  useEffect(() => {
+    const onPop = () => {
+      if (latest.current.brewing) return;
+      const sp = new URLSearchParams(window.location.search);
+      const parsed = Object.fromEntries(
+        Object.entries(urlParsers).map(([key, parser]) => {
+          const raw = sp.get(key);
+          const p = parser as {
+            parse: (v: string) => unknown;
+            defaultValue?: unknown;
+          };
+          const value = raw === null ? null : p.parse(raw);
+          return [key, value ?? p.defaultValue ?? null];
+        }),
+      ) as UrlState;
+      const wanted = selectionFromUrl(parsed);
+      if (
+        wanted.recipeId &&
+        !catalog.recipes.some((r) => r.id === wanted.recipeId)
+      )
+        wanted.recipeId = undefined;
+      if (
+        wanted.grinderId &&
+        !catalog.grinders.some((g) => g.id === wanted.grinderId)
+      )
+        wanted.grinderId = undefined;
+      const first = firstIncompleteStep(wanted);
+      const asked = parsed.step ?? "method";
+      const target =
+        WIZARD_STEPS.indexOf(asked) <= WIZARD_STEPS.indexOf(first)
+          ? asked
+          : first;
+      fromHistory.current = true;
+      actor.send({ type: "RESTORE", selection: wanted, step: target });
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, [actor, catalog]);
 
   const index = WIZARD_STEPS.indexOf(step);
   const canNext = canLeave(step, selection) && !derived.doseError;

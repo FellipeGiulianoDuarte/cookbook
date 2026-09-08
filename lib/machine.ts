@@ -51,6 +51,8 @@ export type WizardEvent =
   | { type: "NEXT" }
   | { type: "BACK" }
   | { type: "JUMP"; step: WizardStep }
+  /** Browser back/forward: the URL is the truth; replace the selection and land on its step. */
+  | { type: "RESTORE"; selection: Selection; step: WizardStep }
   | { type: "START" }
   | { type: "DONE" }
   | { type: "EXIT" }
@@ -84,6 +86,17 @@ const jumpTargets = Object.fromEntries(
     {
       guard: ({ event }: { event: WizardEvent }) =>
         event.type === "JUMP" && event.step === step,
+      target: `.${step}`,
+    },
+  ]),
+);
+const restoreTargets = Object.fromEntries(
+  WIZARD_STEPS.map((step) => [
+    step,
+    {
+      guard: ({ event }: { event: WizardEvent }) =>
+        event.type === "RESTORE" && event.step === step,
+      actions: "restore" as const,
       target: `.${step}`,
     },
   ]),
@@ -136,6 +149,22 @@ export const wizardMachine = setup({
     setNudge: assign(({ event }) =>
       event.type === "SET_NUDGE" ? { nudge: event.nudge } : {},
     ),
+    // Every key is written, so a value the URL no longer carries is cleared, not kept.
+    restore: assign(({ event, context }) => {
+      if (event.type !== "RESTORE") return {};
+      const s = { ...EMPTY_SELECTION, ...event.selection };
+      return {
+        method: s.method,
+        recipeId: s.recipeId,
+        grinderId: s.grinderId,
+        dose: s.dose,
+        roast: s.roast ?? context.roast,
+        process: s.process,
+        orientation: s.orientation,
+        grindOffset: s.grindOffset,
+        nudge: s.nudge,
+      };
+    }),
   },
 }).createMachine({
   id: "wizard",
@@ -151,6 +180,7 @@ export const wizardMachine = setup({
     SET_OFFSET: { actions: "setOffset" },
     SET_NUDGE: { actions: "setNudge" },
     JUMP: Object.values(jumpTargets),
+    RESTORE: Object.values(restoreTargets),
   },
   states: {
     method: {

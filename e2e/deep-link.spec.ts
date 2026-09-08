@@ -59,3 +59,44 @@ test("a link with a dose outside the recipe range lands on the dose step", async
   );
   await expect(page.getByText(/written for 20–45 g/)).toBeVisible();
 });
+
+test("browser back walks the wizard backwards and keeps state and URL in step", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const next = page.getByRole("button", { name: /^Next/ });
+  await page.getByRole("button", { name: /Hario V60/ }).click();
+  await next.click();
+  await expect(page).toHaveURL(/step=recipe/);
+  await page.getByRole("button", { name: /Ultimate V60 Technique/ }).click();
+  // nuqs batches URL writes in a 50 ms window; wait for the recipe to land in the current
+  // history entry before the step change pushes a new one.
+  await expect(page).toHaveURL(/r=v60-hoffmann-ultimate/);
+  await next.click();
+  await expect(page).toHaveURL(/step=grinder/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Which grinder?",
+  );
+
+  await page.goBack();
+  await expect(page).toHaveURL(/step=recipe/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Pick a recipe",
+  );
+  // the recipe chosen before is still selected
+  await expect(
+    page.getByRole("button", { name: /Ultimate V60 Technique/ }),
+  ).toHaveAttribute("aria-pressed", "true");
+
+  await page.goBack();
+  await expect(page).not.toHaveURL(/step=/);
+  await expect(page.getByRole("heading", { level: 1 })).not.toContainText(
+    "Pick a recipe",
+  );
+
+  await page.goForward();
+  await expect(page).toHaveURL(/step=recipe/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Pick a recipe",
+  );
+});
