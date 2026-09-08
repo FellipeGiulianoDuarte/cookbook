@@ -73,7 +73,31 @@
     "travelNote": "{n} µm per click is burr travel, not particle size.",
     "fine": "fine",
     "coarse": "coarse",
-    "officialRef": "{brand}'s own guide: {range}"
+    "officialRef": "{brand}'s own guide: {range}",
+    "kind": {
+      "hand": "manual",
+      "electric": "electric"
+    },
+    "adjustment": {
+      "stepped": "stepped",
+      "stepless": "stepless",
+      "dual": "macro + micro",
+      "labelled": "labelled"
+    },
+    "perTurn": "{n} per turn",
+    "offsetLabel": "offset {n}",
+    "units": {
+      "clicks": "clicks",
+      "setting": "setting",
+      "mark": "mark",
+      "turn": "turn",
+      "turns": "turns",
+      "fromZero": "from your own zero",
+      "countedFromZero": "counted from your own zero",
+      "clicksFromZero": "clicks from zero",
+      "step": "step",
+      "position": "position {i} of {n}"
+    }
   },
   "amount": {
     "title": "How much coffee?",
@@ -104,7 +128,10 @@
     },
     "suggestion": "Roasters suggest for this process",
     "apply": "Apply",
-    "communityNote": "Community guidance, not part of the recipe."
+    "communityNote": "Community guidance, not part of the recipe.",
+    "grindCoarser": "grind coarser",
+    "grindFiner": "grind finer",
+    "ratio": "ratio"
   },
   "options": {
     "title": "A few more things",
@@ -113,12 +140,13 @@
     "inverted": "Inverted",
     "filter": "Filter",
     "model": "Model",
-    "language": "Language"
+    "language": "Language",
+    "asWritten": "Recipe as written: {value}."
   },
   "summary": {
     "title": "Your recipe",
     "grind": "Grind",
-    "temp": "Water",
+    "temp": "Temperature",
     "time": "Time",
     "schedule": "Pours",
     "source": "Source",
@@ -157,5 +185,29 @@
     "timeBands": "Published time ranges",
     "facts": "What the measurements say",
     "preference": "Outside the box is a preference, not a defect."
+  },
+  "texture": {
+    "extra-fine": "extra fine",
+    "fine": "fine",
+    "medium-fine": "medium-fine",
+    "medium": "medium",
+    "medium-coarse": "medium-coarse",
+    "coarse": "coarse"
+  },
+  "sources": {
+    "eyebrow": "Sources",
+    "back": "Cookbook",
+    "title": "Where every number comes from",
+    "intro": "Recipes are entered from the author's own page where one exists, otherwise from a written transcription of the author's video. Grinder settings are read off community charts, which place every grinder on one shared particle-size scale; the maker's own band is shown next to the number as a reference, because makers' bands do not cover the same range (Comandante's pour-over band runs medium-fine to coarse, Timemore's printed guide covers only the centre, and Baratza and Kingrinder publish a single point). \"Primary\" means the author's or maker's own page; \"transcription\" means a written copy of a video; \"community\" means a review site or reader-compiled chart.",
+    "recipes": "Recipes",
+    "grinders": "Grinders",
+    "bean": "Roast, process and grind size",
+    "chart": "Brewing control chart",
+    "footer": "Hario, V60, AeroPress and grinder brand names belong to their owners. The 3D objects are procedural approximations, not scans of the products.",
+    "kind": {
+      "primary": "primary",
+      "transcription": "transcription",
+      "community": "community"
+    }
   }
 }

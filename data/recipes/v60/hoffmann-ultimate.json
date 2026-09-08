@@ -9,18 +9,32 @@
     "en": "Two long pours after the bloom, a spoon stir and a swirl. Low agitation, clean and sweet. Best at 20 g and above.",
     "pt-BR": "Dois despejos longos depois do bloom, uma mexida com colher e um giro. Pouca agitação, xícara limpa e doce. Melhor a partir de 20 g."
   },
-  "dose": { "default": 30, "min": 20, "max": 45 },
+  "dose": {
+    "default": 30,
+    "min": 20,
+    "max": 45
+  },
   "ratio": 16.67,
   "grind": {
     "band": "v60",
     "pos": 0.35,
     "texture": "medium-fine",
-    "note": "Hoffmann: medium-fine. Grind coarser for darker roasts."
+    "note": {
+      "en": "Hoffmann: medium-fine. Grind coarser for darker roasts.",
+      "pt-BR": "Hoffmann: média-fina. Moa mais grosso para torras mais escuras."
+    }
   },
   "temperature": {
     "default": 96,
-    "byRoast": { "light": 100, "medium": 96, "dark": 90 },
-    "note": "The video says: the hotter the better, especially for light roasts; cooler for darker roasts. The numeric values are from written transcriptions (Hario Europe lists 97 °C, Honest Coffee Guide 100 °C)."
+    "byRoast": {
+      "light": 100,
+      "medium": 96,
+      "dark": 90
+    },
+    "note": {
+      "en": "The video says: the hotter the better, especially for light roasts; cooler for darker roasts. The numeric values are from written transcriptions (Hario Europe lists 97 °C, Honest Coffee Guide 100 °C).",
+      "pt-BR": "O vídeo diz: quanto mais quente melhor, sobretudo para torras claras; mais fria para torras escuras. Os valores numéricos vêm de transcrições escritas (Hario Europe lista 97 °C, Honest Coffee Guide 100 °C)."
+    }
   },
   "steps": [
     {
@@ -35,7 +49,9 @@
       "at": 0,
       "until": 10,
       "action": "bloom",
-      "water": { "times": 2 },
+      "water": {
+        "times": 2
+      },
       "text": {
         "en": "Bloom: pour {water} g and swirl the brewer until every ground is wet",
         "pt-BR": "Bloom: despeje {water} g e gire o suporte até molhar todo o café"
@@ -45,13 +61,18 @@
     {
       "at": 10,
       "action": "wait",
-      "text": { "en": "Rest until 0:45", "pt-BR": "Aguarde até 0:45" }
+      "text": {
+        "en": "Rest until 0:45",
+        "pt-BR": "Aguarde até 0:45"
+      }
     },
     {
       "at": 45,
       "until": 75,
       "action": "pour",
-      "water": { "share": 0.6 },
+      "water": {
+        "share": 0.6
+      },
       "text": {
         "en": "Pour to {water} g over 30 seconds (60 % of the total)",
         "pt-BR": "Despeje até {water} g em 30 segundos (60 % do total)"
@@ -62,7 +83,9 @@
       "at": 75,
       "until": 105,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour slowly to {water} g, keeping the cone topped up",
         "pt-BR": "Despeje devagar até {water} g, mantendo o cone cheio"
@@ -107,13 +130,21 @@
   ],
   "totalSeconds": 210,
   "scaling": "linear",
-  "options": { "filter": "Hario V60 paper, plastic V60 02 recommended" },
+  "options": {
+    "filter": {
+      "en": "Hario V60 paper, plastic V60 02 recommended",
+      "pt-BR": "Papel Hario V60; V60 02 de plástico recomendado"
+    }
+  },
   "source": {
     "url": "https://www.hario-usa.com/blogs/recipes-and-more-from-friends/james-hoffmann-uitimate-v60-technique",
     "title": "Hario USA: James Hoffmann Ultimate V60 Technique (written transcription)",
     "year": 2020,
     "kind": "transcription",
-    "notes": "Video: youtube.com/watch?v=AI4ynXzkSQo. Ratio is 30 g / 500 g = 1:16.7, not 1:15 as some pages state. Hoffmann says the technique underperforms below about 20 g; use the 1-cup recipe for 15 g."
+    "notes": {
+      "en": "Video: youtube.com/watch?v=AI4ynXzkSQo. Ratio is 30 g / 500 g = 1:16.7, not 1:15 as some pages state. Hoffmann says the technique underperforms below about 20 g; use the 1-cup recipe for 15 g.",
+      "pt-BR": "Vídeo: youtube.com/watch?v=AI4ynXzkSQo. A proporção é 30 g / 500 g = 1:16,7, não 1:15 como algumas páginas dizem. Hoffmann diz que a técnica rende menos abaixo de uns 20 g; use a receita de 1 xícara para 15 g."
+    }
   },
   "alsoSee": [
     {

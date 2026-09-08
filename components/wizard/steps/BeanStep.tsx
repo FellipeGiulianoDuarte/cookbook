@@ -1,7 +1,9 @@
 "use client";
 
+import { AnimatePresence, motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import { Chip, Eyebrow, StepTitle } from "@/components/ui/choice";
+import { Crossfade } from "@/components/ui/crossfade";
 import { RoastLevel } from "@/lib/schema";
 import { useLocalized } from "@/lib/use-localized";
 import type { CatalogStepProps, DerivedStepProps } from "./types";
@@ -56,55 +58,76 @@ export function BeanStep({
           ))}
         </div>
         {selection.process ? (
-          <p className="mt-3 text-sm text-fg-muted">
+          <Crossfade
+            as="div"
+            id={selection.process}
+            className="mt-3 text-sm text-fg-muted"
+          >
             {L(catalog.adjustments.process[selection.process].description)}
-          </p>
+          </Crossfade>
         ) : null}
       </div>
 
       {bean && derived.tempC !== undefined ? (
         <div className="mt-6 rounded-2xl bg-surface p-4">
           <p className="tabular font-display text-3xl tracking-tight text-fg">
-            {t("temperature", { t: derived.tempC })}
+            <Crossfade id={derived.tempC}>
+              {t("temperature", { t: derived.tempC })}
+            </Crossfade>
           </p>
           <p className="mt-1 text-xs text-fg-faint">
             {t(`tempFrom.${bean.tempSource}`, {
               table: bean.tempTableId ?? "",
             })}
             {derived.recipe?.temperature.note
-              ? ` · ${derived.recipe.temperature.note}`
+              ? ` · ${L(derived.recipe.temperature.note)}`
               : ""}
           </p>
         </div>
       ) : null}
 
-      {sug ? (
-        <div className="mt-4 rounded-2xl border border-line bg-surface-2/60 p-4">
-          <p className="text-sm font-semibold text-fg">{t("suggestion")}</p>
-          <p className="tabular mt-1 text-sm text-fg-muted">
-            {sug.tempDeltaC !== 0
-              ? `${sug.tempDeltaC > 0 ? "+" : ""}${sug.tempDeltaC} °C`
-              : null}
-            {sug.grindPosDelta !== 0
-              ? ` · grind ${sug.grindPosDelta > 0 ? "coarser" : "finer"}`
-              : null}
-            {sug.ratioDelta !== 0
-              ? ` · ratio ${sug.ratioDelta > 0 ? "+" : ""}${sug.ratioDelta}`
-              : null}
-          </p>
-          <div className="mt-3 flex items-center gap-3">
-            <Chip
-              selected={selection.nudge}
-              onSelect={() =>
-                send({ type: "SET_NUDGE", nudge: !selection.nudge })
-              }
-            >
-              {t("apply")}
-            </Chip>
-            <span className="text-xs text-fg-faint">{t("communityNote")}</span>
-          </div>
-        </div>
-      ) : null}
+      <AnimatePresence initial={false}>
+        {sug ? (
+          <motion.div
+            key="suggestion"
+            initial={{ opacity: 0, transform: "translateY(6px) scale(0.98)" }}
+            animate={{ opacity: 1, transform: "translateY(0px) scale(1)" }}
+            exit={{
+              opacity: 0,
+              transform: "translateY(4px) scale(0.98)",
+              transition: { duration: 0.12 },
+            }}
+            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+            className="mt-4 rounded-2xl border border-line bg-surface-2/60 p-4"
+          >
+            <p className="text-sm font-semibold text-fg">{t("suggestion")}</p>
+            <p className="tabular mt-1 text-sm text-fg-muted">
+              {sug.tempDeltaC !== 0
+                ? `${sug.tempDeltaC > 0 ? "+" : ""}${sug.tempDeltaC} °C`
+                : null}
+              {sug.grindPosDelta !== 0
+                ? ` · ${t(sug.grindPosDelta > 0 ? "grindCoarser" : "grindFiner")}`
+                : null}
+              {sug.ratioDelta !== 0
+                ? ` · ${t("ratio")} ${sug.ratioDelta > 0 ? "+" : ""}${sug.ratioDelta}`
+                : null}
+            </p>
+            <div className="mt-3 flex items-center gap-3">
+              <Chip
+                selected={selection.nudge}
+                onSelect={() =>
+                  send({ type: "SET_NUDGE", nudge: !selection.nudge })
+                }
+              >
+                {t("apply")}
+              </Chip>
+              <span className="text-xs text-fg-faint">
+                {t("communityNote")}
+              </span>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

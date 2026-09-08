@@ -50,6 +50,15 @@ export function GrinderStep({
     .map((id) => catalog.grinders.find((g) => g.id === id))
     .filter((g): g is Grinder => Boolean(g));
 
+  const describe = (g: Grinder) =>
+    [
+      t(`kind.${g.kind}`),
+      t(`adjustment.${g.adjustment}`),
+      g.clicksPerRotation ? t("perTurn", { n: g.clicksPerRotation }) : null,
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
   const select = (g: Grinder) => {
     pushRecent(g.id);
     send({ type: "SELECT_GRINDER", grinderId: g.id });
@@ -60,7 +69,7 @@ export function GrinderStep({
       <StepTitle>{t("title")}</StepTitle>
 
       {derived.grinder && derived.recipe ? (
-        <div className="mt-5">
+        <div className="stagger-in mt-5">
           <SettingCard
             grinder={derived.grinder}
             recipe={derived.recipe}
@@ -93,6 +102,7 @@ export function GrinderStep({
             grinders={recentGrinders}
             selectedId={selection.grinderId}
             onSelect={select}
+            describe={describe}
           />
         </>
       ) : null}
@@ -104,6 +114,7 @@ export function GrinderStep({
         grinders={matches}
         selectedId={selection.grinderId}
         onSelect={select}
+        describe={describe}
       />
     </div>
   );
@@ -113,10 +124,12 @@ function GrinderList({
   grinders,
   selectedId,
   onSelect,
+  describe,
 }: {
   grinders: Grinder[];
   selectedId?: string;
   onSelect: (g: Grinder) => void;
+  describe: (g: Grinder) => string;
 }) {
   return (
     <ul className="mt-2 divide-y divide-line rounded-2xl border border-line bg-surface">
@@ -147,15 +160,16 @@ function GrinderList({
                   {g.brand} {g.model}
                 </span>
                 <span className="block text-xs text-fg-faint">
-                  {g.kind === "hand" ? "manual" : "electric"} · {g.adjustment}
-                  {g.clicksPerRotation ? ` · ${g.clicksPerRotation}/turn` : ""}
+                  {describe(g)}
                 </span>
               </span>
-              {on ? (
-                <span className="text-accent" aria-hidden="true">
-                  ●
-                </span>
-              ) : null}
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "h-2 w-2 shrink-0 rounded-full bg-accent transition-[transform,opacity] duration-200 ease-[var(--ease-out)]",
+                  on ? "scale-100 opacity-100" : "scale-50 opacity-0",
+                )}
+              />
             </button>
           </li>
         );

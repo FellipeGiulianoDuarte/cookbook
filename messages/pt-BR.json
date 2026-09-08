@@ -73,7 +73,31 @@
     "travelNote": "{n} µm por clique é o avanço das mós, não o tamanho da partícula.",
     "fine": "fino",
     "coarse": "grosso",
-    "officialRef": "guia da {brand}: {range}"
+    "officialRef": "guia da {brand}: {range}",
+    "kind": {
+      "hand": "manual",
+      "electric": "elétrico"
+    },
+    "adjustment": {
+      "stepped": "com cliques",
+      "stepless": "sem cliques",
+      "dual": "macro + micro",
+      "labelled": "por rótulos"
+    },
+    "perTurn": "{n} por volta",
+    "offsetLabel": "deslocamento {n}",
+    "units": {
+      "clicks": "cliques",
+      "setting": "ajuste",
+      "mark": "marca",
+      "turn": "volta",
+      "turns": "voltas",
+      "fromZero": "a partir do seu zero",
+      "countedFromZero": "contado a partir do seu zero",
+      "clicksFromZero": "cliques desde o zero",
+      "step": "passo",
+      "position": "posição {i} de {n}"
+    }
   },
   "amount": {
     "title": "Quanto café?",
@@ -104,7 +128,10 @@
     },
     "suggestion": "Torrefadores sugerem para este processo",
     "apply": "Aplicar",
-    "communityNote": "Orientação da comunidade, não faz parte da receita."
+    "communityNote": "Orientação da comunidade, não faz parte da receita.",
+    "grindCoarser": "moagem mais grossa",
+    "grindFiner": "moagem mais fina",
+    "ratio": "proporção"
   },
   "options": {
     "title": "Mais alguns detalhes",
@@ -113,12 +140,13 @@
     "inverted": "Invertido",
     "filter": "Filtro",
     "model": "Modelo",
-    "language": "Idioma"
+    "language": "Idioma",
+    "asWritten": "Receita como escrita: {value}."
   },
   "summary": {
     "title": "Sua receita",
     "grind": "Moagem",
-    "temp": "Água",
+    "temp": "Temperatura",
     "time": "Tempo",
     "schedule": "Despejos",
     "source": "Fonte",
@@ -157,5 +185,29 @@
     "timeBands": "Tempos publicados",
     "facts": "O que as medições dizem",
     "preference": "Fora da caixa é preferência, não defeito."
+  },
+  "texture": {
+    "extra-fine": "extrafina",
+    "fine": "fina",
+    "medium-fine": "média-fina",
+    "medium": "média",
+    "medium-coarse": "média-grossa",
+    "coarse": "grossa"
+  },
+  "sources": {
+    "eyebrow": "Fontes",
+    "back": "Cookbook",
+    "title": "De onde vem cada número",
+    "intro": "As receitas são inseridas a partir da página do próprio autor quando existe, senão de uma transcrição escrita do vídeo do autor. Os ajustes de moedor são lidos de tabelas da comunidade, que colocam todos os moedores numa mesma escala de tamanho de partícula; a faixa do próprio fabricante aparece ao lado do número como referência, porque as faixas dos fabricantes não cobrem o mesmo intervalo (a faixa de coado da Comandante vai de média-fina a grossa, o guia impresso da Timemore cobre só o centro, e Baratza e Kingrinder publicam um único ponto). \"Primária\" é a página do próprio autor ou fabricante; \"transcrição\" é uma cópia escrita de um vídeo; \"comunidade\" é um site de reviews ou uma tabela compilada por leitores.",
+    "recipes": "Receitas",
+    "grinders": "Moedores",
+    "bean": "Torra, processo e tamanho da moagem",
+    "chart": "Gráfico de controle de extração",
+    "footer": "Hario, V60, AeroPress e as marcas de moedores pertencem aos seus donos. Os objetos 3D são aproximações procedurais, não scans dos produtos.",
+    "kind": {
+      "primary": "primária",
+      "transcription": "transcrição",
+      "community": "comunidade"
+    }
   }
 }

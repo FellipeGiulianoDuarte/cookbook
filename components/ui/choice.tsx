@@ -35,13 +35,20 @@ export function ChoiceCard({
       onClick={onSelect}
       style={style}
       className={cn(
-        "group relative flex w-full items-start gap-4 rounded-2xl border p-4 text-left transition-[background-color,border-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.98]",
+        "group relative flex w-full items-start gap-4 rounded-2xl border p-4 text-left transition-[background-color,border-color,transform,box-shadow] duration-150 ease-[var(--ease-out)] active:scale-[0.98]",
         selected
-          ? "border-accent/60 bg-surface-2"
+          ? "border-accent/60 bg-surface-2 shadow-[0_0_0_1px_oklch(0.8_0.09_78/0.35)]"
           : "border-line bg-surface hover:border-line-strong hover:bg-surface-2/70",
         className,
       )}
     >
+      <span
+        aria-hidden="true"
+        className={cn(
+          "absolute top-4 right-4 h-2 w-2 rounded-full bg-accent transition-[transform,opacity] duration-200 ease-[var(--ease-out)]",
+          selected ? "scale-100 opacity-100" : "scale-50 opacity-0",
+        )}
+      />
       {aside ? <div className="shrink-0">{aside}</div> : null}
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-3">
@@ -54,7 +61,12 @@ export function ChoiceCard({
             {title}
           </span>
           {meta ? (
-            <span className="tabular shrink-0 text-xs text-fg-faint">
+            <span
+              className={cn(
+                "tabular shrink-0 text-xs text-fg-faint transition-transform duration-200 ease-[var(--ease-out)]",
+                selected && "-translate-x-4",
+              )}
+            >
               {meta}
             </span>
           ) : null}
@@ -86,7 +98,7 @@ export function Chip({
       className={cn(
         "inline-flex h-11 items-center rounded-full border px-4 text-sm font-medium transition-[background-color,color,border-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96]",
         selected
-          ? "border-accent bg-accent text-accent-ink"
+          ? "chip-pop border-accent bg-accent text-accent-ink"
           : "border-line-strong bg-transparent text-fg hover:bg-surface-2",
         className,
       )}

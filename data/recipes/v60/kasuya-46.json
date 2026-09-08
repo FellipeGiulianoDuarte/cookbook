@@ -20,7 +20,10 @@
     "pos": 1.0,
     "texture": "medium-coarse",
     "microns": 800,
-    "note": "Philocoffea: medium-coarse to coarse; kosher-salt texture. Japanese Coffee Gear puts Kasuya's grind at 28–30 clicks on a Comandante C40, the top of that grinder's pour-over chart, so the recipe sits at the coarse edge of the V60 window (800 µm on the Honest Coffee Guide scale). Coarser than every other V60 recipe here."
+    "note": {
+      "en": "Philocoffea: medium-coarse to coarse; kosher-salt texture. Japanese Coffee Gear puts Kasuya's grind at 28–30 clicks on a Comandante C40, the top of that grinder's pour-over chart, so the recipe sits at the coarse edge of the V60 window (800 µm on the Honest Coffee Guide scale). Coarser than every other V60 recipe here.",
+      "pt-BR": "Philocoffea: média-grossa a grossa; textura de sal grosso. Japanese Coffee Gear coloca a moagem de Kasuya em 28–30 cliques num Comandante C40, o topo da tabela de coado desse moedor, então a receita fica na borda grossa da janela de V60 (800 µm na escala do Honest Coffee Guide). Mais grossa que todas as outras receitas de V60 aqui."
+    }
   },
   "temperature": {
     "default": 93,
@@ -29,7 +32,10 @@
       "medium": 88,
       "dark": 83
     },
-    "note": "Philocoffea (Kasuya's company) gives about 93 °C light, 88 °C medium, 83 °C dark. Hario UK and Hario Europe give 92 °C for Kasuya's own brew; Japanese Coffee Gear gives 92–94 / 88–91 / 85–88. Sources disagree by 2–3 °C per roast level; Philocoffea's values are used here."
+    "note": {
+      "en": "Philocoffea (Kasuya's company) gives about 93 °C light, 88 °C medium, 83 °C dark. Hario UK and Hario Europe give 92 °C for Kasuya's own brew; Japanese Coffee Gear gives 92–94 / 88–91 / 85–88. Sources disagree by 2–3 °C per roast level; Philocoffea's values are used here.",
+      "pt-BR": "A Philocoffea (empresa de Kasuya) dá cerca de 93 °C clara, 88 °C média, 83 °C escura. Hario UK e Hario Europe dão 92 °C para o preparo do próprio Kasuya; Japanese Coffee Gear dá 92–94 / 88–91 / 85–88. As fontes divergem em 2–3 °C por nível de torra; aqui usamos os valores da Philocoffea."
+    }
   },
   "steps": [
     {
@@ -126,15 +132,24 @@
   "totalSeconds": 210,
   "scaling": "dose-multiples",
   "options": {
-    "filter": "Hario V60 paper; Hario V60 Kasuya model",
-    "model": "Hario V60 Kasuya model"
+    "filter": {
+      "en": "Hario V60 paper; Hario V60 Kasuya model",
+      "pt-BR": "Papel Hario V60; Hario V60 modelo Kasuya"
+    },
+    "model": {
+      "en": "Hario V60 Kasuya model",
+      "pt-BR": "Hario V60 modelo Kasuya"
+    }
   },
   "source": {
     "url": "https://en.philocoffea.com/blogs/blog/coffee-brewing-method",
     "title": "Philocoffea: Tetsu Kasuya's 4:6 Method",
     "year": 2022,
     "kind": "primary",
-    "notes": "Each pour is 3 × dose and total water is 15 × dose. Adjustments: in the first 40 %, less water in pour 1 (50 + 70) gives a sweeter cup, more (70 + 50) gives a brighter one, 60 + 60 is balanced. In the last 60 %, one pour (180 g) is the lightest, two pours (90 + 90) medium, three pours (60 × 3) the strongest; Philocoffea suggests two pours for dark roasts. The 2016 competition schedule differs: 50 g, 70 g, then 60 g × 3, with pour 5 at 2:45 (Philocoffea), 2:40 (Hario UK/Europe) or 3:00 (Japanese Coffee Gear)."
+    "notes": {
+      "en": "Each pour is 3 × dose and total water is 15 × dose. Adjustments: in the first 40 %, less water in pour 1 (50 + 70) gives a sweeter cup, more (70 + 50) gives a brighter one, 60 + 60 is balanced. In the last 60 %, one pour (180 g) is the lightest, two pours (90 + 90) medium, three pours (60 × 3) the strongest; Philocoffea suggests two pours for dark roasts. The 2016 competition schedule differs: 50 g, 70 g, then 60 g × 3, with pour 5 at 2:45 (Philocoffea), 2:40 (Hario UK/Europe) or 3:00 (Japanese Coffee Gear).",
+      "pt-BR": "Cada despejo é 3 × a dose e a água total é 15 × a dose. Ajustes: nos primeiros 40 %, menos água no despejo 1 (50 + 70) dá uma xícara mais doce, mais (70 + 50) dá uma mais brilhante, 60 + 60 é equilibrado. Nos 60 % finais, um despejo (180 g) é o mais leve, dois (90 + 90) médio, três (60 × 3) o mais forte; a Philocoffea sugere dois despejos para torras escuras. A sequência da competição de 2016 é diferente: 50 g, 70 g, depois 60 g × 3, com o despejo 5 em 2:45 (Philocoffea), 2:40 (Hario UK/Europe) ou 3:00 (Japanese Coffee Gear)."
+    }
   },
   "alsoSee": [
     {

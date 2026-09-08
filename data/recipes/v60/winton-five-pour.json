@@ -9,17 +9,27 @@
     "en": "Five equal 60 g pours from height, each as soon as the previous one has dripped through. No stirring or swirling: the agitation comes from the pour. Coarse grind, done around 3:30.",
     "pt-BR": "Cinco despejos iguais de 60 g de cima, cada um assim que o anterior terminou de escoar. Sem mexer nem girar: a agitação vem do despejo. Moagem grossa, pronto por volta de 3:30."
   },
-  "dose": { "default": 20, "min": 13, "max": 27 },
+  "dose": {
+    "default": 20,
+    "min": 13,
+    "max": 27
+  },
   "ratio": 15,
   "grind": {
     "band": "v60",
     "pos": 0.75,
     "texture": "coarse",
-    "note": "Winton: coarser than typical for V60; adjust so the brew finishes around 3:30. Honest Coffee Guide lists 'medium'."
+    "note": {
+      "en": "Winton: coarser than typical for V60; adjust so the brew finishes around 3:30. Honest Coffee Guide lists 'medium'.",
+      "pt-BR": "Winton: mais grossa que o habitual para V60; ajuste para o preparo terminar por volta de 3:30. O Honest Coffee Guide lista 'média'."
+    }
   },
   "temperature": {
     "default": 93,
-    "note": "Single kettle at 93 °C at home (BeanBook). In competition Winton used two kettles: 93 °C for the bloom and 88 °C for the later pours (Honest Coffee Guide)."
+    "note": {
+      "en": "Single kettle at 93 °C at home (BeanBook). In competition Winton used two kettles: 93 °C for the bloom and 88 °C for the later pours (Honest Coffee Guide).",
+      "pt-BR": "Uma chaleira a 93 °C em casa (BeanBook). Na competição Winton usou duas chaleiras: 93 °C para o bloom e 88 °C para os despejos seguintes (Honest Coffee Guide)."
+    }
   },
   "steps": [
     {
@@ -34,7 +44,9 @@
       "at": 0,
       "until": 10,
       "action": "bloom",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "Pour {add} g from height: centre, out to the edge and back to the centre",
         "pt-BR": "Despeje {add} g de cima: centro, até a borda e de volta ao centro"
@@ -45,7 +57,9 @@
       "at": 40,
       "until": 50,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "As soon as the water has dripped through, pour {add} g the same way to reach {water} g",
         "pt-BR": "Assim que a água escoar, despeje {add} g do mesmo jeito até chegar a {water} g"
@@ -56,7 +70,9 @@
       "at": 80,
       "until": 90,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "When drained, pour {add} g to reach {water} g",
         "pt-BR": "Quando escoar, despeje {add} g até chegar a {water} g"
@@ -67,7 +83,9 @@
       "at": 120,
       "until": 130,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "When drained, pour {add} g to reach {water} g",
         "pt-BR": "Quando escoar, despeje {add} g até chegar a {water} g"
@@ -78,7 +96,9 @@
       "at": 160,
       "until": 170,
       "action": "pour",
-      "water": { "grams": 60 },
+      "water": {
+        "grams": 60
+      },
       "text": {
         "en": "When drained, pour the last {add} g to reach {water} g",
         "pt-BR": "Quando escoar, despeje os últimos {add} g até chegar a {water} g"
@@ -97,20 +117,32 @@
     {
       "at": 210,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 210,
   "scaling": "dose-multiples",
   "options": {
-    "filter": "Hario paper, rinsed; Hario metal V60 02",
-    "model": "Hario metal V60 02"
+    "filter": {
+      "en": "Hario paper, rinsed; Hario metal V60 02",
+      "pt-BR": "Papel Hario, escaldado; Hario V60 02 de metal"
+    },
+    "model": {
+      "en": "Hario metal V60 02",
+      "pt-BR": "Hario V60 02 de metal"
+    }
   },
   "source": {
     "url": "https://honestcoffeeguide.com/brew-recipes/matt-winton-v60-five-pour/",
     "title": "Honest Coffee Guide: Matt Winton V60 Five-Pour (written transcription)",
     "kind": "transcription",
-    "notes": "Video: Hario Official Channel, youtube.com/watch?v=YIC-2nFQ7vM. Each pour is 3 × dose. The video gives no clock times after the bloom: each pour goes in when the previous one has just finished dripping through, and the wait after the bloom is about 30 s (some transcriptions say 45 s); the 40-second spacing here is chosen to finish at 3:30. Honest Coffee Guide's 'total 6:50' conflicts with every other source and is treated as a data error."
+    "notes": {
+      "en": "Video: Hario Official Channel, youtube.com/watch?v=YIC-2nFQ7vM. Each pour is 3 × dose. The video gives no clock times after the bloom: each pour goes in when the previous one has just finished dripping through, and the wait after the bloom is about 30 s (some transcriptions say 45 s); the 40-second spacing here is chosen to finish at 3:30. Honest Coffee Guide's 'total 6:50' conflicts with every other source and is treated as a data error.",
+      "pt-BR": "Vídeo: Hario Official Channel, youtube.com/watch?v=YIC-2nFQ7vM. Cada despejo é 3 × a dose. O vídeo não dá tempos de relógio depois do bloom: cada despejo entra quando o anterior acabou de escoar, e a espera depois do bloom é de uns 30 s (algumas transcrições dizem 45 s); o espaçamento de 40 segundos aqui foi escolhido para terminar em 3:30. O 'total 6:50' do Honest Coffee Guide contradiz todas as outras fontes e é tratado como erro de dados."
+    }
   },
   "alsoSee": [
     {

@@ -8,17 +8,27 @@
     "en": "Two blooms of 45 g, then a single slow pour to the total in small circles. Hit the 2:30 time by adjusting the grind. Swirl at the end is optional.",
     "pt-BR": "Dois blooms de 45 g e depois um único despejo lento até o total, em círculos pequenos. Acerte o tempo de 2:30 ajustando a moagem. O giro no final é opcional."
   },
-  "dose": { "default": 15, "min": 10, "max": 20 },
+  "dose": {
+    "default": 15,
+    "min": 10,
+    "max": 20
+  },
   "ratio": 15,
   "grind": {
     "band": "v60",
     "pos": 0.35,
     "texture": "medium-fine",
-    "note": "Hedrick: medium-fine. Aim for the time, not the grind number."
+    "note": {
+      "en": "Hedrick: medium-fine. Aim for the time, not the grind number.",
+      "pt-BR": "Hedrick: média-fina. Mire no tempo, não no número da moagem."
+    }
   },
   "temperature": {
     "default": 93,
-    "note": "The recipe gives a single 93 °C. Hedrick's separate 'Ultimate Pourover' recipe uses 100 °C light / 92 °C medium / 85 °C dark, but that is a different recipe."
+    "note": {
+      "en": "The recipe gives a single 93 °C. Hedrick's separate 'Ultimate Pourover' recipe uses 100 °C light / 92 °C medium / 85 °C dark, but that is a different recipe.",
+      "pt-BR": "A receita dá um único 93 °C. A receita separada 'Ultimate Pourover' de Hedrick usa 100 °C clara / 92 °C média / 85 °C escura, mas é outra receita."
+    }
   },
   "steps": [
     {
@@ -33,7 +43,9 @@
       "at": 0,
       "until": 10,
       "action": "bloom",
-      "water": { "times": 3 },
+      "water": {
+        "times": 3
+      },
       "text": {
         "en": "Bloom: pour {water} g and wet all the grounds",
         "pt-BR": "Bloom: despeje {water} g molhando todo o café"
@@ -44,7 +56,9 @@
       "at": 30,
       "until": 40,
       "action": "bloom",
-      "water": { "times": 6 },
+      "water": {
+        "times": 6
+      },
       "text": {
         "en": "Second bloom: pour another {add} g to reach {water} g",
         "pt-BR": "Segundo bloom: despeje mais {add} g até chegar a {water} g"
@@ -55,7 +69,9 @@
       "at": 60,
       "until": 75,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour to {water} g at about 10 mL per second in small circles",
         "pt-BR": "Despeje até {water} g a cerca de 10 mL por segundo, em círculos pequenos"
@@ -83,7 +99,10 @@
     {
       "at": 150,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 150,
@@ -92,7 +111,10 @@
     "url": "http://beanbook.app/recipes/lance-hedrick--lance-hedrick-s-one-and-done-v60-recipe__15c20164-8b16-470a-9045-7452c1a4d129",
     "title": "BeanBook: Lance Hedrick's One and Done V60 recipe (written transcription)",
     "kind": "transcription",
-    "notes": "Video: 'The Last V60 Recipe You'll Ever Need', youtube.com/watch?v=PNFVCmxBjQQ. Hedrick has published at least three V60 recipes; this is the 15 g / 225 g one. The 10-second bloom pours and the 15-second main pour are timings chosen for the app; the video gives only the start times 0:00, 0:30 and 1:00."
+    "notes": {
+      "en": "Video: 'The Last V60 Recipe You'll Ever Need', youtube.com/watch?v=PNFVCmxBjQQ. Hedrick has published at least three V60 recipes; this is the 15 g / 225 g one. The 10-second bloom pours and the 15-second main pour are timings chosen for the app; the video gives only the start times 0:00, 0:30 and 1:00.",
+      "pt-BR": "Vídeo: 'The Last V60 Recipe You'll Ever Need', youtube.com/watch?v=PNFVCmxBjQQ. Hedrick publicou pelo menos três receitas de V60; esta é a de 15 g / 225 g. Os despejos de bloom de 10 segundos e o despejo principal de 15 segundos são tempos escolhidos para o app; o vídeo dá só os inícios 0:00, 0:30 e 1:00."
+    }
   },
   "alsoSee": [
     {

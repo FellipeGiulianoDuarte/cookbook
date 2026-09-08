@@ -9,17 +9,27 @@
     "en": "Inverted, two papers, no bypass. 200 g at 80 °C in two pours, two gentle stirs, cap at 1:00, flip at 1:40, press, then swirl to cool.",
     "pt-BR": "Invertido, dois papéis, sem diluição. 200 g a 80 °C em dois despejos, duas mexidas leves, tampa em 1:00, vire em 1:40, pressione e gire para esfriar."
   },
-  "dose": { "default": 18, "min": 18, "max": 18 },
+  "dose": {
+    "default": 18,
+    "min": 18,
+    "max": 18
+  },
   "ratio": 11.11,
   "grind": {
     "band": "aeropress",
     "pos": 0.6,
     "texture": "medium",
-    "note": "Macap Labo 70D, setting 7.0. Position is an estimate; the WAC page gives no particle size."
+    "note": {
+      "en": "Macap Labo 70D, setting 7.0. Position is an estimate; the WAC page gives no particle size.",
+      "pt-BR": "Macap Labo 70D, ajuste 7.0. A posição é uma estimativa; a página do WAC não dá o tamanho da partícula."
+    }
   },
   "temperature": {
     "default": 80,
-    "note": "Third Wave Water Formula 2 at 80 °C."
+    "note": {
+      "en": "Third Wave Water Formula 2 at 80 °C.",
+      "pt-BR": "Third Wave Water Formula 2 a 80 °C."
+    }
   },
   "steps": [
     {
@@ -34,7 +44,9 @@
       "at": 0,
       "until": 10,
       "action": "pour",
-      "water": { "share": 0.25 },
+      "water": {
+        "share": 0.25
+      },
       "text": {
         "en": "Pour {water} g of water at 80 °C. Start the timer as you begin",
         "pt-BR": "Despeje {water} g de água a 80 °C. Inicie o cronômetro ao começar"
@@ -45,26 +57,40 @@
       "at": 10,
       "until": 15,
       "action": "stir",
-      "text": { "en": "Stir gently 3 times", "pt-BR": "Mexa de leve 3 vezes" },
+      "text": {
+        "en": "Stir gently 3 times",
+        "pt-BR": "Mexa de leve 3 vezes"
+      },
       "cue": "stir"
     },
     {
       "at": 15,
       "until": 30,
       "action": "pour",
-      "water": { "share": 1 },
-      "text": { "en": "Pour to {water} g", "pt-BR": "Despeje até {water} g" },
+      "water": {
+        "share": 1
+      },
+      "text": {
+        "en": "Pour to {water} g",
+        "pt-BR": "Despeje até {water} g"
+      },
       "cue": "pour2"
     },
     {
       "at": 30,
       "action": "wait",
-      "text": { "en": "Wait until 0:50", "pt-BR": "Aguarde até 0:50" }
+      "text": {
+        "en": "Wait until 0:50",
+        "pt-BR": "Aguarde até 0:50"
+      }
     },
     {
       "at": 50,
       "action": "stir",
-      "text": { "en": "Stir gently 3 times", "pt-BR": "Mexa de leve 3 vezes" },
+      "text": {
+        "en": "Stir gently 3 times",
+        "pt-BR": "Mexa de leve 3 vezes"
+      },
       "cue": "stir"
     },
     {
@@ -120,21 +146,30 @@
     {
       "at": 150,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 150,
   "scaling": "fixed",
   "options": {
     "orientation": "inverted",
-    "filter": "2 paper filters, rinsed"
+    "filter": {
+      "en": "2 paper filters, rinsed",
+      "pt-BR": "2 filtros de papel, escaldados"
+    }
   },
   "source": {
     "url": "https://worldaeropresschampionship.com/pages/recipes",
     "title": "World AeroPress Championship: winning recipes (2021, Tuomas Merikanto, Finland)",
     "year": 2021,
     "kind": "primary",
-    "notes": "Competition dose is fixed at 18 g. 18 g / 200 g = 1:11.1, no bypass. Water: Third Wave Water Formula 2."
+    "notes": {
+      "en": "Competition dose is fixed at 18 g. 18 g / 200 g = 1:11.1, no bypass. Water: Third Wave Water Formula 2.",
+      "pt-BR": "A dose de competição é fixa em 18 g. 18 g / 200 g = 1:11,1, sem bypass. Água: Third Wave Water Formula 2."
+    }
   },
   "alsoSee": [
     {

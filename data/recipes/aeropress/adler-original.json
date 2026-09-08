@@ -8,19 +8,37 @@
     "en": "The inventor's recipe. Fine grind, 80 °C water to mark 1–1.5, stir 10 seconds, press gently, then top up with hot water like an americano.",
     "pt-BR": "A receita do inventor. Moagem fina, água a 80 °C até a marca 1–1,5, mexa por 10 segundos, pressione de leve e complete com água quente como um americano."
   },
-  "dose": { "default": 15, "min": 14, "max": 18 },
+  "dose": {
+    "default": 15,
+    "min": 14,
+    "max": 18
+  },
   "ratio": 6,
-  "bypass": { "water": { "times": 8 } },
+  "bypass": {
+    "water": {
+      "times": 8
+    }
+  },
   "grind": {
     "band": "aeropress",
     "pos": 0.15,
     "texture": "fine",
-    "note": "Adler: 'fine drip grind', between espresso and drip."
+    "note": {
+      "en": "Adler: 'fine drip grind', between espresso and drip.",
+      "pt-BR": "Adler: 'moagem fina de coado', entre espresso e filtro."
+    }
   },
   "temperature": {
     "default": 80,
-    "byRoast": { "light": 85, "medium": 85, "dark": 80 },
-    "note": "Adler's original: 80 °C (175 °F). The official FAQ recommends 80 °C for dark roasts and 85 °C for medium and light roasts."
+    "byRoast": {
+      "light": 85,
+      "medium": 85,
+      "dark": 80
+    },
+    "note": {
+      "en": "Adler's original: 80 °C (175 °F). The official FAQ recommends 80 °C for dark roasts and 85 °C for medium and light roasts.",
+      "pt-BR": "Original de Adler: 80 °C (175 °F). O FAQ oficial recomenda 80 °C para torras escuras e 85 °C para médias e claras."
+    }
   },
   "steps": [
     {
@@ -35,7 +53,9 @@
       "at": 0,
       "until": 10,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour {water} g of water at 80 °C, up to between mark 1 and 1.5. Start the timer",
         "pt-BR": "Despeje {water} g de água a 80 °C, até entre a marca 1 e 1,5. Inicie o cronômetro"
@@ -50,13 +70,19 @@
       "at": 10,
       "until": 20,
       "action": "stir",
-      "text": { "en": "Stir for 10 seconds", "pt-BR": "Mexa por 10 segundos" },
+      "text": {
+        "en": "Stir for 10 seconds",
+        "pt-BR": "Mexa por 10 segundos"
+      },
       "cue": "stir"
     },
     {
       "at": 20,
       "action": "cap",
-      "text": { "en": "Insert the plunger", "pt-BR": "Encaixe o êmbolo" },
+      "text": {
+        "en": "Insert the plunger",
+        "pt-BR": "Encaixe o êmbolo"
+      },
       "cue": "plunger"
     },
     {
@@ -85,17 +111,29 @@
     {
       "at": 60,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 60,
   "scaling": "linear",
-  "options": { "orientation": "upright", "filter": "1 paper, not rinsed" },
+  "options": {
+    "orientation": "upright",
+    "filter": {
+      "en": "1 paper, not rinsed",
+      "pt-BR": "1 filtro de papel, sem escaldar"
+    }
+  },
   "source": {
     "url": "https://honestcoffeeguide.com/brew-recipes/original-aeropress-recipe/",
     "title": "Honest Coffee Guide: the original AeroPress recipe (Alan Adler)",
     "kind": "transcription",
-    "notes": "Dose is given as one scoop; grams disagree: aeroprecipe.com 15 g, Honest Coffee Guide 15–20 g, the current official site 16–18 g. 15 g is used here. Water is a fill line (mark 1 to 1.5, about 90 g). Total time about 1:00–1:30. The current official instructions (aeropress.com/pages/how-to-use) differ: fill to mark 4, stir 3 s, steep 60 s."
+    "notes": {
+      "en": "Dose is given as one scoop; grams disagree: aeroprecipe.com 15 g, Honest Coffee Guide 15–20 g, the current official site 16–18 g. 15 g is used here. Water is a fill line (mark 1 to 1.5, about 90 g). Total time about 1:00–1:30. The current official instructions (aeropress.com/pages/how-to-use) differ: fill to mark 4, stir 3 s, steep 60 s.",
+      "pt-BR": "A dose é dada como uma colher medida; as gramas divergem: aeroprecipe.com 15 g, Honest Coffee Guide 15–20 g, o site oficial atual 16–18 g. Aqui usamos 15 g. A água é uma linha de nível (marca 1 a 1,5, cerca de 90 g). Tempo total de cerca de 1:00–1:30. As instruções oficiais atuais (aeropress.com/pages/how-to-use) são diferentes: encher até a marca 4, mexer 3 s, infusão de 60 s."
+    }
   },
   "alsoSee": [
     {

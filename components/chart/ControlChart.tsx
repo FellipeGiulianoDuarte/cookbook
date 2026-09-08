@@ -219,6 +219,7 @@ function ChartSvg({
   point: { tds: number; ey: number } | null;
   L: (t: { en: string; "pt-BR": string }) => string;
 }) {
+  const t = useTranslations("chart");
   const W = 320;
   const H = 220;
   const P = { l: 38, r: 10, t: 10, b: 28 };
@@ -242,9 +243,9 @@ function ChartSvg({
       viewBox={`0 0 ${W} ${H}`}
       className="mt-3 w-full"
       role="img"
-      aria-label="Brewing control chart"
+      aria-label={t("title")}
     >
-      <title>Brewing control chart</title>
+      <title>{t("title")}</title>
       {/* SCA box */}
       <rect
         x={x(sca.ey[0])}

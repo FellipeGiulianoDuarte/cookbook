@@ -9,18 +9,32 @@
     "en": "Five equal 50 g pours, a swirl after the first and the last, no spoon stir. Ground finer than the Ultimate technique. Designed for one cup only.",
     "pt-BR": "Cinco despejos iguais de 50 g, um giro depois do primeiro e do último, sem mexer com colher. Moagem mais fina que a técnica Ultimate. Feita só para uma xícara."
   },
-  "dose": { "default": 15, "min": 15, "max": 15 },
+  "dose": {
+    "default": 15,
+    "min": 15,
+    "max": 15
+  },
   "ratio": 16.67,
   "grind": {
     "band": "v60",
     "pos": 0.25,
     "texture": "medium-fine",
-    "note": "Hoffmann: medium-fine, as fine as you can go without bitterness or astringency; finer than the Ultimate technique."
+    "note": {
+      "en": "Hoffmann: medium-fine, as fine as you can go without bitterness or astringency; finer than the Ultimate technique.",
+      "pt-BR": "Hoffmann: média-fina, tão fina quanto der sem amargor ou adstringência; mais fina que a técnica Ultimate."
+    }
   },
   "temperature": {
     "default": 96,
-    "byRoast": { "light": 100, "medium": 96, "dark": 90 },
-    "note": "The video says freshly boiled water, boiling for light roasts and cooler for darker ones. The per-roast numbers are Opie etc.'s transcription and are not verified against the video."
+    "byRoast": {
+      "light": 100,
+      "medium": 96,
+      "dark": 90
+    },
+    "note": {
+      "en": "The video says freshly boiled water, boiling for light roasts and cooler for darker ones. The per-roast numbers are Opie etc.'s transcription and are not verified against the video.",
+      "pt-BR": "O vídeo diz água recém-fervida: fervendo para torras claras e mais fria para as mais escuras. Os números por torra são da transcrição de Opie etc. e não foram verificados contra o vídeo."
+    }
   },
   "steps": [
     {
@@ -35,7 +49,9 @@
       "at": 0,
       "until": 10,
       "action": "bloom",
-      "water": { "grams": 50 },
+      "water": {
+        "grams": 50
+      },
       "text": {
         "en": "Bloom: pour {water} g over 10 seconds, then swirl the brewer until every ground is wet",
         "pt-BR": "Bloom: despeje {water} g em 10 segundos e gire o suporte até molhar todo o café"
@@ -45,13 +61,18 @@
     {
       "at": 10,
       "action": "wait",
-      "text": { "en": "Rest until 0:45", "pt-BR": "Aguarde até 0:45" }
+      "text": {
+        "en": "Rest until 0:45",
+        "pt-BR": "Aguarde até 0:45"
+      }
     },
     {
       "at": 45,
       "until": 55,
       "action": "pour",
-      "water": { "grams": 50 },
+      "water": {
+        "grams": 50
+      },
       "text": {
         "en": "Pour {add} g to reach {water} g, over about 10 seconds",
         "pt-BR": "Despeje {add} g até chegar a {water} g, em cerca de 10 segundos"
@@ -62,7 +83,9 @@
       "at": 70,
       "until": 80,
       "action": "pour",
-      "water": { "grams": 50 },
+      "water": {
+        "grams": 50
+      },
       "text": {
         "en": "Pour {add} g to reach {water} g, over about 10 seconds",
         "pt-BR": "Despeje {add} g até chegar a {water} g, em cerca de 10 segundos"
@@ -73,7 +96,9 @@
       "at": 90,
       "until": 100,
       "action": "pour",
-      "water": { "grams": 50 },
+      "water": {
+        "grams": 50
+      },
       "text": {
         "en": "Pour {add} g to reach {water} g, over about 10 seconds",
         "pt-BR": "Despeje {add} g até chegar a {water} g, em cerca de 10 segundos"
@@ -84,7 +109,9 @@
       "at": 110,
       "until": 120,
       "action": "pour",
-      "water": { "grams": 50 },
+      "water": {
+        "grams": 50
+      },
       "text": {
         "en": "Pour the last {add} g to reach {water} g, over about 10 seconds",
         "pt-BR": "Despeje os últimos {add} g até chegar a {water} g, em cerca de 10 segundos"
@@ -120,13 +147,21 @@
   ],
   "totalSeconds": 180,
   "scaling": "fixed",
-  "options": { "filter": "Hario V60 paper, rinsed; soft filtered water" },
+  "options": {
+    "filter": {
+      "en": "Hario V60 paper, rinsed; soft filtered water",
+      "pt-BR": "Papel Hario V60, escaldado; água filtrada mole"
+    }
+  },
   "source": {
     "url": "https://www.opie-etc.com/etc/commentary-on-james-hoffmanns-a-better-1-cup-v60-technique-for-pour-over-coffee/",
     "title": "Opie etc.: commentary on James Hoffmann's 'A Better 1 Cup V60 Technique' (written transcription)",
     "year": 2022,
     "kind": "transcription",
-    "notes": "Video: youtube.com/watch?v=1oB1oDrDkHM. Designed for 15 g / 250 g (1:16.7) and not intended for larger batches; Hoffmann made it because the Ultimate technique scaled down to one cup underperforms. Bloom is 50 g (about 3.3 × dose), not 2 × dose."
+    "notes": {
+      "en": "Video: youtube.com/watch?v=1oB1oDrDkHM. Designed for 15 g / 250 g (1:16.7) and not intended for larger batches; Hoffmann made it because the Ultimate technique scaled down to one cup underperforms. Bloom is 50 g (about 3.3 × dose), not 2 × dose.",
+      "pt-BR": "Vídeo: youtube.com/watch?v=1oB1oDrDkHM. Feita para 15 g / 250 g (1:16,7) e não pensada para lotes maiores; Hoffmann a criou porque a técnica Ultimate reduzida a uma xícara rende menos. O bloom é de 50 g (cerca de 3,3 × a dose), não 2 × a dose."
+    }
   },
   "alsoSee": [
     {

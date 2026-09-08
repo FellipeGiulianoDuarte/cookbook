@@ -9,18 +9,32 @@
     "en": "Upright, no rinse, no stir. Insert the plunger to stop the drip, wait two minutes, swirl, press gently.",
     "pt-BR": "Na posição normal, sem escaldar, sem mexer. Encaixe o êmbolo para parar o gotejamento, espere dois minutos, gire e pressione de leve."
   },
-  "dose": { "default": 11, "min": 10, "max": 18 },
+  "dose": {
+    "default": 11,
+    "min": 10,
+    "max": 18
+  },
   "ratio": 18.18,
   "grind": {
     "band": "aeropress",
     "pos": 0.35,
     "texture": "medium-fine",
-    "note": "Hoffmann: the finer end of medium, finer than pour-over. Coarsen for darker roasts."
+    "note": {
+      "en": "Hoffmann: the finer end of medium, finer than pour-over. Coarsen for darker roasts.",
+      "pt-BR": "Hoffmann: o lado mais fino de média, mais fino que coado. Engrosse para torras mais escuras."
+    }
   },
   "temperature": {
     "default": 99,
-    "byRoast": { "light": 99, "medium": 93, "dark": 87 },
-    "note": "Light roast: boiling, used immediately. Transcriptions attribute medium 90–95 °C and dark 85–90 °C to Hoffmann."
+    "byRoast": {
+      "light": 99,
+      "medium": 93,
+      "dark": 87
+    },
+    "note": {
+      "en": "Light roast: boiling, used immediately. Transcriptions attribute medium 90–95 °C and dark 85–90 °C to Hoffmann.",
+      "pt-BR": "Torra clara: água fervendo, usada na hora. Transcrições atribuem a Hoffmann 90–95 °C para média e 85–90 °C para escura."
+    }
   },
   "steps": [
     {
@@ -35,7 +49,9 @@
       "at": 0,
       "until": 15,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour {water} g of water, wetting all the grounds. Start the timer as you begin",
         "pt-BR": "Despeje {water} g de água molhando todo o café. Inicie o cronômetro ao começar"
@@ -54,7 +70,10 @@
     {
       "at": 20,
       "action": "wait",
-      "text": { "en": "Wait until 2:00", "pt-BR": "Aguarde até 2:00" }
+      "text": {
+        "en": "Wait until 2:00",
+        "pt-BR": "Aguarde até 2:00"
+      }
     },
     {
       "at": 120,
@@ -68,7 +87,10 @@
     {
       "at": 125,
       "action": "wait",
-      "text": { "en": "Wait until 2:30", "pt-BR": "Aguarde até 2:30" }
+      "text": {
+        "en": "Wait until 2:30",
+        "pt-BR": "Aguarde até 2:30"
+      }
     },
     {
       "at": 150,
@@ -83,18 +105,30 @@
     {
       "at": 180,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 180,
   "scaling": "linear",
-  "options": { "orientation": "upright", "filter": "1 paper, not rinsed" },
+  "options": {
+    "orientation": "upright",
+    "filter": {
+      "en": "1 paper, not rinsed",
+      "pt-BR": "1 filtro de papel, sem escaldar"
+    }
+  },
   "source": {
     "url": "https://aeroprecipe.com/recipes/james-hoffmann-aeropress-recipe",
     "title": "Aeroprecipe transcription of 'The Ultimate AeroPress Technique' (Episode #3)",
     "year": 2021,
     "kind": "transcription",
-    "notes": "Video: youtube.com/watch?v=j6VlT_jUVPc. Cross-checked with klaire.codes and fluentincoffee.com transcriptions. Some aggregators list 95 °C; the video says off-boil for light roasts."
+    "notes": {
+      "en": "Video: youtube.com/watch?v=j6VlT_jUVPc. Cross-checked with klaire.codes and fluentincoffee.com transcriptions. Some aggregators list 95 °C; the video says off-boil for light roasts.",
+      "pt-BR": "Vídeo: youtube.com/watch?v=j6VlT_jUVPc. Conferido com as transcrições de klaire.codes e fluentincoffee.com. Alguns agregadores listam 95 °C; o vídeo diz água recém-fervida para torras claras."
+    }
   },
   "alsoSee": [
     {

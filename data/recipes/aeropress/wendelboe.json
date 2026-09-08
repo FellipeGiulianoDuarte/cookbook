@@ -8,17 +8,27 @@
     "en": "Upright, rinsed filter, boiling water. Stir three times, plunger on top, stir again at one minute, press with your body weight.",
     "pt-BR": "Na posição normal, filtro escaldado, água fervente. Mexa três vezes, êmbolo por cima, mexa de novo em um minuto, pressione com o peso do corpo."
   },
-  "dose": { "default": 14, "min": 12, "max": 18 },
+  "dose": {
+    "default": 14,
+    "min": 12,
+    "max": 18
+  },
   "ratio": 14.29,
   "grind": {
     "band": "aeropress",
     "pos": 0.35,
     "texture": "medium-fine",
-    "note": "Wendelboe: 'fine filter grind'. Aggregators: medium, 15–20 clicks on a Comandante."
+    "note": {
+      "en": "Wendelboe: 'fine filter grind'. Aggregators: medium, 15–20 clicks on a Comandante.",
+      "pt-BR": "Wendelboe: 'moagem fina de filtro'. Agregadores: média, 15–20 cliques num Comandante."
+    }
   },
   "temperature": {
     "default": 99,
-    "note": "Wendelboe's own page says boiling temperature. Aggregators list 96 °C."
+    "note": {
+      "en": "Wendelboe's own page says boiling temperature. Aggregators list 96 °C.",
+      "pt-BR": "A página do próprio Wendelboe diz água fervendo. Agregadores listam 96 °C."
+    }
   },
   "steps": [
     {
@@ -33,7 +43,9 @@
       "at": 0,
       "until": 10,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour {water} g of boiling water. Start the timer as you begin",
         "pt-BR": "Despeje {water} g de água fervente. Inicie o cronômetro ao começar"
@@ -43,7 +55,10 @@
     {
       "at": 10,
       "action": "stir",
-      "text": { "en": "Stir 3 times", "pt-BR": "Mexa 3 vezes" },
+      "text": {
+        "en": "Stir 3 times",
+        "pt-BR": "Mexa 3 vezes"
+      },
       "cue": "stir"
     },
     {
@@ -58,7 +73,10 @@
     {
       "at": 20,
       "action": "wait",
-      "text": { "en": "Wait until 1:00", "pt-BR": "Aguarde até 1:00" }
+      "text": {
+        "en": "Wait until 1:00",
+        "pt-BR": "Aguarde até 1:00"
+      }
     },
     {
       "at": 60,
@@ -82,19 +100,28 @@
     {
       "at": 90,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 90,
   "scaling": "linear",
   "options": {
     "orientation": "upright",
-    "filter": "1 paper, rinsed under the tap for about 10 s"
+    "filter": {
+      "en": "1 paper, rinsed under the tap for about 10 s",
+      "pt-BR": "1 filtro de papel, escaldado na torneira por uns 10 s"
+    }
   },
   "source": {
     "url": "https://timwendelboe.no/pages/how-to-brew-with-an-aeropress",
     "title": "Tim Wendelboe: How to brew with an AeroPress",
     "kind": "primary",
-    "notes": "14 g / 200 g = 1:14.3. The page says boiling water; aggregator transcriptions list 96 °C. Grind is 'fine filter grind'; aggregators translate it as medium, 15–20 clicks on a Comandante. Timings for the first stir, plunger placement and the press are read from the page's sequence, not stated as clock times."
+    "notes": {
+      "en": "14 g / 200 g = 1:14.3. The page says boiling water; aggregator transcriptions list 96 °C. Grind is 'fine filter grind'; aggregators translate it as medium, 15–20 clicks on a Comandante. Timings for the first stir, plunger placement and the press are read from the page's sequence, not stated as clock times.",
+      "pt-BR": "14 g / 200 g = 1:14,3. A página diz água fervendo; transcrições de agregadores listam 96 °C. A moagem é 'fina de filtro'; agregadores traduzem como média, 15–20 cliques num Comandante. Os tempos da primeira mexida, da colocação do êmbolo e da prensagem são lidos da sequência da página, não declarados como tempos de relógio."
+    }
   }
 }

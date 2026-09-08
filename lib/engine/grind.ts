@@ -97,14 +97,43 @@ export function gridToSetting(
   };
 }
 
+/** The words a setting is written with; the UI passes the translated set. */
+export interface SettingWords {
+  clicks: string;
+  setting: string;
+  mark: string;
+  turn: string;
+  turns: string;
+  fromZero: string;
+  countedFromZero: string;
+  clicksFromZero: string;
+  step: string;
+  /** "position {i} of {n}" */
+  position: (i: number, n: number) => string;
+}
+
+export const ENGLISH_WORDS: SettingWords = {
+  clicks: "clicks",
+  setting: "setting",
+  mark: "mark",
+  turn: "turn",
+  turns: "turns",
+  fromZero: "from your own zero",
+  countedFromZero: "counted from your own zero",
+  clicksFromZero: "clicks from zero",
+  step: "step",
+  position: (i, n) => `position ${i} of ${n}`,
+};
+
 /** Render a value in the grinder's own notation. */
 export function formatSetting(
   g: Grinder,
   value: number,
+  w: SettingWords = ENGLISH_WORDS,
 ): { text: string; detail?: string } {
   switch (g.notation) {
     case "clicks":
-      return { text: `${value} clicks` };
+      return { text: `${value} ${w.clicks}` };
     case "rot.num.tick": {
       const R = g.clicksPerRotation ?? 1;
       const N = g.clicksPerNumber ?? 1;
@@ -114,11 +143,11 @@ export function formatSetting(
       const ticks = rem - numbers * N;
       return {
         text: `${rotations}.${numbers}.${ticks}`,
-        detail: `${value} clicks from zero`,
+        detail: `${value} ${w.clicksFromZero}`,
       };
     }
     case "dial":
-      return { text: `setting ${value}` };
+      return { text: `${w.setting} ${value}` };
     case "dial.sub": {
       const N = g.clicksPerNumber ?? 1;
       const start = g.dialStart ?? 0;
@@ -126,13 +155,13 @@ export function formatSetting(
       const sub = value - Math.floor(value / N) * N;
       return {
         text: sub === 0 ? `${number}` : `${number}.${sub}`,
-        detail: `step ${value}`,
+        detail: `${w.step} ${value}`,
       };
     }
     case "marks":
       return {
-        text: `mark ${trimNumber(value)}`,
-        detail: "counted from your own zero",
+        text: `${w.mark} ${trimNumber(value)}`,
+        detail: w.countedFromZero,
       };
     case "rotations": {
       const R = g.clicksPerRotation ?? 1;
@@ -142,8 +171,8 @@ export function formatSetting(
         text:
           turns === 0
             ? `${rem}`
-            : `${turns} turn${turns > 1 ? "s" : ""} + ${rem}`,
-        detail: "from your own zero",
+            : `${turns} ${turns > 1 ? w.turns : w.turn} + ${rem}`,
+        detail: w.fromZero,
       };
     }
     case "labels": {
@@ -151,7 +180,7 @@ export function formatSetting(
       const idx = clamp(Math.round(value), 0, Math.max(0, labels.length - 1));
       return {
         text: labels[idx] ?? `${value}`,
-        detail: `position ${idx + 1} of ${labels.length}`,
+        detail: w.position(idx + 1, labels.length),
       };
     }
   }

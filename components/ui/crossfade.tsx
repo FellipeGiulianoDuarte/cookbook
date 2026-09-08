@@ -14,17 +14,21 @@ export function Crossfade({
   id,
   children,
   className,
+  as = "span",
 }: {
   id: string | number;
   children: ReactNode;
   className?: string;
+  /** "div" for block content (paragraphs, cards); "span" for a value inside a line */
+  as?: "span" | "div";
 }) {
+  const Tag = as === "div" ? motion.div : motion.span;
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <motion.span
+      <Tag
         key={id}
         className={className}
-        style={{ display: "inline-block" }}
+        style={as === "span" ? { display: "inline-block" } : undefined}
         initial={{
           opacity: 0,
           filter: "blur(3px)",
@@ -44,7 +48,7 @@ export function Crossfade({
         transition={{ duration: 0.18, ease: EASE }}
       >
         {children}
-      </motion.span>
+      </Tag>
     </AnimatePresence>
   );
 }

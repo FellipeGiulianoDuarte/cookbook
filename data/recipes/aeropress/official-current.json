@@ -8,18 +8,32 @@
     "en": "The manufacturer's current method. Upright, one scoop, fill to mark 4, stir 3 seconds, steep one minute, press until the hiss.",
     "pt-BR": "O método atual do fabricante. Na posição normal, uma colher de café, água até a marca 4, mexa por 3 segundos, infusão de um minuto, pressione até o chiado."
   },
-  "dose": { "default": 17, "min": 14, "max": 18 },
+  "dose": {
+    "default": 17,
+    "min": 14,
+    "max": 18
+  },
   "ratio": 14.71,
   "grind": {
     "band": "aeropress",
     "pos": 0.5,
     "texture": "medium",
-    "note": "Official: medium (pre-ground) or medium-fine. Medium-fine shortens the steep to 30 seconds."
+    "note": {
+      "en": "Official: medium (pre-ground) or medium-fine. Medium-fine shortens the steep to 30 seconds.",
+      "pt-BR": "Oficial: média (pré-moído) ou média-fina. A média-fina encurta a infusão para 30 segundos."
+    }
   },
   "temperature": {
     "default": 85,
-    "byRoast": { "light": 85, "medium": 85, "dark": 80 },
-    "note": "Official instructions: 85 °C (185 °F) or boiling. The official FAQ recommends 80 °C for dark roasts and 85 °C for medium and light roasts."
+    "byRoast": {
+      "light": 85,
+      "medium": 85,
+      "dark": 80
+    },
+    "note": {
+      "en": "Official instructions: 85 °C (185 °F) or boiling. The official FAQ recommends 80 °C for dark roasts and 85 °C for medium and light roasts.",
+      "pt-BR": "Instruções oficiais: 85 °C (185 °F) ou fervendo. O FAQ oficial recomenda 80 °C para torras escuras e 85 °C para médias e claras."
+    }
   },
   "steps": [
     {
@@ -34,7 +48,9 @@
       "at": 0,
       "until": 10,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour {water} g of water, filling to the mark 4 line. Start the timer as you begin",
         "pt-BR": "Despeje {water} g de água, até a linha da marca 4. Inicie o cronômetro ao começar"
@@ -48,7 +64,10 @@
     {
       "at": 10,
       "action": "stir",
-      "text": { "en": "Stir for 3 seconds", "pt-BR": "Mexa por 3 segundos" },
+      "text": {
+        "en": "Stir for 3 seconds",
+        "pt-BR": "Mexa por 3 segundos"
+      },
       "cue": "stir"
     },
     {
@@ -76,21 +95,33 @@
     {
       "at": 90,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 90,
   "scaling": "linear",
   "options": {
     "orientation": "upright",
-    "filter": "1 paper micro-filter, not rinsed",
-    "model": "Original, Clear, Premium, Go Plus. XL: 2 scoops (32–36 g), fill to mark 8. Go: slightly less coffee"
+    "filter": {
+      "en": "1 paper micro-filter, not rinsed",
+      "pt-BR": "1 microfiltro de papel, sem escaldar"
+    },
+    "model": {
+      "en": "Original, Clear, Premium, Go Plus. XL: 2 scoops (32–36 g), fill to mark 8. Go: slightly less coffee",
+      "pt-BR": "Original, Clear, Premium, Go Plus. XL: 2 colheres (32–36 g), encher até a marca 8. Go: um pouco menos de café"
+    }
   },
   "source": {
     "url": "https://aeropress.com/pages/how-to-use",
     "title": "AeroPress: How to use (current official instructions)",
     "kind": "primary",
-    "notes": "Dose is given as 1 heaping scoop or 16–18 g; 17 g is the midpoint. Water is given as a fill line (mark 4), not in grams; the 250 g default is an estimate derived from the official iced recipe (200 g reaches mark 3 with 22 g of coffee). Steep is 60 s for medium grind, 30 s for medium-fine."
+    "notes": {
+      "en": "Dose is given as 1 heaping scoop or 16–18 g; 17 g is the midpoint. Water is given as a fill line (mark 4), not in grams; the 250 g default is an estimate derived from the official iced recipe (200 g reaches mark 3 with 22 g of coffee). Steep is 60 s for medium grind, 30 s for medium-fine.",
+      "pt-BR": "A dose é dada como 1 colher medida cheia ou 16–18 g; 17 g é o ponto médio. A água é dada como linha de nível (marca 4), não em gramas; os 250 g padrão são uma estimativa derivada da receita gelada oficial (200 g chegam à marca 3 com 22 g de café). Infusão de 60 s para moagem média, 30 s para média-fina."
+    }
   },
   "alsoSee": [
     {

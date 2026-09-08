@@ -9,17 +9,27 @@
     "en": "Bloom with an aggressive spin, then two pours from low height with a gentle spin after each. Hot water, medium-fine grind, a long 4:00–4:30 brew aiming at 22–24.5 % extraction.",
     "pt-BR": "Bloom com um giro forte, depois dois despejos de baixa altura com um giro leve depois de cada um. Água quente, moagem média-fina, extração longa de 4:00–4:30 mirando 22–24,5 %."
   },
-  "dose": { "default": 20, "min": 20, "max": 27 },
+  "dose": {
+    "default": 20,
+    "min": 20,
+    "max": 27
+  },
   "ratio": 16.5,
   "grind": {
     "band": "v60",
     "pos": 0.35,
     "texture": "medium-fine",
-    "note": "Rao: medium-fine. Between coffees of similar roast level, change only the grind."
+    "note": {
+      "en": "Rao: medium-fine. Between coffees of similar roast level, change only the grind.",
+      "pt-BR": "Rao: média-fina. Entre cafés de torra parecida, mude só a moagem."
+    }
   },
   "temperature": {
     "default": 97,
-    "note": "Rao keeps temperature, dose and ratio fixed and changes only the grind between coffees (blog, 2024-02-26). No per-roast values are published."
+    "note": {
+      "en": "Rao keeps temperature, dose and ratio fixed and changes only the grind between coffees (blog, 2024-02-26). No per-roast values are published.",
+      "pt-BR": "Rao mantém temperatura, dose e proporção fixas e muda só a moagem entre cafés (blog, 26/02/2024). Não há valores por torra publicados."
+    }
   },
   "steps": [
     {
@@ -34,7 +44,9 @@
       "at": 0,
       "until": 10,
       "action": "bloom",
-      "water": { "times": 3 },
+      "water": {
+        "times": 3
+      },
       "text": {
         "en": "Bloom: pour {water} g, then spin the brewer aggressively so every ground is wet",
         "pt-BR": "Bloom: despeje {water} g e gire o suporte com força para molhar todo o café"
@@ -44,13 +56,18 @@
     {
       "at": 10,
       "action": "wait",
-      "text": { "en": "Rest until 0:40", "pt-BR": "Aguarde até 0:40" }
+      "text": {
+        "en": "Rest until 0:40",
+        "pt-BR": "Aguarde até 0:40"
+      }
     },
     {
       "at": 40,
       "until": 60,
       "action": "pour",
-      "water": { "times": 10 },
+      "water": {
+        "times": 10
+      },
       "text": {
         "en": "Pour to {water} g from low height with a near-vertical stream, across the whole slurry",
         "pt-BR": "Despeje até {water} g de baixa altura com o jato quase vertical, cobrindo toda a superfície"
@@ -70,7 +87,9 @@
       "at": 105,
       "until": 125,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "When the slurry is about 70 % drained, pour to {water} g the same way",
         "pt-BR": "Quando cerca de 70 % da água tiver escoado, despeje até {water} g do mesmo jeito"
@@ -98,21 +117,33 @@
     {
       "at": 255,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 255,
   "scaling": "linear",
   "options": {
-    "filter": "Standard Hario paper; plastic V60 02",
-    "model": "Plastic Hario V60 02"
+    "filter": {
+      "en": "Standard Hario paper; plastic V60 02",
+      "pt-BR": "Papel Hario padrão; V60 02 de plástico"
+    },
+    "model": {
+      "en": "Plastic Hario V60 02",
+      "pt-BR": "Hario V60 02 de plástico"
+    }
   },
   "source": {
     "url": "https://www.hario.co.uk/blogs/hario-ambassadors/hario-v60-recipe-interview-with-hario-ambassador-scott-rao",
     "title": "Hario UK: V60 recipe interview with Hario ambassador Scott Rao",
     "year": 2022,
     "kind": "primary",
-    "notes": "This is Rao's current recipe; his 2017 single-pour video is retitled '(old) V60 Method' and superseded. Target extraction 22–24.5 %. Rao advises not going below 20–22 g on a V60 and down-dosing only for high-fines coffees (Ethiopians, decafs). The 4:00–4:30 total is entered here as 4:15."
+    "notes": {
+      "en": "This is Rao's current recipe; his 2017 single-pour video is retitled '(old) V60 Method' and superseded. Target extraction 22–24.5 %. Rao advises not going below 20–22 g on a V60 and down-dosing only for high-fines coffees (Ethiopians, decafs). The 4:00–4:30 total is entered here as 4:15.",
+      "pt-BR": "Esta é a receita atual de Rao; o vídeo de despejo único de 2017 foi renomeado '(old) V60 Method' e substituído. Extração alvo 22–24,5 %. Rao aconselha não descer de 20–22 g num V60 e reduzir a dose só para cafés com muitos finos (etíopes, descafeinados). O total de 4:00–4:30 entra aqui como 4:15."
+    }
   },
   "alsoSee": [
     {

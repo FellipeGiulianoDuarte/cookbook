@@ -18,6 +18,10 @@ export const LocalizedText = z.object({
 });
 export type LocalizedText = z.infer<typeof LocalizedText>;
 
+/** A note that started life in English and may carry a translation. Read it with `text()`. */
+export const Note = z.union([z.string(), LocalizedText]);
+export type Note = z.infer<typeof Note>;
+
 export const SourceKind = z.enum(["primary", "transcription", "community"]);
 
 export const Source = z.object({
@@ -26,7 +30,7 @@ export const Source = z.object({
   year: z.number().int().min(1950).max(2100).optional(),
   kind: SourceKind,
   /** Where sources disagree, say so here. Shown in the UI as a footnote. */
-  notes: z.string().optional(),
+  notes: Note.optional(),
 });
 export type Source = z.infer<typeof Source>;
 
@@ -160,14 +164,14 @@ export const Recipe = z.object({
     pos: z.number().min(0).max(1),
     texture: GrindTexture,
     microns: z.number().positive().optional(),
-    note: z.string().optional(),
+    note: Note.optional(),
   }),
   temperature: z.object({
     default: z.number().min(60).max(100),
     byRoast: z
       .partialRecord(RoastLevel, z.number().min(60).max(100))
       .optional(),
-    note: z.string().optional(),
+    note: Note.optional(),
   }),
   steps: z.array(Step).min(2),
   totalSeconds: z.number().positive(),
@@ -176,8 +180,8 @@ export const Recipe = z.object({
   options: z
     .object({
       orientation: z.enum(["upright", "inverted"]).optional(),
-      filter: z.string().optional(),
-      model: z.string().optional(),
+      filter: Note.optional(),
+      model: Note.optional(),
       iced: z.object({ iceGrams: z.number().positive() }).optional(),
     })
     .optional(),

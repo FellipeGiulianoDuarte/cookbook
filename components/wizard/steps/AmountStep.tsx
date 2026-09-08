@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import type { CSSProperties } from "react";
 import { StepTitle } from "@/components/ui/choice";
 import { Crossfade } from "@/components/ui/crossfade";
 import type { DerivedStepProps } from "./types";
@@ -20,9 +21,9 @@ export function AmountStep({ selection, derived, send }: DerivedStepProps) {
       <StepTitle>{t("title")}</StepTitle>
 
       <div className="mt-6 grid grid-cols-3 gap-3">
-        <Stat label={t("dose")} value={dose} unit="g" accent />
-        <Stat label={t("water")} value={water} unit="g" />
-        <Stat label={t("ratio")} value={`1:${ratio.toFixed(1)}`} />
+        <Stat label={t("dose")} value={dose} unit="g" accent index={0} />
+        <Stat label={t("water")} value={water} unit="g" index={1} />
+        <Stat label={t("ratio")} value={`1:${ratio.toFixed(1)}`} index={2} />
       </div>
 
       {derived.schedule?.bypass ? (
@@ -88,14 +89,19 @@ function Stat({
   value,
   unit,
   accent,
+  index,
 }: {
   label: string;
   value: number | string;
   unit?: string;
   accent?: boolean;
+  index: number;
 }) {
   return (
-    <div className="rounded-2xl bg-surface p-4">
+    <div
+      className="stagger-in rounded-2xl bg-surface p-4"
+      style={{ "--i": index } as CSSProperties}
+    >
       <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-faint">
         {label}
       </p>

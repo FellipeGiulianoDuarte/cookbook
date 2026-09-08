@@ -3,7 +3,13 @@
 import { useActorRef, useSelector } from "@xstate/react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  type CSSProperties,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { SceneClient } from "@/components/scene/SceneClient";
 import type { SceneState } from "@/components/scene/types";
 import { Button } from "@/components/ui/button";
@@ -129,6 +135,10 @@ function BrewTimer({
     .slice(0, ctx.index)
     .some((s) => s.action === "press");
   const plunger = step?.action === "press" ? inStep : pressed || done ? 1 : 0;
+  // an inverted brew stands on its plunger until the flip step; from there it is upright on the cup
+  const flipped = ctx.steps
+    .slice(0, ctx.index + 1)
+    .some((s) => s.action === "flip");
   const scene: SceneState = {
     method: recipe.method,
     focus: "brewing",
@@ -137,7 +147,7 @@ function BrewTimer({
     roast: 0.5,
     pouring,
     plunger,
-    inverted,
+    inverted: inverted && !flipped && !done,
     dialTicks: 12,
     dialValue: 0,
     idle: false,
@@ -402,7 +412,8 @@ export function BrewScreen({
         {prep.map((s, i) => (
           <li
             key={`${s.action}-${s.cumulative}`}
-            className="flex gap-3 rounded-2xl bg-surface p-4 text-fg"
+            className="stagger-in flex gap-3 rounded-2xl bg-surface p-4 text-fg"
+            style={{ "--i": Math.min(i, 8) } as CSSProperties}
           >
             <span className="tabular flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-2 text-sm text-fg-muted">
               {i + 1}

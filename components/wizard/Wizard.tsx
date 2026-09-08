@@ -9,6 +9,7 @@ import { BrewScreen } from "@/components/brew/BrewScreen";
 import { SceneClient } from "@/components/scene/SceneClient";
 import type { SceneState } from "@/components/scene/types";
 import { Button } from "@/components/ui/button";
+import { Crossfade } from "@/components/ui/crossfade";
 import { type ClientCatalog, derive } from "@/lib/derive";
 import {
   canLeave,
@@ -240,14 +241,16 @@ export function Wizard({
                 !WIZARD_STEPS.slice(0, i).every((p) => canLeave(p, selection))
               }
               onClick={() => actor.send({ type: "JUMP", step: s })}
-              className={`h-1.5 flex-1 rounded-full transition-[background-color] duration-300 ease-[var(--ease-out)] disabled:cursor-default ${
-                i < index
-                  ? "bg-accent/70"
-                  : i === index
-                    ? "bg-accent"
-                    : "bg-line-strong"
-              }`}
-            />
+              className="h-1.5 flex-1 overflow-hidden rounded-full bg-line-strong disabled:cursor-default"
+            >
+              <span
+                className="block h-full w-full origin-left rounded-full bg-accent transition-[transform,opacity] duration-[420ms] ease-[var(--ease-out)]"
+                style={{
+                  transform: `scaleX(${i <= index ? 1 : 0})`,
+                  opacity: i < index ? 0.7 : 1,
+                }}
+              />
+            </button>
           ))}
         </nav>
         <LanguageToggle />
@@ -310,9 +313,12 @@ export function Wizard({
             >
               {t("nav.next")}
               {index + 1 < WIZARD_STEPS.length ? (
-                <span className="font-normal text-accent-ink/70">
+                <Crossfade
+                  id={WIZARD_STEPS[index + 1]}
+                  className="font-normal text-accent-ink/70"
+                >
                   · {t(`steps.${WIZARD_STEPS[index + 1]}`)}
-                </span>
+                </Crossfade>
               ) : null}
             </Button>
           ) : null}

@@ -9,18 +9,33 @@
     "en": "Upright with the Flow Control cap and two papers. Sifted grind, 100 g at 84 °C, one cross stir at 0:25, press at 0:50 onto 70 g of 50 °C water already in the carafe.",
     "pt-BR": "Na posição normal com a tampa Flow Control e dois papéis. Moagem peneirada, 100 g a 84 °C, uma mexida em cruz em 0:25, pressione em 0:50 sobre 70 g de água a 50 °C já na jarra."
   },
-  "dose": { "default": 18, "min": 18, "max": 18 },
+  "dose": {
+    "default": 18,
+    "min": 18,
+    "max": 18
+  },
   "ratio": 5.56,
-  "bypass": { "water": { "grams": 70 }, "tempC": 50 },
+  "bypass": {
+    "water": {
+      "grams": 70
+    },
+    "tempC": 50
+  },
   "grind": {
     "band": "aeropress",
     "pos": 0.6,
     "texture": "medium",
-    "note": "Comandante Trailmaster x25, 31 clicks, sifted at 200 µm to remove the fines. Position is an estimate for a medium-coarse setting; the WAC page gives no particle size."
+    "note": {
+      "en": "Comandante Trailmaster x25, 31 clicks, sifted at 200 µm to remove the fines. Position is an estimate for a medium-coarse setting; the WAC page gives no particle size.",
+      "pt-BR": "Comandante Trailmaster x25, 31 cliques, peneirado a 200 µm para remover os finos. A posição é uma estimativa para um ajuste média-grossa; a página do WAC não dá o tamanho da partícula."
+    }
   },
   "temperature": {
     "default": 84,
-    "note": "Brew water 84 °C at 125 ppm. Bypass water 50 °C."
+    "note": {
+      "en": "Brew water 84 °C at 125 ppm. Bypass water 50 °C.",
+      "pt-BR": "Água de extração a 84 °C com 125 ppm. Água de bypass a 50 °C."
+    }
   },
   "steps": [
     {
@@ -44,7 +59,9 @@
       "at": 0,
       "until": 10,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour {water} g of water at 84 °C, wetting all the grounds. Start the timer as you begin",
         "pt-BR": "Despeje {water} g de água a 84 °C molhando todo o café. Inicie o cronômetro ao começar"
@@ -54,7 +71,10 @@
     {
       "at": 10,
       "action": "wait",
-      "text": { "en": "Wait until 0:25", "pt-BR": "Aguarde até 0:25" }
+      "text": {
+        "en": "Wait until 0:25",
+        "pt-BR": "Aguarde até 0:25"
+      }
     },
     {
       "at": 25,
@@ -68,7 +88,10 @@
     {
       "at": 30,
       "action": "wait",
-      "text": { "en": "Wait until 0:50", "pt-BR": "Aguarde até 0:50" }
+      "text": {
+        "en": "Wait until 0:50",
+        "pt-BR": "Aguarde até 0:50"
+      }
     },
     {
       "at": 50,
@@ -93,14 +116,20 @@
   "scaling": "fixed",
   "options": {
     "orientation": "upright",
-    "filter": "Flow Control Filter Cap + 2 paper filters"
+    "filter": {
+      "en": "Flow Control Filter Cap + 2 paper filters",
+      "pt-BR": "Tampa Flow Control + 2 filtros de papel"
+    }
   },
   "source": {
     "url": "https://worldaeropresschampionship.com/pages/recipes",
     "title": "World AeroPress Championship: winning recipes (2025, Némo Pop, Australia)",
     "year": 2025,
     "kind": "primary",
-    "notes": "Competition dose is fixed at 18 g. The page gives the pour as 'wetting all grounds' without a duration; 10 s is this app's choice. Total time is given as about 1:10–1:20; 1:15 is used."
+    "notes": {
+      "en": "Competition dose is fixed at 18 g. The page gives the pour as 'wetting all grounds' without a duration; 10 s is this app's choice. Total time is given as about 1:10–1:20; 1:15 is used.",
+      "pt-BR": "A dose de competição é fixa em 18 g. A página descreve o despejo como 'molhar todo o café' sem duração; 10 s é escolha deste app. O tempo total é dado como cerca de 1:10–1:20; usamos 1:15."
+    }
   },
   "alsoSee": [
     {

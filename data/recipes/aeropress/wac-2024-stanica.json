@@ -9,19 +9,33 @@
     "en": "Inverted. Two 50 g pours at 96 °C, a 10-second cross stir, cap and purge at 1:20, flip, press to about 78 g of concentrate, then dilute in two stages.",
     "pt-BR": "Invertido. Dois despejos de 50 g a 96 °C, uma mexida em cruz de 10 segundos, tampa e purga em 1:20, vire, pressione até uns 78 g de concentrado e dilua em duas etapas."
   },
-  "dose": { "default": 18, "min": 18, "max": 18 },
+  "dose": {
+    "default": 18,
+    "min": 18,
+    "max": 18
+  },
   "ratio": 5.56,
-  "bypass": { "water": { "grams": 80 } },
+  "bypass": {
+    "water": {
+      "grams": 80
+    }
+  },
   "grind": {
     "band": "aeropress",
     "pos": 0.86,
     "texture": "medium-coarse",
     "microns": 870,
-    "note": "Comandante C40 Mk4 Red Clix, 58 clicks; 870 µm as stated on the WAC page. Position maps 870 µm into the Honest Coffee Guide AeroPress range 320–960 µm."
+    "note": {
+      "en": "Comandante C40 Mk4 Red Clix, 58 clicks; 870 µm as stated on the WAC page. Position maps 870 µm into the Honest Coffee Guide AeroPress range 320–960 µm.",
+      "pt-BR": "Comandante C40 Mk4 Red Clix, 58 cliques; 870 µm conforme a página do WAC. A posição mapeia 870 µm na faixa de AeroPress do Honest Coffee Guide, 320–960 µm."
+    }
   },
   "temperature": {
     "default": 96,
-    "note": "Brew water 96 °C at 85–90 ppm. Dilution: warm water first, then room-temperature 0 ppm water."
+    "note": {
+      "en": "Brew water 96 °C at 85–90 ppm. Dilution: warm water first, then room-temperature 0 ppm water.",
+      "pt-BR": "Água de extração a 96 °C com 85–90 ppm. Diluição: água morna primeiro, depois água a temperatura ambiente com 0 ppm."
+    }
   },
   "steps": [
     {
@@ -36,7 +50,9 @@
       "at": 0,
       "until": 6,
       "action": "pour",
-      "water": { "share": 0.5 },
+      "water": {
+        "share": 0.5
+      },
       "text": {
         "en": "Pour {water} g of water at 96 °C over 5–6 seconds, through a Melodrip if you have one. Start the timer as you begin",
         "pt-BR": "Despeje {water} g de água a 96 °C em 5–6 segundos, por um Melodrip se tiver. Inicie o cronômetro ao começar"
@@ -46,13 +62,18 @@
     {
       "at": 6,
       "action": "wait",
-      "text": { "en": "Bloom until 0:30", "pt-BR": "Bloom até 0:30" }
+      "text": {
+        "en": "Bloom until 0:30",
+        "pt-BR": "Bloom até 0:30"
+      }
     },
     {
       "at": 30,
       "until": 36,
       "action": "pour",
-      "water": { "share": 1 },
+      "water": {
+        "share": 1
+      },
       "text": {
         "en": "Pour to {water} g over 5–6 seconds",
         "pt-BR": "Despeje até {water} g em 5–6 segundos"
@@ -125,21 +146,30 @@
     {
       "at": 135,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 135,
   "scaling": "fixed",
   "options": {
     "orientation": "inverted",
-    "filter": "1 Aesir paper, rinsed"
+    "filter": {
+      "en": "1 Aesir paper, rinsed",
+      "pt-BR": "1 papel Aesir, escaldado"
+    }
   },
   "source": {
     "url": "https://worldaeropresschampionship.com/pages/recipes",
     "title": "World AeroPress Championship: winning recipes (2024, George Stanica, Romania)",
     "year": 2024,
     "kind": "primary",
-    "notes": "Competition dose is fixed at 18 g. Bypass water is not stated as one number: press to 76–79 g, dilute with warm water to 130–135 g (about 55 g), then add 20–30 g room-temperature water; about 80 g in total, without a single temperature. The flip time (1:30) is placed between the stated cap (1:20) and press (1:35)."
+    "notes": {
+      "en": "Competition dose is fixed at 18 g. Bypass water is not stated as one number: press to 76–79 g, dilute with warm water to 130–135 g (about 55 g), then add 20–30 g room-temperature water; about 80 g in total, without a single temperature. The flip time (1:30) is placed between the stated cap (1:20) and press (1:35).",
+      "pt-BR": "A dose de competição é fixa em 18 g. A água de bypass não é dada como um número só: prense até 76–79 g, dilua com água morna até 130–135 g (cerca de 55 g), depois adicione 20–30 g de água a temperatura ambiente; cerca de 80 g no total, sem uma temperatura única. O momento de virar (1:30) fica entre a tampa (1:20) e a prensagem (1:35) declaradas."
+    }
   },
   "alsoSee": [
     {

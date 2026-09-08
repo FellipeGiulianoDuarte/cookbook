@@ -7,6 +7,7 @@ import type { Derived } from "@/lib/derive";
 import type { Selection, WizardEvent } from "@/lib/machine";
 import type { Grinder, Recipe } from "@/lib/schema";
 import { useLocalized } from "@/lib/use-localized";
+import { useSettingText } from "@/lib/use-setting-text";
 
 /*
   The grinder setting for the chosen recipe: the value in the grinder's notation, the
@@ -30,6 +31,8 @@ export function SettingCard({
   const L = useLocalized();
   const [showZero, setShowZero] = useState(false);
   const s = derived.setting;
+  const settingText = useSettingText();
+  const shown = s ? settingText(grinder, s) : { text: "" };
 
   return (
     <div className="overflow-x-clip rounded-2xl border border-line bg-surface p-5">
@@ -41,16 +44,16 @@ export function SettingCard({
         <>
           <div className="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <Crossfade
-              id={s.text}
+              id={shown.text}
               className="tabular font-display text-5xl leading-none tracking-tight text-fg"
             >
-              {s.text}
+              {shown.text}
             </Crossfade>
             <span className="tabular text-fg-muted">
               {t("tolerance", { n: s.tolerance })}
             </span>
-            {s.detail ? (
-              <span className="text-sm text-fg-faint">{s.detail}</span>
+            {shown.detail ? (
+              <span className="text-sm text-fg-faint">{shown.detail}</span>
             ) : null}
           </div>
 

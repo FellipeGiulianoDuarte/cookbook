@@ -8,17 +8,27 @@
     "en": "Hario's own instructions: bloom with twice the coffee weight, wait 30 seconds, then three pours of four times the coffee weight each, spiralling from the centre. Finished within three minutes.",
     "pt-BR": "As instruções da própria Hario: bloom com o dobro do peso do café, espere 30 segundos, depois três despejos de quatro vezes o peso do café cada, em espiral a partir do centro. Pronto em menos de três minutos."
   },
-  "dose": { "default": 12, "min": 10, "max": 16 },
+  "dose": {
+    "default": 12,
+    "min": 10,
+    "max": 16
+  },
   "ratio": 14,
   "grind": {
     "band": "v60",
     "pos": 0.5,
     "texture": "medium",
-    "note": "Hario's page does not specify a grind. The middle of the V60 band is used as a starting point."
+    "note": {
+      "en": "Hario's page does not specify a grind. The middle of the V60 band is used as a starting point.",
+      "pt-BR": "A página da Hario não especifica a moagem. O meio da faixa de V60 é usado como ponto de partida."
+    }
   },
   "temperature": {
     "default": 93,
-    "note": "Hario publishes no temperature for this method. 93 °C is the centre of the SCA Golden Cup range (93 ± 3 °C)."
+    "note": {
+      "en": "Hario publishes no temperature for this method. 93 °C is the centre of the SCA Golden Cup range (93 ± 3 °C).",
+      "pt-BR": "A Hario não publica temperatura para este método. 93 °C é o centro da faixa Golden Cup da SCA (93 ± 3 °C)."
+    }
   },
   "steps": [
     {
@@ -33,7 +43,9 @@
       "at": 0,
       "until": 10,
       "action": "bloom",
-      "water": { "times": 2 },
+      "water": {
+        "times": 2
+      },
       "text": {
         "en": "Bloom: pour {water} g (twice the coffee weight) and wait 30 seconds",
         "pt-BR": "Bloom: despeje {water} g (o dobro do peso do café) e espere 30 segundos"
@@ -44,7 +56,9 @@
       "at": 30,
       "until": 50,
       "action": "pour",
-      "water": { "times": 6 },
+      "water": {
+        "times": 6
+      },
       "text": {
         "en": "Pour {add} g to reach {water} g, spiralling out from the centre. Never pour onto the paper",
         "pt-BR": "Despeje {add} g até chegar a {water} g, em espiral a partir do centro. Nunca despeje sobre o papel"
@@ -55,7 +69,9 @@
       "at": 70,
       "until": 90,
       "action": "pour",
-      "water": { "times": 10 },
+      "water": {
+        "times": 10
+      },
       "text": {
         "en": "Pour {add} g to reach {water} g, the same way",
         "pt-BR": "Despeje {add} g até chegar a {water} g, do mesmo jeito"
@@ -66,7 +82,9 @@
       "at": 110,
       "until": 130,
       "action": "pour",
-      "water": { "times": 14 },
+      "water": {
+        "times": 14
+      },
       "text": {
         "en": "Pour the last {add} g to reach {water} g",
         "pt-BR": "Despeje os últimos {add} g até chegar a {water} g"
@@ -85,16 +103,27 @@
     {
       "at": 180,
       "action": "serve",
-      "text": { "en": "Done. Serve", "pt-BR": "Pronto. Sirva" }
+      "text": {
+        "en": "Done. Serve",
+        "pt-BR": "Pronto. Sirva"
+      }
     }
   ],
   "totalSeconds": 180,
   "scaling": "linear",
-  "options": { "filter": "Hario V60 paper, rinsed" },
+  "options": {
+    "filter": {
+      "en": "Hario V60 paper, rinsed",
+      "pt-BR": "Papel Hario V60, escaldado"
+    }
+  },
   "source": {
     "url": "https://global.hario.com/v60/v60series.html",
     "title": "Hario: V60 series, how to brew",
     "kind": "primary",
-    "notes": "Hario gives water as multiples of the coffee weight: 2 × for the bloom, then 3 × 4 ×, 14 × in total (12 g → 168 g). The instruction manual says 10–12 g per 120 mL serving. Hario states only 'within 3 minutes regardless of cup count'; the pour start times and 20-second pour durations are chosen for the app."
+    "notes": {
+      "en": "Hario gives water as multiples of the coffee weight: 2 × for the bloom, then 3 × 4 ×, 14 × in total (12 g → 168 g). The instruction manual says 10–12 g per 120 mL serving. Hario states only 'within 3 minutes regardless of cup count'; the pour start times and 20-second pour durations are chosen for the app.",
+      "pt-BR": "A Hario dá a água como múltiplos do peso do café: 2 × no bloom, depois 3 × 4 ×, 14 × no total (12 g → 168 g). O manual diz 10–12 g por porção de 120 mL. A Hario só afirma 'em até 3 minutos, independentemente do número de xícaras'; os inícios de despejo e as durações de 20 segundos são escolhas do app."
+    }
   }
 }
