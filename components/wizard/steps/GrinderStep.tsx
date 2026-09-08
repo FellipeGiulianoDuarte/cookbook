@@ -3,7 +3,9 @@
 import { useTranslations } from "next-intl";
 import { type CSSProperties, useMemo, useState } from "react";
 import { Eyebrow, StepTitle } from "@/components/ui/choice";
+import { StarIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
+import { readMyGrinder, writeMyGrinder } from "@/lib/my-grinder";
 import type { Grinder } from "@/lib/schema";
 import { SettingCard } from "../SettingCard";
 import type { CatalogStepProps, DerivedStepProps } from "./types";
@@ -35,6 +37,18 @@ export function GrinderStep({
   const [recent] = useState<string[]>(() =>
     typeof window === "undefined" ? [] : readRecent(),
   );
+  const [mine, setMine] = useState<string | undefined>(() =>
+    typeof window === "undefined" ? undefined : readMyGrinder(),
+  );
+  const toggleMine = (g: Grinder) => {
+    const next = mine === g.id ? undefined : g.id;
+    setMine(next);
+    writeMyGrinder(next);
+    if (next) send({ type: "SELECT_GRINDER", grinderId: next });
+  };
+  const myGrinder = mine
+    ? catalog.grinders.find((g) => g.id === mine)
+    : undefined;
 
   const matches = useMemo(() => {
     const needle = q.trim().toLowerCase();
@@ -48,7 +62,7 @@ export function GrinderStep({
 
   const recentGrinders = recent
     .map((id) => catalog.grinders.find((g) => g.id === id))
-    .filter((g): g is Grinder => Boolean(g));
+    .filter((g): g is Grinder => g !== undefined && g.id !== mine);
 
   const describe = (g: Grinder) =>
     [
@@ -93,6 +107,23 @@ export function GrinderStep({
         />
       </label>
 
+      {!q && myGrinder ? (
+        <>
+          <Eyebrow>
+            <span className="mt-5 block">{t("mine")}</span>
+          </Eyebrow>
+          <GrinderList
+            grinders={[myGrinder]}
+            selectedId={selection.grinderId}
+            onSelect={select}
+            describe={describe}
+            mine={mine}
+            onToggleMine={toggleMine}
+          />
+          <p className="mt-2 text-xs text-fg-faint">{t("mineHint")}</p>
+        </>
+      ) : null}
+
       {!q && recentGrinders.length ? (
         <>
           <Eyebrow>
@@ -103,6 +134,8 @@ export function GrinderStep({
             selectedId={selection.grinderId}
             onSelect={select}
             describe={describe}
+            mine={mine}
+            onToggleMine={toggleMine}
           />
         </>
       ) : null}
@@ -115,6 +148,8 @@ export function GrinderStep({
         selectedId={selection.grinderId}
         onSelect={select}
         describe={describe}
+        mine={mine}
+        onToggleMine={toggleMine}
       />
     </div>
   );
@@ -125,12 +160,17 @@ function GrinderList({
   selectedId,
   onSelect,
   describe,
+  mine,
+  onToggleMine,
 }: {
   grinders: Grinder[];
   selectedId?: string;
   onSelect: (g: Grinder) => void;
   describe: (g: Grinder) => string;
+  mine?: string;
+  onToggleMine: (g: Grinder) => void;
 }) {
+  const t = useTranslations("grinder");
   return (
     <ul className="mt-2 divide-y divide-line rounded-2xl border border-line bg-surface">
       {grinders.map((g, i) => {
@@ -138,17 +178,17 @@ function GrinderList({
         return (
           <li
             key={g.id}
-            className="stagger-in"
+            className={cn(
+              "stagger-in flex items-stretch transition-[background-color] duration-150",
+              on && "bg-surface-2",
+            )}
             style={{ "--i": Math.min(i, 8) } as CSSProperties}
           >
             <button
               type="button"
               aria-pressed={on}
               onClick={() => onSelect(g)}
-              className={cn(
-                "flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition-[background-color] duration-150 hover:bg-surface-2 active:bg-surface-2",
-                on && "bg-surface-2",
-              )}
+              className="flex min-w-0 flex-1 items-center justify-between gap-3 px-4 py-3 text-left transition-[background-color] duration-150 hover:bg-surface-2 active:bg-surface-2"
             >
               <span>
                 <span
@@ -170,6 +210,21 @@ function GrinderList({
                   on ? "scale-100 opacity-100" : "scale-50 opacity-0",
                 )}
               />
+            </button>
+            <button
+              type="button"
+              aria-pressed={mine === g.id}
+              aria-label={mine === g.id ? t("unstar") : t("star")}
+              title={mine === g.id ? t("unstar") : t("star")}
+              onClick={() => onToggleMine(g)}
+              className={cn(
+                "flex w-12 shrink-0 items-center justify-center transition-[color,transform] duration-150 ease-[var(--ease-out)] active:scale-90",
+                mine === g.id
+                  ? "chip-pop text-accent"
+                  : "text-fg-faint hover:text-fg",
+              )}
+            >
+              <StarIcon filled={mine === g.id} />
             </button>
           </li>
         );

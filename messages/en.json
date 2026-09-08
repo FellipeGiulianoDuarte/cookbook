@@ -97,7 +97,11 @@
       "clicksFromZero": "clicks from zero",
       "step": "step",
       "position": "position {i} of {n}"
-    }
+    },
+    "mine": "My grinder",
+    "mineHint": "Saved on this device and picked for you next time. Links that name a grinder still win.",
+    "star": "Save as my grinder",
+    "unstar": "Forget my grinder"
   },
   "amount": {
     "title": "How much coffee?",

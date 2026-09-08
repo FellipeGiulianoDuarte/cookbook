@@ -19,6 +19,7 @@ import {
   type WizardStep,
   wizardMachine,
 } from "@/lib/machine";
+import { readMyGrinder } from "@/lib/my-grinder";
 import { type UrlState, urlParsers } from "@/lib/url";
 import { selectionFromUrl, urlFromSelection } from "@/lib/url-selection";
 import { LanguageToggle } from "./LanguageToggle";
@@ -97,6 +98,14 @@ export function Wizard({
         : first;
     if (target !== "method") actor.send({ type: "JUMP", step: target });
   }, [actor, initial.step, initialSelection, catalog]);
+
+  // A grinder starred on this device is picked for you when the link names none.
+  useEffect(() => {
+    if (initialSelection.grinderId) return;
+    const mine = readMyGrinder();
+    if (mine && catalog.grinders.some((g) => g.id === mine))
+      actor.send({ type: "SELECT_GRINDER", grinderId: mine });
+  }, [actor, catalog, initialSelection.grinderId]);
 
   // Entering the dose step with no dose yet: start from the recipe's default.
   useEffect(() => {

@@ -53,3 +53,32 @@ test("V60 + Comandante flow reaches the summary with 24 clicks ±1", async ({
   await expect(page.getByText(/Pour to 300 g/)).toBeVisible();
   await expect(page).toHaveURL(/step=summary/);
 });
+
+test("a starred grinder is remembered on the device and picked on the next visit", async ({
+  page,
+}) => {
+  await page.goto("/?m=v60&r=v60-hoffmann-ultimate&step=grinder");
+  await page.getByPlaceholder("Search grinders").fill("c3s");
+  await page
+    .getByRole("button", { name: "Save as my grinder" })
+    .first()
+    .click();
+  await expect(page.getByText("18 clicks")).toBeHidden();
+  await expect(page.getByText("13 clicks")).toBeVisible();
+
+  // Fresh visit with no grinder in the link: the starred one is already selected.
+  await page.goto("/");
+  await expect(page).toHaveURL(/g=timemore-c3s-pro/);
+  await page.getByRole("button", { name: /Hario V60/ }).click();
+  await page.getByRole("button", { name: /^Next/ }).click();
+  await page.getByRole("button", { name: /Ultimate V60 Technique/ }).click();
+  await page.getByRole("button", { name: /^Next/ }).click();
+  await expect(page.getByText("My grinder", { exact: true })).toBeVisible();
+  await expect(page.getByText("13 clicks")).toBeVisible();
+
+  // A link that names another grinder still wins.
+  await page.goto(
+    "/?m=v60&r=v60-hoffmann-ultimate&g=comandante-c40&step=grinder",
+  );
+  await expect(page.getByText("24 clicks")).toBeVisible();
+});

@@ -97,7 +97,11 @@
       "clicksFromZero": "cliques desde o zero",
       "step": "passo",
       "position": "posição {i} de {n}"
-    }
+    },
+    "mine": "Meu moedor",
+    "mineHint": "Salvo neste aparelho e escolhido para você na próxima vez. Links que nomeiam um moedor continuam valendo.",
+    "star": "Salvar como meu moedor",
+    "unstar": "Esquecer meu moedor"
   },
   "amount": {
     "title": "Quanto café?",

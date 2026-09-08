@@ -29,3 +29,20 @@ export function SoundOffIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+/** Filled when `filled`; the fill itself transitions so a tap reads as a small pop. */
+export function StarIcon({
+  filled = false,
+  ...props
+}: SVGProps<SVGSVGElement> & { filled?: boolean }) {
+  return (
+    <svg
+      {...base}
+      {...props}
+      fill={filled ? "currentColor" : "none"}
+      aria-hidden="true"
+    >
+      <path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1.1 5.9L12 16.9l-5.3 2.8 1.1-5.9-4.3-4.1 5.9-.8L12 3.5Z" />
+    </svg>
+  );
+}
