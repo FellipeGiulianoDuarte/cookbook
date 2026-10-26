@@ -5,6 +5,7 @@ import { type CSSProperties, useMemo, useState } from "react";
 import { Eyebrow, StepTitle } from "@/components/ui/choice";
 import { StarIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
+import { haptic } from "@/lib/haptics";
 import { readMyGrinder, writeMyGrinder } from "@/lib/my-grinder";
 import type { Grinder } from "@/lib/schema";
 import { SettingCard } from "../SettingCard";
@@ -42,6 +43,7 @@ export function GrinderStep({
   );
   const toggleMine = (g: Grinder) => {
     const next = mine === g.id ? undefined : g.id;
+    haptic("select");
     setMine(next);
     writeMyGrinder(next);
     if (next) send({ type: "SELECT_GRINDER", grinderId: next });
@@ -74,6 +76,7 @@ export function GrinderStep({
       .join(" · ");
 
   const select = (g: Grinder) => {
+    haptic("select");
     pushRecent(g.id);
     send({ type: "SELECT_GRINDER", grinderId: g.id });
   };

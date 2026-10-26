@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
+import { useFrame } from "@react-three/fiber";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { COLORS } from "../materials";
 import { tube } from "./shapes";
@@ -12,6 +13,10 @@ import { tube } from "./shapes";
   Server: bell-shaped glass body, white silicone band at the neck, glass handle.
   Dripper: 60° ceramic cone, wide flat base plate that sits on the server, short skirt
   inside the neck, side handle, twelve spiral ridges inside, small drip hole.
+
+  variant "switch": the Hario Switch 02. The same cone in glass, no handle, on a black
+  base with a valve lever. While the valve is closed the water stays in the cone; the
+  server only receives what was poured while it was open.
 */
 
 const SERVER_H = 1.0;
@@ -60,11 +65,26 @@ export function V60({
   fill,
   coffee,
   pouring: _pouring,
+  variant = "ceramic",
+  valveOpen = true,
 }: {
   fill: number;
   coffee: number;
   pouring: boolean;
+  variant?: "ceramic" | "switch";
+  valveOpen?: boolean;
 }) {
+  const isSwitch = variant === "switch";
+  // Water that has passed the valve. Frozen while the Switch is closed.
+  const drained = useRef(0);
+  if (!isSwitch || valveOpen) drained.current = fill;
+  const held = isSwitch ? Math.max(0, fill - drained.current) : fill;
+  const lever = useRef<THREE.Group>(null);
+  useFrame(() => {
+    if (!lever.current) return;
+    const target = valveOpen ? -0.3 : 0.35;
+    lever.current.rotation.z += (target - lever.current.rotation.z) * 0.15;
+  });
   const server = useMemo(
     () =>
       splineLathe([
@@ -77,7 +97,8 @@ export function V60({
     [],
   );
 
-  const level = Math.round(Math.max(0, Math.min(1, fill)) * 40) / 40;
+  const level = Math.round(Math.max(0, Math.min(1, drained.current)) * 40) / 40;
+  const coneLevel = Math.round(Math.max(0, Math.min(1, held)) * 40) / 40;
   const serverLiquid = useMemo(() => {
     if (level <= 0) return null;
     const h = 0.04 + level * 0.6;
@@ -166,11 +187,11 @@ export function V60({
     );
   }, [bedH]);
   const slurry = useMemo(() => {
-    if (level <= 0) return null;
+    if (coneLevel <= 0) return null;
     const base = CONE_BOTTOM_Y + 0.01 + bedH;
     const top = Math.min(
       CONE_TOP_Y - 0.08,
-      base + 0.02 + level * (CONE_TOP_Y - base - 0.1),
+      base + 0.02 + coneLevel * (CONE_TOP_Y - base - 0.1),
     );
     return toLathe(
       [
@@ -181,7 +202,7 @@ export function V60({
       ],
       72,
     );
-  }, [level, bedH]);
+  }, [coneLevel, bedH]);
 
   const serverHandle = useMemo(
     () =>
@@ -225,6 +246,14 @@ export function V60({
       depthWrite={false}
     />
   );
+  const resin = (
+    <meshPhysicalMaterial
+      color="#1b1816"
+      roughness={0.45}
+      clearcoat={0.4}
+      clearcoatRoughness={0.4}
+    />
+  );
   const ceramic = (
     <meshPhysicalMaterial
       color="#f4efe7"
@@ -259,30 +288,69 @@ export function V60({
         </mesh>
       ) : null}
 
-      <mesh geometry={plate} castShadow>
-        {ceramic}
-      </mesh>
-      <mesh geometry={cone} castShadow>
-        {ceramic}
+      {isSwitch ? (
+        <group>
+          {/* black resin base: skirt in the neck, flange on the rim, collar round the cone */}
+          <mesh position={[0, PLATE_Y - 0.07, 0]} castShadow>
+            <cylinderGeometry args={[NECK_R - 0.03, NECK_R - 0.03, 0.14, 64]} />
+            {resin}
+          </mesh>
+          <mesh position={[0, PLATE_Y + 0.005, 0]} castShadow>
+            <cylinderGeometry args={[0.55, 0.56, 0.04, 96]} />
+            {resin}
+          </mesh>
+          <mesh position={[0, PLATE_Y + 0.1, 0]} castShadow>
+            <cylinderGeometry args={[0.3, 0.42, 0.16, 96]} />
+            {resin}
+          </mesh>
+          {/* valve lever: up = closed, down = open */}
+          <group ref={lever} position={[0.42, PLATE_Y + 0.1, 0]}>
+            <mesh position={[0.1, 0, 0]} castShadow>
+              <boxGeometry args={[0.2, 0.05, 0.12]} />
+              {resin}
+            </mesh>
+            <mesh position={[0.2, 0, 0]}>
+              <cylinderGeometry args={[0.03, 0.03, 0.12, 24]} />
+              <meshStandardMaterial
+                color={COLORS.steel}
+                roughness={0.3}
+                metalness={0.9}
+              />
+            </mesh>
+          </group>
+        </group>
+      ) : (
+        <mesh geometry={plate} castShadow>
+          {ceramic}
+        </mesh>
+      )}
+      <mesh geometry={cone} castShadow={!isSwitch}>
+        {isSwitch ? glass : ceramic}
       </mesh>
       {ridges.map(({ id, geo }) => (
         <mesh key={id} geometry={geo}>
-          <meshPhysicalMaterial
-            color="#f4efe7"
-            roughness={0.35}
-            clearcoat={0.5}
-          />
+          {isSwitch ? (
+            glass
+          ) : (
+            <meshPhysicalMaterial
+              color="#f4efe7"
+              roughness={0.35}
+              clearcoat={0.5}
+            />
+          )}
         </mesh>
       ))}
-      <mesh geometry={dripperHandle} castShadow>
-        {ceramic}
-      </mesh>
+      {isSwitch ? null : (
+        <mesh geometry={dripperHandle} castShadow>
+          {ceramic}
+        </mesh>
+      )}
       <mesh
         position={[0, CONE_TOP_Y - 0.007, 0]}
         rotation={[Math.PI / 2, 0, 0]}
       >
         <torusGeometry args={[CONE_TOP_R + WALL / 2, WALL / 2, 12, 96]} />
-        {ceramic}
+        {isSwitch ? glass : ceramic}
       </mesh>
       <mesh geometry={paper}>
         <meshStandardMaterial

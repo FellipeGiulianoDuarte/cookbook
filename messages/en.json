@@ -34,6 +34,8 @@
     "title": "What are you brewing with?",
     "v60": "Hario V60",
     "v60Hint": "Pour-over. Clean, bright, shows the origin.",
+    "switch": "Hario Switch",
+    "switchHint": "A V60 cone with a valve. Steep, then drain. Pour-over clarity, immersion ease.",
     "aeropress": "AeroPress",
     "aeropressHint": "Immersion and press. Forgiving, fast, full body."
   },

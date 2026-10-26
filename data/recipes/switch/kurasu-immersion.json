@@ -1,0 +1,100 @@
+{
+  "id": "switch-kurasu-immersion",
+  "method": "switch",
+  "name": "Simple Immersion",
+  "author": "Kurasu Kyoto",
+  "year": 2022,
+  "style": "immersion",
+  "summary": {
+    "en": "The easiest way into the Switch. Close the valve, pour everything, stir at 2:00, open at 2:15. Hard to get wrong.",
+    "pt-BR": "O jeito mais fácil de começar no Switch. Feche a válvula, despeje tudo, mexa em 2:00 e abra em 2:15. Difícil errar."
+  },
+  "dose": {
+    "default": 15,
+    "min": 10,
+    "max": 20
+  },
+  "ratio": 16,
+  "grind": {
+    "band": "v60",
+    "pos": 0.5,
+    "texture": "medium",
+    "note": {
+      "en": "Kurasu: filter grind.",
+      "pt-BR": "Kurasu: moagem para filtro."
+    }
+  },
+  "temperature": {
+    "default": 94
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "valve": "closed",
+      "text": {
+        "en": "Rinse the paper filter with the valve open, discard the water, close the valve and add {dose} g of coffee",
+        "pt-BR": "Escalde o filtro de papel com a válvula aberta, descarte a água, feche a válvula e adicione {dose} g de café"
+      }
+    },
+    {
+      "at": 0,
+      "until": 15,
+      "action": "pour",
+      "water": {
+        "share": 1
+      },
+      "valve": "closed",
+      "text": {
+        "en": "Pour {water} g within 15 seconds, wetting all the grounds",
+        "pt-BR": "Despeje {water} g em até 15 segundos, molhando todo o café"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 120,
+      "action": "stir",
+      "text": {
+        "en": "Stir 3 times with a spoon",
+        "pt-BR": "Mexa 3 vezes com uma colher"
+      },
+      "cue": "stir"
+    },
+    {
+      "at": 135,
+      "action": "drawdown",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve and let it drain",
+        "pt-BR": "Abra a válvula e deixe escoar"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 195,
+      "action": "serve",
+      "text": {
+        "en": "Done",
+        "pt-BR": "Pronto"
+      }
+    }
+  ],
+  "totalSeconds": 195,
+  "scaling": "linear",
+  "options": {
+    "filter": {
+      "en": "Hario V60 02 paper, rinsed",
+      "pt-BR": "Papel Hario V60 02, escaldado"
+    }
+  },
+  "source": {
+    "url": "https://kurasu.kyoto/blogs/kurasu-journal/2-brewing-recipes-with-hario-immersion-dripper-switch",
+    "title": "Kurasu Journal: 2 brewing recipes for the Hario Immersion Dripper Switch",
+    "year": 2022,
+    "kind": "primary",
+    "notes": {
+      "en": "Kurasu's recipe is 10 g / 160 g at 94 °C; the default here is 15 g at the same 1:16 ratio. The page does not give the drawdown time; about 1:00 is allowed.",
+      "pt-BR": "A receita da Kurasu é 10 g / 160 g a 94 °C; aqui o padrão é 15 g na mesma proporção 1:16. A página não dá o tempo de drenagem; consideramos cerca de 1:00."
+    }
+  }
+}

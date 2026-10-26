@@ -17,6 +17,8 @@ export interface SceneState {
   plunger: number;
   /** AeroPress orientation */
   inverted: boolean;
+  /** Hario Switch valve; water stays in the cone while closed */
+  valveOpen: boolean;
   /** grinder dial: ticks per rotation and the target value in ticks from zero */
   dialTicks: number;
   dialValue: number;
@@ -32,6 +34,7 @@ export const SCENE_DEFAULT: SceneState = {
   pouring: false,
   plunger: 0,
   inverted: false,
+  valveOpen: true,
   dialTicks: 12,
   dialValue: 14,
   idle: true,

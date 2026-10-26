@@ -1,0 +1,165 @@
+{
+  "id": "switch-hedrick-gongfu",
+  "method": "switch",
+  "name": "Gong Fu",
+  "author": "Lance Hedrick",
+  "style": "pulse",
+  "summary": {
+    "en": "Three short closed steeps with fresh water each time, drained in between, like gong fu tea. Coarse grind, cooler first stage. Sweet and very clear.",
+    "pt-BR": "Três infusões curtas e fechadas, com água nova a cada vez e drenagem entre elas, como no chá gong fu. Moagem grossa, primeira etapa mais fria. Doce e muito limpo."
+  },
+  "dose": {
+    "default": 15,
+    "min": 12,
+    "max": 20
+  },
+  "ratio": 16.67,
+  "grind": {
+    "band": "v60",
+    "pos": 0.85,
+    "texture": "medium-coarse",
+    "note": {
+      "en": "Hedrick grinds noticeably coarser than most pour-over recipes.",
+      "pt-BR": "Hedrick moe bem mais grosso que a maioria das receitas de coado."
+    }
+  },
+  "temperature": {
+    "default": 90,
+    "note": {
+      "en": "First 50 g at about 75 °C, the two 100 g steeps at 90 °C.",
+      "pt-BR": "Os primeiros 50 g a cerca de 75 °C, as duas infusões de 100 g a 90 °C."
+    }
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "valve": "closed",
+      "text": {
+        "en": "Rinse the paper filter with the valve open, discard the water and close the valve. Have a spoon ready",
+        "pt-BR": "Escalde o filtro de papel com a válvula aberta, descarte a água e feche a válvula. Deixe uma colher à mão"
+      }
+    },
+    {
+      "at": 0,
+      "until": 8,
+      "action": "pour",
+      "water": {
+        "grams": 50
+      },
+      "valve": "closed",
+      "text": {
+        "en": "Pour {add} g of cooler water (about 75 °C) into the empty Switch",
+        "pt-BR": "Despeje {add} g de água mais fria (cerca de 75 °C) no Switch vazio"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 10,
+      "action": "add",
+      "text": {
+        "en": "Add {dose} g of coffee and push it under with the back of a spoon",
+        "pt-BR": "Adicione {dose} g de café e afunde com as costas de uma colher"
+      },
+      "cue": "stir"
+    },
+    {
+      "at": 60,
+      "action": "drawdown",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve and drain fully",
+        "pt-BR": "Abra a válvula e deixe escoar por completo"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 105,
+      "action": "wait",
+      "valve": "closed",
+      "text": {
+        "en": "Close the valve",
+        "pt-BR": "Feche a válvula"
+      }
+    },
+    {
+      "at": 120,
+      "until": 135,
+      "action": "pour",
+      "water": {
+        "grams": 100
+      },
+      "text": {
+        "en": "Pour {add} g at 90 °C onto the back of a spoon held over the bed ({water} g in total)",
+        "pt-BR": "Despeje {add} g a 90 °C nas costas de uma colher acima da cama ({water} g no total)"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 180,
+      "action": "drawdown",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve and drain fully",
+        "pt-BR": "Abra a válvula e deixe escoar por completo"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 225,
+      "until": 240,
+      "action": "pour",
+      "water": {
+        "grams": 100
+      },
+      "valve": "closed",
+      "text": {
+        "en": "Close the valve. Pour the last {add} g at 90 °C the same way ({water} g in total)",
+        "pt-BR": "Feche a válvula. Despeje os últimos {add} g a 90 °C do mesmo jeito ({water} g no total)"
+      },
+      "cue": "pour3"
+    },
+    {
+      "at": 300,
+      "action": "drawdown",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve and let it drain completely",
+        "pt-BR": "Abra a válvula e deixe escoar por completo"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 330,
+      "action": "serve",
+      "text": {
+        "en": "Done",
+        "pt-BR": "Pronto"
+      }
+    }
+  ],
+  "totalSeconds": 330,
+  "scaling": "dose-multiples",
+  "options": {
+    "filter": {
+      "en": "Hario V60 02 paper, rinsed",
+      "pt-BR": "Papel Hario V60 02, escaldado"
+    }
+  },
+  "source": {
+    "url": "https://brewmark.io/brew-guides/lance-hedrick-switch-gongfu",
+    "title": "BrewMark: Lance Hedrick's Gongfu Hario Switch",
+    "kind": "community",
+    "notes": {
+      "en": "BrewMark's summary of Hedrick's video, not endorsed by him. It lists 5:00 as the moment the last drain starts; about 30 s of drawdown follows. The close after the second drain is not timed in the source; 1:45 and 3:45 are used here.",
+      "pt-BR": "Resumo da BrewMark do vídeo de Hedrick, sem endosso dele. Lista 5:00 como o início da última drenagem; seguem cerca de 30 s de escoamento. O fechamento depois de cada drenagem não tem tempo na fonte; aqui usamos 1:45 e 3:45."
+    }
+  },
+  "alsoSee": [
+    {
+      "url": "https://gota.cafe/en/recipes/hario-switch-02/hedrick-gong-fu",
+      "title": "Gota: Hedrick Gong Fu (15 g / 250 g, 5:00)",
+      "kind": "community"
+    }
+  ]
+}

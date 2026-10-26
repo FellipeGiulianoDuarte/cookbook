@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
 import { StepTitle } from "@/components/ui/choice";
 import { Crossfade } from "@/components/ui/crossfade";
+import { haptic } from "@/lib/haptics";
 import type { DerivedStepProps } from "./types";
 
 export function AmountStep({ selection, derived, send }: DerivedStepProps) {
@@ -46,9 +47,13 @@ export function AmountStep({ selection, derived, send }: DerivedStepProps) {
             step={0.5}
             value={dose}
             aria-label={t("dose")}
-            onChange={(e) =>
-              send({ type: "SET_DOSE", dose: Number(e.target.value) })
-            }
+            onChange={(e) => {
+              const dose = Number(e.target.value);
+              // one light tap per whole gram, throttled inside haptic()
+              if (Math.round(dose) !== Math.round(selection.dose ?? dose))
+                haptic("select");
+              send({ type: "SET_DOSE", dose });
+            }}
             className="dose-slider w-full"
           />
           <div className="tabular mt-2 flex justify-between text-xs text-fg-faint">

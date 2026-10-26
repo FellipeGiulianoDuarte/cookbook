@@ -14,6 +14,12 @@ import { Method, Process, RoastLevel } from "@/lib/schema";
 
 export const runtime = "nodejs";
 
+const METHOD_NAME: Partial<Record<string, string>> = {
+  v60: "Hario V60",
+  switch: "Hario Switch",
+  aeropress: "AeroPress",
+};
+
 const W = 1200;
 const H = 630;
 const BG = "#151210";
@@ -45,7 +51,7 @@ export async function GET(req: NextRequest) {
 
   const title = d.recipe ? d.recipe.name : "Cookbook";
   const subtitle = d.recipe
-    ? `${d.recipe.method === "v60" ? "Hario V60" : "AeroPress"} · ${d.recipe.author}`
+    ? `${METHOD_NAME[d.recipe.method] ?? d.recipe.method} · ${d.recipe.author}`
     : "Brew it right every time.";
   const cells =
     d.recipe && d.schedule

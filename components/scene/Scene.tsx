@@ -24,8 +24,9 @@ import type { SceneState } from "./types";
 */
 
 const SPOTS = {
-  v60: new THREE.Vector3(-1.15, -1.3, 0),
-  aeropress: new THREE.Vector3(1.15, -1.3, 0),
+  v60: new THREE.Vector3(-1.75, -1.3, 0),
+  switch: new THREE.Vector3(0, -1.3, 0),
+  aeropress: new THREE.Vector3(1.75, -1.3, 0),
   grinder: new THREE.Vector3(0, 0, -6),
   beans: new THREE.Vector3(6, 0, -6),
 } as const;
@@ -109,12 +110,26 @@ export default function Scene({ state }: { state: SceneState }) {
         <Turntable
           position={SPOTS.v60}
           on={state.idle && state.focus === "brewers"}
-          visible={state.focus === "brewers" || state.method !== "aeropress"}
+          visible={state.focus === "brewers" || state.method === "v60"}
         >
           <V60
             fill={state.method === "v60" ? state.fill : 0}
-            coffee={state.coffee}
+            coffee={state.method === "v60" ? state.coffee : 0}
             pouring={state.pouring && state.method === "v60"}
+          />
+        </Turntable>
+        <Turntable
+          position={SPOTS.switch}
+          on={state.idle && state.focus === "brewers"}
+          phase={0.6}
+          visible={state.focus === "brewers" || state.method === "switch"}
+        >
+          <V60
+            variant="switch"
+            valveOpen={state.method === "switch" ? state.valveOpen : true}
+            fill={state.method === "switch" ? state.fill : 0}
+            coffee={state.method === "switch" ? state.coffee : 0}
+            pouring={state.pouring && state.method === "switch"}
           />
         </Turntable>
         <Turntable
@@ -126,7 +141,7 @@ export default function Scene({ state }: { state: SceneState }) {
         >
           <AeroPress
             fill={state.method === "aeropress" ? state.fill : 0}
-            coffee={state.coffee}
+            coffee={state.method === "aeropress" ? state.coffee : 0}
             plunger={state.method === "aeropress" ? state.plunger : 0}
             inverted={state.inverted}
             pouring={state.pouring && state.method === "aeropress"}
@@ -152,7 +167,13 @@ export default function Scene({ state }: { state: SceneState }) {
         <group visible={state.focus === "brewing"}>
           <Kettle
             pouring={state.pouring}
-            target={state.method === "aeropress" ? SPOTS.aeropress : SPOTS.v60}
+            target={
+              state.method === "aeropress"
+                ? SPOTS.aeropress
+                : state.method === "switch"
+                  ? SPOTS.switch
+                  : SPOTS.v60
+            }
             spoutHeight={
               state.method === "aeropress"
                 ? state.inverted
@@ -258,21 +279,32 @@ const VIEWS: Record<
 > = {
   brewers: {
     center: new THREE.Vector3(0.05, -0.35, 0),
-    radius: 1.95,
-    dir: new THREE.Vector3(0.12, 0.2, 1).normalize(),
+    radius: 2.6,
+    dir: new THREE.Vector3(0.1, 0.2, 1).normalize(),
   },
+  // Method step with a choice: drift a little toward the chosen brewer, keep all three in frame.
   brewersV60: {
-    center: new THREE.Vector3(0, -0.25, 0),
-    radius: 1.95,
-    dir: new THREE.Vector3(0.05, 0.2, 1).normalize(),
+    center: new THREE.Vector3(-0.35, -0.3, 0),
+    radius: 2.45,
+    dir: new THREE.Vector3(0.02, 0.2, 1).normalize(),
+  },
+  brewersSwitch: {
+    center: new THREE.Vector3(0, -0.3, 0),
+    radius: 2.45,
+    dir: new THREE.Vector3(0.1, 0.2, 1).normalize(),
   },
   brewersAeropress: {
-    center: new THREE.Vector3(0, -0.25, 0),
-    radius: 1.95,
+    center: new THREE.Vector3(0.35, -0.3, 0),
+    radius: 2.45,
     dir: new THREE.Vector3(0.2, 0.2, 1).normalize(),
   },
   v60: {
     center: new THREE.Vector3(SPOTS.v60.x, -0.42, 0),
+    radius: 1.35,
+    dir: new THREE.Vector3(0.35, 0.28, 1).normalize(),
+  },
+  switch: {
+    center: new THREE.Vector3(SPOTS.switch.x, -0.42, 0),
     radius: 1.35,
     dir: new THREE.Vector3(0.35, 0.28, 1).normalize(),
   },
@@ -304,6 +336,11 @@ const VIEWS: Record<
     radius: 1.75,
     dir: new THREE.Vector3(0.3, 0.2, 1).normalize(),
   },
+  switchBrewing: {
+    center: new THREE.Vector3(SPOTS.switch.x - 0.25, 0.0, 0),
+    radius: 1.75,
+    dir: new THREE.Vector3(0.3, 0.2, 1).normalize(),
+  },
   aeropressBrewing: {
     center: new THREE.Vector3(SPOTS.aeropress.x - 0.25, 0.1, 0),
     radius: 1.75,
@@ -312,17 +349,24 @@ const VIEWS: Record<
 };
 
 function viewKey(state: SceneState): keyof typeof VIEWS {
-  if (state.focus === "brewers")
-    return state.method === "v60"
+  const m =
+    state.method === "aeropress"
+      ? "aeropress"
+      : state.method === "switch"
+        ? "switch"
+        : "v60";
+  if (state.focus === "brewers") {
+    if (!state.method) return "brewers";
+    return m === "v60"
       ? "brewersV60"
-      : state.method === "aeropress"
-        ? "brewersAeropress"
-        : "brewers";
+      : m === "switch"
+        ? "brewersSwitch"
+        : "brewersAeropress";
+  }
   if (state.focus === "grinder") return "grinder";
   if (state.focus === "bean") return "bean";
-  const ap = state.method === "aeropress";
-  if (state.focus === "brewing") return ap ? "aeropressBrewing" : "v60Brewing";
-  return ap ? "aeropress" : "v60";
+  if (state.focus === "brewing") return `${m}Brewing`;
+  return m;
 }
 
 function Rig({ state }: { state: SceneState }) {

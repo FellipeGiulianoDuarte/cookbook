@@ -34,9 +34,10 @@ export const Source = z.object({
 });
 export type Source = z.infer<typeof Source>;
 
-/** Brew methods the wizard can run. Only v60 and aeropress ship at launch. */
+/** Brew methods the wizard can run. v60, switch and aeropress ship. */
 export const Method = z.enum([
   "v60",
+  "switch",
   "aeropress",
   "chemex",
   "frenchpress",
@@ -123,6 +124,8 @@ export const Step = z.object({
   /** Text may use {water} (cumulative g), {add} (g added in this step), {dose}, {total} */
   text: LocalizedText,
   note: LocalizedText.optional(),
+  /** Hario Switch: the valve position from this step on. Steps without it keep the last one. */
+  valve: z.enum(["open", "closed"]).optional(),
   /** Label for the 3D / GSAP timeline */
   cue: z.string().optional(),
 });

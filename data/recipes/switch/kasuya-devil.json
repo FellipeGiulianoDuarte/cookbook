@@ -1,0 +1,142 @@
+{
+  "id": "switch-kasuya-devil",
+  "method": "switch",
+  "name": "Devil Recipe",
+  "author": "Tetsu Kasuya",
+  "year": 2023,
+  "style": "two-pour",
+  "summary": {
+    "en": "Percolate the first 120 g at 90 °C with the valve open, then close it and steep the rest at 70 °C. Hot water takes the sweetness and acidity first; the cool immersion adds body without bitterness.",
+    "pt-BR": "Percole os primeiros 120 g a 90 °C com a válvula aberta, depois feche e faça a infusão do resto a 70 °C. A água quente extrai primeiro a doçura e a acidez; a imersão mais fria dá corpo sem amargor."
+  },
+  "dose": {
+    "default": 20,
+    "min": 15,
+    "max": 25
+  },
+  "ratio": 14,
+  "grind": {
+    "band": "v60",
+    "pos": 0.05,
+    "texture": "medium-fine",
+    "note": {
+      "en": "Kasuya: slightly finer than his usual pour-over. Roastaroma's write-up gives about 20 clicks on a Comandante, just below that grinder's V60 chart.",
+      "pt-BR": "Kasuya: um pouco mais fino que o coado habitual dele. O texto da Roastaroma indica cerca de 20 cliques no Comandante, logo abaixo da faixa de V60 desse moedor."
+    }
+  },
+  "temperature": {
+    "default": 90,
+    "note": {
+      "en": "Two temperatures: 90 °C for the first 120 g, then about 70 °C for the immersion. Roastaroma lists 93 °C for the first stage.",
+      "pt-BR": "Duas temperaturas: 90 °C nos primeiros 120 g e cerca de 70 °C na imersão. A Roastaroma indica 93 °C na primeira etapa."
+    }
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "valve": "open",
+      "text": {
+        "en": "Rinse the paper filter, discard the water and add {dose} g of coffee. Leave the valve open",
+        "pt-BR": "Escalde o filtro de papel, descarte a água e adicione {dose} g de café. Deixe a válvula aberta"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": {
+        "grams": 60
+      },
+      "valve": "open",
+      "text": {
+        "en": "Pour {add} g at 90 °C with the valve open ({water} g in total)",
+        "pt-BR": "Despeje {add} g a 90 °C com a válvula aberta ({water} g no total)"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 30,
+      "until": 40,
+      "action": "pour",
+      "water": {
+        "grams": 60
+      },
+      "text": {
+        "en": "Pour {add} g at 90 °C to reach {water} g",
+        "pt-BR": "Despeje {add} g a 90 °C até chegar a {water} g"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 45,
+      "action": "wait",
+      "text": {
+        "en": "Add cold water to the kettle to bring it down to about 70 °C",
+        "pt-BR": "Coloque água fria na chaleira para baixar a cerca de 70 °C"
+      }
+    },
+    {
+      "at": 75,
+      "until": 90,
+      "action": "pour",
+      "water": {
+        "grams": 160
+      },
+      "valve": "closed",
+      "text": {
+        "en": "Close the valve. Pour {add} g at 70 °C to reach {water} g",
+        "pt-BR": "Feche a válvula. Despeje {add} g a 70 °C até chegar a {water} g"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 105,
+      "action": "drawdown",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve and let it drain",
+        "pt-BR": "Abra a válvula e deixe escoar"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 180,
+      "action": "serve",
+      "text": {
+        "en": "Done. The drawdown should end around 3:00",
+        "pt-BR": "Pronto. A drenagem deve terminar perto de 3:00"
+      }
+    }
+  ],
+  "totalSeconds": 180,
+  "scaling": "dose-multiples",
+  "options": {
+    "filter": {
+      "en": "Hario V60 02 paper, rinsed",
+      "pt-BR": "Papel Hario V60 02, escaldado"
+    }
+  },
+  "source": {
+    "url": "https://comoricoffee.com/en/kasuyas-hario-switch-recipe-en/",
+    "title": "Comori Coffee: Tetsu Kasuya's new Hario Switch recipe (written from his video)",
+    "year": 2023,
+    "kind": "transcription",
+    "notes": {
+      "en": "Video: youtube.com/watch?v=gC8K40kZ_6E. 20 g / 280 g. Pours of 60 g scale with the dose (3 × dose).",
+      "pt-BR": "Vídeo: youtube.com/watch?v=gC8K40kZ_6E. 20 g / 280 g. Os despejos de 60 g acompanham a dose (3 × a dose)."
+    }
+  },
+  "alsoSee": [
+    {
+      "url": "https://roastaroma.com/blog/tetsu-kasuyas-devil-recipe-for-the-hario-switch",
+      "title": "Roastaroma: grind and temperature notes",
+      "kind": "community"
+    },
+    {
+      "url": "https://www.timer.coffee/recipes/hario-switch/tetsu-kasuya-devil-recipe-for-hario-switch/",
+      "title": "Timer.coffee transcription",
+      "kind": "transcription"
+    }
+  ]
+}

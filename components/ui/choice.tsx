@@ -2,6 +2,7 @@
 
 import type { CSSProperties, ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { haptic } from "@/lib/haptics";
 
 /*
   Selectable card and chip. Both are real buttons with aria-pressed so keyboard and
@@ -32,7 +33,10 @@ export function ChoiceCard({
     <button
       type="button"
       aria-pressed={selected}
-      onClick={onSelect}
+      onClick={() => {
+        haptic("select");
+        onSelect();
+      }}
       style={style}
       className={cn(
         "group relative flex w-full items-start gap-4 rounded-2xl border p-4 text-left transition-[background-color,border-color,transform,box-shadow] duration-150 ease-[var(--ease-out)] active:scale-[0.98]",
@@ -94,7 +98,10 @@ export function Chip({
     <button
       type="button"
       aria-pressed={selected}
-      onClick={onSelect}
+      onClick={() => {
+        haptic("select");
+        onSelect();
+      }}
       className={cn(
         "inline-flex h-11 items-center rounded-full border px-4 text-sm font-medium transition-[background-color,color,border-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96]",
         selected

@@ -74,11 +74,11 @@ function BrewTimer({
                 : "step",
               mutedRef.current,
             );
-            haptic(step.action === "pour" ? [40, 60, 40] : 40);
+            haptic("step");
           },
           onDone: () => {
             beep("done", mutedRef.current);
-            haptic([60, 80, 60, 80, 60]);
+            haptic("done");
           },
         },
       }),
@@ -139,9 +139,16 @@ function BrewTimer({
   const flipped = ctx.steps
     .slice(0, ctx.index + 1)
     .some((s) => s.action === "flip");
+  // Switch valve: the last position any step up to this one set; open once the brew is done.
+  const lastValve = ctx.steps
+    .slice(0, ctx.index + 1)
+    .reverse()
+    .find((s) => s.valve)?.valve;
+  const valveOpen = done || lastValve !== "closed";
   const scene: SceneState = {
     method: recipe.method,
     focus: "brewing",
+    valveOpen,
     fill,
     coffee: schedule.dose / Math.max(schedule.dose, recipe.dose.max),
     roast: 0.5,
@@ -206,8 +213,7 @@ function BrewTimer({
           </span>
         </ProgressRing>
         <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
-          {formatClock(schedule.totalSeconds)} ·{" "}
-          {recipe.method === "v60" ? "V60" : "AeroPress"}
+          {formatClock(schedule.totalSeconds)} · {t(`method.${recipe.method}`)}
         </p>
       </div>
 
@@ -392,6 +398,7 @@ export function BrewScreen({
             roast: 0.5,
             pouring: false,
             plunger: 0,
+            valveOpen: true,
             inverted,
             dialTicks: 12,
             dialValue: 0,

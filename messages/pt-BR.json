@@ -34,6 +34,8 @@
     "title": "Com o que você vai preparar?",
     "v60": "Hario V60",
     "v60Hint": "Coado. Limpo, brilhante, mostra a origem.",
+    "switch": "Hario Switch",
+    "switchHint": "Um cone V60 com válvula. Infusão, depois drenagem. Clareza de coado, facilidade de imersão.",
     "aeropress": "AeroPress",
     "aeropressHint": "Imersão e pressão. Tolerante, rápido, corpo cheio."
   },

@@ -43,7 +43,7 @@ function parseAll<T>(
   });
 }
 
-export const RECIPE_METHODS: Method[] = ["v60", "aeropress"];
+export const RECIPE_METHODS: Method[] = ["v60", "switch", "aeropress"];
 
 export function loadRecipes(): Recipe[] {
   const files = RECIPE_METHODS.flatMap((m) =>
@@ -66,6 +66,11 @@ const FEATURED_ORDER = [
   "v60-hedrick-one-and-done",
   "v60-onyx-guide",
   "v60-hario-official",
+  "switch-kasuya-devil",
+  "switch-kasuya-new-hybrid",
+  "switch-hoffmann-immersion",
+  "switch-hedrick-gongfu",
+  "switch-kurasu-immersion",
   "aeropress-hoffmann-ultimate",
   "aeropress-official-current",
   "aeropress-wendelboe",
@@ -134,6 +139,7 @@ function assertUniqueIds(items: { id: string }[], what: string) {
 /** The grind band a brew method reads from when a recipe does not say otherwise. */
 export const METHOD_BAND: Record<Method, GrindBand> = {
   v60: "v60",
+  switch: "v60",
   aeropress: "aeropress",
   chemex: "chemex",
   frenchpress: "frenchpress",

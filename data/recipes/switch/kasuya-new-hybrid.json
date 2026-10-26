@@ -1,0 +1,168 @@
+{
+  "id": "switch-kasuya-new-hybrid",
+  "method": "switch",
+  "name": "New Hybrid",
+  "author": "Tetsu Kasuya",
+  "year": 2025,
+  "style": "pulse",
+  "summary": {
+    "en": "Kasuya's update to the Devil Recipe. A short closed bloom, two open pours at 90 °C, then a cooler closed steep to 300 g. Very sweet, heavier body.",
+    "pt-BR": "A atualização de Kasuya para a Devil Recipe. Um bloom curto com a válvula fechada, dois despejos abertos a 90 °C e uma infusão fechada mais fria até 300 g. Muito doce, corpo mais denso."
+  },
+  "dose": {
+    "default": 20,
+    "min": 15,
+    "max": 25
+  },
+  "ratio": 15,
+  "grind": {
+    "band": "v60",
+    "pos": 0.2,
+    "texture": "medium-fine",
+    "note": {
+      "en": "Medium-fine, as for the Devil Recipe.",
+      "pt-BR": "Média-fina, como na Devil Recipe."
+    }
+  },
+  "temperature": {
+    "default": 90,
+    "note": {
+      "en": "90 °C for the first 200 g, then 70–80 °C for the last 100 g. Kasuya's short gives 93 °C for the first stage.",
+      "pt-BR": "90 °C nos primeiros 200 g e 70–80 °C nos últimos 100 g. O vídeo curto de Kasuya indica 93 °C na primeira etapa."
+    }
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "valve": "closed",
+      "text": {
+        "en": "Rinse the paper filter with the valve open, discard the water, close the valve and add {dose} g of coffee",
+        "pt-BR": "Escalde o filtro de papel com a válvula aberta, descarte a água, feche a válvula e adicione {dose} g de café"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": {
+        "grams": 50
+      },
+      "valve": "closed",
+      "text": {
+        "en": "Pour {add} g at 90 °C with the valve closed",
+        "pt-BR": "Despeje {add} g a 90 °C com a válvula fechada"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 35,
+      "action": "wait",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve",
+        "pt-BR": "Abra a válvula"
+      }
+    },
+    {
+      "at": 40,
+      "until": 50,
+      "action": "pour",
+      "water": {
+        "grams": 70
+      },
+      "text": {
+        "en": "Pour {add} g at 90 °C to reach {water} g",
+        "pt-BR": "Despeje {add} g a 90 °C até chegar a {water} g"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 90,
+      "until": 100,
+      "action": "pour",
+      "water": {
+        "grams": 80
+      },
+      "text": {
+        "en": "Pour {add} g at 90 °C to reach {water} g",
+        "pt-BR": "Despeje {add} g a 90 °C até chegar a {water} g"
+      },
+      "cue": "pour2"
+    },
+    {
+      "at": 100,
+      "action": "wait",
+      "text": {
+        "en": "Cool the kettle to 70–80 °C with a splash of cold water",
+        "pt-BR": "Esfrie a chaleira para 70–80 °C com um pouco de água fria"
+      }
+    },
+    {
+      "at": 125,
+      "action": "wait",
+      "valve": "closed",
+      "text": {
+        "en": "Close the valve",
+        "pt-BR": "Feche a válvula"
+      }
+    },
+    {
+      "at": 130,
+      "until": 145,
+      "action": "pour",
+      "water": {
+        "grams": 100
+      },
+      "text": {
+        "en": "Pour {add} g at 70–80 °C to reach {water} g",
+        "pt-BR": "Despeje {add} g a 70–80 °C até chegar a {water} g"
+      },
+      "cue": "pour3"
+    },
+    {
+      "at": 165,
+      "action": "drawdown",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve and let it drain",
+        "pt-BR": "Abra a válvula e deixe escoar"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 210,
+      "action": "serve",
+      "text": {
+        "en": "Done",
+        "pt-BR": "Pronto"
+      }
+    }
+  ],
+  "totalSeconds": 210,
+  "scaling": "dose-multiples",
+  "options": {
+    "filter": {
+      "en": "Hario V60 02 paper, rinsed",
+      "pt-BR": "Papel Hario V60 02, escaldado"
+    }
+  },
+  "source": {
+    "url": "https://www.timer.coffee/recipes/hario-switch/2025-new-hybrid-hario-switch-recipe-by-tetsu-kasuya/",
+    "title": "Timer.coffee: 2025 'New Hybrid' Hario Switch recipe by Tetsu Kasuya",
+    "year": 2025,
+    "kind": "transcription",
+    "notes": {
+      "en": "Video: youtube.com/shorts/LLXqj9EUNW0. Roastaroma's January 2025 write-up closes at about 2:10 and opens at 2:55 instead of 2:05 and 2:45.",
+      "pt-BR": "Vídeo: youtube.com/shorts/LLXqj9EUNW0. O texto da Roastaroma de janeiro de 2025 fecha perto de 2:10 e abre em 2:55, em vez de 2:05 e 2:45."
+    }
+  },
+  "alsoSee": [
+    {
+      "url": "https://roastaroma.com/blog/tetsu-kasayas-evolved-hybrid-recipe-v2-super-hybrid-sneaky-recipe",
+      "title": "Roastaroma: 'Super Hybrid' write-up",
+      "year": 2025,
+      "kind": "community"
+    }
+  ]
+}

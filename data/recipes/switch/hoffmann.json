@@ -1,0 +1,128 @@
+{
+  "id": "switch-hoffmann-immersion",
+  "method": "switch",
+  "name": "Switch Immersion",
+  "author": "James Hoffmann",
+  "year": 2023,
+  "style": "immersion",
+  "summary": {
+    "en": "Full immersion with a fine grind. Bloom, fill to 250 g, stir at 1:00, open the valve at 2:00. Clarity of a pour-over with the ease of a steep.",
+    "pt-BR": "Imersão total com moagem fina. Bloom, complete até 250 g, mexa em 1:00 e abra a válvula em 2:00. A clareza de um coado com a facilidade de uma infusão."
+  },
+  "dose": {
+    "default": 15,
+    "min": 12,
+    "max": 20
+  },
+  "ratio": 16.67,
+  "grind": {
+    "band": "v60",
+    "pos": 0.1,
+    "texture": "fine",
+    "note": {
+      "en": "Hoffmann: fine, finer than his V60 grind. The steep does the extraction; the bed just filters.",
+      "pt-BR": "Hoffmann: fina, mais fina que a do V60 dele. A infusão faz a extração; a cama só filtra."
+    }
+  },
+  "temperature": {
+    "default": 93,
+    "byRoast": {
+      "light": 96,
+      "medium": 93,
+      "dark": 88
+    },
+    "note": {
+      "en": "The transcription gives 93 °C.",
+      "pt-BR": "A transcrição indica 93 °C."
+    }
+  },
+  "steps": [
+    {
+      "at": 0,
+      "action": "rinse",
+      "valve": "closed",
+      "text": {
+        "en": "Rinse the paper filter with the valve open, discard the water, close the valve and add {dose} g of coffee",
+        "pt-BR": "Escalde o filtro de papel com a válvula aberta, descarte a água, feche a válvula e adicione {dose} g de café"
+      }
+    },
+    {
+      "at": 0,
+      "until": 10,
+      "action": "bloom",
+      "water": {
+        "times": 2
+      },
+      "valve": "closed",
+      "text": {
+        "en": "Pour {add} g to bloom and swirl to wet every ground",
+        "pt-BR": "Despeje {add} g para o bloom e gire para molhar todo o café"
+      },
+      "cue": "bloom"
+    },
+    {
+      "at": 30,
+      "until": 45,
+      "action": "pour",
+      "water": {
+        "share": 1
+      },
+      "text": {
+        "en": "Pour to {water} g",
+        "pt-BR": "Despeje até {water} g"
+      },
+      "cue": "pour1"
+    },
+    {
+      "at": 60,
+      "action": "stir",
+      "text": {
+        "en": "Stir gently",
+        "pt-BR": "Mexa de leve"
+      },
+      "cue": "stir"
+    },
+    {
+      "at": 120,
+      "action": "drawdown",
+      "valve": "open",
+      "text": {
+        "en": "Open the valve and let it drain",
+        "pt-BR": "Abra a válvula e deixe escoar"
+      },
+      "cue": "drawdown"
+    },
+    {
+      "at": 165,
+      "action": "serve",
+      "text": {
+        "en": "Done",
+        "pt-BR": "Pronto"
+      }
+    }
+  ],
+  "totalSeconds": 165,
+  "scaling": "linear",
+  "options": {
+    "filter": {
+      "en": "Hario V60 02 paper, rinsed",
+      "pt-BR": "Papel Hario V60 02, escaldado"
+    }
+  },
+  "source": {
+    "url": "http://beanbook.app/recipes/james-hoffmann--hario-switch-immersion-brew__fa27df0d-36fc-44be-95b6-b53acbb27e1b",
+    "title": "BeanBook transcription of Hoffmann's Hario Switch immersion brew",
+    "kind": "transcription",
+    "notes": {
+      "en": "Video: youtube.com/watch?v=QjIvN8mlK9Y. 15 g / 250 g, total 2:45 on a V60 filter. Hario USA's page of his Switch recipe with a Sibarist fast filter gives 15 g / 250 g in 2:30.",
+      "pt-BR": "Vídeo: youtube.com/watch?v=QjIvN8mlK9Y. 15 g / 250 g, total de 2:45 com filtro V60. A página da Hario USA da receita dele com filtro rápido Sibarist indica 15 g / 250 g em 2:30."
+    }
+  },
+  "alsoSee": [
+    {
+      "url": "https://www.hario-usa.com/blogs/recipes-and-more-from-friends/james-hoffmann-switch-sibarist",
+      "title": "Hario USA: James Hoffmann, Switch + Sibarist (15 g / 250 g, 2:30)",
+      "kind": "primary"
+    }
+  ]
+}

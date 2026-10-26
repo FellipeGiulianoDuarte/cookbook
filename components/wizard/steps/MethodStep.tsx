@@ -5,7 +5,7 @@ import { ChoiceCard, StepTitle } from "@/components/ui/choice";
 import type { Method } from "@/lib/schema";
 import type { StepProps } from "./types";
 
-const METHODS: Method[] = ["v60", "aeropress"];
+const METHODS: Method[] = ["v60", "switch", "aeropress"];
 
 export function MethodStep({ selection, send }: StepProps) {
   const t = useTranslations("method");

@@ -201,6 +201,7 @@ export function Wizard({
     pouring: false,
     plunger: 0,
     inverted,
+    valveOpen: true,
     dialTicks: derived.grinder?.clicksPerRotation ?? 12,
     dialValue: derived.setting?.kind === "ok" ? derived.setting.value : 0,
     idle: true,
