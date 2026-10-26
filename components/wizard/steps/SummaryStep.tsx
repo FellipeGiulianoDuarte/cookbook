@@ -24,7 +24,22 @@ export function SummaryStep({
   const settingText = useSettingText();
   const r = derived.recipe;
   const s = derived.schedule;
-  if (!r || !s) return null;
+  if (!r || !s)
+    return (
+      <div>
+        <StepTitle>{t("summary.title")}</StepTitle>
+        <p className="mt-3 text-fg-muted">
+          {r ? t("summary.needDose") : t("summary.needRecipe")}
+        </p>
+        <Button
+          variant="secondary"
+          className="mt-5"
+          onClick={() => send({ type: "JUMP", step: r ? "amount" : "recipe" })}
+        >
+          {r ? t("summary.toDose") : t("summary.toRecipe")}
+        </Button>
+      </div>
+    );
   const setting = derived.setting;
 
   const share = async () => {

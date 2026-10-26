@@ -21,7 +21,11 @@ import {
 } from "@/lib/machine";
 import { readMyGrinder } from "@/lib/my-grinder";
 import { type UrlState, urlParsers } from "@/lib/url";
-import { selectionFromUrl, urlFromSelection } from "@/lib/url-selection";
+import {
+  sanitizeSelection,
+  selectionFromUrl,
+  urlFromSelection,
+} from "@/lib/url-selection";
 import { LanguageToggle } from "./LanguageToggle";
 import { AmountStep } from "./steps/AmountStep";
 import { BeanStep } from "./steps/BeanStep";
@@ -59,15 +63,22 @@ export function Wizard({
     shallow: true,
   });
 
-  const initialSelection = useMemo(() => {
-    const s = selectionFromUrl(initial);
-    // Drop ids the catalog does not know (old links, typos) so the wizard never dead-ends.
-    if (s.recipeId && !catalog.recipes.some((r) => r.id === s.recipeId))
-      s.recipeId = undefined;
-    if (s.grinderId && !catalog.grinders.some((g) => g.id === s.grinderId))
-      s.grinderId = undefined;
-    return s;
-  }, [catalog, initial]);
+  const initialSelection = useMemo(
+    () => sanitizeSelection(selectionFromUrl(initial), catalog),
+    [catalog, initial],
+  );
+
+  // The step a link lands on: the one it asks for, never past the first unanswered step.
+  // A dose outside the recipe's range (old link) sends the user back to the dose step.
+  const initialStep = useMemo<WizardStep>(() => {
+    const first = derive(catalog, initialSelection).doseError
+      ? "amount"
+      : firstIncompleteStep(initialSelection);
+    const wanted = initial.step ?? first;
+    return WIZARD_STEPS.indexOf(wanted) <= WIZARD_STEPS.indexOf(first)
+      ? wanted
+      : first;
+  }, [catalog, initialSelection, initial.step]);
 
   const actor = useActorRef(wizardMachine, {
     input: { selection: initialSelection },
@@ -81,23 +92,14 @@ export function Wizard({
     [catalog, selection],
   );
 
-  // Restore the step from the URL once, or land on the first incomplete step.
+  // Restore the step from the URL once.
   const restored = useRef(false);
   useEffect(() => {
     if (restored.current) return;
     restored.current = true;
-    // Never restore a step the selection cannot support (old link, dropped id).
-    // A dose outside the recipe's range (old link) sends the user back to the dose step.
-    const first = derive(catalog, initialSelection).doseError
-      ? "amount"
-      : firstIncompleteStep(initialSelection);
-    const wanted = initial.step ?? first;
-    const target =
-      WIZARD_STEPS.indexOf(wanted) <= WIZARD_STEPS.indexOf(first)
-        ? wanted
-        : first;
-    if (target !== "method") actor.send({ type: "JUMP", step: target });
-  }, [actor, initial.step, initialSelection, catalog]);
+    if (initialStep !== "method")
+      actor.send({ type: "JUMP", step: initialStep });
+  }, [actor, initialStep]);
 
   // A grinder starred on this device is picked for you when the link names none.
   useEffect(() => {
@@ -117,16 +119,19 @@ export function Wizard({
   // Mirror selection and step into the URL. A step change is a history entry so the
   // browser's back button walks the wizard backwards; edits within a step replace.
   const lastStep = useRef(step);
+  const settled = useRef(false);
   useEffect(() => {
+    // Landing on a link's step replaces the entry the link opened; later step changes push.
     const push =
-      lastStep.current !== step && restored.current && !fromHistory.current;
+      settled.current && lastStep.current !== step && !fromHistory.current;
+    if (step === initialStep) settled.current = true;
     fromHistory.current = false;
     lastStep.current = step;
     setUrl(
       { ...urlFromSelection(selection), step: step === "method" ? null : step },
       { history: push ? "push" : "replace" },
     );
-  }, [selection, step, setUrl]);
+  }, [selection, step, setUrl, initialStep]);
 
   // Browser back/forward: the URL is the truth, so read it, replace the selection and land
   // on its step. Only popstate triggers this; our own pushState/replaceState never does,
@@ -149,18 +154,10 @@ export function Wizard({
           return [key, value ?? p.defaultValue ?? null];
         }),
       ) as UrlState;
-      const wanted = selectionFromUrl(parsed);
-      if (
-        wanted.recipeId &&
-        !catalog.recipes.some((r) => r.id === wanted.recipeId)
-      )
-        wanted.recipeId = undefined;
-      if (
-        wanted.grinderId &&
-        !catalog.grinders.some((g) => g.id === wanted.grinderId)
-      )
-        wanted.grinderId = undefined;
-      const first = firstIncompleteStep(wanted);
+      const wanted = sanitizeSelection(selectionFromUrl(parsed), catalog);
+      const first = derive(catalog, wanted).doseError
+        ? "amount"
+        : firstIncompleteStep(wanted);
       const asked = parsed.step ?? "method";
       const target =
         WIZARD_STEPS.indexOf(asked) <= WIZARD_STEPS.indexOf(first)
@@ -298,7 +295,11 @@ export function Wizard({
               aria-current={i === index ? "step" : undefined}
               disabled={
                 i > index &&
-                !WIZARD_STEPS.slice(0, i).every((p) => canLeave(p, selection))
+                (!WIZARD_STEPS.slice(0, i).every((p) =>
+                  canLeave(p, selection),
+                ) ||
+                  (derived.doseError !== undefined &&
+                    i > WIZARD_STEPS.indexOf("amount")))
               }
               onClick={() => actor.send({ type: "JUMP", step: s })}
               className="h-1.5 flex-1 overflow-hidden rounded-full bg-line-strong disabled:cursor-default"

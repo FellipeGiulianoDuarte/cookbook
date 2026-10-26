@@ -118,11 +118,20 @@ export const wizardMachine = setup({
     // Changing the method invalidates the recipe (recipes belong to a method).
     selectMethod: assign(({ context, event }) =>
       event.type === "SELECT_METHOD" && event.method !== context.method
-        ? { method: event.method, recipeId: undefined, orientation: undefined }
+        ? {
+            method: event.method,
+            recipeId: undefined,
+            dose: undefined,
+            orientation: undefined,
+          }
         : {},
     ),
-    selectRecipe: assign(({ event }) =>
-      event.type === "SELECT_RECIPE" ? { recipeId: event.recipeId } : {},
+    // A dose belongs to its recipe (Hoffmann's AeroPress stops at 18 g, the 4:6 starts at
+    // 13 g), so a new recipe starts again from its own default on the dose step.
+    selectRecipe: assign(({ context, event }) =>
+      event.type === "SELECT_RECIPE" && event.recipeId !== context.recipeId
+        ? { recipeId: event.recipeId, dose: undefined, orientation: undefined }
+        : {},
     ),
     selectGrinder: assign(({ event }) =>
       event.type === "SELECT_GRINDER" ? { grinderId: event.grinderId } : {},

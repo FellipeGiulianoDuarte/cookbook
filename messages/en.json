@@ -154,7 +154,11 @@
     "time": "Time",
     "schedule": "Pours",
     "source": "Source",
-    "chart": "Brewing control chart"
+    "chart": "Brewing control chart",
+    "needDose": "This dose is outside what the recipe allows. Pick a new dose to see the recipe.",
+    "needRecipe": "Pick a recipe to see the full brew.",
+    "toDose": "Choose a dose",
+    "toRecipe": "Choose a recipe"
   },
   "brew": {
     "next": "Next",

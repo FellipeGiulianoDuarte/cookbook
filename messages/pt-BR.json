@@ -154,7 +154,11 @@
     "time": "Tempo",
     "schedule": "Despejos",
     "source": "Fonte",
-    "chart": "Gráfico de controle"
+    "chart": "Gráfico de controle",
+    "needDose": "Essa dose está fora do que a receita permite. Escolha uma nova dose para ver a receita.",
+    "needRecipe": "Escolha uma receita para ver o preparo completo.",
+    "toDose": "Escolher a dose",
+    "toRecipe": "Escolher a receita"
   },
   "brew": {
     "next": "Próximo",

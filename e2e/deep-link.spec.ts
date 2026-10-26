@@ -100,3 +100,50 @@ test("browser back walks the wizard backwards and keeps state and URL in step", 
     "Pick a recipe",
   );
 });
+
+test("a link whose recipe belongs to another method lands on the recipe step", async ({
+  page,
+}) => {
+  await page.goto("/?m=v60&r=aeropress-wendelboe&d=14&step=grinder");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Pick a recipe",
+  );
+  await expect(page).not.toHaveURL(/r=/);
+  await expect(page).not.toHaveURL(/d=/);
+});
+
+test("switching method from a full link never strands the summary", async ({
+  page,
+}) => {
+  await page.goto(
+    "/?m=v60&r=v60-hoffmann-ultimate&g=comandante-c40&d=20&step=summary",
+  );
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Your recipe",
+  );
+  await page.getByRole("button", { name: "Method", exact: true }).click();
+  await page
+    .getByRole("button", { name: /AeroPress/ })
+    .first()
+    .click();
+  await expect(page).not.toHaveURL(/d=/);
+  await page.getByRole("button", { name: /^Next/ }).click();
+  await page
+    .getByRole("button", { name: /Ultimate AeroPress Technique/ })
+    .click();
+  // the summary bar is not reachable until a dose for this recipe exists
+  await expect(
+    page.getByRole("button", { name: "Summary", exact: true }),
+  ).toBeDisabled();
+  await page.getByRole("button", { name: /^Next/ }).click();
+  await page.getByRole("button", { name: /^Next/ }).click();
+  await expect(page).toHaveURL(/d=11/);
+});
+
+test("opening a shared link adds no extra history entry", async ({ page }) => {
+  await page.goto("/?m=v60&r=v60-hoffmann-ultimate&step=grinder");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Which grinder?",
+  );
+  expect(await page.evaluate(() => history.length)).toBe(2);
+});

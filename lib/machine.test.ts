@@ -163,3 +163,37 @@ describe("RESTORE (browser back/forward)", () => {
     expect(snap.context.recipeId).toBeUndefined();
   });
 });
+
+describe("a selection never carries a dose into another recipe", () => {
+  it("changing the method clears recipe and dose", () => {
+    const actor = createActor(wizardMachine, {
+      input: {
+        selection: {
+          method: "v60",
+          recipeId: "v60-hoffmann-ultimate",
+          dose: 20,
+        },
+      },
+    }).start();
+    actor.send({ type: "SELECT_METHOD", method: "aeropress" });
+    const c = actor.getSnapshot().context;
+    expect(c.recipeId).toBeUndefined();
+    expect(c.dose).toBeUndefined();
+  });
+
+  it("changing the recipe clears the dose; picking the same recipe keeps it", () => {
+    const actor = createActor(wizardMachine, {
+      input: {
+        selection: {
+          method: "v60",
+          recipeId: "v60-hoffmann-ultimate",
+          dose: 30,
+        },
+      },
+    }).start();
+    actor.send({ type: "SELECT_RECIPE", recipeId: "v60-hoffmann-ultimate" });
+    expect(actor.getSnapshot().context.dose).toBe(30);
+    actor.send({ type: "SELECT_RECIPE", recipeId: "v60-kasuya-46" });
+    expect(actor.getSnapshot().context.dose).toBeUndefined();
+  });
+});
