@@ -17,7 +17,7 @@ test("Start brew runs the timer, Pause freezes it, Skip walks to Done", async ({
   await expect(page.getByText(/Pour 200 g of water/)).toBeVisible();
   await expect(page.getByRole("button", { name: "Pause" })).toBeVisible();
   await page.waitForTimeout(1200);
-  const clock = page.locator("span.font-display").first();
+  const clock = page.getByRole("timer");
   await expect(clock).not.toHaveText("0:00");
 
   await page.getByRole("button", { name: "Pause" }).click();
@@ -33,7 +33,7 @@ test("Start brew runs the timer, Pause freezes it, Skip walks to Done", async ({
   await expect(page.getByText("Enjoy")).toBeVisible();
   await page.getByRole("button", { name: "Brew again" }).click();
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Your recipe",
+    "Ultimate AeroPress Technique",
   );
 });
 

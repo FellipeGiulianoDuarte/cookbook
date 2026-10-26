@@ -10,6 +10,7 @@ import { SceneClient } from "@/components/scene/SceneClient";
 import type { SceneState } from "@/components/scene/types";
 import { Button } from "@/components/ui/button";
 import { Crossfade } from "@/components/ui/crossfade";
+import { cn } from "@/lib/cn";
 import { type ClientCatalog, derive } from "@/lib/derive";
 import {
   canLeave,
@@ -278,91 +279,75 @@ export function Wizard({
     }
   })();
 
+  const reachable = (i: number) =>
+    i <= index ||
+    (WIZARD_STEPS.slice(0, i).every((p) => canLeave(p, selection)) &&
+      !(derived.doseError !== undefined && i > WIZARD_STEPS.indexOf("amount")));
+
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-28 pt-4 sm:px-6">
-      <header className="flex items-center justify-between gap-4">
-        <nav
-          className="flex flex-1 items-center gap-1.5"
-          aria-label={t("steps.progress", {
+    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
+      {/* The stage: the equipment for this step, full width, under the sheet's edge. */}
+      <div className="stage relative h-[40svh] max-h-[380px] min-h-[250px] sm:mt-4 sm:rounded-t-[var(--radius-lg)] sm:overflow-hidden">
+        <SceneClient state={scene} className="h-full" />
+        <div className="absolute top-[max(0.75rem,env(safe-area-inset-top))] right-4">
+          <LanguageToggle />
+        </div>
+      </div>
+
+      <main className="relative -mt-7 flex flex-1 flex-col rounded-t-[var(--radius-lg)] bg-surface px-5 pt-4 pb-32 shadow-[var(--shadow-sheet)] sm:px-7">
+        <Ruler
+          steps={WIZARD_STEPS}
+          index={index}
+          reachable={reachable}
+          label={(s) => t(`steps.${s}`)}
+          navLabel={t("steps.progress", {
             current: index + 1,
             total: WIZARD_STEPS.length,
           })}
-        >
-          {WIZARD_STEPS.map((s, i) => (
-            <button
-              key={s}
-              type="button"
-              aria-label={t(`steps.${s}`)}
-              aria-current={i === index ? "step" : undefined}
-              disabled={
-                i > index &&
-                (!WIZARD_STEPS.slice(0, i).every((p) =>
-                  canLeave(p, selection),
-                ) ||
-                  (derived.doseError !== undefined &&
-                    i > WIZARD_STEPS.indexOf("amount")))
+          onJump={(s) => {
+            dir.current = WIZARD_STEPS.indexOf(s) > index ? 1 : -1;
+            actor.send({ type: "JUMP", step: s });
+          }}
+        />
+
+        <div className="relative mt-6 flex-1">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.section
+              key={step}
+              initial={
+                reduce
+                  ? false
+                  : {
+                      opacity: 0,
+                      transform: `translateX(${18 * dir.current}px)`,
+                    }
               }
-              onClick={() => actor.send({ type: "JUMP", step: s })}
-              className="h-1.5 flex-1 overflow-hidden rounded-full bg-line-strong disabled:cursor-default"
+              animate={{ opacity: 1, transform: "translateX(0px)" }}
+              exit={
+                reduce
+                  ? undefined
+                  : {
+                      opacity: 0,
+                      transform: `translateX(${-14 * dir.current}px)`,
+                      transition: { duration: 0.12 },
+                    }
+              }
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              aria-labelledby="step-title"
             >
-              <span
-                className="block h-full w-full origin-left rounded-full bg-accent transition-[transform,opacity] duration-[420ms] ease-[var(--ease-out)]"
-                style={{
-                  transform: `scaleX(${i <= index ? 1 : 0})`,
-                  opacity: i < index ? 0.7 : 1,
-                }}
-              />
-            </button>
-          ))}
-        </nav>
-        <LanguageToggle />
-      </header>
+              {body}
+            </motion.section>
+          </AnimatePresence>
+        </div>
+      </main>
 
-      <div className="stage mt-5 h-64 overflow-hidden rounded-2xl sm:h-72">
-        <SceneClient state={scene} className="h-full" />
-      </div>
-
-      <div className="relative mt-6 flex-1">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.section
-            key={step}
-            initial={
-              reduce
-                ? false
-                : { opacity: 0, transform: `translateX(${20 * dir.current}px)` }
-            }
-            animate={{ opacity: 1, transform: "translateX(0px)" }}
-            exit={
-              reduce
-                ? undefined
-                : {
-                    opacity: 0,
-                    transform: `translateX(${-16 * dir.current}px)`,
-                    transition: { duration: 0.12 },
-                  }
-            }
-            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
-            aria-labelledby="step-title"
-          >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
-              {t("steps.progress", {
-                current: index + 1,
-                total: WIZARD_STEPS.length,
-              })}{" "}
-              · {t(`steps.${step}`)}
-            </p>
-            {body}
-          </motion.section>
-        </AnimatePresence>
-      </div>
-
-      <nav className="fixed inset-x-0 bottom-0 z-10 border-t border-line bg-bg/85 px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur sm:px-6">
-        <div className="mx-auto flex max-w-xl gap-3">
+      <nav className="fixed inset-x-0 bottom-0 z-10 bg-surface/90 px-5 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:px-7">
+        <div className="mx-auto flex max-w-xl items-center gap-3">
           {index > 0 ? (
             <Button
-              variant="secondary"
+              variant="ghost"
               onClick={() => go("BACK")}
-              className="min-w-28"
+              className="min-w-24"
             >
               {t("nav.back")}
             </Button>
@@ -373,19 +358,89 @@ export function Wizard({
               disabled={!canNext}
               className="flex-1"
             >
-              {t("nav.next")}
               {index + 1 < WIZARD_STEPS.length ? (
-                <Crossfade
-                  id={WIZARD_STEPS[index + 1]}
-                  className="font-normal text-accent-ink/70"
-                >
-                  · {t(`steps.${WIZARD_STEPS[index + 1]}`)}
+                <Crossfade id={WIZARD_STEPS[index + 1]}>
+                  {t("nav.nextTo", {
+                    step: t(`steps.${WIZARD_STEPS[index + 1]}`),
+                  })}
                 </Crossfade>
-              ) : null}
+              ) : (
+                t("nav.next")
+              )}
             </Button>
           ) : null}
         </div>
       </nav>
     </div>
+  );
+}
+
+/**
+ * Progress as the scale printed on a glass server: one long mark per step, short marks
+ * between. Marks up to the current step are amber, the current one is milk white and
+ * taller. Each long mark is a button that jumps back, or forward when the steps before it
+ * are answered.
+ */
+function Ruler({
+  steps,
+  index,
+  reachable,
+  label,
+  navLabel,
+  onJump,
+}: {
+  steps: readonly WizardStep[];
+  index: number;
+  reachable: (i: number) => boolean;
+  label: (s: WizardStep) => string;
+  navLabel: string;
+  onJump: (s: WizardStep) => void;
+}) {
+  return (
+    <nav aria-label={navLabel} className="flex items-end pr-1">
+      {steps.map((s, i) => {
+        const last = i === steps.length - 1;
+        const done = i < index;
+        const current = i === index;
+        return (
+          <button
+            key={s}
+            type="button"
+            aria-label={label(s)}
+            aria-current={current ? "step" : undefined}
+            disabled={!reachable(i)}
+            onClick={() => onJump(s)}
+            className={cn(
+              "group flex h-9 items-end gap-[calc((100%-3px)/5)] disabled:cursor-default",
+              last ? "flex-none" : "flex-1",
+            )}
+          >
+            <span
+              aria-hidden="true"
+              className={cn(
+                "block w-[3px] rounded-full transition-[height,background-color] duration-300 ease-[var(--ease-out)]",
+                current
+                  ? "h-6 bg-fg"
+                  : done
+                    ? "h-4 bg-coffee"
+                    : "h-4 bg-line-strong group-enabled:group-hover:bg-fg-faint",
+              )}
+            />
+            {last
+              ? null
+              : [0, 1, 2, 3].map((k) => (
+                  <span
+                    key={k}
+                    aria-hidden="true"
+                    className={cn(
+                      "block h-2 w-px transition-[background-color] duration-300",
+                      done ? "bg-coffee/70" : "bg-line-strong",
+                    )}
+                  />
+                ))}
+          </button>
+        );
+      })}
+    </nav>
   );
 }

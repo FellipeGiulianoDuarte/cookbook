@@ -28,7 +28,8 @@
     "again": "Preparar de novo",
     "share": "Copiar link",
     "copied": "Link copiado",
-    "edit": "Trocar"
+    "edit": "Trocar",
+    "nextTo": "Próximo: {step}"
   },
   "method": {
     "title": "Com o que você vai preparar?",
@@ -63,7 +64,7 @@
     "basis": {
       "official": "faixa do fabricante",
       "community": "tabela da comunidade",
-      "estimated": "estimada (sem faixa publicada)"
+      "estimated": "estimativa do Honest Coffee Guide (sem faixa publicada)"
     },
     "unsafe": "Fino demais para este moedor: o fabricante diz para não moer abaixo de {n}.",
     "outOfRange": "Fora da faixa útil deste moedor.",
@@ -75,7 +76,7 @@
     "travelNote": "{n} µm por clique é o avanço das mós, não o tamanho da partícula.",
     "fine": "fino",
     "coarse": "grosso",
-    "officialRef": "guia da {brand}: {range}",
+    "officialRef": "O guia da {brand} indica {range}.",
     "kind": {
       "hand": "manual",
       "electric": "elétrico"
@@ -103,7 +104,11 @@
     "mine": "Meu moedor",
     "mineHint": "Salvo neste aparelho e escolhido para você na próxima vez. Links que nomeiam um moedor continuam valendo.",
     "star": "Salvar como meu moedor",
-    "unstar": "Esquecer meu moedor"
+    "unstar": "Esquecer meu moedor",
+    "bandBasis": "Posicionado na faixa de {method} pela {basis}.",
+    "change": "Trocar moedor",
+    "done": "Pronto",
+    "matches": "{n, plural, =0 {Nenhum moedor encontrado} one {# moedor} other {# moedores}}"
   },
   "amount": {
     "title": "Quanto café?",
@@ -113,7 +118,8 @@
     "bypass": "mais {g} g para diluir",
     "ice": "sobre {g} g de gelo",
     "cups": "{n, plural, =1 {cerca de uma xícara} other {cerca de # xícaras}}",
-    "outOfRange": "Esta receita foi escrita para {min}–{max} g."
+    "outOfRange": "Esta receita foi escrita para {min}–{max} g.",
+    "ratioLine": "Proporção 1:{ratio}"
   },
   "bean": {
     "title": "Qual é o grão?",
@@ -137,7 +143,8 @@
     "communityNote": "Orientação da comunidade, não faz parte da receita.",
     "grindCoarser": "moagem mais grossa",
     "grindFiner": "moagem mais fina",
-    "ratio": "proporção"
+    "ratio": "proporção",
+    "waterTemp": "Temperatura da água"
   },
   "options": {
     "title": "Mais alguns detalhes",
@@ -154,16 +161,17 @@
     "grind": "Moagem",
     "temp": "Temperatura",
     "time": "Tempo",
-    "schedule": "Despejos",
+    "schedule": "Etapas",
     "source": "Fonte",
     "chart": "Gráfico de controle",
     "needDose": "Essa dose está fora do que a receita permite. Escolha uma nova dose para ver a receita.",
     "needRecipe": "Escolha uma receita para ver o preparo completo.",
     "toDose": "Escolher a dose",
-    "toRecipe": "Escolher a receita"
+    "toRecipe": "Escolher a receita",
+    "grindOn": "Moagem no seu {grinder}"
   },
   "brew": {
-    "next": "Próximo",
+    "next": "Depois, às",
     "until": "até {time}",
     "done": "Pronto",
     "doneTitle": "Aproveite",
@@ -174,7 +182,10 @@
     "exit": "Voltar à receita",
     "ready": "Prepare tudo",
     "startTimer": "Iniciar o cronômetro",
-    "prepHint": "Faça isto antes. O relógio começa quando você tocar no botão."
+    "prepHint": "Faça isto antes. O relógio começa quando você tocar no botão.",
+    "of": "de {total}",
+    "ofWater": "de {total} g",
+    "window": "{from} a {to}"
   },
   "chart": {
     "title": "Gráfico de controle de extração",

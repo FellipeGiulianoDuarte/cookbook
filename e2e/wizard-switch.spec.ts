@@ -29,7 +29,7 @@ test("Hario Switch + Kasuya Devil Recipe reaches a summary with the valve steps"
   await next.click();
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Your recipe",
+    "Devil Recipe",
   );
   await expect(
     page.getByText(/Close the valve\. Pour 160 g at 70 °C to reach 280 g/),

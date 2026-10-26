@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import type { CSSProperties } from "react";
-import { StepTitle } from "@/components/ui/choice";
+import { Quantity, StepTitle } from "@/components/ui/choice";
 import { Crossfade } from "@/components/ui/crossfade";
 import { haptic } from "@/lib/haptics";
 import type { DerivedStepProps } from "./types";
@@ -21,14 +21,27 @@ export function AmountStep({ selection, derived, send }: DerivedStepProps) {
     <div>
       <StepTitle>{t("title")}</StepTitle>
 
-      <div className="mt-6 grid grid-cols-3 gap-3">
-        <Stat label={t("dose")} value={dose} unit="g" accent index={0} />
-        <Stat label={t("water")} value={water} unit="g" index={1} />
-        <Stat label={t("ratio")} value={`1:${ratio.toFixed(1)}`} index={2} />
+      <div className="mt-7 flex items-end gap-5">
+        <Measure label={t("dose")}>
+          <Crossfade id={String(dose)}>
+            <Quantity value={dose} unit="g" kind="coffee" size="lg" />
+          </Crossfade>
+        </Measure>
+        <span aria-hidden="true" className="mb-9 text-2xl text-fg-faint">
+          →
+        </span>
+        <Measure label={t("water")}>
+          <Crossfade id={String(water)}>
+            <Quantity value={water} unit="g" kind="water" size="lg" />
+          </Crossfade>
+        </Measure>
       </div>
+      <p className="tabular mt-3 text-fg-muted">
+        {t("ratioLine", { ratio: ratio.toFixed(1) })}
+      </p>
 
       {derived.schedule?.bypass ? (
-        <p className="mt-2 text-sm text-fg-muted">
+        <p className="mt-1 text-sm text-fg-muted">
           {t("bypass", { g: derived.schedule.bypass.grams })}
         </p>
       ) : null}
@@ -39,7 +52,7 @@ export function AmountStep({ selection, derived, send }: DerivedStepProps) {
       ) : null}
 
       {!fixed ? (
-        <div className="mt-8">
+        <div className="mt-9">
           <input
             type="range"
             min={r.dose.min}
@@ -55,8 +68,13 @@ export function AmountStep({ selection, derived, send }: DerivedStepProps) {
               send({ type: "SET_DOSE", dose });
             }}
             className="dose-slider w-full"
+            style={
+              {
+                "--filled": `${((dose - r.dose.min) / Math.max(1, r.dose.max - r.dose.min)) * 100}%`,
+              } as CSSProperties
+            }
           />
-          <div className="tabular mt-2 flex justify-between text-xs text-fg-faint">
+          <div className="tabular mt-3 flex justify-between text-sm text-fg-faint">
             <span>{r.dose.min} g</span>
             <span>{r.dose.max} g</span>
           </div>
@@ -89,35 +107,17 @@ export function AmountStep({ selection, derived, send }: DerivedStepProps) {
   );
 }
 
-function Stat({
+function Measure({
   label,
-  value,
-  unit,
-  accent,
-  index,
+  children,
 }: {
   label: string;
-  value: number | string;
-  unit?: string;
-  accent?: boolean;
-  index: number;
+  children: React.ReactNode;
 }) {
   return (
-    <div
-      className="stagger-in rounded-2xl bg-surface p-4"
-      style={{ "--i": index } as CSSProperties}
-    >
-      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-faint">
-        {label}
-      </p>
-      <p
-        className={`tabular mt-1 font-display text-3xl leading-none tracking-tight ${accent ? "text-accent" : "text-fg"}`}
-      >
-        <Crossfade id={String(value)}>{value}</Crossfade>
-        {unit ? (
-          <span className="ml-1 text-base text-fg-faint">{unit}</span>
-        ) : null}
-      </p>
+    <div className="stagger-in">
+      {children}
+      <p className="mt-2 text-sm text-fg-faint">{label}</p>
     </div>
   );
 }

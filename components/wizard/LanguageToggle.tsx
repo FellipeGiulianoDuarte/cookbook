@@ -28,12 +28,12 @@ export function LanguageToggle() {
 
   return (
     <nav
-      className="relative flex items-center rounded-full border border-line-strong p-0.5"
+      className="relative flex items-center rounded-full bg-bg/75 p-0.5 backdrop-blur-md"
       aria-label={t("language")}
     >
       <span
         aria-hidden="true"
-        className="absolute inset-y-0.5 left-0.5 rounded-full bg-accent transition-[transform,opacity] duration-[220ms] ease-[var(--ease-out)]"
+        className="absolute inset-y-0.5 left-0.5 rounded-full bg-fg transition-[transform,opacity] duration-[220ms] ease-[var(--ease-out)]"
         style={{
           width: `calc((100% - 4px) / ${LOCALES.length})`,
           transform: `translateX(${index * 100}%)`,
@@ -58,7 +58,7 @@ export function LanguageToggle() {
             }}
             className={cn(
               "relative z-10 h-8 rounded-full px-3 text-xs font-semibold transition-[color,transform] duration-[180ms] ease-[var(--ease-out)] active:scale-95",
-              on ? "text-accent-ink" : "text-fg-muted hover:text-fg",
+              on ? "text-bg" : "text-fg-muted hover:text-fg",
             )}
           >
             {LABEL[l]}

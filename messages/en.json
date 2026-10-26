@@ -28,7 +28,8 @@
     "again": "Brew again",
     "share": "Copy link",
     "copied": "Link copied",
-    "edit": "Change"
+    "edit": "Change",
+    "nextTo": "Next: {step}"
   },
   "method": {
     "title": "What are you brewing with?",
@@ -63,7 +64,7 @@
     "basis": {
       "official": "manufacturer's range",
       "community": "community chart",
-      "estimated": "estimated (no published range)"
+      "estimated": "Honest Coffee Guide estimate (no published range)"
     },
     "unsafe": "Too fine for this grinder: the maker says not to grind below {n}.",
     "outOfRange": "Outside this grinder's usable range.",
@@ -75,7 +76,7 @@
     "travelNote": "{n} µm per click is burr travel, not particle size.",
     "fine": "fine",
     "coarse": "coarse",
-    "officialRef": "{brand}'s own guide: {range}",
+    "officialRef": "{brand}'s own guide says {range}.",
     "kind": {
       "hand": "manual",
       "electric": "electric"
@@ -103,7 +104,11 @@
     "mine": "My grinder",
     "mineHint": "Saved on this device and picked for you next time. Links that name a grinder still win.",
     "star": "Save as my grinder",
-    "unstar": "Forget my grinder"
+    "unstar": "Forget my grinder",
+    "bandBasis": "Placed in the {method} band from the {basis}.",
+    "change": "Change grinder",
+    "done": "Done",
+    "matches": "{n, plural, =0 {No grinder matches} one {# grinder} other {# grinders}}"
   },
   "amount": {
     "title": "How much coffee?",
@@ -113,7 +118,8 @@
     "bypass": "plus {g} g to dilute",
     "ice": "over {g} g of ice",
     "cups": "{n, plural, =1 {about one cup} other {about # cups}}",
-    "outOfRange": "This recipe is written for {min}–{max} g."
+    "outOfRange": "This recipe is written for {min}–{max} g.",
+    "ratioLine": "Ratio 1:{ratio}"
   },
   "bean": {
     "title": "What's the bean?",
@@ -137,7 +143,8 @@
     "communityNote": "Community guidance, not part of the recipe.",
     "grindCoarser": "grind coarser",
     "grindFiner": "grind finer",
-    "ratio": "ratio"
+    "ratio": "ratio",
+    "waterTemp": "Water temperature"
   },
   "options": {
     "title": "A few more things",
@@ -154,16 +161,17 @@
     "grind": "Grind",
     "temp": "Temperature",
     "time": "Time",
-    "schedule": "Pours",
+    "schedule": "Steps",
     "source": "Source",
     "chart": "Brewing control chart",
     "needDose": "This dose is outside what the recipe allows. Pick a new dose to see the recipe.",
     "needRecipe": "Pick a recipe to see the full brew.",
     "toDose": "Choose a dose",
-    "toRecipe": "Choose a recipe"
+    "toRecipe": "Choose a recipe",
+    "grindOn": "Grind on your {grinder}"
   },
   "brew": {
-    "next": "Next",
+    "next": "Then at",
     "until": "by {time}",
     "done": "Done",
     "doneTitle": "Enjoy",
@@ -174,7 +182,10 @@
     "exit": "Back to the recipe",
     "ready": "Get ready",
     "startTimer": "Start the timer",
-    "prepHint": "Do these first. The clock starts when you tap the button."
+    "prepHint": "Do these first. The clock starts when you tap the button.",
+    "of": "of {total}",
+    "ofWater": "of {total} g",
+    "window": "{from} to {to}"
   },
   "chart": {
     "title": "Brewing control chart",

@@ -25,7 +25,9 @@ test("V60 + Comandante flow reaches the summary with 24 clicks ±1", async ({
   await expect(page.getByText("±1")).toBeVisible();
   // The chart band drives the number; Comandante's own 18–35 is shown as the reference.
   await expect(page.getByText("community chart")).toBeVisible();
-  await expect(page.getByText("Comandante's own guide: 18–35")).toBeVisible();
+  await expect(
+    page.getByText("Comandante's own guide says 18–35"),
+  ).toBeVisible();
   await next.click();
 
   // Dose step starts from the recipe default and shows the water
@@ -33,11 +35,11 @@ test("V60 + Comandante flow reaches the summary with 24 clicks ±1", async ({
     "How much coffee?",
   );
   await expect(page).toHaveURL(/d=30/);
-  await expect(page.getByText(/^500/)).toBeVisible();
+  await expect(page.getByText("500 g", { exact: true })).toBeVisible();
   await next.click();
 
   await page.getByRole("button", { name: "Light", exact: true }).click();
-  await expect(page.getByText("Water at 100 °C")).toBeVisible();
+  await expect(page.getByText("100 °C", { exact: true })).toBeVisible();
   await next.click();
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
@@ -46,7 +48,7 @@ test("V60 + Comandante flow reaches the summary with 24 clicks ±1", async ({
   await next.click();
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Your recipe",
+    "Ultimate V60 Technique",
   );
   await expect(page.getByText("24 clicks")).toBeVisible();
   await expect(page.getByText("3:30").first()).toBeVisible();
@@ -73,7 +75,11 @@ test("a starred grinder is remembered on the device and picked on the next visit
   await page.getByRole("button", { name: /^Next/ }).click();
   await page.getByRole("button", { name: /Ultimate V60 Technique/ }).click();
   await page.getByRole("button", { name: /^Next/ }).click();
-  await expect(page.getByText("My grinder", { exact: true })).toBeVisible();
+  // the starred grinder is already chosen: its setting shows, the picker stays folded
+  await expect(
+    page.getByRole("button", { name: "Forget my grinder" }),
+  ).toBeVisible();
+  await expect(page.getByPlaceholder("Search grinders")).toBeHidden();
   await expect(page.getByText("13 clicks")).toBeVisible();
 
   // A link that names another grinder still wins.

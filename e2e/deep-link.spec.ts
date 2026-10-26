@@ -7,7 +7,7 @@ test("a shared link restores every selection and lands on the summary", async ({
     "/?m=v60&r=v60-kasuya-46&g=1zpresso-k-ultra&d=20&roast=dark&step=summary",
   );
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Your recipe",
+    "4:6 Method",
   );
   await expect(page.getByText(/4:6/).first()).toBeVisible();
   // Kasuya dark roast → 83 °C from Philocoffea
@@ -119,7 +119,7 @@ test("switching method from a full link never strands the summary", async ({
     "/?m=v60&r=v60-hoffmann-ultimate&g=comandante-c40&d=20&step=summary",
   );
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Your recipe",
+    "Ultimate V60 Technique",
   );
   await page.getByRole("button", { name: "Method", exact: true }).click();
   await page

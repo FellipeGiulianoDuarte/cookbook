@@ -13,6 +13,7 @@ import {
 import { SceneClient } from "@/components/scene/SceneClient";
 import type { SceneState } from "@/components/scene/types";
 import { Button } from "@/components/ui/button";
+import { Quantity } from "@/components/ui/choice";
 import { Crossfade } from "@/components/ui/crossfade";
 import { SoundOffIcon, SoundOnIcon } from "@/components/ui/icons";
 import { beep, unlockAudio } from "@/lib/audio";
@@ -170,85 +171,115 @@ function BrewTimer({
 
   return (
     <motion.div
-      className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-32 pt-4 sm:px-6"
-      initial={{ opacity: 0, transform: "translateY(10px)" }}
-      animate={{ opacity: 1, transform: "translateY(0px)" }}
+      className="mx-auto flex min-h-dvh w-full max-w-xl flex-col"
+      // Opacity only: a transform here would make the fixed control bar position
+      // itself against this wrapper instead of the screen.
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.24, ease: [0.23, 1, 0.32, 1] }}
     >
-      <header className="flex items-center justify-between text-xs text-fg-faint">
-        <button
-          type="button"
-          onClick={onExit}
-          className="h-10 rounded-full px-3 text-fg-muted transition-[background-color] duration-150 hover:bg-surface-2"
-        >
-          ← {recipe.name}
-        </button>
-        <button
-          type="button"
-          onClick={toggleMute}
-          aria-pressed={muted}
-          aria-label={muted ? t("brew.soundOff") : t("brew.soundOn")}
-          title={muted ? t("brew.soundOff") : t("brew.soundOn")}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-fg-muted transition-[background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-surface-2 active:scale-90"
-        >
-          <Crossfade id={muted ? "off" : "on"}>
-            {muted ? <SoundOffIcon /> : <SoundOnIcon />}
-          </Crossfade>
-        </button>
-      </header>
-
-      <div className="stage relative mt-3 h-52 overflow-hidden rounded-2xl sm:h-60">
+      <div className="stage relative h-[34svh] max-h-[320px] min-h-[220px] sm:mt-4 sm:overflow-hidden sm:rounded-t-[var(--radius-lg)]">
         <SceneClient state={scene} className="h-full" />
-        {step?.water ? (
-          <span className="tabular absolute right-4 top-3 text-xs text-fg-faint">
-            {step.cumulative} g / {schedule.water} g
-          </span>
-        ) : null}
+        <div className="absolute inset-x-3 top-[max(0.75rem,env(safe-area-inset-top))] flex items-center justify-between">
+          <button
+            type="button"
+            onClick={onExit}
+            className="h-10 rounded-full bg-bg/75 px-4 text-sm text-fg backdrop-blur-md transition-[background-color] duration-150 hover:bg-bg/90"
+          >
+            ← {recipe.name}
+          </button>
+          <button
+            type="button"
+            onClick={toggleMute}
+            aria-pressed={muted}
+            aria-label={muted ? t("brew.soundOff") : t("brew.soundOn")}
+            title={muted ? t("brew.soundOff") : t("brew.soundOn")}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-bg/75 text-fg backdrop-blur-md transition-[background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-bg/90 active:scale-90"
+          >
+            <Crossfade id={muted ? "off" : "on"}>
+              {muted ? <SoundOffIcon /> : <SoundOnIcon />}
+            </Crossfade>
+          </button>
+        </div>
       </div>
 
-      <div className="mt-6 text-center">
-        <ProgressRing progress={progress}>
-          <span className="tabular font-display text-[4.25rem] leading-none tracking-tight text-fg">
-            {formatClock(elapsed)}
-          </span>
-        </ProgressRing>
-        <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
-          {formatClock(schedule.totalSeconds)} · {t(`method.${recipe.method}`)}
-        </p>
-      </div>
+      <main className="relative -mt-7 flex flex-1 flex-col rounded-t-[var(--radius-lg)] bg-surface px-5 pt-6 pb-36 shadow-[var(--shadow-sheet)] sm:px-7">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <span role="timer" className="num block text-[6.5rem] text-water">
+              {formatClock(elapsed)}
+            </span>
+            <span className="tabular mt-2 block text-sm text-fg-faint">
+              {t("brew.of", { total: formatClock(schedule.totalSeconds) })}
+            </span>
+          </div>
+          {step?.water ? (
+            <div className="text-right">
+              <Quantity
+                value={step.cumulative}
+                unit="g"
+                kind="water"
+                size="sm"
+              />
+              <span className="tabular mt-1 block text-sm text-fg-faint">
+                {t("brew.ofWater", { total: schedule.water })}
+              </span>
+            </div>
+          ) : null}
+        </div>
+        <div
+          className="mt-5 h-1 overflow-hidden rounded-full bg-line-strong"
+          aria-hidden="true"
+        >
+          <div
+            className="h-full origin-left rounded-full bg-water"
+            style={{
+              transform: `scaleX(${Math.min(1, Math.max(0, progress))})`,
+            }}
+          />
+        </div>
 
-      {done ? (
-        <section className="mt-8 rounded-2xl bg-surface p-5 text-center">
-          <p className="font-display text-3xl text-fg">{t("brew.doneTitle")}</p>
-          <p className="mt-1 text-fg-muted">
-            {L(recipe.steps[recipe.steps.length - 1].text)}
-          </p>
-        </section>
-      ) : step ? (
-        <section className="mt-8 rounded-2xl bg-surface p-5" aria-live="polite">
-          <Crossfade id={ctx.index} className="block">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
-              {formatClock(step.at)}
-              {step.until ? ` → ${formatClock(step.until)}` : ""}
+        {done ? (
+          <section className="mt-8">
+            <p className="display text-[2.5rem] leading-none text-fg">
+              {t("brew.doneTitle")}
             </p>
-            <p className="mt-1 font-display text-2xl leading-tight text-fg sm:text-3xl">
-              {fillStepText(L(step.text), step, schedule.dose)}
+            <p className="mt-1 text-fg-muted">
+              {L(recipe.steps[recipe.steps.length - 1].text)}
             </p>
-            {step.note ? (
-              <p className="mt-2 text-sm text-fg-muted">{L(step.note)}</p>
-            ) : null}
-            {nextStep ? (
-              <p className="mt-4 border-t border-line pt-3 text-sm text-fg-muted">
-                <span className="text-fg-faint">{t("brew.next")} · </span>
-                <span className="tabular">{formatClock(nextStep.at)}</span>{" "}
-                {fillStepText(L(nextStep.text), nextStep, schedule.dose)}
+          </section>
+        ) : step ? (
+          <section className="mt-8" aria-live="polite">
+            <Crossfade id={ctx.index} className="block">
+              <p className="tabular text-sm text-water">
+                {step.until
+                  ? t("brew.window", {
+                      from: formatClock(step.at),
+                      to: formatClock(step.until),
+                    })
+                  : formatClock(step.at)}
               </p>
-            ) : null}
-          </Crossfade>
-        </section>
-      ) : null}
+              <p className="mt-2 text-[1.75rem] font-semibold leading-[1.18] tracking-[-0.015em] text-fg">
+                {fillStepText(L(step.text), step, schedule.dose)}
+              </p>
+              {step.note ? (
+                <p className="mt-2 text-sm text-fg-muted">{L(step.note)}</p>
+              ) : null}
+              {nextStep ? (
+                <p className="mt-6 border-t border-line pt-4 text-fg-muted">
+                  <span className="text-fg-faint">{t("brew.next")} </span>
+                  <span className="tabular text-water">
+                    {formatClock(nextStep.at)}
+                  </span>{" "}
+                  {fillStepText(L(nextStep.text), nextStep, schedule.dose)}
+                </p>
+              ) : null}
+            </Crossfade>
+          </section>
+        ) : null}
+      </main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-10 border-t border-line bg-bg/90 px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur sm:px-6">
+      <nav className="fixed inset-x-0 bottom-0 z-10 bg-surface/90 px-5 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:px-7">
         <div className="mx-auto flex max-w-xl gap-3">
           {done ? (
             <>
@@ -288,49 +319,6 @@ function BrewTimer({
         </div>
       </nav>
     </motion.div>
-  );
-}
-
-function ProgressRing({
-  progress,
-  children,
-}: {
-  progress: number;
-  children: React.ReactNode;
-}) {
-  const r = 118;
-  const c = 2 * Math.PI * r;
-  return (
-    <div className="relative mx-auto h-64 w-64">
-      <svg
-        viewBox="0 0 256 256"
-        className="h-full w-full -rotate-90"
-        aria-hidden="true"
-      >
-        <circle
-          cx="128"
-          cy="128"
-          r={r}
-          fill="none"
-          stroke="var(--color-line-strong)"
-          strokeWidth="6"
-        />
-        <circle
-          cx="128"
-          cy="128"
-          r={r}
-          fill="none"
-          stroke="var(--color-accent)"
-          strokeWidth="6"
-          strokeLinecap="round"
-          strokeDasharray={c}
-          strokeDashoffset={c * (1 - Math.min(1, Math.max(0, progress)))}
-        />
-      </svg>
-      <div className="absolute inset-0 flex items-center justify-center">
-        {children}
-      </div>
-    </div>
   );
 }
 
@@ -378,17 +366,8 @@ export function BrewScreen({
   }
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-5 pb-32 pt-4 sm:px-6">
-      <header className="flex items-center justify-between text-xs text-fg-faint">
-        <button
-          type="button"
-          onClick={onExit}
-          className="h-10 rounded-full px-3 text-fg-muted hover:bg-surface-2"
-        >
-          ← {recipe.name}
-        </button>
-      </header>
-      <div className="stage mt-3 h-52 overflow-hidden rounded-2xl sm:h-60">
+    <div className="mx-auto flex min-h-dvh w-full max-w-xl flex-col">
+      <div className="stage relative h-[34svh] max-h-[320px] min-h-[220px] sm:mt-4 sm:overflow-hidden sm:rounded-t-[var(--radius-lg)]">
         <SceneClient
           state={{
             method: recipe.method,
@@ -406,32 +385,46 @@ export function BrewScreen({
           }}
           className="h-full"
         />
-      </div>
-      <p className="mt-8 text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
-        {schedule.dose} g · {schedule.water} g ·{" "}
-        {formatClock(schedule.totalSeconds)}
-      </p>
-      <h1 className="mt-1 font-display text-[2rem] leading-[1.05] tracking-tight text-fg">
-        {t("brew.ready")}
-      </h1>
-      <p className="mt-2 text-fg-muted">{t("brew.prepHint")}</p>
-      <ol className="mt-5 space-y-3">
-        {prep.map((s, i) => (
-          <li
-            key={`${s.action}-${s.cumulative}`}
-            className="stagger-in flex gap-3 rounded-2xl bg-surface p-4 text-fg"
-            style={{ "--i": Math.min(i, 8) } as CSSProperties}
+        <div className="absolute top-[max(0.75rem,env(safe-area-inset-top))] left-3">
+          <button
+            type="button"
+            onClick={onExit}
+            className="h-10 rounded-full bg-bg/75 px-4 text-sm text-fg backdrop-blur-md hover:bg-bg/90"
           >
-            <span className="tabular flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-2 text-sm text-fg-muted">
-              {i + 1}
-            </span>
-            <span className="leading-snug">
-              {fillStepText(L(s.text), s, schedule.dose)}
-            </span>
-          </li>
-        ))}
-      </ol>
-      <nav className="fixed inset-x-0 bottom-0 z-10 border-t border-line bg-bg/90 px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 backdrop-blur sm:px-6">
+            ← {recipe.name}
+          </button>
+        </div>
+      </div>
+      <main className="relative -mt-7 flex flex-1 flex-col rounded-t-[var(--radius-lg)] bg-surface px-5 pt-7 pb-36 shadow-[var(--shadow-sheet)] sm:px-7">
+        <p className="tabular flex flex-wrap gap-x-4 text-fg-muted">
+          <span className="text-coffee">{schedule.dose} g</span>
+          <span className="text-water">{schedule.water} g</span>
+          <span className="text-water">
+            {formatClock(schedule.totalSeconds)}
+          </span>
+        </p>
+        <h1 className="display mt-3 text-[2.125rem] leading-[1.02] text-fg">
+          {t("brew.ready")}
+        </h1>
+        <p className="mt-2 text-fg-muted">{t("brew.prepHint")}</p>
+        <ol className="mt-5">
+          {prep.map((s, i) => (
+            <li
+              key={`${s.action}-${s.cumulative}`}
+              className="stagger-in flex gap-4 border-t border-line py-4 text-fg first:border-t-0"
+              style={{ "--i": Math.min(i, 8) } as CSSProperties}
+            >
+              <span className="tabular flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-2 text-sm text-fg-muted">
+                {i + 1}
+              </span>
+              <span className="leading-snug">
+                {fillStepText(L(s.text), s, schedule.dose)}
+              </span>
+            </li>
+          ))}
+        </ol>
+      </main>
+      <nav className="fixed inset-x-0 bottom-0 z-10 bg-surface/90 px-5 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:px-7">
         <div className="mx-auto flex max-w-xl">
           <Button
             className="flex-1"

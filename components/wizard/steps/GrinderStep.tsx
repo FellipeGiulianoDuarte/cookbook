@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { type CSSProperties, useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Eyebrow, StepTitle } from "@/components/ui/choice";
 import { StarIcon } from "@/components/ui/icons";
 import { cn } from "@/lib/cn";
@@ -81,79 +82,118 @@ export function GrinderStep({
     send({ type: "SELECT_GRINDER", grinderId: g.id });
   };
 
+  const chosen =
+    derived.grinder && derived.recipe ? derived.grinder : undefined;
+  // With a grinder chosen the step is about its setting; the picker folds away.
+  const [picking, setPicking] = useState(false);
+  const showPicker = !chosen || picking;
+  const starButton = (g: Grinder) => (
+    <button
+      type="button"
+      aria-pressed={mine === g.id}
+      aria-label={mine === g.id ? t("unstar") : t("star")}
+      title={mine === g.id ? t("unstar") : t("star")}
+      onClick={() => toggleMine(g)}
+      className={cn(
+        "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-[color,background-color,transform] duration-150 ease-[var(--ease-out)] hover:bg-surface-2 active:scale-90",
+        mine === g.id ? "chip-pop text-coffee" : "text-fg-faint hover:text-fg",
+      )}
+    >
+      <StarIcon filled={mine === g.id} />
+    </button>
+  );
+
   return (
     <div>
       <StepTitle>{t("title")}</StepTitle>
 
-      {derived.grinder && derived.recipe ? (
+      {chosen && derived.recipe ? (
         <div className="stagger-in mt-5">
           <SettingCard
-            grinder={derived.grinder}
+            grinder={chosen}
             recipe={derived.recipe}
             derived={derived}
             selection={selection}
             send={send}
+            aside={starButton(chosen)}
           />
+          {mine !== chosen.id ? null : (
+            <p className="mt-3 text-sm text-fg-faint">{t("mineHint")}</p>
+          )}
+          <Button
+            variant="secondary"
+            size="md"
+            className="mt-6"
+            aria-expanded={picking}
+            onClick={() => {
+              setPicking((v) => !v);
+              setQ("");
+            }}
+          >
+            {picking ? t("done") : t("change")}
+          </Button>
         </div>
       ) : null}
 
-      <label className="mt-6 block">
-        <span className="sr-only">{t("search")}</span>
-        <input
-          type="search"
-          inputMode="search"
-          autoComplete="off"
-          placeholder={t("search")}
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          className="h-12 w-full rounded-xl border border-line-strong bg-surface px-4 text-base text-fg placeholder:text-fg-faint focus:border-accent focus:outline-none"
-        />
-      </label>
+      {showPicker ? (
+        <div className={chosen ? "stagger-in mt-6" : "mt-5"}>
+          <label className="block">
+            <span className="sr-only">{t("search")}</span>
+            <input
+              type="search"
+              inputMode="search"
+              autoComplete="off"
+              placeholder={t("search")}
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              className="h-12 w-full rounded-full bg-surface-2 px-5 text-base text-fg placeholder:text-fg-faint focus:outline-2 focus:outline-water"
+            />
+          </label>
 
-      {!q && myGrinder ? (
-        <>
-          <Eyebrow>
-            <span className="mt-5 block">{t("mine")}</span>
-          </Eyebrow>
+          {!q && myGrinder ? (
+            <>
+              <div className="mt-6">
+                <Eyebrow>{t("mine")}</Eyebrow>
+              </div>
+              <GrinderList
+                grinders={[myGrinder]}
+                selectedId={selection.grinderId}
+                onSelect={select}
+                describe={describe}
+                star={starButton}
+              />
+            </>
+          ) : null}
+
+          {!q && recentGrinders.length ? (
+            <>
+              <div className="mt-6">
+                <Eyebrow>{t("recent")}</Eyebrow>
+              </div>
+              <GrinderList
+                grinders={recentGrinders}
+                selectedId={selection.grinderId}
+                onSelect={select}
+                describe={describe}
+                star={starButton}
+              />
+            </>
+          ) : null}
+
+          <div className="mt-6">
+            <Eyebrow>
+              {q ? t("matches", { n: matches.length }) : t("all")}
+            </Eyebrow>
+          </div>
           <GrinderList
-            grinders={[myGrinder]}
+            grinders={matches}
             selectedId={selection.grinderId}
             onSelect={select}
             describe={describe}
-            mine={mine}
-            onToggleMine={toggleMine}
+            star={starButton}
           />
-          <p className="mt-2 text-xs text-fg-faint">{t("mineHint")}</p>
-        </>
+        </div>
       ) : null}
-
-      {!q && recentGrinders.length ? (
-        <>
-          <Eyebrow>
-            <span className="mt-5 block">{t("recent")}</span>
-          </Eyebrow>
-          <GrinderList
-            grinders={recentGrinders}
-            selectedId={selection.grinderId}
-            onSelect={select}
-            describe={describe}
-            mine={mine}
-            onToggleMine={toggleMine}
-          />
-        </>
-      ) : null}
-
-      <div className="mt-5">
-        <Eyebrow>{q ? `${matches.length}` : t("all")}</Eyebrow>
-      </div>
-      <GrinderList
-        grinders={matches}
-        selectedId={selection.grinderId}
-        onSelect={select}
-        describe={describe}
-        mine={mine}
-        onToggleMine={toggleMine}
-      />
     </div>
   );
 }
@@ -163,72 +203,46 @@ function GrinderList({
   selectedId,
   onSelect,
   describe,
-  mine,
-  onToggleMine,
+  star,
 }: {
   grinders: Grinder[];
   selectedId?: string;
   onSelect: (g: Grinder) => void;
   describe: (g: Grinder) => string;
-  mine?: string;
-  onToggleMine: (g: Grinder) => void;
+  star: (g: Grinder) => React.ReactNode;
 }) {
-  const t = useTranslations("grinder");
   return (
-    <ul className="mt-2 divide-y divide-line rounded-2xl border border-line bg-surface">
+    <ul className="-mx-2 mt-1 grid gap-0.5">
       {grinders.map((g, i) => {
         const on = g.id === selectedId;
         return (
           <li
             key={g.id}
             className={cn(
-              "stagger-in flex items-stretch transition-[background-color] duration-150",
-              on && "bg-surface-2",
+              "stagger-in relative flex items-center rounded-[var(--radius)] pr-1 transition-[background-color] duration-150",
+              on ? "bg-surface-2" : "hover:bg-surface-2/60",
             )}
             style={{ "--i": Math.min(i, 8) } as CSSProperties}
           >
+            <span
+              aria-hidden="true"
+              className={cn(
+                "absolute top-1/2 left-2.5 h-5 w-[3px] -translate-y-1/2 rounded-full bg-coffee transition-[opacity] duration-200",
+                on ? "opacity-100" : "opacity-0",
+              )}
+            />
             <button
               type="button"
               aria-pressed={on}
               onClick={() => onSelect(g)}
-              className="flex min-w-0 flex-1 items-center justify-between gap-3 px-4 py-3 text-left transition-[background-color] duration-150 hover:bg-surface-2 active:bg-surface-2"
+              className="min-w-0 flex-1 py-3 pr-2 pl-6 text-left active:scale-[0.99]"
             >
-              <span>
-                <span
-                  className={cn(
-                    "block font-medium",
-                    on ? "text-accent" : "text-fg",
-                  )}
-                >
-                  {g.brand} {g.model}
-                </span>
-                <span className="block text-xs text-fg-faint">
-                  {describe(g)}
-                </span>
+              <span className="block font-medium text-fg">
+                {g.brand} {g.model}
               </span>
-              <span
-                aria-hidden="true"
-                className={cn(
-                  "h-2 w-2 shrink-0 rounded-full bg-accent transition-[transform,opacity] duration-200 ease-[var(--ease-out)]",
-                  on ? "scale-100 opacity-100" : "scale-50 opacity-0",
-                )}
-              />
+              <span className="block text-sm text-fg-faint">{describe(g)}</span>
             </button>
-            <button
-              type="button"
-              aria-pressed={mine === g.id}
-              aria-label={mine === g.id ? t("unstar") : t("star")}
-              title={mine === g.id ? t("unstar") : t("star")}
-              onClick={() => onToggleMine(g)}
-              className={cn(
-                "flex w-12 shrink-0 items-center justify-center transition-[color,transform] duration-150 ease-[var(--ease-out)] active:scale-90",
-                mine === g.id
-                  ? "chip-pop text-accent"
-                  : "text-fg-faint hover:text-fg",
-              )}
-            >
-              <StarIcon filled={mine === g.id} />
-            </button>
+            {star(g)}
           </li>
         );
       })}

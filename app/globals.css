@@ -1,47 +1,51 @@
 @import "tailwindcss";
 
 /*
-  Design tokens. Dark espresso surfaces, one crema accent, copper secondary.
-  OKLCH keeps the browns perceptually even. Semantic names on top so the UI and the
-  3D scene read the same source.
+  Design tokens.
+  The screen is used at the counter, phone in one hand, kettle in the other, so every step
+  is built around one number. Numbers are coloured by what they measure: coffee is amber,
+  water and time are glass blue, the grinder setting is milk white. Everything else stays
+  quiet on a brewed-coffee brown ground. One family, Bricolage Grotesque; its condensed
+  cut carries the big numbers.
 */
 :root {
   color-scheme: dark;
 
-  /* raw palette */
-  --espresso-950: oklch(0.13 0.012 60);
-  --espresso-900: oklch(0.17 0.014 60);
-  --espresso-800: oklch(0.22 0.016 58);
-  --espresso-700: oklch(0.29 0.02 56);
-  --espresso-600: oklch(0.38 0.03 54);
-  --crema-500: oklch(0.8 0.09 78);
-  --crema-400: oklch(0.86 0.07 82);
-  --copper-500: oklch(0.63 0.13 50);
-  --milk-100: oklch(0.96 0.012 80);
-  --milk-300: oklch(0.82 0.02 78);
-  --milk-500: oklch(0.66 0.025 75);
+  --roast-950: #1c1511; /* ground: a cup of filter coffee, not black */
+  --roast-900: #241b16; /* the sheet over the stage */
+  --roast-800: #2e231c; /* raised rows, inputs */
+  --roast-700: #3b2e25;
+  --milk-50: #f3ebe1;
+  --milk-300: #c2b3a3;
+  --milk-500: #8e7d6d;
+  --amber-400: #d9a15b; /* coffee */
+  --amber-300: #e6b878;
+  --glass-400: #8ec3d6; /* water and time */
 
   /* semantic */
-  --color-bg: var(--espresso-950);
-  --color-surface: var(--espresso-900);
-  --color-surface-2: var(--espresso-800);
-  --color-line: oklch(1 0 0 / 0.08);
-  --color-line-strong: oklch(1 0 0 / 0.16);
-  --color-fg: var(--milk-100);
+  --color-bg: var(--roast-950);
+  --color-surface: var(--roast-900);
+  --color-surface-2: var(--roast-800);
+  --color-surface-3: var(--roast-700);
+  --color-line: rgb(243 235 225 / 0.09);
+  --color-line-strong: rgb(243 235 225 / 0.17);
+  --color-fg: var(--milk-50);
   --color-fg-muted: var(--milk-300);
   --color-fg-faint: var(--milk-500);
-  --color-accent: var(--crema-500);
-  --color-accent-strong: var(--crema-400);
-  --color-accent-ink: oklch(0.22 0.03 70);
-  --color-secondary: var(--copper-500);
-  --color-ok: oklch(0.72 0.14 150);
-  --color-warn: oklch(0.8 0.15 80);
-  --color-danger: oklch(0.68 0.19 25);
+  --color-coffee: var(--amber-400);
+  --color-water: var(--glass-400);
+  --color-accent: var(--amber-400);
+  --color-accent-strong: var(--amber-300);
+  --color-accent-ink: var(--roast-950);
+  --color-secondary: var(--glass-400);
+  --color-ok: #8fc79a;
+  --color-warn: #e8c36a;
+  --color-danger: #e98a74;
 
-  --radius-sm: 10px;
-  --radius: 16px;
-  --radius-lg: 24px;
-  --shadow-soft: 0 24px 60px -30px oklch(0 0 0 / 0.7);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 28px;
+  --shadow-sheet: 0 -18px 40px -24px rgb(0 0 0 / 0.55);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease: cubic-bezier(0.32, 0.72, 0, 1);
@@ -51,11 +55,14 @@
   --color-bg: var(--color-bg);
   --color-surface: var(--color-surface);
   --color-surface-2: var(--color-surface-2);
+  --color-surface-3: var(--color-surface-3);
   --color-line: var(--color-line);
   --color-line-strong: var(--color-line-strong);
   --color-fg: var(--color-fg);
   --color-fg-muted: var(--color-fg-muted);
   --color-fg-faint: var(--color-fg-faint);
+  --color-coffee: var(--color-coffee);
+  --color-water: var(--color-water);
   --color-accent: var(--color-accent);
   --color-accent-strong: var(--color-accent-strong);
   --color-accent-ink: var(--color-accent-ink);
@@ -64,9 +71,9 @@
   --color-warn: var(--color-warn);
   --color-danger: var(--color-danger);
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), Georgia, serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
 
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius);
@@ -86,7 +93,8 @@ body {
   background: var(--color-bg);
   color: var(--color-fg);
   font-family: var(--font-sans);
-  letter-spacing: -0.011em;
+  font-optical-sizing: auto;
+  letter-spacing: -0.006em;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   touch-action: manipulation;
@@ -99,13 +107,41 @@ body {
 }
 
 :focus-visible {
-  outline: 3px solid oklch(from var(--color-accent) l c h / 0.5);
+  outline: 2px solid var(--color-water);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* The big numbers: condensed, heavy, tabular, tight. Size comes from the call site. */
+.num {
+  font-family: var(--font-display);
+  font-variation-settings:
+    "wdth" 75,
+    "opsz" 96;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.035em;
+  line-height: 0.88;
+}
+.num-unit {
+  font-variation-settings:
+    "wdth" 90,
+    "opsz" 24;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+/* Headings: the display optical size, a little condensed. */
+.display {
+  font-family: var(--font-display);
+  font-variation-settings:
+    "wdth" 94,
+    "opsz" 72;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -124,7 +160,11 @@ body {
   appearance: none;
   height: 8px;
   border-radius: 999px;
-  background: var(--color-line-strong);
+  background: linear-gradient(
+    to right,
+    var(--color-coffee) 0 var(--filled, 50%),
+    var(--color-line-strong) var(--filled, 50%) 100%
+  );
   outline: none;
 }
 .dose-slider::-webkit-slider-thumb {
@@ -133,9 +173,9 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--color-accent);
-  border: 4px solid var(--color-bg);
-  box-shadow: 0 2px 10px oklch(0 0 0 / 0.5);
+  background: var(--color-fg);
+  border: 4px solid var(--color-coffee);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.45);
   cursor: pointer;
   transition: transform 150ms var(--ease-out);
 }
@@ -150,8 +190,8 @@ body {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--color-accent);
-  border: 4px solid var(--color-bg);
+  background: var(--color-fg);
+  border: 4px solid var(--color-coffee);
   cursor: pointer;
 }
 

@@ -5,9 +5,9 @@ import { cn } from "@/lib/cn";
 import { haptic } from "@/lib/haptics";
 
 /*
-  Selectable card and chip. Both are real buttons with aria-pressed so keyboard and
-  screen readers get the state. Selection is shown by size, weight and one accent,
-  not by a heavy border.
+  Selectable row and chip. Both are real buttons with aria-pressed so keyboard and screen
+  readers get the state. Rows are not cards: they sit on the sheet, and the chosen one is
+  marked by a raised ground and a short amber mark on the left, like a line on a scale.
 */
 
 export function ChoiceCard({
@@ -39,44 +39,32 @@ export function ChoiceCard({
       }}
       style={style}
       className={cn(
-        "group relative flex w-full items-start gap-4 rounded-2xl border p-4 text-left transition-[background-color,border-color,transform,box-shadow] duration-150 ease-[var(--ease-out)] active:scale-[0.98]",
-        selected
-          ? "border-accent/60 bg-surface-2 shadow-[0_0_0_1px_oklch(0.8_0.09_78/0.35)]"
-          : "border-line bg-surface hover:border-line-strong hover:bg-surface-2/70",
+        "group relative flex w-full items-start gap-4 rounded-[var(--radius)] py-4 pr-4 pl-6 text-left transition-[background-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.985]",
+        selected ? "bg-surface-2" : "hover:bg-surface-2/60",
         className,
       )}
     >
       <span
         aria-hidden="true"
         className={cn(
-          "absolute top-4 right-4 h-2 w-2 rounded-full bg-accent transition-[transform,opacity] duration-200 ease-[var(--ease-out)]",
-          selected ? "scale-100 opacity-100" : "scale-50 opacity-0",
+          "absolute top-5 left-2.5 h-5 w-[3px] origin-center rounded-full bg-coffee transition-[transform,opacity] duration-200 ease-[var(--ease-out)]",
+          selected ? "scale-y-100 opacity-100" : "scale-y-50 opacity-0",
         )}
       />
       {aside ? <div className="shrink-0">{aside}</div> : null}
       <div className="min-w-0 flex-1">
         <div className="flex items-baseline justify-between gap-3">
-          <span
-            className={cn(
-              "font-semibold tracking-tight",
-              selected ? "text-accent" : "text-fg",
-            )}
-          >
+          <span className="text-[1.0625rem] font-semibold tracking-tight text-fg">
             {title}
           </span>
           {meta ? (
-            <span
-              className={cn(
-                "tabular shrink-0 text-xs text-fg-faint transition-transform duration-200 ease-[var(--ease-out)]",
-                selected && "-translate-x-4",
-              )}
-            >
-              {meta}
-            </span>
+            <span className="tabular shrink-0 text-sm text-water">{meta}</span>
           ) : null}
         </div>
         {hint ? (
-          <p className="mt-1 text-sm leading-snug text-fg-muted">{hint}</p>
+          <div className="mt-1 text-[0.9375rem] leading-snug text-fg-muted">
+            {hint}
+          </div>
         ) : null}
       </div>
     </button>
@@ -103,10 +91,10 @@ export function Chip({
         onSelect();
       }}
       className={cn(
-        "inline-flex h-11 items-center rounded-full border px-4 text-sm font-medium transition-[background-color,color,border-color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96]",
+        "inline-flex h-11 items-center gap-2 rounded-full px-4 text-[0.9375rem] font-medium transition-[background-color,color,transform] duration-150 ease-[var(--ease-out)] active:scale-[0.96]",
         selected
-          ? "chip-pop border-accent bg-accent text-accent-ink"
-          : "border-line-strong bg-transparent text-fg hover:bg-surface-2",
+          ? "chip-pop bg-fg text-bg"
+          : "bg-surface-2 text-fg hover:bg-surface-3",
         className,
       )}
     >
@@ -115,18 +103,69 @@ export function Chip({
   );
 }
 
+/** A short sentence-case label above a group of controls. */
 export function Eyebrow({ children }: { children: ReactNode }) {
-  return (
-    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-fg-faint">
-      {children}
-    </p>
-  );
+  return <p className="text-sm font-medium text-fg-faint">{children}</p>;
 }
 
 export function StepTitle({ children }: { children: ReactNode }) {
   return (
-    <h1 className="font-display text-[2rem] leading-[1.05] tracking-tight text-fg sm:text-4xl">
+    <h1
+      id="step-title"
+      className="display text-[2.125rem] leading-[1.02] text-fg sm:text-[2.5rem]"
+    >
       {children}
     </h1>
+  );
+}
+
+/**
+ * A measured quantity: the number big and condensed, the unit small beside it.
+ * `kind` picks the colour by what is measured.
+ */
+export function Quantity({
+  value,
+  unit,
+  kind = "plain",
+  size = "md",
+  className,
+}: {
+  value: ReactNode;
+  unit?: ReactNode;
+  kind?: "coffee" | "water" | "plain";
+  size?: "sm" | "md" | "lg" | "xl";
+  className?: string;
+}) {
+  const color =
+    kind === "coffee"
+      ? "text-coffee"
+      : kind === "water"
+        ? "text-water"
+        : "text-fg";
+  const sizes = {
+    sm: "text-[1.75rem]",
+    md: "text-[2.75rem]",
+    lg: "text-[4.25rem]",
+    xl: "text-[6.5rem]",
+  } as const;
+  return (
+    <span className={cn("inline-flex items-baseline gap-1", color, className)}>
+      {/* read as one phrase ("20 g"); the styled pieces are for the eye */}
+      <span className="sr-only">
+        {value}
+        {unit ? ` ${unit}` : ""}
+      </span>
+      <span aria-hidden="true" className={cn("num", sizes[size])}>
+        {value}
+      </span>
+      {unit ? (
+        <span
+          aria-hidden="true"
+          className="num-unit text-base text-current opacity-75"
+        >
+          {unit}
+        </span>
+      ) : null}
+    </span>
   );
 }

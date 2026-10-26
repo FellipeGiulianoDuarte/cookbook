@@ -14,30 +14,37 @@ export function RecipeStep({ catalog, selection, send }: CatalogStepProps) {
   return (
     <div>
       <StepTitle>{t("title")}</StepTitle>
-      <div className="mt-6 grid gap-3">
+      <div className="mt-5 -mx-2 grid gap-1">
         {recipes.map((r, i) => (
           <ChoiceCard
             key={r.id}
             className="stagger-in"
-            style={{ "--i": i } as CSSProperties}
+            style={{ "--i": Math.min(i, 8) } as CSSProperties}
             selected={selection.recipeId === r.id}
             onSelect={() => send({ type: "SELECT_RECIPE", recipeId: r.id })}
-            title={
-              <>
-                {r.name}{" "}
-                <span className="font-normal text-fg-muted">
-                  {t("by", { author: r.author })}
-                </span>
-              </>
-            }
-            meta={`${t(`style.${r.style}`)} · ${t("total", { time: formatClock(r.totalSeconds) })}`}
+            title={r.name}
+            meta={formatClock(r.totalSeconds)}
             hint={
               <>
-                {L(r.summary)}{" "}
-                <span className="tabular text-fg-faint">
-                  {t("dose", { min: r.dose.min, max: r.dose.max })} · 1:
-                  {r.ratio.toFixed(1)}
+                <span className="block text-fg-faint">
+                  {t("by", { author: r.author })}
                 </span>
+                <span className="tabular mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <span className="text-coffee">
+                    <b className="font-semibold">{r.dose.default}</b> g
+                  </span>
+                  <span className="text-water">
+                    <b className="font-semibold">
+                      {Math.round(r.dose.default * r.ratio)}
+                    </b>{" "}
+                    g
+                  </span>
+                  <span className="text-fg">
+                    <b className="font-semibold">{r.temperature.default}</b> °C
+                  </span>
+                  <span className="text-fg-faint">{t(`style.${r.style}`)}</span>
+                </span>
+                <span className="mt-2 line-clamp-2 block">{L(r.summary)}</span>
               </>
             }
           />

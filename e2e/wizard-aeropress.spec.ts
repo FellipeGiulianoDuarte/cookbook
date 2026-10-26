@@ -20,7 +20,7 @@ test("AeroPress + Kingrinder K6 shows 64 clicks from the chart, the maker's 65-c
   // Kingrinder's single published point (65) is shown as the maker's reference. The app must
   // never divide microns by the 16 µm-per-click travel figure.
   await expect(page.getByText("64 clicks")).toBeVisible();
-  await expect(page.getByText("Kingrinder's own guide: 65")).toBeVisible();
+  await expect(page.getByText("Kingrinder's own guide says 65")).toBeVisible();
   await next.click();
 
   await expect(page).toHaveURL(/d=11/);
@@ -35,7 +35,7 @@ test("AeroPress + Kingrinder K6 shows 64 clicks from the chart, the maker's 65-c
   await next.click();
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Your recipe",
+    "Ultimate AeroPress Technique",
   );
   await expect(
     page.getByText(/Press gently for about 30 seconds/),
